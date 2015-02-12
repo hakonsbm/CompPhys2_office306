@@ -30,6 +30,7 @@ VMCSolver::VMCSolver() :
     nCycles(1000000)
 {
 
+
 }
 
 void VMCSolver::runMonteCarloIntegration()
