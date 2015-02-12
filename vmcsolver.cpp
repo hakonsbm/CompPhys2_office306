@@ -83,10 +83,10 @@ void VMCSolver::runMonteCarloIntegration()
             }
             rNew = rOld;
 
-            //To be removed, for testing purposes
-            cout << localEnergy(rNew) << endl;
-            cout << trialFunction()->localEnergy(rNew,this) << endl;
-            return;
+//            //To be removed, for testing purposes
+//            cout << localEnergy(rNew) << endl;
+//            cout << trialFunction()->localEnergy(rNew,this) << endl;
+//            return;
 
             // find optimal steplength
             for (stepLength; stepLength <= 5; stepLength += 0.1){
