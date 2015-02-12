@@ -24,6 +24,8 @@ public:
     double getAlpha() {return alpha; }
     double getBeta() {return beta; }
     int getCharge() {return charge; }
+    double getH()   {return h;}
+    double getH2()  {return h2;}
 
 
 private:

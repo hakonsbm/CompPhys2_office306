@@ -8,15 +8,15 @@
 
 using namespace arma;
 
-class VMMSolver;
+class VMCSolver;
 
 class HeliumSimpleNumerically : public TrialFunction
 {
 
 public:
     HeliumSimpleNumerically();
-    double localEnergy;
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
+    virtual double localEnergy(const mat &r, VMCSolver *solver );
 
 };
 

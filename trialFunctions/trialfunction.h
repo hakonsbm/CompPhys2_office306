@@ -11,9 +11,8 @@ class TrialFunction
 {
 public:
     TrialFunction();
-    double m_localEnergy;
-//    void testFunction( VMCSolver *solver );
     virtual double waveFunction(const mat &r, VMCSolver *solver ) = 0 ;
+    virtual double localEnergy(const mat &r, VMCSolver *solver ) = 0;
 
 };
 
