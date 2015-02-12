@@ -6,8 +6,12 @@ LIBS += -llapack -larmadillo
 
 SOURCES += main.cpp \
     vmcsolver.cpp \
-    lib.cpp
+    lib.cpp \
+    trialFunctions/trialfunction.cpp \
+    trialFunctions/heliumsimplenumerically.cpp
 
 HEADERS += \
     vmcsolver.h \
-    lib.h
+    lib.h \
+    trialFunctions/trialfunction.h \
+    trialFunctions/heliumsimplenumerically.h

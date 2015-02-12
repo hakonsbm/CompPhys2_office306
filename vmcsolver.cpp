@@ -1,5 +1,7 @@
 #include "vmcsolver.h"
 #include "lib.h"
+#include "trialFunctions/trialfunction.h"
+#include "trialFunctions/heliumsimplenumerically.h"
 
 #include <armadillo>
 #include <iostream>
@@ -10,6 +12,8 @@
 
 using namespace arma;
 using namespace std;
+
+
 
 ofstream ofile;
 
@@ -25,6 +29,7 @@ VMCSolver::VMCSolver() :
     beta(1.01),
     nCycles(1000000)
 {
+
 }
 
 void VMCSolver::runMonteCarloIntegration()
@@ -38,6 +43,7 @@ void VMCSolver::runMonteCarloIntegration()
     int moves, acc_moves_old;
 
     double beta_old = beta;
+
 
     double d_alpha = 0.1;
     double alpha_max = alpha; // 1.2*charge;
@@ -58,6 +64,7 @@ void VMCSolver::runMonteCarloIntegration()
 
             rOld = zeros<mat>(nParticles, nDimensions);
             rNew = zeros<mat>(nParticles, nDimensions);
+
 
             waveFunctionOld = 0;
             waveFunctionNew = 0;
