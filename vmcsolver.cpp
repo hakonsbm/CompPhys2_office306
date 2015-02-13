@@ -83,10 +83,11 @@ void VMCSolver::runMonteCarloIntegration()
             }
             rNew = rOld;
 
-//            //To be removed, for testing purposes
-//            cout << localEnergy(rNew) << endl;
-//            cout << trialFunction()->localEnergy(rNew,this) << endl;
-//            return;
+            //To be removed, for testing purposes
+//            cout << rNew.row(0) * rNew.row(0).trans() << endl;
+            cout << localEnergy(rNew) << endl;
+            cout << trialFunction()->localEnergy(rNew,this) << endl;
+            return;
 
             // find optimal steplength
             for (stepLength; stepLength <= 5; stepLength += 0.1){
@@ -279,44 +280,43 @@ double VMCSolver::localEnergy(const mat &r)
 //}
 
 // Trial wavefunction T1
-double VMCSolver::waveFunction(const mat &r)
-{
-    vec rpos(nParticles);
-    for(int i = 0; i < nParticles; i++) {
-        double rSingleParticle = 0;
-        for(int j = 0; j < nDimensions; j++) {
-            rSingleParticle += r(i,j) * r(i,j);
-        }
-        rpos[i] = sqrt(rSingleParticle);
-    }
-    return exp(-accu(rpos) * alpha);
-}
+//double VMCSolver::waveFunction(const mat &r)
+//{
+//    vec rpos(nParticles);
+//    for(int i = 0; i < nParticles; i++) {
+//        double rSingleParticle = 0;
+//        for(int j = 0; j < nDimensions; j++) {
+//            rSingleParticle += r(i,j) * r(i,j);
+//        }
+//        rpos[i] = sqrt(rSingleParticle);
+//    }
+//    return exp(-accu(rpos) * alpha);
+//}
 
-//// Trial wavefunction T2
-// double VMCSolver::waveFunction(const mat &r)
-// {
-//     //double r12;
-//     vec rpos(nParticles);
-//     for(int i = 0; i < nParticles; i++) {
-//         double rSingleParticle = 0;
-//         for(int j = 0; j < nDimensions; j++) {
-//             rSingleParticle += r(i,j) * r(i,j);
-//         }
-//         rpos[i] = sqrt(rSingleParticle);
-//     }
-//     // assuming 2 particles
-//     //   (ta fra elektron-elektron pot.)
-//     //r12 = abs(rpos[0] - rpos[1]);
-//     double r12 = 0;
-//     for(int i = 0; i < nParticles; i++) {
-//         for(int j = i + 1; j < nParticles; j++) {
-//             r12 = 0;
-//             for(int k = 0; k < nDimensions; k++) {
-//                 r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
-//             }
-//         }
-//     }
+// Trial wavefunction T2
+ double VMCSolver::waveFunction(const mat &r)
+ {
+     //double r12;
+     vec rpos(nParticles);
+     for(int i = 0; i < nParticles; i++) {
+         double rSingleParticle = 0;
+         for(int j = 0; j < nDimensions; j++) {
+             rSingleParticle += r(i,j) * r(i,j);
+         }
+         rpos[i] = sqrt(rSingleParticle);
+     }
+     // assuming 2 particles
+     //   (ta fra elektron-elektron pot.)
+     //r12 = abs(rpos[0] - rpos[1]);
+     double r12 = 0;
+     for(int i = 0; i < nParticles; i++) {
+         for(int j = i + 1; j < nParticles; j++) {
+             r12 = 0;
+             for(int k = 0; k < nDimensions; k++) {
+                 r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+             }
+         }
+     }
     
-
-//     return exp(-accu(rpos) * alpha) * exp(r12 / (2.0*(1 + beta * r12))) ;
-// }
+     return exp(-accu(rpos) * alpha) * exp(r12 / (2.0*(1 + beta * r12))) ;
+ }

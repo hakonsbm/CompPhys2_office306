@@ -8,7 +8,7 @@ int main()
 {
     VMCSolver *solver = new VMCSolver();
 
-    solver->setTrialFunction(new HeliumSimpleNumerically());
+    solver->setTrialFunction(new HeliumJastrowAnalytical());
 
     solver->runMonteCarloIntegration();
     return 0;
