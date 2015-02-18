@@ -2,7 +2,7 @@
 
 HeliumSimpleAnalytical::HeliumSimpleAnalytical()
 {
-
+    simpleFlag = true;
 }
 
 double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)

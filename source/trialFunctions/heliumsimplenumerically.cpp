@@ -9,7 +9,7 @@ using namespace std;
 
 HeliumSimpleNumerically::HeliumSimpleNumerically()
 {
-//    cout << "Simple got created" << localEnergy << endl;
+    simpleFlag = true;
 }
 
 double HeliumSimpleNumerically::waveFunction(const mat &r, VMCSolver *solver)

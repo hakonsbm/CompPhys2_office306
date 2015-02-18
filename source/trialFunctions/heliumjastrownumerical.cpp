@@ -2,7 +2,7 @@
 
 HeliumJastrowNumerical::HeliumJastrowNumerical()
 {
-
+    simpleFlag = false;
 }
 
 HeliumJastrowNumerical::~HeliumJastrowNumerical()

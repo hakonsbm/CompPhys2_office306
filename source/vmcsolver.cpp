@@ -40,8 +40,6 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
 
-    cout << alpha  << endl;
-
     ofile.open(outfilename);
     m_alpha = alpha;
     m_beta = beta;

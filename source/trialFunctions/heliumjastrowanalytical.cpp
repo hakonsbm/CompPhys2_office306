@@ -3,7 +3,7 @@
 
 HeliumJastrowAnalytical::HeliumJastrowAnalytical()
 {
-
+    simpleFlag = false;
 }
 
 HeliumJastrowAnalytical::~HeliumJastrowAnalytical()
