@@ -19,7 +19,7 @@ ofstream ofile;
 VMCSolver::VMCSolver():
     nDimensions(3),
     charge(2),
-    stepLength(0.001),
+    stepLength(0.01),
     nParticles(2),
     h(0.001),
     h2(1000000),
