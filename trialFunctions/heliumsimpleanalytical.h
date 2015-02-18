@@ -1,5 +1,6 @@
-#ifndef HELIUMSIMPLENUMERICALLY_H
-#define HELIUMSIMPLENUMERICALLY_H
+#ifndef HELIUMSIMPLEANALYTICAL_H
+#define HELIUMSIMPLEANALYTICAL_H
+
 
 #include "trialfunction.h"
 #include "../vmcsolver.h"
@@ -10,14 +11,14 @@ using namespace arma;
 
 class VMCSolver;
 
-class HeliumSimpleNumerically : public TrialFunction
+class HeliumSimpleAnalytical : public TrialFunction
 {
 
 public:
-    HeliumSimpleNumerically();
+    HeliumSimpleAnalytical();
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
     virtual double localEnergy(const mat &r, VMCSolver *solver );
 
 };
 
-#endif // HELIUMSIMPLENUMERICALLY_H
+#endif // HELIUMSIMPLEANALYTICAL_H

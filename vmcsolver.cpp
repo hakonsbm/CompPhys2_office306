@@ -94,7 +94,6 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
 
 
 
-
 void VMCSolver::calculateOptimalSteplength() {
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
@@ -156,82 +155,4 @@ void VMCSolver::calculateOptimalSteplength() {
     }
     stepLength = step_min;
     cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
-}
-
-
-
-double VMCSolver::localEnergy(const mat &r) {
-    mat rPlus = zeros<mat>(nParticles, nDimensions);
-    mat rMinus = zeros<mat>(nParticles, nDimensions);
-
-    rPlus = rMinus = r;
-
-    double waveFunctionMinus = 0;
-    double waveFunctionPlus = 0;
-
-    double waveFunctionCurrent = waveFunction(r);
-
-    // Kinetic energy
-
-    double kineticEnergy = 0;
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = 0; j < nDimensions; j++) {
-            rPlus(i,j) += h;
-            rMinus(i,j) -= h;
-            waveFunctionMinus = waveFunction(rMinus);
-            waveFunctionPlus = waveFunction(rPlus);
-            kineticEnergy -= (waveFunctionMinus + waveFunctionPlus - 2 * waveFunctionCurrent);
-            rPlus(i,j) = r(i,j);
-            rMinus(i,j) = r(i,j);
-        }
-    }
-    kineticEnergy = 0.5*h2*kineticEnergy/waveFunctionCurrent;
-
-    // Potential energy
-    double potentialEnergy = 0;
-    double rSingleParticle = 0;
-    for(int i = 0; i < nParticles; i++) {
-        rSingleParticle = 0;
-        for(int j = 0; j < nDimensions; j++) {
-            rSingleParticle += r(i,j)*r(i,j);
-        }
-        potentialEnergy -= charge / sqrt(rSingleParticle);
-    }
-    // Contribution from electron-electron potential
-    double r12 = 0;
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = i + 1; j < nParticles; j++) {
-            r12 = 0;
-            for(int k = 0; k < nDimensions; k++) {
-                r12 += (r(i,k)-r(j,k))*(r(i,k)-r(j,k));
-            }
-            potentialEnergy +=1/sqrt(r12);
-        }
-    }
-    return kineticEnergy+potentialEnergy;
-}
-
-
-
-double VMCSolver::waveFunction(const mat &r) {
-    //double r12;
-    vec rpos(nParticles);
-    for(int i = 0; i < nParticles; i++) {
-        double rSingleParticle = 0;
-        for(int j = 0; j < nDimensions; j++) {
-            rSingleParticle += r(i,j)*r(i,j);
-        }
-        rpos[i] = sqrt(rSingleParticle);
-    }
-    double r12 = 0;
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = i+1; j < nParticles; j++) {
-            r12 = 0;
-            for(int k = 0; k < nDimensions; k++) {
-                 r12 += (r(i,k)-r(j,k))*(r(i,k)-r(j,k));
-            }
-        }
-    }
-    
-    return exp(-accu(rpos)*m_alpha)*exp(r12/(2.0*(1+m_beta*r12)));
 }

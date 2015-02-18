@@ -8,8 +8,7 @@ using namespace std;
 using namespace arma;
 
 
-TrialFunction::TrialFunction():
- m_localEnergy(0)
+TrialFunction::TrialFunction()
 {
 
 }

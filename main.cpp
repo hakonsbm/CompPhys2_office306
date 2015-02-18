@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     VMCSolver *solver = new VMCSolver();
 
-    solver->setTrialFunction(new HeliumSimpleNumerically());
+    solver->setTrialFunction(new HeliumJastrowAnalytical());
 
     solver->calculateOptimalSteplength();
     double alpha_max = 1.2*solver->getCharge();

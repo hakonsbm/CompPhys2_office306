@@ -4,6 +4,9 @@
 #include <armadillo>
 #include "trialFunctions/trialfunction.h"
 #include "trialFunctions/heliumsimplenumerically.h"
+#include "trialFunctions/heliumsimpleanalytical.h"
+#include "trialFunctions/heliumjastrownumerical.h"
+#include "trialFunctions/heliumjastrowanalytical.h"
 
 using namespace arma;
 
@@ -19,11 +22,13 @@ public:
     void setTrialFunction(TrialFunction *trialFunction) { m_trialFunction = trialFunction; }
     TrialFunction *trialFunction(){return m_trialFunction;}
 
-    int getNParticleshere() {return nParticles; }
+    int getNParticles() {return nParticles; }
     int getNDimensions() {return nDimensions; }
     double getAlpha() {return alpha; }
     double getBeta() {return beta; }
     int getCharge() {return charge; }
+    double getH()   {return h;}
+    double getH2()  {return h2;}
 
 
 private:
