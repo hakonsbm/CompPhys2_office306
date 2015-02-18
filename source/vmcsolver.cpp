@@ -147,10 +147,11 @@ void VMCSolver::calculateOptimalSteplength() {
                 }
             }
         }
+        ratio = acc_moves/moves;
         //cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
-        if(abs(acc_moves) < acc_moves_old) {
+        if(abs(0.5-ratio) < abs(0.5-old_ratio)) {
             step_min = stepLength;
-            acc_moves_old = acc_moves;
+            old_ratio = ratio;
         }
     }
     stepLength = step_min;
