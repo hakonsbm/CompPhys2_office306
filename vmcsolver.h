@@ -14,8 +14,8 @@ class VMCSolver
 public:
     VMCSolver();
 
-    void runMonteCarloIntegration();
-
+    void runMonteCarloIntegration(double alpha, double beta);
+    void calculateOptimalSteplength();
     void setTrialFunction(TrialFunction *trialFunction) { m_trialFunction = trialFunction; }
     TrialFunction *trialFunction(){return m_trialFunction;}
 
@@ -35,6 +35,9 @@ private:
     int nDimensions;
     int charge;
     double stepLength;
+    double step_min;
+    double m_alpha;
+    double m_beta;
     int nParticles;
 
     double h;
