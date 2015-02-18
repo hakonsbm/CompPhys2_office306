@@ -19,7 +19,7 @@ ofstream ofile;
 VMCSolver::VMCSolver():
     nDimensions(3),
     charge(2),
-    stepLength(0.001),
+    stepLength(0.01),
     nParticles(2),
     h(0.001),
     h2(1000000),
@@ -51,7 +51,7 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
     for(int cycle = 0; cycle < nCycles; cycle++) {
 
         //Store the current value of the wave function
-        waveFunctionOld = waveFunction(rOld);
+        waveFunctionOld = trialFunction()->waveFunction(rOld, this);
 
         //New position to test
         for(int i = 0; i < nParticles; i++) {
@@ -59,7 +59,7 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
                 rNew(i,j) = rOld(i,j) + stepLength*(ran2(&idum) - 0.5);
             }
             //Recalculate the value of the wave function
-            waveFunctionNew = waveFunction(rNew);
+            waveFunctionNew = trialFunction()->waveFunction(rNew, this);
 
             //Check for step acceptance (if yes, update position, if no, reset position)
             if(ran2(&idum) <= (waveFunctionNew*waveFunctionNew) / (waveFunctionOld*waveFunctionOld)) {
@@ -76,7 +76,7 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
             }
             moves += 1;
             //update energies
-            deltaE = localEnergy(rNew);
+            deltaE = trialFunction()->localEnergy(rNew, this);
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;
         }
@@ -100,10 +100,9 @@ void VMCSolver::calculateOptimalSteplength() {
 
     double waveFunctionOld = 0;
     double waveFunctionNew = 0;
-    double step_min = 0;
-    double ratio = 0;
-    double old_ratio = 1;
-    int moves = 0;
+//    double stepLength = 0.1;
+    double step_min = nCycles;
+    int acc_moves_old = nCycles;
     int acc_moves = 0;
 
     // initial trial positions
@@ -116,9 +115,7 @@ void VMCSolver::calculateOptimalSteplength() {
 
     // find optimal steplength
     for (stepLength; stepLength <= 5; stepLength += 0.01){
-        moves = 0;
         acc_moves = 0;
-        ratio = 0;
         waveFunctionOld = 0;
         waveFunctionNew = 0;
 
@@ -130,12 +127,12 @@ void VMCSolver::calculateOptimalSteplength() {
         }
         rNew = rOld;
         for(int cycle = 0; cycle < nCycles/100; cycle++) {
-            waveFunctionOld = waveFunction(rOld);
+            waveFunctionOld = trialFunction()->waveFunction(rOld, this);
             for(int i = 0; i < nParticles; i++) {
                 for(int j = 0; j < nDimensions; j++) {
                     rNew(i,j) = rOld(i,j)+stepLength*(ran2(&idum) - 0.5);
                 }
-                waveFunctionNew = waveFunction(rNew);
+                waveFunctionNew = trialFunction()->waveFunction(rNew, this);
                 if(ran2(&idum) <= (waveFunctionNew*waveFunctionNew)/(waveFunctionOld*waveFunctionOld)) {
                     acc_moves += 1;
                     for(int j = 0; j < nDimensions; j++) {
@@ -148,16 +145,14 @@ void VMCSolver::calculateOptimalSteplength() {
                         rNew(i,j) = rOld(i,j);
                     }
                 }
-                moves += 1;
             }
         }
-        ratio = acc_moves/moves;
         //cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
-        if(abs(0.5-ratio) < abs(0.5-old_ratio)) {
+        if(abs(acc_moves) < acc_moves_old) {
             step_min = stepLength;
-            old_ratio = ratio;
+            acc_moves_old = acc_moves;
         }
     }
     stepLength = step_min;
-    cout << "Steplength: " << stepLength << endl;
+    cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
 }
