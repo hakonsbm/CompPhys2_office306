@@ -1,4 +1,9 @@
 #include "vmcsolver.h"
+#include "trialFunctions/trialfunction.h"
+#include "trialFunctions/heliumjastrowanalytical.h"
+#include "trialFunctions/heliumjastrownumerical.h"
+#include "trialFunctions/heliumsimpleanalytical.h"
+#include "trialFunctions/heliumsimplenumerically.h"
 
 #include <iostream>
 
@@ -7,7 +12,7 @@ using namespace std;
 int main() {
     VMCSolver *solver = new VMCSolver();
 
-    solver->setTrialFunction(new HeliumJastrowAnalytical());
+    solver->setTrialFunction(new HeliumSimpleNumerically());
 
     solver->calculateOptimalSteplength();
     double alpha_max = 1.2*solver->getCharge();
