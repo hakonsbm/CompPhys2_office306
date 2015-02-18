@@ -19,7 +19,7 @@ ofstream ofile;
 VMCSolver::VMCSolver():
     nDimensions(3),
     charge(2),
-    stepLength(0.01),
+    stepLength(1.0),
     nParticles(2),
     h(0.001),
     h2(1000000),
@@ -37,6 +37,11 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
     double energySquaredSum = 0;
     double deltaE= 0;
 
+    rOld = zeros<mat>(nParticles, nDimensions);
+    rNew = zeros<mat>(nParticles, nDimensions);
+
+    cout << alpha  << endl;
+
     ofile.open(outfilename);
     m_alpha = alpha;
     m_beta = beta;
@@ -46,12 +51,14 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
             rOld(i,j) = stepLength * (ran2(&idum) - 0.5);
         }
     }
+
     rNew = rOld;
     //loop over Monte Carlo cycles
     for(int cycle = 0; cycle < nCycles; cycle++) {
 
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
+
 
         //New position to test
         for(int i = 0; i < nParticles; i++) {
@@ -159,3 +166,4 @@ void VMCSolver::calculateOptimalSteplength() {
     stepLength = step_min;
     cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
 }
+

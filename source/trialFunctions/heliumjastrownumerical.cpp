@@ -18,6 +18,7 @@ double HeliumJastrowNumerical::waveFunction(const mat &r, VMCSolver *solver)
     double beta = solver->getBeta();
 
 
+
     //double r12;
     vec rpos(nParticles);
     for(int i = 0; i < nParticles; i++) {

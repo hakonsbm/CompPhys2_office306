@@ -24,8 +24,8 @@ public:
 
     int getNParticles() {return nParticles; }
     int getNDimensions() {return nDimensions; }
-    double getAlpha() {return alpha; }
-    double getBeta() {return beta; }
+    double getAlpha() {return m_alpha; }
+    double getBeta() {return m_beta; }
     int getCharge() {return charge; }
     double getH()   {return h;}
     double getH2()  {return h2;}
@@ -49,9 +49,6 @@ private:
     double h2;
 
     long idum;
-
-    double alpha;
-    double beta;
 
     int nCycles;
 
