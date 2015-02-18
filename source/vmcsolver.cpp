@@ -100,9 +100,10 @@ void VMCSolver::calculateOptimalSteplength() {
 
     double waveFunctionOld = 0;
     double waveFunctionNew = 0;
-//    double stepLength = 0.1;
     double step_min = nCycles;
-    int acc_moves_old = nCycles;
+    double ratio = 0;
+    double old_ratio = 1;
+    int moves = 0;
     int acc_moves = 0;
 
     // initial trial positions
@@ -115,6 +116,7 @@ void VMCSolver::calculateOptimalSteplength() {
 
     // find optimal steplength
     for (stepLength; stepLength <= 5; stepLength += 0.01){
+        moves = 0;
         acc_moves = 0;
         waveFunctionOld = 0;
         waveFunctionNew = 0;
@@ -140,15 +142,15 @@ void VMCSolver::calculateOptimalSteplength() {
                         waveFunctionOld = waveFunctionNew;
                     }
                 } else {
-                    acc_moves -= 1;
+                    //acc_moves -= 1;
                     for(int j = 0; j < nDimensions; j++) {
                         rNew(i,j) = rOld(i,j);
                     }
                 }
+                moves += 1;
             }
         }
         ratio = acc_moves/moves;
-        //cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
         if(abs(0.5-ratio) < abs(0.5-old_ratio)) {
             step_min = stepLength;
             old_ratio = ratio;

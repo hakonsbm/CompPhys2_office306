@@ -12,7 +12,7 @@ using namespace std;
 int main() {
     VMCSolver *solver = new VMCSolver();
 
-    solver->setTrialFunction(new HeliumSimpleAnalytical());
+    solver->setTrialFunction(new HeliumJastrowAnalytical());
 
     solver->calculateOptimalSteplength();
 
