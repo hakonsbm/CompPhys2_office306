@@ -19,7 +19,7 @@ ofstream ofile;
 VMCSolver::VMCSolver():
     nDimensions(3),
     charge(2),
-    stepLength(0.1),
+    stepLength(0.001),
     nParticles(2),
     h(0.001),
     h2(1000000),
@@ -100,7 +100,7 @@ void VMCSolver::calculateOptimalSteplength() {
 
     double waveFunctionOld = 0;
     double waveFunctionNew = 0;
-    double stepLength = 0.1;
+//    double stepLength = 0.1;
     double step_min = nCycles;
     int acc_moves_old = nCycles;
     int acc_moves = 0;
@@ -114,7 +114,7 @@ void VMCSolver::calculateOptimalSteplength() {
     rNew = rOld;
 
     // find optimal steplength
-    for (stepLength; stepLength <= 5; stepLength += 0.1){
+    for (stepLength; stepLength <= 5; stepLength += 0.01){
         acc_moves = 0;
         waveFunctionOld = 0;
         waveFunctionNew = 0;

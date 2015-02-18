@@ -12,9 +12,10 @@ using namespace std;
 int main() {
     VMCSolver *solver = new VMCSolver();
 
-    solver->setTrialFunction(new HeliumSimpleNumerically());
+    solver->setTrialFunction(new HeliumSimpleAnalytical());
 
     solver->calculateOptimalSteplength();
+
     double alpha_max = 1.2*solver->getCharge();
     double beta_max = 1.5;
     double d_alpha = 0.1;
