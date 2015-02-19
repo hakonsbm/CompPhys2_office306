@@ -6,35 +6,53 @@
 #include "trialFunctions/heliumsimplenumerically.h"
 
 #include <iostream>
+#include <time.h>
+
 
 using namespace std;
 
 int main() {
     VMCSolver *solver = new VMCSolver();
-
     solver->setTrialFunction(new HeliumSimpleAnalytical());
-    if(solver->trialFunction()->simpleFlag)
-    solver->calculateOptimalSteplength();
-    solver->runMonteCarloIntegration(0.01, 0);
 
 
-//    double alpha_max = 1.2*solver->getCharge();
-//    double beta_max = 1.5;
-//    double d_alpha = 0.1;
-//    double d_beta = 0.01;
 
-//    for(double alpha = 0.9*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
-//        if(solver->trialFunction()->simpleFlag)
-//        {
-//            solver->runMonteCarloIntegration(alpha, 0);
-//        }
-//        else
-//        {
-//            for(double beta = 1.01; beta <= beta_max; beta += d_beta) {
-//                solver->runMonteCarloIntegration(alpha, beta);
-//            }
-//        }
+    double alpha_max = 1.2*solver->getCharge();
+    double beta_max = 1.5;
+    double d_alpha = 0.1;
+    double d_beta = 0.01;
 
-//    }
+    clock_t start, end;     //To keep track of the time
+
+
+    for(double alpha = 0.9*solver->getCharge(); alpha <= 5; alpha += d_alpha) {
+        solver->setAlpha(alpha);
+        if(solver->trialFunction()->simpleFlag) {
+
+            start = clock();
+                solver->calculateOptimalSteplength();
+            end = clock();
+
+            double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
+
+            start = clock();
+                solver->runMonteCarloIntegration();
+            end = clock();
+
+            double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
+
+            cout << "Time Optimal Steplength: " << timeOptimalStepLength << endl;
+            cout << "Time Run Monte Carlo: " << timeRunMonte << endl;
+        }
+        else {
+            for(double beta = 1.01; beta <= beta_max; beta += d_beta) {
+                solver->setBeta(beta);
+                solver->calculateOptimalSteplength();
+                solver->runMonteCarloIntegration();
+            }
+        }
+    }
+
+
     return 0;
 }
