@@ -37,6 +37,9 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
     double energySquaredSum = 0;
     double deltaE= 0;
 
+    rOld = zeros<mat>(nParticles, nDimensions);
+    rNew = zeros<mat>(nParticles, nDimensions);
+
     ofile.open(outfilename);
     m_alpha = alpha;
     m_beta = beta;
@@ -46,12 +49,14 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
             rOld(i,j) = stepLength * (ran2(&idum) - 0.5);
         }
     }
+
     rNew = rOld;
     //loop over Monte Carlo cycles
     for(int cycle = 0; cycle < nCycles; cycle++) {
 
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
+
 
         //New position to test
         for(int i = 0; i < nParticles; i++) {
@@ -159,3 +164,4 @@ void VMCSolver::calculateOptimalSteplength() {
     stepLength = step_min;
     cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
 }
+

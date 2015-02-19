@@ -2,7 +2,7 @@
 
 HeliumJastrowNumerical::HeliumJastrowNumerical()
 {
-
+    simpleFlag = false;
 }
 
 HeliumJastrowNumerical::~HeliumJastrowNumerical()
@@ -16,6 +16,7 @@ double HeliumJastrowNumerical::waveFunction(const mat &r, VMCSolver *solver)
     double nDimensions = solver->getNDimensions();
     double alpha = solver->getAlpha();
     double beta = solver->getBeta();
+
 
 
     //double r12;
