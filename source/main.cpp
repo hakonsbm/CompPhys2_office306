@@ -15,25 +15,26 @@ int main() {
     solver->setTrialFunction(new HeliumSimpleAnalytical());
     if(solver->trialFunction()->simpleFlag)
     solver->calculateOptimalSteplength();
+    solver->runMonteCarloIntegration(0.01, 0);
 
 
-    double alpha_max = 1.2*solver->getCharge();
-    double beta_max = 1.5;
-    double d_alpha = 0.1;
-    double d_beta = 0.01;
+//    double alpha_max = 1.2*solver->getCharge();
+//    double beta_max = 1.5;
+//    double d_alpha = 0.1;
+//    double d_beta = 0.01;
 
-    for(double alpha = 0.9*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
-        if(solver->trialFunction()->simpleFlag)
-        {
-            solver->runMonteCarloIntegration(alpha, 0);
-        }
-        else
-        {
-            for(double beta = 1.01; beta <= beta_max; beta += d_beta) {
-                solver->runMonteCarloIntegration(alpha, beta);
-            }
-        }
+//    for(double alpha = 0.9*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
+//        if(solver->trialFunction()->simpleFlag)
+//        {
+//            solver->runMonteCarloIntegration(alpha, 0);
+//        }
+//        else
+//        {
+//            for(double beta = 1.01; beta <= beta_max; beta += d_beta) {
+//                solver->runMonteCarloIntegration(alpha, beta);
+//            }
+//        }
 
-    }
+//    }
     return 0;
 }
