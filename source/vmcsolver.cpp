@@ -115,7 +115,7 @@ void VMCSolver::calculateOptimalSteplength() {
     rNew = rOld;
 
     // find optimal steplength
-    for (stepLength; stepLength <= 0.09; stepLength += 0.0005){
+    for (stepLength; stepLength <= 0.5; stepLength += 0.0005){
         moves = 0;
         acc_moves = 0;
         waveFunctionOld = 0;
