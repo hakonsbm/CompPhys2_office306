@@ -19,7 +19,7 @@ ofstream ofile;
 VMCSolver::VMCSolver():
     nDimensions(3),
     charge(2),
-    stepLength(0.04),
+    stepLength(1),
     nParticles(2),
     h(0.001),
     h2(1000000),
@@ -27,7 +27,7 @@ VMCSolver::VMCSolver():
     nCycles(1000000)
 {}
 
-void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
+void VMCSolver::runMonteCarloIntegration() {
     char const *outfilename = "out4-4.d";
     int acc_moves = 0;
     int moves = 0;
@@ -41,8 +41,6 @@ void VMCSolver::runMonteCarloIntegration(double alpha, double beta) {
     rNew = zeros<mat>(nParticles, nDimensions);
 
     ofile.open(outfilename);
-    m_alpha = alpha;
-    m_beta = beta;
     //initial trial positions
     for(int i = 0; i < nParticles; i++) {
         for(int j = 0; j < nDimensions; j++) {
@@ -120,7 +118,7 @@ void VMCSolver::calculateOptimalSteplength() {
     rNew = rOld;
 
     // find optimal steplength
-    for (stepLength; stepLength <= 0.5; stepLength += 0.0005){
+    for (stepLength; stepLength <= 1.5; stepLength += 0.0005){
         moves = 0;
         acc_moves = 0;
         waveFunctionOld = 0;
