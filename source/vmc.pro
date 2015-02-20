@@ -8,16 +8,16 @@ SOURCES += main.cpp \
     vmcsolver.cpp \
     lib.cpp \
     trialFunctions/trialfunction.cpp \
-    trialFunctions/heliumsimplenumerically.cpp \
     trialFunctions/heliumsimpleanalytical.cpp \
     trialFunctions/heliumjastrownumerical.cpp \
-    trialFunctions/heliumjastrowanalytical.cpp
+    trialFunctions/heliumjastrowanalytical.cpp \
+    trialFunctions/heliumsimplenumerical.cpp
 
 HEADERS += \
     vmcsolver.h \
     lib.h \
     trialFunctions/trialfunction.h \
-    trialFunctions/heliumsimplenumerically.h \
     trialFunctions/heliumsimpleanalytical.h \
     trialFunctions/heliumjastrownumerical.h \
-    trialFunctions/heliumjastrowanalytical.h
+    trialFunctions/heliumjastrowanalytical.h \
+    trialFunctions/heliumsimplenumerical.h

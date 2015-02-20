@@ -4,6 +4,8 @@
 HeliumJastrowAnalytical::HeliumJastrowAnalytical()
 {
     simpleFlag = false;
+    m_outfileName = "HeliumJastrowAnalytical";
+
 }
 
 HeliumJastrowAnalytical::~HeliumJastrowAnalytical()

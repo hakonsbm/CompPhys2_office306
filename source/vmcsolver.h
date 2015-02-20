@@ -3,7 +3,7 @@
 
 #include <armadillo>
 #include "trialFunctions/trialfunction.h"
-#include "trialFunctions/heliumsimplenumerically.h"
+#include "trialFunctions/heliumsimplenumerical.h"
 #include "trialFunctions/heliumsimpleanalytical.h"
 #include "trialFunctions/heliumjastrownumerical.h"
 #include "trialFunctions/heliumjastrowanalytical.h"
@@ -33,11 +33,15 @@ public:
     double getH2()  {return h2;}
 
 
+
+
 private:
     TrialFunction *m_trialFunction;
 
     double waveFunction(const mat &r);
     double localEnergy(const mat &r);
+
+
 
     int nDimensions;
     int charge;

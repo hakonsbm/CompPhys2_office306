@@ -19,6 +19,7 @@ public:
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
     virtual double localEnergy(const mat &r, VMCSolver *solver );
 
+
 };
 
 #endif // HELIUMSIMPLEANALYTICAL_H

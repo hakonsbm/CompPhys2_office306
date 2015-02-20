@@ -3,18 +3,23 @@
 #include "trialFunctions/heliumjastrowanalytical.h"
 #include "trialFunctions/heliumjastrownumerical.h"
 #include "trialFunctions/heliumsimpleanalytical.h"
-#include "trialFunctions/heliumsimplenumerically.h"
+#include "trialFunctions/heliumsimplenumerical.h"
 
 #include <iostream>
 #include <time.h>
 
 
 using namespace std;
+ofstream outfile;
 
 int main() {
     VMCSolver *solver = new VMCSolver();
     solver->setTrialFunction(new HeliumSimpleAnalytical());
 
+    //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
+    //vmcSolver class
+    char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName).c_str();
+    outfile.open(outfilePath);
 
 
     double alpha_max = 1.2*solver->getCharge();
@@ -25,7 +30,7 @@ int main() {
     clock_t start, end;     //To keep track of the time
 
 
-    for(double alpha = 0.9*solver->getCharge(); alpha <= 5; alpha += d_alpha) {
+    for(double alpha = 0.1*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
         solver->setAlpha(alpha);
         if(solver->trialFunction()->simpleFlag) {
 
@@ -47,11 +52,26 @@ int main() {
         else {
             for(double beta = 1.01; beta <= beta_max; beta += d_beta) {
                 solver->setBeta(beta);
-                solver->calculateOptimalSteplength();
-                solver->runMonteCarloIntegration();
+
+                start = clock();
+                    solver->calculateOptimalSteplength();
+                end = clock();
+
+                double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
+
+                start = clock();
+                    solver->runMonteCarloIntegration();
+                end = clock();
+
+                double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
+
+                cout << "Time Optimal Steplength: " << timeOptimalStepLength << endl;
+                cout << "Time Run Monte Carlo: " << timeRunMonte << endl;
             }
         }
     }
+
+    outfile.close();
 
 
     return 0;

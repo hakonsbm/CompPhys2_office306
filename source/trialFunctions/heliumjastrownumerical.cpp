@@ -3,6 +3,8 @@
 HeliumJastrowNumerical::HeliumJastrowNumerical()
 {
     simpleFlag = false;
+    m_outfileName = "HeliumJastrowNumerical";
+
 }
 
 HeliumJastrowNumerical::~HeliumJastrowNumerical()

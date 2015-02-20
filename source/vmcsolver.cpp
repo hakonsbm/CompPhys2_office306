@@ -1,7 +1,7 @@
 #include "vmcsolver.h"
 #include "lib.h"
 #include "trialFunctions/trialfunction.h"
-#include "trialFunctions/heliumsimplenumerically.h"
+#include "trialFunctions/heliumsimplenumerical.h"
 
 #include <armadillo>
 #include <iostream>
@@ -12,7 +12,9 @@
 
 using namespace arma;
 using namespace std;
-ofstream ofile;
+//ofstream outfile;
+
+extern ofstream outfile;
 
 
 
@@ -25,10 +27,12 @@ VMCSolver::VMCSolver():
     h2(1000000),
     idum(-1),
     nCycles(1000000)
-{}
+{
+
+}
 
 void VMCSolver::runMonteCarloIntegration() {
-    char const *outfilename = "out4-4.d";
+//    char const *outfilename = "../source/outfiles/Test";// + trialFunction()->m_outfileName;
     int acc_moves = 0;
     int moves = 0;
     double waveFunctionOld = 0;
@@ -40,7 +44,8 @@ void VMCSolver::runMonteCarloIntegration() {
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
 
-    ofile.open(outfilename);
+//    outfile.open(outfilename, std::ofstream::app)
+            ;
     //initial trial positions
     for(int i = 0; i < nParticles; i++) {
         for(int j = 0; j < nDimensions; j++) {
@@ -91,8 +96,7 @@ void VMCSolver::runMonteCarloIntegration() {
     cout << "Accepted moves: " << acc_moves << endl;
     cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
     cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
-    ofile << setw(15) << setprecision(8) << energy << m_alpha << m_beta << endl;
-    ofile.close();
+    outfile << setw(15) << setprecision(8) << energy << "\t" << energySquared  << "\t" << m_alpha << "\t" <<  m_beta << endl;
 }
 
 
@@ -162,4 +166,5 @@ void VMCSolver::calculateOptimalSteplength() {
     stepLength = step_min;
     cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
 }
+
 

@@ -4,6 +4,7 @@
 #include <armadillo>
 
 using namespace arma;
+using namespace std;
 
 class VMCSolver;
 
@@ -14,7 +15,9 @@ public:
     virtual double waveFunction(const mat &r, VMCSolver *solver ) = 0 ;
     virtual double localEnergy(const mat &r, VMCSolver *solver ) = 0;
 
-    bool simpleFlag;
+    string m_outfileName;
+
+    bool simpleFlag;    
 
 };
 

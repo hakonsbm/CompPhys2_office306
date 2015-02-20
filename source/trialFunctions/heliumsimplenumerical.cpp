@@ -1,4 +1,4 @@
-#include "heliumsimplenumerically.h"
+#include "heliumsimplenumerical.h"
 #include "trialfunction.h"
 #include "vmcsolver.h"
 
@@ -7,12 +7,14 @@
 
 using namespace std;
 
-HeliumSimpleNumerically::HeliumSimpleNumerically()
+HeliumSimpleNumerical::HeliumSimpleNumerical()
 {
     simpleFlag = true;
+    m_outfileName = "HeliumSimpleNumerical";
+
 }
 
-double HeliumSimpleNumerically::waveFunction(const mat &r, VMCSolver *solver)
+double HeliumSimpleNumerical::waveFunction(const mat &r, VMCSolver *solver)
 {
 
 //    cout << solver->getAlpha() << endl;
@@ -28,7 +30,7 @@ double HeliumSimpleNumerically::waveFunction(const mat &r, VMCSolver *solver)
     return exp(-accu(rpos) * solver->getAlpha());
 }
 
-double HeliumSimpleNumerically::localEnergy(const mat &r, VMCSolver *solver)
+double HeliumSimpleNumerical::localEnergy(const mat &r, VMCSolver *solver)
 {
     //Grabbing all the necessary constants stored in the solver
     double nParticles = solver->getNParticles();

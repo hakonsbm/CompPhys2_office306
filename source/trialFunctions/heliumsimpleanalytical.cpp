@@ -3,6 +3,7 @@
 HeliumSimpleAnalytical::HeliumSimpleAnalytical()
 {
     simpleFlag = true;
+    m_outfileName = "HeliumSimpleAnalytical";
 }
 
 double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
