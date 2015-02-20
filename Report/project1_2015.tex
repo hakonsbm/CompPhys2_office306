@@ -1,0 +1,61 @@
+\documentclass[11pt]{article}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{a4wide}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[dvips]{epsfig}
+\usepackage[T1]{fontenc}
+\usepackage{cite} % [2,3,4] --> [2--4]
+\usepackage{shadow}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{subcaption}
+
+
+\usetikzlibrary{arrows, shapes}
+
+\setcounter{tocdepth}{2}
+
+\lstset{language=c++}
+\lstset{alsolanguage=[90]Fortran}
+\lstset{basicstyle=\small}
+\lstset{backgroundcolor=\color{white}}
+\lstset{frame=single}
+\lstset{stringstyle=\ttfamily}
+\lstset{keywordstyle=\color{red}\bfseries}
+\lstset{commentstyle=\itshape\color{blue}}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{breaklines}
+
+\title{ Molecular Dynamics \\ FYS-4411 }
+\author{Gullik Vetvik Killie}
+
+\begin{document}
+
+\section{Monte Carlo start}
+
+\section{Closed form expression}
+
+	The local energy for the simple trialfunct
+
+	\[
+	Z \left(- \frac{1}{r_{2}} - \frac{1}{r_{1}}\right) - \alpha^{2} + \alpha \left(\frac{1}{r_{2}} + \frac{1}{r_{1}}\right) + \frac{1}{r_{12}}
+	\]
+
+
+\section{Methodology}
+	An improvement to the Metropolis algorithm is to implement importance sampling, where the sampling algorithm works to increase the sampling at important areas and decrease the sampling at unimportant areas.
+
+
+
+
+\end{document}
+
+

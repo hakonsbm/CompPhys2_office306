@@ -67,6 +67,8 @@ int main() {
 
                 cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
                 cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+                
+                
             }
         }
     }
