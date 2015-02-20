@@ -14,7 +14,7 @@ ofstream outfile;
 
 int main() {
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumJastrowAnalytical());
+    solver->setTrialFunction(new HeliumSimpleAnalytical());
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -67,6 +67,8 @@ int main() {
 
                 cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
                 cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+
+
             }
         }
     }
