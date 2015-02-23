@@ -1,3 +1,4 @@
 #Ignore the stupid user files
 *.user
 *.o
+/build*
