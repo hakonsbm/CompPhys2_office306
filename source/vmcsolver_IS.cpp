@@ -1,4 +1,4 @@
-#include "vmcsolver.h"
+#include "vmcsolver_IS.h"
 #include "lib.h"
 #include "trialFunctions/trialfunction.h"
 #include "trialFunctions/heliumsimplenumerical.h"
@@ -43,6 +43,8 @@ void VMCSolver::runMonteCarloIntegration() {
 
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
+    QForceOld = zeros<mat>(nParticles, nDimensions);
+    QForceNew = zeros<mat>(nParticles, nDimensions);
 
     //initial trial positions
     for(int i = 0; i < nParticles; i++) {

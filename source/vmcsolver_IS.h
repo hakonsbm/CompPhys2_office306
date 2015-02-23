@@ -55,9 +55,14 @@ private:
     double h2;
     long idum;
     int nCycles;
+    double D; // diffusion constant
+    double timestep; // timestep for gaussian deviate
+
 
     mat rOld;
     mat rNew;
+    mat QForceOld;
+    mat QForceNew;
 
 
 };

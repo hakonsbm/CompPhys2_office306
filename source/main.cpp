@@ -1,4 +1,4 @@
-#include "vmcsolver.h"
+#include "vmcsolver_IS.h"
 #include "trialFunctions/trialfunction.h"
 #include "trialFunctions/heliumjastrowanalytical.h"
 #include "trialFunctions/heliumjastrownumerical.h"

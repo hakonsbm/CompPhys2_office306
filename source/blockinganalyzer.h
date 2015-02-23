@@ -1,7 +1,7 @@
 #ifndef BLOCKINGANALYZER_H
 #define BLOCKINGANALYZER_H
 
-class VMCSolver {};
+//class VMCSolver {};
 
 class BlockingAnalyzer
 {
