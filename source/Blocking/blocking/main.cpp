@@ -1,6 +1,8 @@
 #include "iostream"
 #include "fstream"
 #include "vector"
+#include "cmath"
+#include "iomanip"
 
 using namespace std;
 ofstream outfile;
@@ -31,7 +33,7 @@ int main() {
         average /= (double)i;
         averageSquared /= (double)i;
         std = sqrt(averageSquared-average*average);
-        outfile << setw(15) << setprecision(8) << energy << "\t" << energySquared  << "\t" << m_alpha << "\t" <<  m_beta << endl;
+        outfile << setw(15) << setprecision(8) << i << "\t" << std  << "\t" << average << endl;
     }
 outfile.close();
     return 0;
