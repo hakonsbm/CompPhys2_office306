@@ -25,5 +25,7 @@ Gullik
 ######################################
 Added sepparate project and vmc files for importance sampling (because we need to compare with and without IS). Importance sampling needs to be implemented though.  
 
+Håkon
+
 
 
