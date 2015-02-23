@@ -1,0 +1,66 @@
+#ifndef VMCSOLVER_H
+#define VMCSOLVER_H
+
+#include <armadillo>
+#include "trialFunctions/trialfunction.h"
+#include "trialFunctions/heliumsimplenumerical.h"
+#include "trialFunctions/heliumsimpleanalytical.h"
+#include "trialFunctions/heliumjastrownumerical.h"
+#include "trialFunctions/heliumjastrowanalytical.h"
+
+using namespace arma;
+
+class TrialFunction; class HeliumSimpleNumerically;
+
+class VMCSolver
+{
+public:
+    VMCSolver();
+
+    void runMonteCarloIntegration();
+    void calculateOptimalSteplength();
+    void setTrialFunction(TrialFunction *trialFunction) { m_trialFunction = trialFunction; }
+    void setAlpha(double alpha) {m_alpha = alpha;}
+    void setBeta(double beta) {m_beta = beta;}
+
+    TrialFunction *trialFunction(){return m_trialFunction;}
+
+    int getNParticles() {return nParticles; }
+    int getNDimensions() {return nDimensions; }
+    double getAlpha() {return m_alpha; }
+    double getBeta() {return m_beta; }
+    int getCharge() {return charge; }
+    double getH()   {return h;}
+    double getH2()  {return h2;}
+
+
+
+
+private:
+    TrialFunction *m_trialFunction;
+
+    double waveFunction(const mat &r);
+    double localEnergy(const mat &r);
+
+
+
+    int nDimensions;
+    int charge;
+    double stepLength;
+    double step_min;
+    double m_alpha;
+    double m_beta;
+    int nParticles;
+    double h;
+    double h2;
+    long idum;
+    int nCycles;
+    char const *outFileName = "out4-4.d";
+
+    mat rOld;
+    mat rNew;
+
+
+};
+
+#endif // VMCSOLVER_H
