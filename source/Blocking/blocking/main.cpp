@@ -1,16 +1,11 @@
-#include "blockinganalyzer.h"
-#include "vmcsolver.h"
 #include "iostream"
 #include "fstream"
 #include "vector"
 
 using namespace std;
+ofstream outfile;
 
-BlockingAnalyzer::BlockingAnalyzer() {}
-
-
-
-void runStatisticalAnalysis() {
+int main() {
 
     ifstream readFileEnergy ("out4-4.d", ios::in);
     vector <double> energy;
@@ -22,6 +17,7 @@ void runStatisticalAnalysis() {
     double std;
     int count;
     readFileEnergy >> count;
+    outfile.open("outputSTD.d");
     for (int i = 0; i < count; i++) {
         readFileEnergy >> tmp1 >> tmp2;
         energy.push_back(tmp1);
@@ -35,5 +31,8 @@ void runStatisticalAnalysis() {
         average /= (double)i;
         averageSquared /= (double)i;
         std = sqrt(averageSquared-average*average);
+        outfile << setw(15) << setprecision(8) << energy << "\t" << energySquared  << "\t" << m_alpha << "\t" <<  m_beta << endl;
     }
+outfile.close();
+    return 0;
 }
