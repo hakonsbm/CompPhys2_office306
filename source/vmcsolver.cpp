@@ -21,7 +21,7 @@ extern ofstream outfile;
 VMCSolver::VMCSolver():
     nDimensions(3),
     charge(2),
-    stepLength(1),
+    stepLength(0.1),
     nParticles(2),
     h(0.001),
     h2(1000000),
@@ -92,7 +92,7 @@ void VMCSolver::runMonteCarloIntegration() {
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
 
-    cout << endl << "##############################################################################" << endl << endl;
+
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
     cout << "Moves: " << moves << endl;
     cout << "Accepted moves: " << acc_moves << endl;
@@ -125,7 +125,7 @@ void VMCSolver::calculateOptimalSteplength() {
     rNew = rOld;
 
     // find optimal steplength
-    for (stepLength; stepLength <= 1.5; stepLength += 0.0005){
+    for (stepLength = 0.1; stepLength <= 20.0; stepLength += 0.5){
         moves = 0;
         acc_moves = 0;
         waveFunctionOld = 0;
@@ -167,7 +167,8 @@ void VMCSolver::calculateOptimalSteplength() {
         }
     }
     stepLength = step_min;
-    cout << "Steplength: " << stepLength  << "  " << acc_moves << endl;
+    cout << endl << "##############################################################################" << endl << endl;
+    cout << endl << "Steplength: " << stepLength << endl;
 }
 
 
