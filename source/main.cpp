@@ -22,7 +22,7 @@ int main() {
     outfile.open(outfilePath);
 
 
-    double alpha_max = 1.0*solver->getCharge();
+    double alpha_max = 1.5*solver->getCharge();
     double beta_max = 1.5;
     double d_alpha = 0.1;
     double d_beta = 0.01;
@@ -30,7 +30,7 @@ int main() {
     clock_t start, end;     //To keep track of the time
 
 
-    for(double alpha = 0.5*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
+    for(double alpha = 0.1*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
         solver->setAlpha(alpha);
         if(solver->trialFunction()->simpleFlag) {
 
@@ -72,7 +72,7 @@ int main() {
             }
         }
     }
-
+    cout << "Writing to " << outfilePath << endl;
     outfile.close();
 
 
