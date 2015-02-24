@@ -9,36 +9,49 @@ ofstream outfile;
 
 int main() {
 
-    ifstream readFileEnergy;
+    ifstream readFileEnergy("out4-4.d", ios::in);
     vector <double> energy;
     vector <double> energySquared;
     double tmp1;
     double tmp2;
+    double tmp3;
+    double tmp4;
     double average;
     double averageSquared;
     double std;
+    double averageSTD;
+    double mean;
     int count=100000;
-    bool test;
-    //readFileEnergy >> count;
+    int numberOfBlocks;
     outfile.open("outputSTD.d");
-    readFileEnergy.open("out4-4.d");
-    test = readFileEnergy.fail();
+    readFileEnergy.open("../source/outfiles/HeliumSimpleAnalytical_samples");
     for (int i = 0; i < count; i++) {
-        readFileEnergy >> tmp1;
-        readFileEnergy >> tmp2;
+        readFileEnergy >> tmp1 >> tmp2 >> tmp3 >> tmp4;
         energy.push_back(tmp1);
         energySquared.push_back(tmp2);
     }
     readFileEnergy.close();
-    for(int i = 1000; i < count/5+1; i += 100) {
-        for(int j= 0; j < count +1; j++) {
-            average += energy[j];
-            averageSquared += energySquared[j];
+    for(int i = 100; i < count/5+1; i += 100) {
+        mean = 0;
+        averageSTD = 0;
+        for(int j = 0; j < count; j += i) {
+            numberOfBlocks = count / i;
+            average = 0;
+            averageSquared = 0;
+            std = 0;
+            for(int k = j; k < j+i; k++){
+                average += energy[k];
+                averageSquared += energySquared[k];
+            }
+            average /= (double)i;
+            averageSquared /= (double)i;
+            std = sqrt(averageSquared-average*average);
+            mean += average;
+            averageSTD += std;
         }
-        average /= (double)i;
-        averageSquared /= (double)i;
-        std = sqrt(averageSquared-average*average);
-        outfile << setw(15) << setprecision(8) << i << "\t" << std  << "\t" << average << endl;
+        mean /= (double)numberOfBlocks;
+        averageSTD /= (double)numberOfBlocks;
+        outfile << setw(15) << setprecision(8) << i << "\t" << averageSTD  << "\t" << mean << endl;
     }
 outfile.close();
     return 0;
