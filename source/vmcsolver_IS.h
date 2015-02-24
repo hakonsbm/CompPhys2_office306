@@ -41,6 +41,7 @@ private:
 
     double waveFunction(const mat &r);
     double localEnergy(const mat &r);
+    double QuantumForce(const mat &r, mat QForce);
 
 
 
@@ -56,7 +57,8 @@ private:
     long idum;
     int nCycles;
     double D; // diffusion constant
-    double timestep; // timestep for gaussian deviate
+    // double timestep; // timestep for gaussian deviate (using steplength)
+    double GreensFunction;
 
 
     mat rOld;

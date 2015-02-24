@@ -1,4 +1,4 @@
-#include "vmcsolver.h"
+#include "vmcsolver_IS.h"
 #include "trialFunctions/trialfunction.h"
 #include "trialFunctions/heliumjastrowanalytical.h"
 #include "trialFunctions/heliumjastrownumerical.h"
@@ -18,11 +18,11 @@ int main() {
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
-    char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName).c_str();
+    char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName+string("_IS")).c_str();
     outfile.open(outfilePath);
 
 
-    double alpha_max = 1.5*solver->getCharge();
+    double alpha_max = 1.0*solver->getCharge();
     double beta_max = 1.5;
     double d_alpha = 0.1;
     double d_beta = 0.01;
@@ -30,7 +30,7 @@ int main() {
     clock_t start, end;     //To keep track of the time
 
 
-    for(double alpha = 0.1*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
+    for(double alpha = 1.0*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
         solver->setAlpha(alpha);
         if(solver->trialFunction()->simpleFlag) {
 

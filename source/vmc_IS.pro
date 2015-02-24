@@ -4,15 +4,15 @@ CONFIG -= qt
 
 LIBS += -llapack -larmadillo
 
-SOURCES += main.cpp \
+SOURCES += \
     lib.cpp \
     trialFunctions/trialfunction.cpp \
     trialFunctions/heliumsimpleanalytical.cpp \
     trialFunctions/heliumjastrownumerical.cpp \
     trialFunctions/heliumjastrowanalytical.cpp \
     trialFunctions/heliumsimplenumerical.cpp \
-    blockinganalyzer.cpp \
-    vmcsolver_IS.cpp
+    vmcsolver_IS.cpp \
+    main_IS.cpp
 
 HEADERS += \
     lib.h \
@@ -21,5 +21,4 @@ HEADERS += \
     trialFunctions/heliumjastrownumerical.h \
     trialFunctions/heliumjastrowanalytical.h \
     trialFunctions/heliumsimplenumerical.h \
-    blockinganalyzer.h \
     vmcsolver_IS.h
