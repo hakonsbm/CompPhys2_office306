@@ -11,6 +11,7 @@
 
 using namespace std;
 ofstream outfile;
+ofstream samplefile;
 
 int main() {
     VMCSolver *solver = new VMCSolver();
@@ -19,7 +20,9 @@ int main() {
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
     char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName).c_str();
+    char const * samplefilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName + string("_samples")).c_str();
     outfile.open(outfilePath);
+    samplefile.open(samplefilePath);
 
 
     double alpha_max = 0.85*solver->getCharge();
@@ -72,8 +75,9 @@ int main() {
             }
         }
     }
-    cout << "Writing to " << outfilePath << endl;
+    cout << "\nWriting to " << outfilePath << endl;
     outfile.close();
+    samplefile.close();
 
 
     return 0;

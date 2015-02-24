@@ -26,7 +26,7 @@ VMCSolver::VMCSolver():
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(1000000),
+    nCycles(10000000),
     D(0.5)
 {
 
@@ -113,15 +113,19 @@ void VMCSolver::runMonteCarloIntegration() {
     }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
-
+    double energyVar = energySquared - energy*energy;
 
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
+    cout << "Variance: " << energyVar << endl;
     cout << "Moves: " << moves << endl;
     cout << "Accepted moves: " << acc_moves << endl;
     cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
     cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
 
-    outfile << setw(15) << setprecision(8) << energy << "\t" << energySquared  << "\t" << m_alpha << "\t" <<  m_beta << endl;
+    outfile << setw(15) << setprecision(8) << energy;
+    outfile << setw(15) << setprecision(8) << energySquared;
+    outfile << setw(15) << setprecision(8) << m_alpha;
+    outfile << setw(15) << setprecision(8) << m_beta << endl;
 }
 
 

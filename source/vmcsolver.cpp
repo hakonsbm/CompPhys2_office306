@@ -15,7 +15,7 @@ using namespace std;
 //ofstream outfile;
 
 extern ofstream outfile;
-
+extern ofstream samplefile;
 
 
 VMCSolver::VMCSolver():
@@ -26,7 +26,7 @@ VMCSolver::VMCSolver():
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(1000000)
+    nCycles(100000)
 {
 
 }
@@ -86,6 +86,10 @@ void VMCSolver::runMonteCarloIntegration() {
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;
         }
+        samplefile << setw(15) << setprecision(8) << deltaE;
+        samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
+        samplefile << setw(15) << setprecision(8) << m_alpha;
+        samplefile << setw(15) << setprecision(8) << m_beta << endl;
     }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
@@ -102,7 +106,7 @@ void VMCSolver::runMonteCarloIntegration() {
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
     outfile << setw(15) << setprecision(8) << m_alpha;
-    outfile << setw(15) << setprecision(8) <<  m_beta << endl;
+    outfile << setw(15) << setprecision(8) << m_beta << endl;
 }
 
 

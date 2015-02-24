@@ -12,7 +12,6 @@ SOURCES += main.cpp \
     trialFunctions/heliumjastrownumerical.cpp \
     trialFunctions/heliumjastrowanalytical.cpp \
     trialFunctions/heliumsimplenumerical.cpp \
-    blockinganalyzer.cpp
 
 HEADERS += \
     vmcsolver.h \
@@ -22,4 +21,3 @@ HEADERS += \
     trialFunctions/heliumjastrownumerical.h \
     trialFunctions/heliumjastrowanalytical.h \
     trialFunctions/heliumsimplenumerical.h \
-    blockinganalyzer.h
