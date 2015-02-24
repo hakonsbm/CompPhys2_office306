@@ -149,7 +149,7 @@ void VMCSolver::calculateOptimalSteplength() {
     rNew = rOld;
 
     // find optimal steplength
-    for (stepLength = 0.1; stepLength <= 20.0; stepLength += 0.2){
+    for (stepLength = 0.01; stepLength <= 1.0; stepLength += 0.01){
         moves = 0;
         acc_moves = 0;
         waveFunctionOld = 0;
@@ -162,7 +162,7 @@ void VMCSolver::calculateOptimalSteplength() {
             }
         }
         rNew = rOld;
-        for(int cycle = 0; cycle < nCycles/100; cycle++) {
+        for(int cycle = 0; cycle < 1000; cycle++) {
             waveFunctionOld = trialFunction()->waveFunction(rOld, this);
             for(int i = 0; i < nParticles; i++) {
                 for(int i = 0; i < nParticles; i++) {
@@ -201,11 +201,13 @@ void VMCSolver::calculateOptimalSteplength() {
                     moves += 1;
                 }
             }
-            ratio = (double)acc_moves/(double)moves;
-            if(abs(0.5-ratio) < abs(0.5-old_ratio)) {
-                step_min = stepLength;
-                old_ratio = ratio;
-            }
+
+        }
+        //cout << acc_moves << endl;
+        ratio = (double)acc_moves/(double)moves;
+        if(abs(0.5-ratio) < abs(0.5-old_ratio)) {
+            step_min = stepLength;
+            old_ratio = ratio;
         }
 
     }
