@@ -23,7 +23,7 @@ I'll add classes for the analytical solution to trial function 1 and 2, and a nu
 Gullik
 
 ######################################33
-Added sepparate project and vmc files for importance sampling (because we need to compare with and without IS). Importance sampling needs to be implemented though.  
+Added sepparate project and vmc files for importance sampling.
 
 Håkon
 
