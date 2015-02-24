@@ -9,7 +9,7 @@ ofstream outfile;
 
 int main() {
 
-    ifstream readFileEnergy ("out4-4.d", ios::in);
+    ifstream readFileEnergy;
     vector <double> energy;
     vector <double> energySquared;
     double tmp1;
@@ -17,15 +17,20 @@ int main() {
     double average;
     double averageSquared;
     double std;
-    int count;
-    readFileEnergy >> count;
+    int count=100000;
+    bool test;
+    //readFileEnergy >> count;
     outfile.open("outputSTD.d");
+    readFileEnergy.open("out4-4.d");
+    test = readFileEnergy.fail();
     for (int i = 0; i < count; i++) {
-        readFileEnergy >> tmp1 >> tmp2;
+        readFileEnergy >> tmp1;
+        readFileEnergy >> tmp2;
         energy.push_back(tmp1);
         energySquared.push_back(tmp2);
     }
-    for(int i = 1000; i < count/5+1; i += 1000) {
+    readFileEnergy.close();
+    for(int i = 1000; i < count/5+1; i += 100) {
         for(int j= 0; j < count +1; j++) {
             average += energy[j];
             averageSquared += energySquared[j];
