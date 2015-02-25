@@ -26,7 +26,7 @@ VMCSolver::VMCSolver():
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(10000000),
+    nCycles(100000),
     D(0.5)
 {
 
@@ -61,7 +61,6 @@ void VMCSolver::runMonteCarloIntegration() {
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
         QuantumForce(rOld, QForceOld); QForceOld = QForceOld*h/waveFunctionOld;
-
         //New position to test
         for(int i = 0; i < nParticles; i++) {
             for(int j = 0; j < nDimensions; j++) {
@@ -125,7 +124,8 @@ void VMCSolver::runMonteCarloIntegration() {
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
     outfile << setw(15) << setprecision(8) << m_alpha;
-    outfile << setw(15) << setprecision(8) << m_beta << endl;
+    outfile << setw(15) << setprecision(8) << m_beta;
+    outfile << setw(15) << setprecision(8) << stepLength << endl;
 }
 
 

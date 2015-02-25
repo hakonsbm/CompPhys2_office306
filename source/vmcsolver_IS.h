@@ -22,6 +22,7 @@ public:
     void setTrialFunction(TrialFunction *trialFunction) { m_trialFunction = trialFunction; }
     void setAlpha(double alpha) {m_alpha = alpha;}
     void setBeta(double beta) {m_beta = beta;}
+    void setSteplength(double SL) {stepLength = SL;}
 
     TrialFunction *trialFunction(){return m_trialFunction;}
 
@@ -32,6 +33,8 @@ public:
     int getCharge() {return charge; }
     double getH()   {return h;}
     double getH2()  {return h2;}
+
+
 
 
 
