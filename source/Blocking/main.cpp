@@ -16,20 +16,24 @@ int main() {
     double tmp2;
     double tmp3;
     double tmp4;
-    double average;
-    double averageSquared;
-    double std;
-    double averageSTD;
-    double mean;
-    int count=100000;
-    int numberOfBlocks;
+    double average = 0;
+    double averageSquared = 0;
+    double std = 0;
+    double averageSTD = 0;
+    double mean = 0;
+    int count = 0;
+    int numberOfBlocks = 0;
     outfile.open("outputSTD.d");
     readFileEnergy.open("../source/outfiles/HeliumSimpleAnalytical_samples");
-    for (int i = 0; i < count; i++) {
+    while (!readFileEnergy.eof()) {
         readFileEnergy >> tmp1 >> tmp2 >> tmp3 >> tmp4;
         energy.push_back(tmp1);
         energySquared.push_back(tmp2);
+        count++;
     }
+    count--;
+    energy.pop_back();
+    energySquared.pop_back();
     readFileEnergy.close();
     for(int i = 100; i < count/5+1; i += 100) {
         mean = 0;
@@ -45,7 +49,7 @@ int main() {
             }
             average /= (double)i;
             averageSquared /= (double)i;
-            std = sqrt(averageSquared-average*average);
+            std = sqrt((averageSquared-average*average)/(double)i);
             mean += average;
             averageSTD += std;
         }
