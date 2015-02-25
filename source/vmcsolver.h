@@ -33,6 +33,7 @@ public:
     double getH()   {return h;}
     double getH2()  {return h2;}
 
+    void setImportanceSampling() {importanceSampling = true;}
 
 
 
@@ -42,6 +43,7 @@ private:
     double waveFunction(const mat &r);
     double localEnergy(const mat &r);
 
+    bool importanceSampling;    //When this flag is true it uses importance sampling instead of regular sampling
 
 
     int nDimensions;
