@@ -1,5 +1,10 @@
 # CompPhys2_office306
 
+########################################
+
+Hi, I saw was adding importance sampling stuff now, so then I will stay away from it for now :)
+
+
 #################################333
 
 Temporary result from run of the trial functions
