@@ -22,7 +22,7 @@ VMCSolver::VMCSolver():
     nDimensions(3),
     charge(2),
     stepLength(0.5),
-    nParticles(2),
+    nParticles(4),
     h(0.001),
     h2(1000000),
     idum(-1),
@@ -42,7 +42,6 @@ void VMCSolver::runMonteCarloIntegration() {
     double energySum = 0;
     double energySquaredSum = 0;
     double deltaE = 0;
-
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
 

@@ -4,6 +4,7 @@
 #include "trialFunctions/heliumjastrownumerical.h"
 #include "trialFunctions/heliumsimpleanalytical.h"
 #include "trialFunctions/heliumsimplenumerical.h"
+#include "trialFunctions/beryllium.h"
 
 #include <iostream>
 #include <time.h>
@@ -26,7 +27,7 @@ int main() {
     //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumSimpleAnalytical());
+    solver->setTrialFunction(new Beryllium()); // HeliumSimpleNumerical
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
