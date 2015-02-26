@@ -20,13 +20,13 @@ extern ofstream samplefile;
 
 VMCSolver::VMCSolver():
     nDimensions(3),
-    charge(2),
+    charge(4),
     stepLength(0.5),
     nParticles(4),
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(10000),
+    nCycles(100000),
     D(0.5),
     importanceSampling(false)
 {

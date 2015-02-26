@@ -17,7 +17,7 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
 {
 
     double rSingleParticle, alpha, beta, wf, product, rij;
-    int prodcount = 0;
+    product = 1.0;
     alpha = solver -> getAlpha();
     beta = solver -> getBeta();
     vec argument(solver->getNParticles());
@@ -34,14 +34,7 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
             for(int k = 0; k < solver->getNDimensions(); k++) {
                 rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
             }
-            if(prodcount == 0)
-            {
-                product = exp(rij/(2.0*(1+beta*rij)));
-            } else
-            {
-                product = product * exp(rij/(2.0*(1+beta*rij)));
-            }
-            prodcount++;
+            product = product * exp(rij/(2.0*(1+beta*rij)));
         }
     }
 
