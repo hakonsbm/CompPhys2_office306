@@ -35,35 +35,43 @@
 \lstset{breaklines}
 
 \title{ Computational Physics II \\ FYS-4411 }
-\author{Gullik Vetvik Killie}
+\author{Gullik Vetvik Killie\\
+		Håkon S.B. Mørk\\
+		Jose Emeilio Ruiz Navarro
+		}
 
 \begin{document}
 
-\abstract{Fille in abstract}
+\maketitle
+
+\abstract{Fill in abstract}
 
 \section{Introduction}
 
 \section{Methods}
+	\subsection{Derivation of local energies}
+		\subsubsection{Helium: Simple trialfunction}
+		The simple version of the trial function is only dependant on one parameter \( \alpha \) and does not take into account interaction between the two electrons, it is of the form 
+		\[ \Psi_T (\vb{r_1}, \vb{r_2}) = \exp{ -\alpha (r_1 + r_2) } \]
 
-\section{ Results and discussion }
+		\begin{align}
+		E_L &= \frac{1}{ \Psi_T } \hat{H} \Psi_T 
+		\\
+		&=	\exp{ \alpha (r_1 + r_2) } \left( -\frac{nabla_1^2}{ 2 } - \frac{nabla_2^2}{ 2 } - \frac{2}{r_1}  -\frac{2}{r_2} +  \frac{1}{r_{12}} \right)   \exp{ -\alpha (r_1 + r_2) }
+		\end{align} 
+	
+\section{Results and discussion}
 
-\section{ Conclusions and perspectives }
+\section{Conclusions and perspectives}
 
 \appendix
 
-\section{Closed form expression}
 
 	The local energy for the simple trialfunct
 
 	\[
 	Z \left(- \frac{1}{r_{2}} - \frac{1}{r_{1}}\right) - \alpha^{2} + \alpha \left(\frac{1}{r_{2}} + \frac{1}{r_{1}}\right) + \frac{1}{r_{12}}
 	\]
-
-
-\section{Methodology}
-	An improvement to the Metropolis algorithm is to implement importance sampling, where the sampling algorithm works to increase the sampling at important areas and decrease the sampling at unimportant areas.
-
-
 
 
 \end{document}
