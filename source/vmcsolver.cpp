@@ -188,6 +188,10 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;
         }
+        samplefile << setw(15) << setprecision(8) << deltaE;
+        samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
+        samplefile << setw(15) << setprecision(8) << m_alpha;
+        samplefile << setw(15) << setprecision(8) << m_beta << endl;
     }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);

@@ -39,10 +39,11 @@ localEnergy1 = calculateLocalEnergy(phi1)
 localEnergy1 = localEnergy1.subs(r12,R12).factor().subs(r1, R1).subs(r1**2,R1**2).subs(r2,R2).subs(r2**2,R2**2).simplify().collect(Z).collect(alpha)
 
 print sp.printing.latex(localEnergy1)
+print sp.printing.ccode(localEnergy1)
 
 #I was not able to simplify the expression for the local energy with the more complicated trialfunction
 
-localEnergy2 = calculateLocalEnergy(phi2)
-localEnergy2 = localEnergy2#Add lots of simplifying here
+# localEnergy2 = calculateLocalEnergy(phi2)
+# localEnergy2 = localEnergy2#Add lots of simplifying here
 
 # print sp.printing.latex(localEnergy2)
