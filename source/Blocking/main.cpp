@@ -5,11 +5,11 @@
 #include "iomanip"
 
 using namespace std;
-ofstream outfile;
 
 int main() {
 
-    ifstream readFileEnergy("out4-4.d", ios::in);
+    ifstream inFile;
+    ofstream outFile;
     vector <double> energy;
     vector <double> energySquared;
     double tmp1;
@@ -22,11 +22,14 @@ int main() {
     double averageSTD = 0;
     double mean = 0;
     int count = 0;
+    int dividend = 1000;
     int numberOfBlocks = 0;
-    outfile.open("outputSTD.d");
-    readFileEnergy.open("../source/outfiles/HeliumSimpleAnalytical_samples");
-    while (!readFileEnergy.eof()) {
-        readFileEnergy >> tmp1 >> tmp2 >> tmp3 >> tmp4;
+    int maxBlockSize = 0;
+    int minBlockSize = 0;
+    outFile.open("outputSTD.dat");
+    inFile.open("input.dat");
+    while (!inFile.eof()) {
+        inFile >> tmp1 >> tmp2 >> tmp3 >> tmp4;
         energy.push_back(tmp1);
         energySquared.push_back(tmp2);
         count++;
@@ -34,8 +37,15 @@ int main() {
     count--;
     energy.pop_back();
     energySquared.pop_back();
-    readFileEnergy.close();
-    for(int i = 100; i < count/5+1; i += 100) {
+    inFile.close();
+    maxBlockSize = count / 4;
+    minBlockSize = count / dividend;
+    if(minBlockSize < 1000) {
+        minBlockSize = 1000;
+        dividend = count / minBlockSize;
+    }
+    dividend--;
+    for(int i = minBlockSize; i < maxBlockSize + 1; i += count / dividend - count / (dividend + 1)) {
         mean = 0;
         averageSTD = 0;
         for(int j = 0; j < count; j += i) {
@@ -55,8 +65,9 @@ int main() {
         }
         mean /= (double)numberOfBlocks;
         averageSTD /= (double)numberOfBlocks;
-        outfile << setw(15) << setprecision(8) << i << "\t" << averageSTD  << "\t" << mean << endl;
+        outFile << setw(15) << setprecision(8) << i << "\t" << averageSTD  << "\t" << mean << endl;
+        dividend--;
     }
-outfile.close();
+    outFile.close();
     return 0;
 }
