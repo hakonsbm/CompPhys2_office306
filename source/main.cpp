@@ -14,12 +14,62 @@ ofstream outfile;
 ofstream samplefile;
 
 //This runs through with several different alpha and beta values and prints the results
+void runWithDiffConstants(VMCSolver *solver);
+
+
+int main() {
+    // Choices for the trialFunctions to use are:
+    //
+    //HeliumSimpleAnalytical:   alpha = 1.62    beta = 0
+    //HeliumSimpleNumerical:    alpha = 1.7     beta = 0
+    //HeliumJastrowAnalytical:  alpha = 1.8     beta = 1.05
+    //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
+
+    VMCSolver *solver = new VMCSolver();
+    solver->setTrialFunction(new HeliumSimpleAnalytical());
+
+    //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
+    //vmcSolver class
+    char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName).c_str();
+    char const * samplefilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName + string("_samples")).c_str();
+    outfile.open(outfilePath);
+    samplefile.open(samplefilePath);
+
+
+    //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
+    //Look for the program energyLevels.py to find which values weere the best
+//    runWithDiffConstants(solver);
+
+////////////////////////////////////////////////////////////////////////////////////7
+//Enable the part below if you want the alph and beta values to run with (Good values below)
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+    solver->setAlpha(1.62);
+    solver->setBeta(0.);
+
+//    solver->calculateOptimalSteplength();
+//    solver->runMonteCarloIntegration();
+
+    solver->runMonteCarloIntegrationIS();
+
+
+    cout << "\nWriting to " << outfilePath << endl;
+    outfile.close();
+    samplefile.close();
+
+
+    return 0;
+}
+
 void runWithDiffConstants(VMCSolver *solver)
 {
     double alpha_max = 0.85*solver->getCharge();
     double beta_max = 1.5;
     double d_alpha = 0.1;
     double d_beta = 0.01;
+
+    solver->calculateOptimalSteplength();
 
     clock_t start, end;     //To keep track of the time
 
@@ -67,42 +117,4 @@ void runWithDiffConstants(VMCSolver *solver)
             }
         }
     }
-}
-
-int main() {
-    VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumSimpleAnalytical());
-
-    //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
-    //vmcSolver class
-    char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName).c_str();
-    char const * samplefilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName + string("_samples")).c_str();
-    outfile.open(outfilePath);
-    samplefile.open(samplefilePath);
-
-
-    //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
-    //Look for the program energyLevels.py to find which values where the best
-//    solver->calculateOptimalSteplength();
-//    runWithDiffConstants(solver);
-
-    //Enable this if you want the alph and beta values to run with (Good values below)
-    //HeliumSimpleAnalytical:   alpha = 1.62    beta = 0
-    //HeliumSimpleNumerical:    alpha = 1.7     beta = 0
-    //HeliumJastrowAnalytical:  alpha = 1.8     beta = 1.05
-    //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
-
-    solver->setAlpha(1.62);
-    solver->setBeta(0.);
-
-    solver->calculateOptimalSteplength();
-    solver->runMonteCarloIntegration();
-
-
-    cout << "\nWriting to " << outfilePath << endl;
-    outfile.close();
-    samplefile.close();
-
-
-    return 0;
 }

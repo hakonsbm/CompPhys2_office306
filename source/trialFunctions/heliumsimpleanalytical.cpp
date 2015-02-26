@@ -8,7 +8,6 @@ HeliumSimpleAnalytical::HeliumSimpleAnalytical()
 
 double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
 {
-
     vec rpos(solver->getNParticles());
     for(int i = 0; i < solver->getNParticles(); i++) {
         double rSingleParticle = 0;

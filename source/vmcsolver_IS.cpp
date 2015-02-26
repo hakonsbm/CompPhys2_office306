@@ -29,7 +29,10 @@ VMCSolver::VMCSolver():
     nCycles(100000),
     D(0.5)
 {
-
+    cout << nParticles << endl;
+//    cout << getNParticles() << endl;
+    cout << getNParticles() << endl;
+    cout << nParticles << endl;
 }
 
 void VMCSolver::runMonteCarloIntegration() {
