@@ -97,7 +97,6 @@ void VMCSolver::runMonteCarloIntegration() {
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = energySquared - energy*energy;
 
-
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
     cout << "Variance: " << energyVar << endl;
     cout << "Moves: " << moves << endl;
@@ -197,6 +196,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = energySquared - energy*energy;
 
+    cout << rNew << endl;
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
     cout << "Variance: " << energyVar << endl;
     cout << "Moves: " << moves << endl;

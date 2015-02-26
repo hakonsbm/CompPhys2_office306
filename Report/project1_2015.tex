@@ -50,16 +50,29 @@
 
 \section{Methods}
 	\subsection{Derivation of local energies}
+
 		\subsubsection{Helium: Simple trialfunction}
 		The simple version of the trial function is only dependant on one parameter \( \alpha \) and does not take into account interaction between the two electrons, it is of the form 
 		\[ \Psi_T (\vb{r_1}, \vb{r_2}) = \exp{ -\alpha (r_1 + r_2) } \]
 
 		\begin{align}
-		E_L &= \frac{1}{ \Psi_T } \hat{H} \Psi_T 
+		E_L &= \frac{1}{ \Psi_T(\vb{r_i} , \vb{r_{ij}}) } \hat{H} \Psi_T \Psi_T(\vb{r_i} , \vb{r_{ij}})
 		\\
-		&=	\exp{ \alpha (r_1 + r_2) } \left( -\frac{nabla_1^2}{ 2 } - \frac{nabla_2^2}{ 2 } - \frac{2}{r_1}  -\frac{2}{r_2} +  \frac{1}{r_{12}} \right)   \exp{ -\alpha (r_1 + r_2) }
+		&=	\frac{1}{ \Psi_T(\vb{r_i} , \vb{r_{ij}}) } \left( -\pdv[2]{}{x_k}  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }  \right) \Psi_T(\vb{r_i} , \vb{r_{ij}})
+		\\
+		&= -\frac{1}{2\Psi_T(\vb{r_i} , \vb{r_{ij}})} \left( \pdv[2]{\Psi_T(\vb{r_i} , \vb{r_{ij}})}{x_k}   \right)  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }
 		\end{align} 
 	
+	Let us focus on one of the terms that will be different for each type of trial function 
+
+		\begin{align}
+		-\frac{1}{2\Psi_T} \pdv[2]{\Psi_T}{x_k}  &= -\frac{1}{2\Psi_T} \pdv{}{x_k}\left( \pdv{\Psi_T}{x_k} \right)
+		\\
+		&= -\frac{1}{2\Psi_T} \pdv{}{x_k}\left( \pdv{\Psi_T}{r_i} \pdv{r_i}{x_k} \right)
+		\intertext{\( \pdv{r_i}{x_k} = \pdv{\sqrt{}}{x_k} \) }
+		g
+		\end{align}
+
 \section{Results and discussion}
 
 \section{Conclusions and perspectives}
