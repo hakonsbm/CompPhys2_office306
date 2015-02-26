@@ -26,7 +26,7 @@ VMCSolver::VMCSolver():
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(100000),
+    nCycles(10000000),
     D(0.5),
     importanceSampling(false)
 {
