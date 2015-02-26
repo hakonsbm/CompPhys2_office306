@@ -26,7 +26,7 @@ VMCSolver::VMCSolver():
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(10000000),
+    nCycles(100000),
     D(0.5),
     importanceSampling(false)
 {
@@ -42,6 +42,8 @@ void VMCSolver::runMonteCarloIntegration() {
     double energySum = 0;
     double energySquaredSum = 0;
     double deltaE = 0;
+    double r12 = 0;
+    double averageR12 = 0;
 
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
@@ -88,14 +90,23 @@ void VMCSolver::runMonteCarloIntegration() {
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;
         }
+        //we need to find the average value of r12
+        r12 = 0;
+        for(int k = 0; k < nDimensions; k++) {
+            r12 += (rNew(0,k) - rNew(1,k)) * (rNew(0,k) - rNew(1,k));
+        }
+        averageR12 += sqrt(r12);
+
         samplefile << setw(15) << setprecision(8) << deltaE;
         samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
         samplefile << setw(15) << setprecision(8) << m_alpha;
-        samplefile << setw(15) << setprecision(8) << m_beta << endl;
+        samplefile << setw(15) << setprecision(8) << m_beta;
+        samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
     }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = energySquared - energy*energy;
+    averageR12 /= (double) nCycles;
 
 
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
@@ -104,11 +115,14 @@ void VMCSolver::runMonteCarloIntegration() {
     cout << "Accepted moves: " << acc_moves << endl;
     cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
     cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+    cout << "Average distance between the electrons: " << averageR12 << endl;
 
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
     outfile << setw(15) << setprecision(8) << m_alpha;
-    outfile << setw(15) << setprecision(8) << m_beta << endl;
+    outfile << setw(15) << setprecision(8) << m_beta;
+    outfile << setw(15) << setprecision(8) << averageR12;
+    outfile << setw(15) << setprecision(8) << stepLength << endl;
 }
 
 void VMCSolver::runMonteCarloIntegrationIS() {
@@ -120,6 +134,8 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     double energySum = 0;
     double energySquaredSum = 0;
     double deltaE = 0;
+    double r12 = 0;
+    double averageR12 = 0;
 
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
@@ -188,14 +204,23 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;
         }
+        //we need to find the average value of r12
+        r12 = 0;
+        for(int k = 0; k < nDimensions; k++) {
+            r12 += (rNew(0,k) - rNew(1,k)) * (rNew(0,k) - rNew(1,k));
+        }
+        averageR12 += sqrt(r12);
+
         samplefile << setw(15) << setprecision(8) << deltaE;
         samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
         samplefile << setw(15) << setprecision(8) << m_alpha;
-        samplefile << setw(15) << setprecision(8) << m_beta << endl;
+        samplefile << setw(15) << setprecision(8) << m_beta;
+        samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
     }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = energySquared - energy*energy;
+    averageR12 /= (double) nCycles;
 
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
     cout << "Variance: " << energyVar << endl;
@@ -203,11 +228,13 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     cout << "Accepted moves: " << acc_moves << endl;
     cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
     cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+    cout << "Average distance between the electrons: " << averageR12 << endl;
 
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
     outfile << setw(15) << setprecision(8) << m_alpha;
     outfile << setw(15) << setprecision(8) << m_beta;
+    outfile << setw(15) << setprecision(8) << averageR12;
     outfile << setw(15) << setprecision(8) << stepLength << endl;
 }
 
