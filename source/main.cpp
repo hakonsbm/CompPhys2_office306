@@ -39,20 +39,20 @@ int main() {
 
     //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
     //Look for the program energyLevels.py to find which values weere the best
-//    runWithDiffConstants(solver);
+    runWithDiffConstants(solver);
 
 ////////////////////////////////////////////////////////////////////////////////////7
 //Enable the part below if you want the alph and beta values to run with (Good values below)
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-    solver->setAlpha(1.62);
-    solver->setBeta(0.);
+//    solver->setAlpha(3.9);
+//   solver->setBeta(0.01);
 
-//    solver->calculateOptimalSteplength();
-//    solver->runMonteCarloIntegration();
+//  solver->calculateOptimalSteplength();
+    solver->runMonteCarloIntegration();
 
-    solver->runMonteCarloIntegrationIS();
+//    solver->runMonteCarloIntegrationIS();
 
 
     cout << "\nWriting to " << outfilePath << endl;
@@ -65,17 +65,17 @@ int main() {
 
 void runWithDiffConstants(VMCSolver *solver)
 {
-    double alpha_max = 0.85*solver->getCharge();
-    double beta_max = 1.5;
-    double d_alpha = 0.1;
-    double d_beta = 0.01;
+    double alpha_max = 1.0 * solver->getCharge();
+    double beta_max = 2.0;
+    double d_alpha = 0.5;
+    double d_beta = 0.5;
 
     solver->calculateOptimalSteplength();
 
     clock_t start, end;     //To keep track of the time
 
 
-    for(double alpha = 0.01*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
+    for(double alpha = 0.1*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
         solver->setAlpha(alpha);
         if(solver->trialFunction()->simpleFlag) {
 
@@ -96,7 +96,7 @@ void runWithDiffConstants(VMCSolver *solver)
             cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
         }
         else {
-            for(double beta = 1.01; beta <= beta_max; beta += d_beta) {
+            for(double beta = 0.1; beta <= beta_max; beta += d_beta) {
                 solver->setBeta(beta);
 
                 start = clock();

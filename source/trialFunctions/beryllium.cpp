@@ -16,7 +16,10 @@ Beryllium::Beryllium()
 double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
 {
 
-    double rSingleParticle, alpha, wf;
+    double rSingleParticle, alpha, beta, wf, product, rij;
+    int prodcount = 0;
+    alpha = solver -> getAlpha();
+    beta = solver -> getBeta();
     vec argument(solver->getNParticles());
     for(int i = 0; i < solver->getNParticles(); i++) {
         argument[i] = 0.0;
@@ -26,13 +29,28 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
             rSingleParticle += r(i,j) * r(i,j);
         }
         argument[i] = sqrt(rSingleParticle);
+        for(int j = i + 1; j < solver->getNParticles(); j++) {
+            rij = 0;
+            for(int k = 0; k < solver->getNDimensions(); k++) {
+                rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+            }
+            if(prodcount == 0)
+            {
+                product = exp(rij/(2.0*(1+beta*rij)));
+            } else
+            {
+                product = product * exp(rij/(2.0*(1+beta*rij)));
+            }
+            prodcount++;
+        }
     }
-    alpha = solver -> getAlpha();
+
     wf = (psi1s(argument[0], alpha)*psi2s(argument[1], alpha)
         -psi1s(argument[1], alpha)*psi2s(argument[0], alpha))*
         (psi1s(argument[2], alpha)*psi2s(argument[3], alpha)
         -psi1s(argument[3], alpha)*psi2s(argument[2], alpha));
-    return wf;
+
+    return wf*product;
 }
 
 double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
