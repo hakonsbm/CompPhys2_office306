@@ -18,7 +18,10 @@ public:
     VMCSolver();
 
     void runMonteCarloIntegration();
+    void runMonteCarloIntegrationIS();
+
     void calculateOptimalSteplength();
+    double QuantumForce(const mat &r, mat QForce);
     void setTrialFunction(TrialFunction *trialFunction) { m_trialFunction = trialFunction; }
     void setAlpha(double alpha) {m_alpha = alpha;}
     void setBeta(double beta) {m_beta = beta;}
@@ -58,8 +61,15 @@ private:
     long idum;
     int nCycles;
 
+    double D; // diffusion constant
+    // double timestep; // timestep for gaussian deviate (using steplength)
+    double GreensFunction;
+
+
     mat rOld;
     mat rNew;
+    mat QForceOld;
+    mat QForceNew;
 
 
 };

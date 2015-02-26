@@ -26,13 +26,13 @@ public:
 
     TrialFunction *trialFunction(){return m_trialFunction;}
 
-    int getNParticles() {return nParticles; }
     int getNDimensions() {return nDimensions; }
     double getAlpha() {return m_alpha; }
     double getBeta() {return m_beta; }
     int getCharge() {return charge; }
     double getH()   {return h;}
     double getH2()  {return h2;}
+    int getNParticles() {return nParticles; }
 
 
 
@@ -46,6 +46,7 @@ private:
     double localEnergy(const mat &r);
     double QuantumForce(const mat &r, mat QForce);
 
+    int nParticles;
 
 
     int nDimensions;
@@ -54,7 +55,6 @@ private:
     double step_min;
     double m_alpha;
     double m_beta;
-    int nParticles;
     double h;
     double h2;
     long idum;
