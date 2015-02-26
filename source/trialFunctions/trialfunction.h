@@ -19,6 +19,7 @@ public:
 
     bool simpleFlag;    
 
+
 };
 
 #endif // TRIALFUNCTION_H
