@@ -24,7 +24,7 @@ int main() {
     int count = 0;
     int numberOfBlocks = 0;
     outfile.open("outputSTD.d");
-    readFileEnergy.open("../source/outfiles/HeliumSimpleAnalytical_samples");
+    readFileEnergy.open("../outfiles/HeliumSimpleAnalytical_samples");
     while (!readFileEnergy.eof()) {
         readFileEnergy >> tmp1 >> tmp2 >> tmp3 >> tmp4;
         energy.push_back(tmp1);
