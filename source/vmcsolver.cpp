@@ -26,7 +26,7 @@ VMCSolver::VMCSolver():
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(100000),
+    nCycles(1000000),
     D(0.5),
     importanceSampling(false)
 {
@@ -57,8 +57,14 @@ void VMCSolver::runMonteCarloIntegration() {
 
     rNew = rOld;
     //loop over Monte Carlo cycles
-    for(int cycle = 0; cycle < nCycles; cycle++) {
+    int print_cycle = 10000;
 
+    for(int cycle = 0; cycle < nCycles; cycle++) {
+        if(cycle == print_cycle)
+        {
+            cout << (double)cycle*100./nCycles << " %" << endl;
+            print_cycle += 10000;
+        }
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
 
@@ -150,7 +156,14 @@ void VMCSolver::runMonteCarloIntegrationIS() {
 
     rNew = rOld;
     //loop over Monte Carlo cycles
+    int print_cycle = 10000;
     for(int cycle = 0; cycle < nCycles; cycle++) {
+
+        if(cycle == print_cycle)
+        {
+            cout << (double)cycle*100./nCycles << " %" << endl;
+            print_cycle += 10000;
+        }
 
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
