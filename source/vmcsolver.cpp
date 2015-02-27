@@ -20,9 +20,9 @@ extern ofstream samplefile;
 
 VMCSolver::VMCSolver():
     nDimensions(3),
-    charge(4),
+    charge(2),
     stepLength(0.5),
-    nParticles(4),
+    nParticles(2),
     h(0.001),
     h2(1000000),
     idum(-1),
@@ -97,12 +97,19 @@ void VMCSolver::runMonteCarloIntegration() {
         }
         averageR12 += sqrt(r12);
 
-        samplefile << setw(15) << setprecision(8) << deltaE;
-        samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
-        samplefile << setw(15) << setprecision(8) << m_alpha;
-        samplefile << setw(15) << setprecision(8) << m_beta;
-        samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
+        if (cycle % 10 == 0) {
+            samplefile << setw(15) << setprecision(8) << deltaE;
+            samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
+            samplefile << setw(15) << setprecision(8) << rNew(0,0);
+            samplefile << setw(15) << setprecision(8) << rNew(0,1);
+            samplefile << setw(15) << setprecision(8) << rNew(0,2);
+            samplefile << setw(15) << setprecision(8) << rNew(1,0);
+            samplefile << setw(15) << setprecision(8) << rNew(1,1);
+            samplefile << setw(15) << setprecision(8) << rNew(1,2);
+            samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
+        }
     }
+    samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = energySquared - energy*energy;
@@ -210,12 +217,19 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         }
         averageR12 += sqrt(r12);
 
-        samplefile << setw(15) << setprecision(8) << deltaE;
-        samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
-        samplefile << setw(15) << setprecision(8) << m_alpha;
-        samplefile << setw(15) << setprecision(8) << m_beta;
-        samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
+        if (cycle % 10 == 0) {
+            samplefile << setw(15) << setprecision(8) << deltaE;
+            samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
+            samplefile << setw(15) << setprecision(8) << rNew(0,0);
+            samplefile << setw(15) << setprecision(8) << rNew(0,1);
+            samplefile << setw(15) << setprecision(8) << rNew(0,2);
+            samplefile << setw(15) << setprecision(8) << rNew(1,0);
+            samplefile << setw(15) << setprecision(8) << rNew(1,1);
+            samplefile << setw(15) << setprecision(8) << rNew(1,2);
+            samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
+        }
     }
+    samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = energySquared - energy*energy;

@@ -27,7 +27,7 @@ int main() {
     //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Beryllium()); // HeliumSimpleNumerical
+    solver->setTrialFunction(new HeliumJastrowAnalytical()); // Beryllium
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -46,8 +46,8 @@ int main() {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-   solver->setAlpha(4.0);
-   solver->setBeta(0.1);
+   solver->setAlpha(1.8);
+   solver->setBeta(1.05);
 
 //  solver->calculateOptimalSteplength();
 //    solver->runMonteCarloIntegration();
