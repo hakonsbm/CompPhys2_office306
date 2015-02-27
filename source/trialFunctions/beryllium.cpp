@@ -15,8 +15,11 @@ Beryllium::Beryllium()
 
 double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
 {
-
-    double rSingleParticle, alpha, beta, wf, product, rij;
+    double rSingleParticle, alpha, beta, wf, product, rij, a;
+    int spin_count = 0;
+    vec spins(6);
+    spins(0) = 1./2.; spins(5) = 1./2.;
+    for(int s = 1; s<=4; s++) spins(s) = 1./4.;
     product = 1.0;
     alpha = solver -> getAlpha();
     beta = solver -> getBeta();
@@ -34,7 +37,9 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
             for(int k = 0; k < solver->getNDimensions(); k++) {
                 rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
             }
-            product = product * exp(rij/(2.0*(1+beta*rij)));
+            a = spins(spin_count);
+            product = product * exp(a*rij/(1+beta*rij));
+            spin_count++;
         }
     }
 
