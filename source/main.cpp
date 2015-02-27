@@ -25,6 +25,7 @@ int main() {
     //HeliumSimpleNumerical:    alpha = 1.7     beta = 0
     //HeliumJastrowAnalytical:  alpha = 1.8     beta = 1.05
     //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
+    //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
     solver->setTrialFunction(new HeliumJastrowAnalytical()); // Beryllium
@@ -39,12 +40,13 @@ int main() {
 
     //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
     //Look for the program energyLevels.py to find which values weere the best
- //   runWithDiffConstants(solver);
+//    runWithDiffConstants(solver);
 
 ////////////////////////////////////////////////////////////////////////////////////7
 //Enable the part below if you want the alph and beta values to run with (Good values below)
 
 //////////////////////////////////////////////////////////////////////////////////////
+
 
    solver->setAlpha(1.8);
    solver->setBeta(1.05);
@@ -52,7 +54,7 @@ int main() {
 //  solver->calculateOptimalSteplength();
 //    solver->runMonteCarloIntegration();
 
-    solver->runMonteCarloIntegrationIS();
+   solver->runMonteCarloIntegrationIS();
 
 
     cout << "\nWriting to " << outfilePath << endl;
@@ -65,53 +67,53 @@ int main() {
 
 void runWithDiffConstants(VMCSolver *solver)
 {
-    double alpha_max = 3.0 * solver->getCharge();
-    double beta_max = 2.0;
-    double d_alpha = 0.5;
-    double d_beta = 0.5;
+    double alpha_max = 1.0* solver->getCharge();
+    double beta_max = 0.49;
+    double d_alpha = 0.02;
+    double d_beta = 0.02;
 
     solver->calculateOptimalSteplength();
 
     clock_t start, end;     //To keep track of the time
 
 
-    for(double alpha = 0.1*solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
+    for(double alpha = alpha = 1.0* solver->getCharge(); alpha <= alpha_max; alpha += d_alpha) {
         solver->setAlpha(alpha);
         if(solver->trialFunction()->simpleFlag) {
 
 
             start = clock();
-                solver->calculateOptimalSteplength();
+               // solver->calculateOptimalSteplength();
             end = clock();
 
-            double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
+            //double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
 
             start = clock();
-                solver->runMonteCarloIntegration();
+                solver->runMonteCarloIntegrationIS();
             end = clock();
 
             double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
 
-            cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
+            //cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
             cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
         }
         else {
-            for(double beta = 0.1; beta <= beta_max; beta += d_beta) {
+            for(double beta = 0.4; beta <= beta_max; beta += d_beta) {
                 solver->setBeta(beta);
 
                 start = clock();
-                    solver->calculateOptimalSteplength();
+                    //solver->calculateOptimalSteplength();
                 end = clock();
 
-                double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
+                //double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
 
                 start = clock();
-                    solver->runMonteCarloIntegration();
+                    solver->runMonteCarloIntegrationIS();
                 end = clock();
 
                 double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
 
-                cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
+                //cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
                 cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
 
 
