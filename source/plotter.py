@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sys import argv
 
 
-filename = "HeliumSimpleAnalytical_IS_dt_0.1to1.0"
+filename = "./outfiles/HeliumSimpleAnalytical_IS_dt_0.1to1.0"
 infile = open(filename, "r")
 energy = []
 energySq = []
