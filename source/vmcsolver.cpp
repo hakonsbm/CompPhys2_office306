@@ -34,7 +34,6 @@ VMCSolver::VMCSolver():
 }
 
 void VMCSolver::runMonteCarloIntegration() {
-//    char const *outfilename = "../source/outfiles/Test";// + trialFunction()->m_outfileName;
     int acc_moves = 0;
     int moves = 0;
     double waveFunctionOld = 0;
@@ -163,18 +162,19 @@ void VMCSolver::runMonteCarloIntegrationIS() {
 
     rNew = rOld;
     //loop over Monte Carlo cycles
-    int print_cycle = 10000;
+    int print_cycle = 0;
     for(int cycle = 0; cycle < nCycles; cycle++) {
 
         if(cycle == print_cycle)
         {
             cout << (double)cycle*100./nCycles << " %" << endl;
-            print_cycle += 10000;
+            print_cycle += 250000;
         }
 
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
-        QuantumForce(rOld, QForceOld); QForceOld = QForceOld*h/waveFunctionOld;
+        QuantumForce(rOld, QForceOld);
+        QForceOld = QForceOld*h/waveFunctionOld;
         //New position to test
         for(int i = 0; i < nParticles; i++) {
             for(int j = 0; j < nDimensions; j++) {
@@ -192,6 +192,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             //Recalculate the value of the wave function
             waveFunctionNew = trialFunction()->waveFunction(rNew, this);
             QuantumForce(rNew, QForceNew); QForceNew = QForceNew*h/waveFunctionNew; // possible typo
+
 
             //  we compute the log of the ratio of the greens functions to be used in the
             //  Metropolis-Hastings algorithm
@@ -264,7 +265,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     outfile << setw(15) << setprecision(8) << stepLength << endl;
 }
 
-double VMCSolver::QuantumForce(const mat &r, mat QForce)
+double VMCSolver::QuantumForce(const mat &r, mat &QForce)
 {
     mat rPlus = zeros<mat>(nParticles, nDimensions);
     mat rMinus = zeros<mat>(nParticles, nDimensions);

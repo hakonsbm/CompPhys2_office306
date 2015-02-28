@@ -32,14 +32,13 @@ int main() {
     VMCSolver *solver = new VMCSolver();
     solver->setTrialFunction(new HeliumSimpleAnalytical(solver)); // HeliumSimpleNumerical
 
-
     //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
     //Look for the program energyLevels.py to find which values were the best
-    runWithDiffConstants(solver);
+//    runWithDiffConstants(solver);
 //    runSIWithDiffTimesteps(solver);
 
 
-//   solver->runMonteCarloIntegrationIS();
+   solver->runMonteCarloIntegrationIS();
 
 
 
@@ -50,7 +49,7 @@ void runWithDiffConstants(VMCSolver *solver)
 {
     //Settings for which values it should be cycled over and if we want to use importance sampling or now
 
-    double alpha_min = 1.0;
+    double alpha_min = 1.0* solver->getCharge();
     double alpha_max = 1.0* solver->getCharge();
 
     double beta_min = 0.4;
@@ -58,15 +57,24 @@ void runWithDiffConstants(VMCSolver *solver)
     double d_alpha = 0.02;
     double d_beta = 0.02;
 
-    bool ImportanceSampling = false;
+    bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
-    char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName + string("alpha_beta")).c_str();
     char const * samplefilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName + string("_samples")).c_str();
 
+    cout << samplefilePath << endl;
+
+    char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName ).c_str();//(string("../source/outfiles/") + solver->trialFunction()->m_outfileName + string("_alpha_beta")).c_str();
+
+
+    cout << samplefilePath << endl;
+
+    cout << outfilePath << endl;
+
     outfile.open(outfilePath);
-    samplefile.open(samplefilePath);
+//    samplefile.open(samplefilePath);
+
 
 
     clock_t start, end;     //To keep track of the time
@@ -133,7 +141,7 @@ void runWithDiffConstants(VMCSolver *solver)
 
     cout << "\nWriting to " << outfilePath << endl;
     outfile.close();
-    samplefile.close();
+//    samplefile.close();
 }
 
 void runSIWithDiffTimesteps(VMCSolver *solver)

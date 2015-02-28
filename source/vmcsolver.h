@@ -21,7 +21,7 @@ public:
     void runMonteCarloIntegrationIS();
 
     void calculateOptimalSteplength();
-    double QuantumForce(const mat &r, mat QForce);
+    double QuantumForce(const mat &r, mat &QForce);
     void setTrialFunction(TrialFunction *trialFunction) { m_trialFunction = trialFunction; }
     void setAlpha(double alpha) {m_alpha = alpha;}
     void setBeta(double beta) {m_beta = beta;}
@@ -48,6 +48,7 @@ private:
     double localEnergy(const mat &r);
 
     bool importanceSampling;    //When this flag is true it uses importance sampling instead of regular sampling
+    bool energySampling;
 
 
     int nDimensions;
