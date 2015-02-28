@@ -1,9 +1,14 @@
 #include "heliumsimpleanalytical.h"
 
-HeliumSimpleAnalytical::HeliumSimpleAnalytical()
+HeliumSimpleAnalytical::HeliumSimpleAnalytical(VMCSolver *solver)
 {
     simpleFlag = true;
     m_outfileName = "HeliumSimpleAnalytical";
+
+    solver->setCharge(2);
+    solver->setNParticles(2);
+    solver->setAlpha(1.62);
+    solver->setBeta(0);
 }
 
 double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)

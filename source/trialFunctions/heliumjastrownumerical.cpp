@@ -1,9 +1,14 @@
 #include "heliumjastrownumerical.h"
 
-HeliumJastrowNumerical::HeliumJastrowNumerical()
+HeliumJastrowNumerical::HeliumJastrowNumerical(VMCSolver *solver)
 {
     simpleFlag = false;
     m_outfileName = "HeliumJastrowNumerical";
+
+    solver->setCharge(2);
+    solver->setNParticles(2);
+    solver->setAlpha(1.8);
+    solver->setBeta(1.05);
 
 }
 

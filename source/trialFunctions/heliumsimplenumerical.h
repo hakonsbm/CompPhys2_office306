@@ -14,7 +14,7 @@ class HeliumSimpleNumerical : public TrialFunction
 {
 
 public:
-    HeliumSimpleNumerical();
+    HeliumSimpleNumerical(VMCSolver *solver);
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
     virtual double localEnergy(const mat &r, VMCSolver *solver );
 

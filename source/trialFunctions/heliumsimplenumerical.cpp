@@ -7,10 +7,15 @@
 
 using namespace std;
 
-HeliumSimpleNumerical::HeliumSimpleNumerical()
+HeliumSimpleNumerical::HeliumSimpleNumerical(VMCSolver *solver)
 {
     simpleFlag = true;
     m_outfileName = "HeliumSimpleNumerical";
+
+    solver->setCharge(2);
+    solver->setNParticles(2);
+    solver->setAlpha(1.62);
+    solver->setBeta(0);
 
 }
 

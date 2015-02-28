@@ -13,7 +13,7 @@ class VMCSolver;
 class HeliumJastrowNumerical : public TrialFunction
 {
 public:
-    HeliumJastrowNumerical();
+    HeliumJastrowNumerical(VMCSolver *solver);
     ~HeliumJastrowNumerical();
 
     double waveFunction(const mat &r, VMCSolver *solver);

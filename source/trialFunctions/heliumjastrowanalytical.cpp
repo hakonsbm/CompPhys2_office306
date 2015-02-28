@@ -1,10 +1,16 @@
 #include "heliumjastrowanalytical.h"
 
 
-HeliumJastrowAnalytical::HeliumJastrowAnalytical()
+HeliumJastrowAnalytical::HeliumJastrowAnalytical(VMCSolver *solver)
 {
     simpleFlag = false;
     m_outfileName = "HeliumJastrowAnalytical";
+
+    solver->setCharge(2);
+    solver->setNParticles(2);
+    solver->setAlpha(1.8);
+    solver->setBeta(1.05);
+
 
 }
 

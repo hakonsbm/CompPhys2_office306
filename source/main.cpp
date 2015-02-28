@@ -28,8 +28,12 @@ int main() {
     //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
     //Beryllium:                alpha = 4.0     beta = 0.31
 
+
+
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumJastrowAnalytical()); // HeliumSimpleNumerical
+    solver->setTrialFunction(new HeliumJastrowAnalytical(solver)); // HeliumSimpleNumerical
+
+
 
     solver->setAlpha(1.8);
     solver->setBeta(1.05);
@@ -135,7 +139,7 @@ void runWithDiffConstants(VMCSolver *solver)
 
 void runSIWithDiffTimesteps(VMCSolver *solver)
 {
-    solver->setTrialFunction(new HeliumJastrowAnalytical);
+    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
 
     solver->setAlpha(1.8);
     solver->setBeta(1.05);

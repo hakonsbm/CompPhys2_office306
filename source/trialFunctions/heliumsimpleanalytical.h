@@ -15,7 +15,7 @@ class HeliumSimpleAnalytical : public TrialFunction
 {
 
 public:
-    HeliumSimpleAnalytical();
+    HeliumSimpleAnalytical(VMCSolver* solver);
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
     virtual double localEnergy(const mat &r, VMCSolver *solver );
 
