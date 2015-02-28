@@ -21,12 +21,12 @@ extern ofstream samplefile;
 VMCSolver::VMCSolver():
     nDimensions(3),
     charge(2),
-    stepLength(0.5),
+    stepLength(0.005),
     nParticles(2),
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(1000000),
+    nCycles(100000),
     D(0.5),
     importanceSampling(false)
 {
@@ -62,7 +62,7 @@ void VMCSolver::runMonteCarloIntegration() {
         if(cycle == print_cycle)
         {
             cout << (double)cycle*100./nCycles << " %" << endl;
-            print_cycle += 250000;
+            print_cycle += (double) nCycles/4;
         }
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
@@ -102,7 +102,7 @@ void VMCSolver::runMonteCarloIntegration() {
         }
         averageR12 += sqrt(r12);
 
-        if (cycle % 10 == 0) {
+        if (m_blockSampling &&  cycle % 10 == 0) {
             samplefile << setw(15) << setprecision(8) << deltaE;
             samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
             samplefile << setw(15) << setprecision(8) << rNew(0,0);
@@ -114,7 +114,11 @@ void VMCSolver::runMonteCarloIntegration() {
             samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
         }
     }
-    samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+    if(m_blockSampling)
+    {
+        samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+        cout << "blockSampling" << endl;
+    }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = energySquared - energy*energy;
@@ -127,6 +131,8 @@ void VMCSolver::runMonteCarloIntegration() {
     cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
     cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
     cout << "Average distance between the electrons: " << averageR12 << endl;
+    cout << "Steplength: " << stepLength << endl;
+
 
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
@@ -168,7 +174,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         if(cycle == print_cycle)
         {
             cout << (double)cycle*100./nCycles << " %" << endl;
-            print_cycle += 250000;
+            print_cycle +=(double) nCycles/4;
         }
 
         //Store the current value of the wave function
@@ -231,7 +237,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         }
         averageR12 += sqrt(r12);
 
-        if (cycle % 10 == 0) {
+        if (m_blockSampling &&  cycle % 10 == 0) {
             samplefile << setw(15) << setprecision(8) << deltaE;
             samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
             samplefile << setw(15) << setprecision(8) << rNew(0,0);
@@ -243,7 +249,13 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
         }
     }
-    samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+
+    if(m_blockSampling)
+    {
+        samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+        cout << "blockSampling" << endl;
+    }
+
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = energySquared - energy*energy;
@@ -256,6 +268,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
     cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
     cout << "Average distance between the electrons: " << averageR12 << endl;
+    cout << "Steplength: " << stepLength << endl;
 
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
@@ -265,7 +278,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     outfile << setw(15) << setprecision(8) << stepLength << endl;
 }
 
-double VMCSolver::QuantumForce(const mat &r, mat &QForce)
+void VMCSolver::QuantumForce(const mat &r, mat &QForce)
 {
     mat rPlus = zeros<mat>(nParticles, nDimensions);
     mat rMinus = zeros<mat>(nParticles, nDimensions);
@@ -275,11 +288,11 @@ double VMCSolver::QuantumForce(const mat &r, mat &QForce)
     double waveFunctionMinus = 0;
     double waveFunctionPlus = 0;
 
-    double waveFunctionCurrent = trialFunction()->waveFunction(r, this);
+//    double waveFunctionCurrent = trialFunction()->waveFunction(r, this);
 
     // Kinetic energy
 
-    double kineticEnergy = 0;
+//    double kineticEnergy = 0;
     for(int i = 0; i < nParticles; i++) {
         for(int j = 0; j < nDimensions; j++) {
             rPlus(i,j) += h;
