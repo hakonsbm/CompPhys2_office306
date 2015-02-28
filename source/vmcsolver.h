@@ -27,6 +27,7 @@ public:
     void setBeta(double beta) {m_beta = beta;}
     void setCharge(int C) {charge = C;}
     void setNParticles(int P) {nParticles = P;}
+    void setStepLength(double inStepLength) {stepLength = inStepLength;}
 
     TrialFunction *trialFunction(){return m_trialFunction;}
 
@@ -37,6 +38,7 @@ public:
     int getCharge() {return charge; }
     double getH()   {return h;}
     double getH2()  {return h2;}
+    double getStepLength() {return stepLength;}
 
 
 private:
