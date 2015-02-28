@@ -57,13 +57,13 @@ void VMCSolver::runMonteCarloIntegration() {
 
     rNew = rOld;
     //loop over Monte Carlo cycles
-    int print_cycle = 10000;
+    int print_cycle = 0;
 
     for(int cycle = 0; cycle < nCycles; cycle++) {
         if(cycle == print_cycle)
         {
             cout << (double)cycle*100./nCycles << " %" << endl;
-            print_cycle += 10000;
+            print_cycle += 250000;
         }
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);

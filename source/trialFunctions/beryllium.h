@@ -14,7 +14,7 @@ class Beryllium: public TrialFunction
 {
 
 public:
-    Beryllium();
+    Beryllium(VMCSolver *solver);
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
     virtual double localEnergy(const mat &r, VMCSolver *solver );
 

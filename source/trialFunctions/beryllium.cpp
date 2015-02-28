@@ -7,10 +7,15 @@
 
 using namespace std;
 
-Beryllium::Beryllium()
+Beryllium::Beryllium(VMCSolver *solver)
 {
     simpleFlag = false;
     m_outfileName = "Beryllium";
+
+    solver->setCharge(4);
+    solver->setNParticles(4);
+    solver->setAlpha(4.0);
+    solver->setBeta(0.31);
 }
 
 double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
