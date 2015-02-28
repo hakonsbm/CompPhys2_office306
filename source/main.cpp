@@ -34,6 +34,7 @@ int main() {
     solver->setAlpha(1.8);
     solver->setBeta(1.05);
 
+
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
     char const * outfilePath = (string("../source/outfiles/") + solver->trialFunction()->m_outfileName).c_str();
@@ -52,8 +53,16 @@ int main() {
 ////////////////////////////////////////////////////////////////////////////////////7
 //Enable the part below if you want the alph and beta values to run with
 
+
 ////  solver->calculateOptimalSteplength();
 ////    solver->runMonteCarloIntegration();
+
+//   solver->setAlpha(1.8);
+//   solver->setBeta(1.05);
+
+//  solver->calculateOptimalSteplength();
+//    solver->runMonteCarloIntegration();
+
 
    solver->runMonteCarloIntegrationIS();
 
