@@ -2,7 +2,7 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= qt
 
-LIBS += -llapack -larmadillo
+LIBS += -llapack -larmadillo -lunittest++
 
 SOURCES += main.cpp \
     vmcsolver.cpp \

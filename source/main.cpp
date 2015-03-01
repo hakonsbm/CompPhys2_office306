@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <time.h>
+#include <unittest++/UnitTest++.h>
+
 
 
 using namespace std;
@@ -19,6 +21,7 @@ ofstream samplefile;
 void runWithDiffConstants(VMCSolver *solver);
 void runSIWithDiffTimesteps(VMCSolver *solver);
 void runBlockingSampledRun(VMCSolver *solver) ;
+
 
 
 
@@ -45,7 +48,7 @@ int main() {
 
 //   solver->runMonteCarloIntegrationIS();
 
-    return 0;
+    return UnitTest::RunAllTests();;
 }
 
 void runWithDiffConstants(VMCSolver *solver)
@@ -197,3 +200,14 @@ void runBlockingSampledRun(VMCSolver *solver)
 
 }
 
+TEST(Hydrogen) {
+
+
+
+    VMCSolver *solver = new VMCSolver();
+    solver->setTrialFunction(new Hydrogen(solver)); // HeliumSimpleNumerical
+    solver->setAlpha(0.9);
+    solver->runMonteCarloIntegration();
+    CHECK_EQUAL(0, solver->getEnergyVar());
+
+}

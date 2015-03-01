@@ -119,7 +119,7 @@ void VMCSolver::runMonteCarloIntegration() {
     }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
-    double energyVar = energySquared - energy*energy;  //Should we add this /(nCycles * nParticles)
+    energyVar = energySquared - energy*energy;  //Should we add this /(nCycles * nParticles)
     averageR12 /= (double) nCycles;
 
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
