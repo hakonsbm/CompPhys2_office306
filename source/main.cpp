@@ -4,6 +4,7 @@
 #include "trialFunctions/heliumjastrownumerical.h"
 #include "trialFunctions/heliumsimpleanalytical.h"
 #include "trialFunctions/heliumsimplenumerical.h"
+#include "trialFunctions/hydrogen.h"
 #include "trialFunctions/beryllium.h"
 
 #include <iostream>
@@ -32,15 +33,8 @@ int main() {
 
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumJastrowAnalytical(solver)); // HeliumSimpleNumerical
+    solver->setTrialFunction(new Hydrogen(solver)); // HeliumSimpleNumerical
 
-    solver->setCycles(40000000);
-    solver->setAlpha(1.843);
-    solver->setBeta(0.34);
-    solver->setStepLength(0.05);
-
-//    solver->calculateOptimalSteplength();
-    solver->runMonteCarloIntegrationIS();
 
     //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
     //Look for the program energyLevels.py to find which values were the best
@@ -58,18 +52,19 @@ void runWithDiffConstants(VMCSolver *solver)
 {
     //Settings for which values it should be cycled over and if we want to use importance sampling or now
 
-    double alpha_min = 0.75*solver->getCharge();
+    double alpha_min = 0.7*solver->getCharge();
     double alpha_max = 1.1* solver->getCharge();
 
     int nSteps = 20;
 
-    double beta_min = 0.0;
-    double beta_max = 1.;
+    double beta_min = 0.3;
+    double beta_max = 0.4;
     double d_alpha = (alpha_max-alpha_min)/ (double) nSteps;
     double d_beta = (beta_max-beta_min)/ (double) nSteps;
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
+    solver->setCycles(1000000);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -100,6 +95,7 @@ void runWithDiffConstants(VMCSolver *solver)
             else {
                 start = clock();
                     solver->calculateOptimalSteplength();
+//                      solver->setStepLength(1.4);
                 end = clock();
 
                 double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
@@ -154,12 +150,15 @@ void runWithDiffConstants(VMCSolver *solver)
 void runSIWithDiffTimesteps(VMCSolver *solver)
 {
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+    solver->setCycles(100000);
 
-    int nSteps = 50;
+    int nSteps = 100;
     double time_min = 0.001;
-    double time_max = 0.05;
+    double time_max = 1.;
     double dt = (time_max-time_min)/ (double) nSteps;
+
+    solver->setAlpha(1.843 );
+    solver->setBeta(0.34);
 
     solver->switchbBlockSampling(false);    //This also samples the energies at each cycle to do blocking analysis on the data
 

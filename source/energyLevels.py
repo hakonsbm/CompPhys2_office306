@@ -1,6 +1,7 @@
 import numpy as np
 import pylab as pl
 import scipy.stats as stats
+import mpl_toolkits.mplot3d.axes3d as p3
 
 
 def findLowestEnergy():
@@ -48,16 +49,72 @@ def plotResultsVSTimestep(data):
 
 	return
 
+def plotEnergyVsAlphaBeta(data):
+
+	alpha = data[:,2]
+	beta = data[:,3]
+	energy = data[:,0]
+	variance = data[:,1] - data[:,0]**2
+
+
+	fig=pl.figure()
+	ax = p3.Axes3D(fig)
+	ax.title("  'variance' vs alpha and beta ")
+	ax.plot_trisurf(alpha,beta,energy)
+	ax.set_xlabel('alpha')
+	ax.set_ylabel('beta')
+	ax.set_zlabel('Energy')
+	pl.show()
+
+
+	fig=pl.figure()
+	ax = p3.Axes3D(fig)
+	ax.title("  'variance' vs alpha and beta ")
+	ax.plot_trisurf(alpha,beta,variance)
+	ax.set_xlabel('alpha')
+	ax.set_ylabel('beta')
+	ax.set_zlabel('variance')
+	pl.show()
+
+	return
+
+def plotEnergyVsAlpha(data):
+	pl.figure()
+	pl.title("Energy vs alpha")
+
+	alpha = data[:,2]
+	energy = data[:,0]
+	variance = data[:,1] - data[:,0]**2 
+
+
+
+	pl.plot(alpha,energy)
+
+	pl.xlabel("alpha")
+	pl.ylabel("Energy")
+
+	pl.figure()
+	pl.title(" 'Variance vs alpha'")
+	pl.plot (alpha,variance)
+	pl.show()
+
+
 
 #Decide what we want to plot this time
 
 HeliumSimpleAnalyticalTime = np.genfromtxt("outfiles/HeliumSimpleAnalytical_timeStep")
 HeliumJastrowAnalyticalTime = np.genfromtxt("outfiles/HeliumJastrowAnalytical_timeStep")
 
+HeliumSimpleNumericalAlphaBeta = np.genfromtxt("outfiles/HeliumSimpleNumerical_alpha_beta")
+HeliumSimpleAnalyticalAlphaBeta = np.genfromtxt("outfiles/HeliumSimpleAnalytical_alpha_beta")
 
+HeliumJastrowAnalyticalAlphaBeta = np.genfromtxt("outfiles/HeliumJastrowAnalytical_alpha_beta")
+HeliumJastrowNumericalAlphaBeta = np.genfromtxt("outfiles/HeliumJastrowNumerical_alpha_beta")
 
 # findLowestEnergy()
-plotResultsVSTimestep(HeliumJastrowAnalyticalTime)
+# plotResultsVSTimestep(HeliumJastrowAnalyticalTime)
+# plotEnergyVsAlphaBeta(HeliumJastrowAnalyticalAlphaBeta)
+plotEnergyVsAlpha(HeliumSimpleAnalyticalAlphaBeta)
 
 
 

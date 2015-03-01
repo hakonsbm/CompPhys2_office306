@@ -12,7 +12,8 @@ SOURCES += main.cpp \
     trialFunctions/heliumjastrownumerical.cpp \
     trialFunctions/heliumjastrowanalytical.cpp \
     trialFunctions/heliumsimplenumerical.cpp \
-    trialFunctions/beryllium.cpp
+    trialFunctions/beryllium.cpp \
+    trialFunctions/hydrogen.cpp
 
 HEADERS += \
     vmcsolver.h \
@@ -22,4 +23,5 @@ HEADERS += \
     trialFunctions/heliumjastrownumerical.h \
     trialFunctions/heliumjastrowanalytical.h \
     trialFunctions/heliumsimplenumerical.h \
-    trialFunctions/beryllium.h
+    trialFunctions/beryllium.h \
+    trialFunctions/hydrogen.h

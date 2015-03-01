@@ -15,6 +15,9 @@
 \usepackage{url}
 \usepackage{tikz}
 \usepackage{subcaption}
+\usepackage[utf8]{inputenc}
+
+
 
 
 \usetikzlibrary{arrows, shapes}
@@ -50,11 +53,46 @@
 
 \section{Methods}
 	\subsection{Monte Carlo of the Helium Atom}
-		In a quantum mechanical system the energy is given by the expectation value of the Hamiltonian. 
+		In a quantum mechanical system the energy is given by the expectation value of the Hamiltonian, let \(\Psi_T\) be a proposal for a wavefunction that can describe the system.
 
 		\begin{align}
-			E[H] = \bra{\Psi}
+			E[\hat{H}] = \expval{\hat{H}}{\Psi_T} = \frac{\int{d\vb{R} \Psi_T^*(\vb{R})\hat{H} \Psi_T(\vb{R})  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
 		\end{align}
+
+		Let us introduce a local energy: 
+
+		\begin{align}
+			E_L(\hat{H}) &= \frac{1}{ \Psi_T(\vb{R}) } \hat{H} \Psi_T(\vb{R}))
+		\end{align}
+
+		\begin{align}
+			E[\hat{H}] &= \frac{\int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) E_L(\vb{R}))  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
+			\intertext{Since the denumeraor is a scalar constant after integrating it we can put it inside the integral in the numerator}
+			E[\hat{H}] &= \int{d\vb{R} \frac{\Psi_T^*(\vb{R}) \Psi_T(\vb{R})  }{\int{d\vb{R'} \Psi_T^*(\vb{R'}) \Psi_T(\vb{R'})}}  E_L(\vb{R})  }
+			\\
+			E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
+		\end{align}
+
+			This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral. 
+
+		\begin{enumerate}
+			\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
+			\item Start Monte Carlo Calculations
+				\begin{enumerate}
+					\item Propose a move of the particles according to an algorithm, for example \newline \( \vb{R_{new}} = \vb{R_{old}} + \delta * r \), where \(r\) is a random number in \([0,1]\)
+					\item Accept or reject move according to \( P(\vb{R_{new}})/ P(\vb{R_{old}}) \ge r \), where r is a new number. Update position values if accepted.
+					\item Calculate energy for this cycle.
+				\end{enumerate}
+		\end{enumerate}
+
+	\subsection{Helium atom}
+		The dimensionless hamiltonian for the Helium atom consists of a kinetic energy part and a potential energy part and is given by
+
+		\begin{align}
+			\hat{H} &= -\frac{\nabla^2_1}{2} - \frac{\nabla^2_2}{2} - \frac{Z}{r_1} - \frac{Z}{r_2} + \frac{1}{r_{12}}
+		\end{align}
+
+
 
 
 	\subsection{Derivation of local energies}

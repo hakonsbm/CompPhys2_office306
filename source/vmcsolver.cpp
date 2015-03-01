@@ -27,8 +27,7 @@ VMCSolver::VMCSolver():
     h2(1000000),
     idum(-1),
     nCycles(100000),
-    D(0.5),
-    importanceSampling(false)
+    D(0.5)
 {
 
 }
@@ -67,7 +66,6 @@ void VMCSolver::runMonteCarloIntegration() {
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
 
-
         //New position to test
         for(int i = 0; i < nParticles; i++) {
             for(int j = 0; j < nDimensions; j++) {
@@ -97,9 +95,9 @@ void VMCSolver::runMonteCarloIntegration() {
         }
         //we need to find the average value of r12
         r12 = 0;
-        for(int k = 0; k < nDimensions; k++) {
-            r12 += (rNew(0,k) - rNew(1,k)) * (rNew(0,k) - rNew(1,k));
-        }
+//        for(int k = 0; k < nDimensions; k++) {
+//            r12 += (rNew(0,k) - rNew(1,k)) * (rNew(0,k) - rNew(1,k));
+//        }
         averageR12 += sqrt(r12);
 
         if (m_blockSampling &&  cycle % 10 == 0) {
@@ -121,7 +119,7 @@ void VMCSolver::runMonteCarloIntegration() {
     }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
-    double energyVar = energySquared - energy*energy;
+    double energyVar = energySquared - energy*energy;  //Should we add this /(nCycles * nParticles)
     averageR12 /= (double) nCycles;
 
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
@@ -159,6 +157,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     QForceOld = zeros<mat>(nParticles, nDimensions);
     QForceNew = zeros<mat>(nParticles, nDimensions);
 
+
     //initial trial positions
     for(int i = 0; i < nParticles; i++) {
         for(int j = 0; j < nDimensions; j++) {
@@ -179,6 +178,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
 
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
+
         QuantumForce(rOld, QForceOld);
         QForceOld = QForceOld*h/waveFunctionOld;
         //New position to test
@@ -198,6 +198,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             //Recalculate the value of the wave function
             waveFunctionNew = trialFunction()->waveFunction(rNew, this);
             QuantumForce(rNew, QForceNew); QForceNew = QForceNew*h/waveFunctionNew; // possible typo
+
 
 
             //  we compute the log of the ratio of the greens functions to be used in the
@@ -224,18 +225,25 @@ void VMCSolver::runMonteCarloIntegrationIS() {
                    QForceNew(i,j) = QForceOld(i,j);
                 }
             }
+
             moves += 1;
             //update energies
             deltaE = trialFunction()->localEnergy(rNew, this);
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;
+
         }
         //we need to find the average value of r12
         r12 = 0;
+
         for(int k = 0; k < nDimensions; k++) {
+
             r12 += (rNew(0,k) - rNew(1,k)) * (rNew(0,k) - rNew(1,k));
         }
         averageR12 += sqrt(r12);
+
+
+
 
         if (m_blockSampling &&  cycle % 10 == 0) {
             samplefile << setw(15) << setprecision(8) << deltaE;

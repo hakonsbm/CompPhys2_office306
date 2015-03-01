@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1425144064 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1425144065
+["pdflatex"] 1425220911 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1425220911
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
@@ -19,8 +19,13 @@
   "/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty" 1362954379 2637 846ebe982d3549c7ede7ce135456f54a ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1254151887 20571 b8bd218bf2e18b4f5817ee643cd9c515 ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty" 1254151887 4435 b97063eb2f20be499e7725926af85c55 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty" 1254151887 4388 1cb2ca8d423695bd22ea8d126c276f33 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu" 1254151887 1868 39c80c053f689193a1ca9a83d05b2744 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu" 1254151887 2620 9a36ef7e0369aa29d9d298a6bf19588e ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo" 1254151887 9058 640f9c40a6d912e30839a669c8a999ec ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def" 1254151887 9172 67c33288b50eb57eab968f345e8befb0 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu" 1254151887 7480 2a6bcf9edfeb9ff088a3f0cf7f1a196c ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def" 1254151887 6350 d390538f995713c986118b8607d58f49 ""
   "/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty" 1368312746 65148 c61accbd2b9a5316d9be0887ec48d722 ""
   "/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty" 1368312746 62748 b02c0dc118f5f35146d37cec569e83b1 ""
   "/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty" 1360019375 4351 ee16013c18d101f9ecb20e53efde17b4 ""
@@ -153,11 +158,11 @@
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfkeys.sty" 1304191498 274 4cad6e665cc93ac2ac979039a94fa1e1 ""
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1304191498 325 2bcd023400636339210573e2b3ee298b ""
   "/usr/share/texmf/tex/latex/xcolor/xcolor.sty" 1339578534 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "project1_2015.aux" 1425144064 1450 6a1e21049e62eb092ff9df98d470a8df ""
-  "project1_2015.out" 1425144064 365 be88b78d7afd061c241a3e261027a5bb ""
-  "project1_2015.tex" 1425144063 5080 540e60931e28e7bf75d24deea5c57a15 ""
+  "project1_2015.aux" 1425220911 1544 1787cba041d0779bcef5e479d309b425 ""
+  "project1_2015.out" 1425220911 425 72836cc62c6329bc4125e398af20624b ""
+  "project1_2015.tex" 1425220910 6963 673b99667fa81e23e064c2a35a826052 ""
   (generated)
-  "project1_2015.log"
-  "project1_2015.aux"
-  "project1_2015.pdf"
   "project1_2015.out"
+  "project1_2015.pdf"
+  "project1_2015.aux"
+  "project1_2015.log"
