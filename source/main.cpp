@@ -10,7 +10,7 @@
 #include <iostream>
 #include <time.h>
 #include <unittest++/UnitTest++.h>
-
+#include <omp.h>
 
 
 using namespace std;
@@ -34,31 +34,30 @@ int main() {
     //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
     //Beryllium:                alpha = 4.0     beta = 0.31
 
-
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Hydrogen(solver)); // HeliumSimpleNumerical
+    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
 
 
     //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
     //Look for the program energyLevels.py to find which values were the best
 //    runWithDiffConstants(solver);
-//    runSIWithDiffTimesteps(solver);
+
+    runSIWithDiffTimesteps(solver);
 //    runBlockingSampledRun(solver) ;
 
 
-//   solver->runMonteCarloIntegrationIS();
-
-    return UnitTest::RunAllTests();;
+//  return  UnitTest::RunAllTests();
+    return 0;
 }
 
 void runWithDiffConstants(VMCSolver *solver)
 {
     //Settings for which values it should be cycled over and if we want to use importance sampling or now
 
-    double alpha_min = 0.7*solver->getCharge();
-    double alpha_max = 1.1* solver->getCharge();
+    double alpha_min = 0.8*solver->getCharge();
+    double alpha_max = 1.2* solver->getCharge();
 
-    int nSteps = 20;
+    int nSteps = 10;
 
     double beta_min = 0.3;
     double beta_max = 0.4;
@@ -67,7 +66,7 @@ void runWithDiffConstants(VMCSolver *solver)
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+    solver->setCycles(100000);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -153,12 +152,14 @@ void runWithDiffConstants(VMCSolver *solver)
 void runSIWithDiffTimesteps(VMCSolver *solver)
 {
     solver->switchbBlockSampling(false);
-    solver->setCycles(100000);
+    solver->setCycles(1000000);
 
     int nSteps = 100;
     double time_min = 0.001;
     double time_max = 1.;
     double dt = (time_max-time_min)/ (double) nSteps;
+
+    double timeStep;
 
     solver->setAlpha(1.843 );
     solver->setBeta(0.34);
@@ -173,13 +174,27 @@ void runSIWithDiffTimesteps(VMCSolver *solver)
 
     outfile.open(outfilePath);
 
-    for(double timeStep = time_min ; timeStep < time_max ; timeStep += dt )
+    clock_t start, end;     //To keep track of the time
+
+
+    for(timeStep = time_min ; timeStep < time_max ; timeStep += dt )
     {
+
         solver->setStepLength(timeStep);
-        solver->runMonteCarloIntegrationIS();
+
+        start = clock();
+            solver->runMonteCarloIntegrationIS();
+        end = clock();
+
+        double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
+
+        cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+
     }
 
     outfile.close();
+    cout << "\nWriting to " << outfilePath << endl;
+
 }
 
 void runBlockingSampledRun(VMCSolver *solver)
@@ -205,9 +220,8 @@ TEST(Hydrogen) {
 
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Hydrogen(solver)); // HeliumSimpleNumerical
-    solver->setAlpha(0.9);
+    solver->setTrialFunction(new Hydrogen(solver));
     solver->runMonteCarloIntegration();
-    CHECK_EQUAL(0, solver->getEnergyVar());
+    CHECK_EQUAL(0., solver->getEnergyVar());
 
 }

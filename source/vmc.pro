@@ -4,6 +4,10 @@ CONFIG -= qt
 
 LIBS += -llapack -larmadillo -lunittest++
 
+QMAKE_CXXFLAGS+= -fopenmp
+QMAKE_LFLAGS +=  -fopenmp
+QMAKE_CFLAGS_DEBUG += -fopenmp
+
 SOURCES += main.cpp \
     vmcsolver.cpp \
     lib.cpp \

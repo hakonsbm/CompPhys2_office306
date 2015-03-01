@@ -38,18 +38,37 @@ def findLowestEnergy():
 
 
 #Making the plots timesteps and energy
-def plotResultsVSTimestep(data):
+def plotResultsVSTimestep(data, name):
 
-	# print data
-	pl.figure()
-	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f' % (data[0,2] , data[0,3]))
+	energy = data[:,0]
+	variance = data[:,1] - data[:,0]**2
+	timeStep = data[:,5]
 
-	pl.plot(data[:,5] , data[:,0])
-	pl.show()
+
+	timeFig = pl.figure()
+	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f'  % (data[0,2] , data[0,3]) + " for " + name)
+
+	pl.plot(timeStep , energy)
+	pl.xlabel("Energy")
+	pl.ylabel("Timestep")
+
+	timeFig.savefig("../Report/figures/" + name + "TimeEnergy")
+
+	timeFig = pl.figure()
+	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f'  % (data[0,2] , data[0,3]) + " for " + name)
+
+	pl.plot(timeStep , variance)
+	pl.xlabel("Variance")
+	pl.ylabel("Timestep")
+
+	timeFig.savefig("../Report/figures/" + name + "TimeVariance")
+
+
+
 
 	return
 
-def plotEnergyVsAlphaBeta(data):
+def plotEnergyVsAlphaBeta(data, name):
 
 	alpha = data[:,2]
 	beta = data[:,3]
@@ -57,64 +76,69 @@ def plotEnergyVsAlphaBeta(data):
 	variance = data[:,1] - data[:,0]**2
 
 
-	fig=pl.figure()
+
+	fig = pl.figure()
 	ax = p3.Axes3D(fig)
-	ax.title("  'variance' vs alpha and beta ")
+	pl.title("Energy vs alpha and beta, " + name)
 	ax.plot_trisurf(alpha,beta,energy)
 	ax.set_xlabel('alpha')
 	ax.set_ylabel('beta')
 	ax.set_zlabel('Energy')
-	pl.show()
+
+	fig.savefig("../Report/figures/" + name + "AlphaBetaEnergy")
+
 
 
 	fig=pl.figure()
-	ax = p3.Axes3D(fig)
-	ax.title("  'variance' vs alpha and beta ")
+	ax = p3.Axes3D(fig2)
+	pl.title("Variance vs Alpha and beta, " + name)
 	ax.plot_trisurf(alpha,beta,variance)
 	ax.set_xlabel('alpha')
 	ax.set_ylabel('beta')
 	ax.set_zlabel('variance')
-	pl.show()
+
+	fig.savefig("../Report/figures/" + name + "AlphaBetaVariance")
+
 
 	return
 
-def plotEnergyVsAlpha(data):
-	pl.figure()
-	pl.title("Energy vs alpha")
+def plotEnergyVsAlpha(data, name):
 
 	alpha = data[:,2]
 	energy = data[:,0]
 	variance = data[:,1] - data[:,0]**2 
 
-
+	energyFig = pl.figure()
+	pl.title("Energy vs alpha, " + name)
 
 	pl.plot(alpha,energy)
 
 	pl.xlabel("alpha")
 	pl.ylabel("Energy")
 
-	pl.figure()
-	pl.title(" 'Variance vs alpha'")
+	energyFig.savefig("../Report/figures/EnergyVsAlpha" + name)
+
+	varianceFig = pl.figure()
+	pl.title(" Variance vs alpha, " + name)
 	pl.plot (alpha,variance)
-	pl.show()
+
+	varianceFig.savefig("../Report/figures/VarianceVsAlpha" + name)
 
 
 
 #Decide what we want to plot this time
 
-HeliumSimpleAnalyticalTime = np.genfromtxt("outfiles/HeliumSimpleAnalytical_timeStep")
-HeliumJastrowAnalyticalTime = np.genfromtxt("outfiles/HeliumJastrowAnalytical_timeStep")
+name = "HeliumJastrowAnalytical"
 
-HeliumSimpleNumericalAlphaBeta = np.genfromtxt("outfiles/HeliumSimpleNumerical_alpha_beta")
-HeliumSimpleAnalyticalAlphaBeta = np.genfromtxt("outfiles/HeliumSimpleAnalytical_alpha_beta")
+data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
+datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
 
-HeliumJastrowAnalyticalAlphaBeta = np.genfromtxt("outfiles/HeliumJastrowAnalytical_alpha_beta")
-HeliumJastrowNumericalAlphaBeta = np.genfromtxt("outfiles/HeliumJastrowNumerical_alpha_beta")
+
 
 # findLowestEnergy()
-# plotResultsVSTimestep(HeliumJastrowAnalyticalTime)
-# plotEnergyVsAlphaBeta(HeliumJastrowAnalyticalAlphaBeta)
-plotEnergyVsAlpha(HeliumSimpleAnalyticalAlphaBeta)
+plotResultsVSTimestep(datatime , name)
+# plotEnergyVsAlphaBeta(data, name)
+# plotEnergyVsAlpha(data, name)
 
-
+pl.show()
 

@@ -143,17 +143,46 @@
 
 
 \section{Results and discussion}
+	
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.45\linewidth]{figures/EnergyVsAlphaHeliumSimpleAnalytical}
+		\includegraphics[width=0.45\linewidth]{figures/VarianceVsAlphaHeliumSimpleAnalytical}
+		\caption{To be filled in}
+		  \label{fig01:alpha_Simple}
+	\end{figure}
+
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeEnergy}
+		\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeVariance}
+		\caption{To be filled in}
+		  \label{fig02:timestep}
+	\end{figure}
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
+		\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaVariance}
+		\caption{To be filled in}
+		  \label{fig02:timestep}
+	\end{figure}
+
 
 \section{Conclusions and perspectives}
 
 \appendix
+	
+	\section{Testing the VMC}
+		\subsection{Hydrogen Atom}
+			The wavefunction for the Helium atom can be found exactly and can be used to test our Variational Monte Carlo Calculation since an exact wavefunction should return the exact energy, \( 0.5 \) atomic units with \(0\) variance.
 
+			\[ \Psi(\vb{R}) = r_1 e^{-r_1}  \qquad E_L(r_1) = -\frac{1}{r_1} - \frac{\alpha}{2} \left( \alpha - \frac{2}{r_1} \right) \]
 
-	The local energy for the simple trialfunct
+			The unit test a unit named Helium tests the VMC clalculation with a hydrogen wavefunction and returns the correct values.
 
-	\[
-	Z \left(- \frac{1}{r_{2}} - \frac{1}{r_{1}}\right) - \alpha^{2} + \alpha \left(\frac{1}{r_{2}} + \frac{1}{r_{1}}\right) + \frac{1}{r_{12}}
-	\]
 
 
 \end{document}
