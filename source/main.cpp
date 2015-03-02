@@ -22,6 +22,7 @@ void runWithDiffConstants(VMCSolver *solver);
 void runSIWithDiffTimesteps(VMCSolver *solver);
 void runBlockingSampledRun(VMCSolver *solver);
 void runCompareAnalytical(VMCSolver *solver);
+void runDiffNCycles(VMCSolver *solver);
 
 
 
@@ -36,7 +37,7 @@ int main() {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
+    solver->setTrialFunction(new Beryllium(solver));
 
 
 
@@ -47,6 +48,7 @@ int main() {
 //    runSIWithDiffTimesteps(solver);
 //    runBlockingSampledRun(solver) ;
     runCompareAnalytical(solver);
+//    runDiffNCycles(solver);
 
 
 //  return  UnitTest::RunAllTests();
@@ -235,7 +237,7 @@ void runCompareAnalytical(VMCSolver *solver)
 
     timeRunAnalytic = 1.0*(end - start)/CLOCKS_PER_SEC;
 
-    solver->setTrialFunction(new HeliumSimpleNumerical(solver));
+    solver->setTrialFunction(new HeliumJastrowNumerical(solver));
 
     solver->trialFunction();
 
@@ -247,9 +249,35 @@ void runCompareAnalytical(VMCSolver *solver)
 
     cout << "Time to calculate analytic vs numerical " << timeRunAnalytic << " vs " << timeRunNumerical << endl;
     cout << "Time run gain "  <<  (timeRunAnalytic - timeRunNumerical) / timeRunNumerical << endl;
-    cout << "Time ratia " << timeRunAnalytic/timeRunNumerical << endl;
+    cout << "Time ratia " << timeRunNumerical/timeRunAnalytic << endl;
 
 }
+
+void runDiffNCycles(VMCSolver *solver)
+{
+    string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
+
+    char const * outfilePath = (pathString + string("_nCycles")).c_str();
+
+    int wantedCycles = 10000000;
+    int nSteps = 100;
+    double deltaCycles = (double) wantedCycles/nSteps;
+    int nCycles = 100;
+
+    outfile.open(outfilePath);
+
+    for(nCycles = 100; nCycles < wantedCycles ; nCycles += deltaCycles )
+    {
+        solver->setCycles(nCycles);
+
+        solver->runMonteCarloIntegrationIS();
+
+    }
+
+    outfile.close();
+
+}
+
 
 
 TEST(Hydrogen) {
