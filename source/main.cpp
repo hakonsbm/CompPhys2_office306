@@ -35,14 +35,14 @@ int main() {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
+    solver->setTrialFunction(new Beryllium(solver));
 
 
     //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
     //Look for the program energyLevels.py to find which values were the best
-//    runWithDiffConstants(solver);
+    runWithDiffConstants(solver);
 
-    runSIWithDiffTimesteps(solver);
+//    runSIWithDiffTimesteps(solver);
 //    runBlockingSampledRun(solver) ;
 
 
@@ -66,7 +66,7 @@ void runWithDiffConstants(VMCSolver *solver)
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
-    solver->setCycles(100000);
+    solver->setCycles(1000000);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -152,7 +152,7 @@ void runWithDiffConstants(VMCSolver *solver)
 void runSIWithDiffTimesteps(VMCSolver *solver)
 {
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+    solver->setCycles(100000);
 
     int nSteps = 100;
     double time_min = 0.001;
@@ -205,7 +205,7 @@ void runBlockingSampledRun(VMCSolver *solver)
 
     char const * outfilePath = (pathString + string("_blockingSamples")).c_str();
 
-    solver->setCycles(10000000);
+    solver->setCycles(1000000);
 
     samplefile.open(outfilePath);
 
