@@ -4,37 +4,24 @@ import scipy.stats as stats
 import mpl_toolkits.mplot3d.axes3d as p3
 
 
-def findLowestEnergy():
+def findLowestEnergy(data, name):
 
 	def LowestEnergy(data):
 		bestRun = np.argmin(data[:,0])
 
-		alpha = data[bestRun, 2]
-		beta = data[bestRun, 3]
+		alpha = data[bestRun, 3]
+		beta = data[bestRun, 4]
 		energy = data[bestRun, 0]
+		variance = data[bestRun, 2] 
 
-		return alpha, beta, energy
+		return alpha, beta, energy, variance
 
 
-	HeliumSimpleAnalytical = np.genfromtxt("outfiles/HeliumSimpleAnalytical_alpha_beta")
-	alpha, beta, energy = LowestEnergy(HeliumSimpleAnalytical)
-	print "With trialfunction HeliumSimpleAnalytical"
-	print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
+	alpha, beta, energy, variance = LowestEnergy(data)
+	print "With trialfunction " + name
+	print "alpha = ", alpha , ", beta = ", beta ,  ", the lowest energy was : " , energy, " with sample variance " , variance
 
-	# HeliumSimpleNumerical = np.genfromtxt("outfiles/HeliumSimpleNumerical_alpha_beta")
-	# alpha, beta, energy = LowestEnergy(HeliumSimpleNumerical)
-	# print "With trialfunction HeliumSimpleNumerical"
-	# print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
 
-	HeliumJastrowAnalytical = np.genfromtxt("outfiles/HeliumJastrowAnalytical_alpha_beta")
-	alpha, beta, energy = LowestEnergy(HeliumJastrowAnalytical)
-	print "With trialfunction HeliumJastrowAnalytical"
-	print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
-
-	# HeliumJastrowNumerical = np.genfromtxt("outfiles/HeliumJastrowNumerical_alpha_beta")
-	# alpha, beta, energy = LowestEnergy(HeliumJastrowNumerical)
-	# print "With trialfunction HeliumJastrowNumerical"
-	# print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
 
 
 #Making the plots timesteps and energy
@@ -42,11 +29,11 @@ def plotResultsVSTimestep(data, name):
 
 	energy = data[:,0]
 	variance = data[:,1] - data[:,0]**2
-	timeStep = data[:,5]
+	timeStep = data[:,6]
 
 
 	timeFig = pl.figure()
-	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f'  % (data[0,2] , data[0,3]) + " for " + name)
+	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f'  % (data[0,3] , data[0,4]) + " for " + name)
 
 	pl.plot(timeStep , energy)
 	pl.xlabel("Energy")
@@ -55,7 +42,7 @@ def plotResultsVSTimestep(data, name):
 	timeFig.savefig("../Report/figures/" + name + "TimeEnergy")
 
 	timeFig = pl.figure()
-	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f'  % (data[0,2] , data[0,3]) + " for " + name)
+	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f'  % (data[0,3] , data[0,4]) + " for " + name)
 
 	pl.plot(timeStep , variance)
 	pl.xlabel("Variance")
@@ -70,8 +57,8 @@ def plotResultsVSTimestep(data, name):
 
 def plotEnergyVsAlphaBeta(data, name):
 
-	alpha = data[:,2]
-	beta = data[:,3]
+	alpha = data[:,3]
+	beta = data[:,4]
 	energy = data[:,0]
 	variance = data[:,1] - data[:,0]**2
 
@@ -104,7 +91,7 @@ def plotEnergyVsAlphaBeta(data, name):
 
 def plotEnergyVsAlpha(data, name):
 
-	alpha = data[:,2]
+	alpha = data[:,3]
 	energy = data[:,0]
 	variance = data[:,1] - data[:,0]**2 
 
@@ -153,19 +140,25 @@ def plotChargeDensity(data, name):
 
 #Decide what we want to plot this time
 
-name = "HeliumJastrowAnalytical"
-# name = "Beryllium";
+# name = "HeliumSimpleAnalytical"
+name = "Beryllium";
 
-data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
+<<<<<<< HEAD
+#data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
 datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
-dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples")
+#dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples")
+=======
+data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
+# datatime = np.genfromtxt("outfiles/" + name +"_timeStep_10M")
+# dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples_10M")
+>>>>>>> 7d7a91562279e755fbb579a98806f0301ca9a396
 
-a = np.linspace(0,100)
 
-# findLowestEnergy()
-plotResultsVSTimestep(datatime , name)
-#plotEnergyVsAlphaBeta(data, name)
+findLowestEnergy(data, name)
+# plotResultsVSTimestep(datatime , name)
+# plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
+# plotResultsVSTimestep(datatime , name)
 # plotChargeDensity(dataSample[0 : : 100, :], name)
 
 pl.show()

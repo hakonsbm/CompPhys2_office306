@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  2 MAR 2015 12:54
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  2 MAR 2015 16:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1858,13 +1858,33 @@ Now handling font encoding PD1 ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen265
+\lightrulewidth=\dimen266
+\cmidrulewidth=\dimen267
+\belowrulesep=\dimen268
+\belowbottomsep=\dimen269
+\aboverulesep=\dimen270
+\abovetopsep=\dimen271
+\cmidrulesep=\dimen272
+\cmidrulekern=\dimen273
+\defaultaddspace=\dimen274
+\@cmidla=\count170
+\@cmidlb=\count171
+\@aboverulesep=\dimen275
+\@belowrulesep=\dimen276
+\@thisruleclass=\count172
+\@lastruleclass=\count173
+\@thisrulewidth=\dimen277
+)
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrow
 s.code.tex
 File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
 
 (/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
-\arrowsize=\dimen265
+\arrowsize=\dimen278
 ))
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
 s.code.tex
@@ -1954,34 +1974,34 @@ File: lstlang1.sty 2013/08/26 1.5b listings language file
 (./project1_2015.aux)
 \openout1 = `project1_2015.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-\c@lstlisting=\count170
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+\c@lstlisting=\count174
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count171
-\scratchdimen=\dimen266
+\scratchcounter=\count175
+\scratchdimen=\dimen279
 \scratchbox=\box75
-\nofMPsegments=\count172
-\nofMParguments=\count173
+\nofMPsegments=\count176
+\nofMParguments=\count177
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count174
-\MPscratchDim=\dimen267
-\MPnumerator=\count175
-\makeMPintoPDFobject=\count176
+\MPscratchCnt=\count178
+\MPscratchDim=\dimen280
+\MPnumerator=\count179
+\makeMPintoPDFobject=\count180
 \everyMPtoPDFconversion=\toks35
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -1999,7 +2019,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box76
-Package hyperref Info: Link coloring OFF on input line 46.
+Package hyperref Info: Link coloring OFF on input line 48.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -2007,11 +2027,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count177
+\c@section@level=\count181
 )
-LaTeX Info: Redefining \ref on input line 46.
-LaTeX Info: Redefining \pageref on input line 46.
-LaTeX Info: Redefining \nameref on input line 46.
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+LaTeX Info: Redefining \nameref on input line 48.
 
 (./project1_2015.out) (./project1_2015.out)
 \@outlinefile=\write4
@@ -2021,89 +2041,90 @@ LaTeX Info: Redefining \nameref on input line 46.
 ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 49.
+LaTeX Font Info:    Try loading font information for U+msa on input line 51.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 49.
+LaTeX Font Info:    Try loading font information for U+msb on input line 51.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-<figures/EnergyVsAlphaHeliumSimpleAnalytical.png, id=103, 578.16pt x 433.62pt>
+<figures/EnergyVsAlphaHeliumSimpleAnalytical.png, id=108, 578.16pt x 433.62pt>
 File: figures/EnergyVsAlphaHeliumSimpleAnalytical.png Graphic file (type png)
 
 <use figures/EnergyVsAlphaHeliumSimpleAnalytical.png>
 Package pdftex.def Info: figures/EnergyVsAlphaHeliumSimpleAnalytical.png used o
-n input line 170.
+n input line 192.
 (pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
 
-<figures/VarianceVsAlphaHeliumSimpleAnalytical.png, id=105, 586.8324pt x 442.29
-24pt>
+<figures/VarianceVsAlphaHeliumSimpleAnalytical.png, id=110, 578.16pt x 433.62pt
+>
 File: figures/VarianceVsAlphaHeliumSimpleAnalytical.png Graphic file (type png)
 
  <use figures/VarianceVsAlphaHeliumSimpleAnalytical.png>
 Package pdftex.def Info: figures/VarianceVsAlphaHeliumSimpleAnalytical.png used
- on input line 171.
-(pdftex.def)             Requested size: 199.19283pt x 150.12772pt.
+ on input line 193.
+(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
 
-<figures/HeliumJastrowAnalyticalTimeEnergy.png, id=106, 578.16pt x 433.62pt>
+<figures/HeliumJastrowAnalyticalTimeEnergy.png, id=111, 578.16pt x 433.62pt>
 File: figures/HeliumJastrowAnalyticalTimeEnergy.png Graphic file (type png)
 
 <use figures/HeliumJastrowAnalyticalTimeEnergy.png>
 Package pdftex.def Info: figures/HeliumJastrowAnalyticalTimeEnergy.png used on 
-input line 179.
+input line 200.
 (pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
 
-<figures/HeliumJastrowAnalyticalTimeVariance.png, id=107, 578.16pt x 433.62pt>
+<figures/HeliumJastrowAnalyticalTimeVariance.png, id=112, 578.16pt x 433.62pt>
 File: figures/HeliumJastrowAnalyticalTimeVariance.png Graphic file (type png)
 
 <use figures/HeliumJastrowAnalyticalTimeVariance.png>
 Package pdftex.def Info: figures/HeliumJastrowAnalyticalTimeVariance.png used o
-n input line 180.
+n input line 201.
 (pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
 
-<figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png, id=108, 578.16pt x 433.62p
+<figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png, id=114, 578.16pt x 433.62p
 t>
 File: figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png Graphic file (type png
 )
  <use figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png>
 Package pdftex.def Info: figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png use
-d on input line 187.
+d on input line 213.
 (pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
 
-<figures/HeliumJastrowAnalyticalAlphaBetaVariance.png, id=109, 578.16pt x 433.6
+<figures/HeliumJastrowAnalyticalAlphaBetaVariance.png, id=115, 578.16pt x 433.6
 2pt>
 File: figures/HeliumJastrowAnalyticalAlphaBetaVariance.png Graphic file (type p
 ng)
  <use figures/HeliumJastrowAnalyticalAlphaBetaVariance.png>
 Package pdftex.def Info: figures/HeliumJastrowAnalyticalAlphaBetaVariance.png u
-sed on input line 188.
+sed on input line 214.
 (pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
  [4 <./figures/EnergyVsAlphaHeliumSimpleAnalytical.png> <./figures/VarianceVsAl
-phaHeliumSimpleAnalytical.png> <./figures/HeliumJastrowAnalyticalTimeEnergy.png
-> <./figures/HeliumJastrowAnalyticalTimeVariance.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 208.
- [5 <./figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png> <./figures/HeliumJas
-trowAnalyticalAlphaBetaVariance.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 208.
+phaHeliumSimpleAnalytical.png>] [5 <./figures/HeliumJastrowAnalyticalTimeEnergy
+.png> <./figures/HeliumJastrowAnalyticalTimeVariance.png> <./figures/HeliumJast
+rowAnalyticalAlphaBetaEnergy.png> <./figures/HeliumJastrowAnalyticalAlphaBetaVa
+riance.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 256.
 
-(./project1_2015.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 208.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 208.
+[6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 256.
+ (./project1_2015.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 256.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 256.
 Package rerunfilecheck Info: File `project1_2015.out' has not changed.
-(rerunfilecheck)             Checksum: E1E795BF42C5E54589E27D428ACE809B;539.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 208.
+(rerunfilecheck)             Checksum: 47AA65630435B5884962BAC1D1FCEE94;610.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 256.
  ) 
 Here is how much of TeX's memory you used:
- 25018 strings out of 493304
- 470622 string characters out of 6139871
- 595293 words of memory out of 5000000
- 27958 multiletter control sequences out of 15000+600000
- 19687 words of font info for 55 fonts, out of 8000000 for 9000
+ 25092 strings out of 493304
+ 471610 string characters out of 6139871
+ 598032 words of memory out of 5000000
+ 28023 multiletter control sequences out of 15000+600000
+ 21864 words of font info for 63 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  56i,14n,58p,10440b,497s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
@@ -2123,10 +2144,10 @@ ic/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200
 mf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/publi
 c/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.
 pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on project1_2015.pdf (5 pages, 686790 bytes).
+Output written on project1_2015.pdf (6 pages, 638861 bytes).
 PDF statistics:
- 204 PDF objects out of 1000 (max. 8388607)
- 164 compressed objects within 2 object streams
- 48 named destinations out of 1000 (max. 500000)
- 115 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 217 PDF objects out of 1000 (max. 8388607)
+ 176 compressed objects within 2 object streams
+ 51 named destinations out of 1000 (max. 500000)
+ 123 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -20,7 +20,8 @@ ofstream samplefile;
 //This runs through with several different alpha and beta values and prints the results
 void runWithDiffConstants(VMCSolver *solver);
 void runSIWithDiffTimesteps(VMCSolver *solver);
-void runBlockingSampledRun(VMCSolver *solver) ;
+void runBlockingSampledRun(VMCSolver *solver);
+void runCompareAnalytical(VMCSolver *solver);
 
 
 
@@ -35,15 +36,17 @@ int main() {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Beryllium(solver));
+    solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
+
+
 
 
     //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
     //Look for the program energyLevels.py to find which values were the best
-    //runWithDiffConstants(solver);
-    runSIWithDiffTimesteps(solver);
-
+//    runWithDiffConstants(solver);
+//    runSIWithDiffTimesteps(solver);
 //    runBlockingSampledRun(solver) ;
+    runCompareAnalytical(solver);
 
 
 //  return  UnitTest::RunAllTests();
@@ -54,7 +57,7 @@ void runWithDiffConstants(VMCSolver *solver)
 {
     //Settings for which values it should be cycled over and if we want to use importance sampling or now
 
-    double alpha_min = 0.8*solver->getCharge();
+    double alpha_min = 0.7*solver->getCharge();
     double alpha_max = 1.2* solver->getCharge();
 
     int nSteps = 10;
@@ -214,6 +217,40 @@ void runBlockingSampledRun(VMCSolver *solver)
     samplefile.close();
 
 }
+
+void runCompareAnalytical(VMCSolver *solver)
+{
+    double timeRunAnalytic;
+    double timeRunNumerical;
+
+
+    solver->switchbBlockSampling(false);
+    solver->setCycles(10000000);
+
+    clock_t start, end;     //To keep track of the time
+
+    start = clock();
+        solver->runMonteCarloIntegration();
+    end = clock();
+
+    timeRunAnalytic = 1.0*(end - start)/CLOCKS_PER_SEC;
+
+    solver->setTrialFunction(new HeliumSimpleNumerical(solver));
+
+    solver->trialFunction();
+
+    start = clock();
+        solver->runMonteCarloIntegration();
+    end = clock();
+
+    timeRunNumerical = 1.0*(end - start)/CLOCKS_PER_SEC;
+
+    cout << "Time to calculate analytic vs numerical " << timeRunAnalytic << " vs " << timeRunNumerical << endl;
+    cout << "Time run gain "  <<  (timeRunAnalytic - timeRunNumerical) / timeRunNumerical << endl;
+    cout << "Time ratia " << timeRunAnalytic/timeRunNumerical << endl;
+
+}
+
 
 TEST(Hydrogen) {
 
