@@ -7,8 +7,8 @@ HeliumJastrowNumerical::HeliumJastrowNumerical(VMCSolver *solver)
 
     solver->setCharge(2);
     solver->setNParticles(2);
-    solver->setAlpha(1.8);
-    solver->setBeta(1.05);
+    solver->setAlpha(1.843);
+    solver->setBeta(0.34);
 
 }
 
