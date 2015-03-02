@@ -242,7 +242,7 @@ operator, and is therefore equal to $1/2$ in atomic units.
 
 The process of isotropic diffusion characterized by a time-dependent
 probability density $P\left(\mathbf{x},t\right)$ will, as an approximation,
-obey the Fokker-Planck equation
+obey the Fokker-Planck equation 
 \[
 \frac{\partial P}{\partial t}=\sum_{i}D\frac{\partial}{\partial\mathbf{x_{i}}}\left(\frac{\partial}{\partial\mathbf{x_{i}}}-\mathbf{F_{i}}\right)P(\mathbf{x},t),
 \]
@@ -353,8 +353,8 @@ only had time to run it for $10^{6}$ cycles. We then find the lowest
 energy to be $-14.4127$ with $\alpha=3.8$ and $\beta=0.293$. 
 
 From reseach papers we find the value for energy in the ground state
-of helium to be $-2.9037$ {[}Toichiro Kinoshita{]} and the value
-for energy in the ground state of beryllium to be $-14.667$ {[}Jacek
+of helium to be $-2.9037$ \cite{Kinoshita:1957:PR} and the value
+for energy in the ground state of beryllium to be $-14.667$ \cite{Koput:2011:PCCP}.
 Koput{]}. In table \ref{EnergyComparisonTable} we compare results
 obtained with our Variational Monte Carlo method with results from
 various research papers. 
@@ -427,6 +427,25 @@ energies found in research papers.}
 
 	\subsection{Parameter grid  and values }
 		The algorithm by just minimizing the energy to find the best fits for \(\alpha\) and \(\beta\) could be improved since both the energy and it's variance should be minimized with a correct wavefunction. So the algorithm should take into account that and find the combined lowest energy and variance and use that to find the best values for the parameters. A homogeneous is used to search through the different \(\alpha\) and \(\beta\) and by improving this the speed of the program would be greatly improved. If for example it first did a coarse run, then found the best value searched in the vicinity of that point with a higher resolution it would be improved.
+\subsection{Conclusions}
+
+The Variational Monte Carlo method gives fairly good values. It is
+however important to use enough cycles to minimize any random fluctuations.
+We see that the Jastrow factor, which is not included in $\psi_{T1}$,
+is important to give values close to the theoretically right values.
+This is especially true for beryllium. It see also that it is favorable
+to use importance sampling over the less efficient brute force Metropolis
+algorithm. 
+
+There is a big difference in computation time between the helium and
+the beryllium runs as beryllium has twice the number of electrons.
+Beryllium is however a rather simple atom compared to others, so computing
+energies for more complicated atoms requires a fast algorithm (or
+lots of patience). It can also be wise to implement parallelization
+to speed up the computations.
+
+\bibliographystyle{plain}
+\bibliography{references}
 
 
 \appendix
