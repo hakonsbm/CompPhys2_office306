@@ -35,13 +35,13 @@ int main() {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
+    solver->setTrialFunction(new Beryllium(solver));
 
 
     //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
     //Look for the program energyLevels.py to find which values were the best
-    runWithDiffConstants(solver);
-//    runSIWithDiffTimesteps(solver);
+    //runWithDiffConstants(solver);
+    runSIWithDiffTimesteps(solver);
 
 //    runBlockingSampledRun(solver) ;
 
@@ -152,17 +152,17 @@ void runWithDiffConstants(VMCSolver *solver)
 void runSIWithDiffTimesteps(VMCSolver *solver)
 {
     solver->switchbBlockSampling(false);
-    solver->setCycles(100000);
+    solver->setCycles(1000000);
 
     int nSteps = 100;
-    double time_min = 0.001;
+    double time_min = 0.01;
     double time_max = 1.;
     double dt = (time_max-time_min)/ (double) nSteps;
 
     double timeStep;
 
-    solver->setAlpha(1.843 );
-    solver->setBeta(0.34);
+    solver->setAlpha(4);
+    solver->setBeta(0.31);
 
     solver->switchbBlockSampling(false);    //This also samples the energies at each cycle to do blocking analysis on the data
 

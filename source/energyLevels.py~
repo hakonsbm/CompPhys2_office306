@@ -163,8 +163,8 @@ dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples")
 a = np.linspace(0,100)
 
 # findLowestEnergy()
-plotResultsVSTimestep(datatime , name)
-#plotEnergyVsAlphaBeta(data, name)
+# plotResultsVSTimestep(datatime , name)
+plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
 # plotChargeDensity(dataSample[0 : : 100, :], name)
 
