@@ -42,16 +42,20 @@
 \title{ Computational Physics II \\ FYS-4411 }
 \author{Gullik Vetvik Killie\\
 		Håkon S.B. Mørk\\
-		Jose Emeilio Ruiz Navarro
+		Jose Emilio Ruiz Navarro
 		}
 
 \begin{document}
 
 \maketitle
 
-\abstract{Fill in abstract}
+\abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: helium and beryllium. In the case of helium, the average distance between the electrons was computed as well, and two different hydrogen-like wavefunctions were used: one without taking into account the interaction between the two electrons and another one with a Jastrow factor dependent on the distance between the electrons $r_{12}$. The dependence on the timestep of the algorithm and the results was investigated as well, and no significant relation was found. Importance sampling was introduced as well to improve the program with more efficiency and make the results more precise. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor with and provide insight into the electronic structure of the beryllium atom.}
 
 \section{Introduction}
+
+VMC methods pose a very attractive alternative to other more complex ways of finding the ground state energies of simple atoms and molecules, like configuration-interaction calculations. The price to be paid in exchange for this simplicity is the sensitivity to the trial wave functions that are used, a VMC algorithm is very sensitive to how these are constructed, so they are one of the most important aspects to be considered (in this work, given the simple nature of the atoms which we will be working with, it's not so important to worry about the quality of the trial wave functions because very simple and basic ones are more than enough to reproduce the actual results). It shouldn't be forgotten that it is a variational method, and this implies that finding the optimal set of variational parameters is going to be the most important part of the calculation itself because it create a lot of problems if the search range for the parameters is illy defined and is not close enough to the variational minimum, namely, the results will have a poor quality if this happens. This means that the parameters need to be chosen very carefully, or a recursive search with decreasingly coarse spacing in the space of variational parameters is required if there is no deep knowledge about the system in question.\\
+
+Instead of evaluating a very complex multidimensional integral to compute the expectation value of an operator, like the hamiltonian in this case, a VMC calculation exploits the fact that the majority of the configuration space where the wave function belongs can be regarded as much less important than other parts, the values of the wave function are too small there and can be mostly ignored during the integration of the algorithm. To capitalize this, the Metropolis algorithm is added to the VMC method, as well as importance sampling.\\
 
 
 \section{Methods}
@@ -70,13 +74,13 @@
 
 		\begin{align}
 			E[\hat{H}] &= \frac{\int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) E_L(\vb{R}))  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
-			\intertext{Since the denumeraor is a scalar constant after integrating it we can put it inside the integral in the numerator}
+			\intertext{Since the denumerator is a scalar constant after integrating it we can put it inside the integral in the numerator}
 			E[\hat{H}] &= \int{d\vb{R} \frac{\Psi_T^*(\vb{R}) \Psi_T(\vb{R})  }{\int{d\vb{R'} \Psi_T^*(\vb{R'}) \Psi_T(\vb{R'})}}  E_L(\vb{R})  }
 			\\
 			E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
 		\end{align}
 
-			This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral. 
+		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral. 
 
 		\begin{enumerate}
 			\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
@@ -118,6 +122,8 @@
 		A similar calculation applies for \(r_{12} \rightarrow 0\) and a trialfunction of the form   \[\Psi_T(r_1,r_2,r_{12}) = e^{-\alpha (r_1 + r_2)} e^{\beta r_{12}} \] should fulfill the condition that the wavefunction is finite everywhere.
 
 
+
+
 	\subsection{Beryllium atom}
 
 		It is fairly simple to extend the calculational machinery of Variational
@@ -149,7 +155,7 @@
 
 		Furthermore, for the Jastrow factor, 
 		\[
-		\Psi_{C}=\prod_{i<j}g(r_{ij})=\exp{\left\{ \sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}\right\} },
+		\Psi_{C}=\prod_{i<j}g(r_{ij})=\exp{\sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}},
 		\]
 		we need to take into account the spins of the electrons. We fix electrons
 		1 and 2 to have spin up, and electron 3 and 4 to have spin down. This
@@ -210,13 +216,24 @@
 		\end{align}
 
 
+		\subsection{Verification of the model}
+			The wavefunction for a Hydrogen atom is known, see equation \eqref{eq:hydrogen}, a Monte Carlo calculation for an exact wavefunction will give a exact result.
+
+			\begin{align}
+			 \Psi(\rho ) = \alpha \rho e^{-\alpha\rho} \qquad \text{ With  local energy: } \qquad E_{L} (\rho) = - \frac{1}{\rho} - \frac{\alpha}{2} \left( \alpha - \frac{2}{\rho} \right) \label{eq:hydrogen}
+			\end{align}
+
+			If the VMC calculation is run with a Hydrogen atom with \(\alpha = 1\) it should produce an energy of exactly \( -0.5\) with \(0\) variance. A check for this is implemented as a unit test in the program.
+
+			The closed expressions of the local energy has also been verified by comparing them to numerical versions and checked that they produced similar values.
+
 
 \subsection{Importance sampling}
 
 We now want to make the code more efficient, so we replace the brute
 force Metropolis algorithm with a walk in coordinate space biased
 by the trial wave function, an approach based on the Fokker-Planck
-equation and the Langevin equation for generation a trajectory in
+equation and the Langevin equation for generating a trajectory in
 coordinate space. 
 
 For one particle or walker, a diffusion process characterized by a
@@ -242,7 +259,7 @@ operator, and is therefore equal to $1/2$ in atomic units.
 
 The process of isotropic diffusion characterized by a time-dependent
 probability density $P\left(\mathbf{x},t\right)$ will, as an approximation,
-obey the Fokker-Planck equation
+obey the Fokker-Planck equation 
 \[
 \frac{\partial P}{\partial t}=\sum_{i}D\frac{\partial}{\partial\mathbf{x_{i}}}\left(\frac{\partial}{\partial\mathbf{x_{i}}}-\mathbf{F_{i}}\right)P(\mathbf{x},t),
 \]
@@ -273,8 +290,8 @@ is large, thus increasing the efficiency of the simulation. This is
 a great improvement on the Metropolis algorithm where the walker has
 the same probability to move in every direction.
 
-From the Fokker-Planck equation we get a transition probability fiven
-by the Green's function
+From the Fokker-Planck equation we get a transition probability given
+by Green's function
 \[
 G(y,x,\Delta t)=\frac{1}{(4\pi D\Delta t)^{3N/2}}\exp{\left(-(y-x-D\Delta tF(x))^{2}/4D\Delta t\right)}
 \]
@@ -291,6 +308,48 @@ is replaced by the Metropolis-Hastings algorithm,
 q(y,x)=\frac{G(x,y,\Delta t)|\Psi_{T}(y)|^{2}}{G(y,x,\Delta t)|\Psi_{T}(x)|^{2}}
 \]
 
+
+		\subsection{Blocking}
+			Blocking refers to a method to more accurately estimate the error of the values obtained by the VMC algorithm. It's actually a completely separate and independent process. The basic idea lies on the correlations between all the measurements. If these are important enough, they will produce an increase in the error that needs to be taken into account. The reason behind this is related to the effective amount of measurements, if there are correlations there will be measurements that will contain less information, so these won't be as valuable as the rest and it will be as if there are \textit{less} measurementes than we actually have. Obviously this is a problem, the usual identification of the error with $\sqrt{\frac{\sigma}{n}}$ will be overly optimistic and a correction is needed.\\
+
+\[
+f_d=\frac{1}{n-d}\sum_{k=1}^{n-d}{\left(x_k-\bar{x}_n\right)\left(x_{k+d}-\bar{x}_n\right)}
+\]
+
+This can be used to give an actual form to the correction factor:\\
+
+\[
+\tau1+2\sum_{d=1}^{n-1}{\frac{f_d}{var\left(x\right)}}
+\]
+
+This is the autocorrelation time and it relates the error with the variance:\\
+
+\[
+err^2=\frac{\tau}{n}var\left(x\right)
+\]
+
+And the inverse of the first factor is actually the number of effective measuremnts (that are actually useful since they contain information):\\
+
+\[
+n_{eff}=\frac{n}{\tau}
+\]
+
+The expression that relates the standard deviation with this correlation time is thus:\\
+
+\[
+\sigma=\sqrt{\left(\frac{1+2\tau/\Delta t}{n}\left(\bar{x^2}-\bar{x}^2\right)\right)}
+\]
+
+Where $\Delta t$ is the time between samples, and it's commonly smaller than $\tau$. The main problem is that to compute $\tau$ a lot of time is needed, and this is not feasible in most cases.\\
+
+			The solution is to use blocking, and the algorithm to do this is actually quite simple. The total amount of measurements is divided into blocks (hence the name) of a certain size, and for each block the standard deviation is obtained. When the standard deviation stops increasing as the block size does, the correlations are irrelevant and the value for it is ready.\\
+
+
+			\begin{figure}
+\centering \includegraphics[width=0.45\linewidth]{figures/blockingheliumsimpleandalytical}
+\protect\caption{STD vs. blocksize. Here we see the plateuing trend of the STD as the blocksize increases, but the problem is that as the blocksize decreases it should decrease as well and not increase. This problem will be fixed in the future.}
+\label{fig01:alpha_Simple} 
+\end{figure}
 
 
 
@@ -319,7 +378,8 @@ force pulling the electron to the nucleus.
 \begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{figures/EnergyVsAlphaHeliumSimpleAnalytical}
 \includegraphics[width=0.45\linewidth]{figures/VarianceVsAlphaHeliumSimpleAnalytical}
-\protect\caption{To be filled in}
+
+\includegraphics[width=0.45\linewidth]{figures/VarianceNCyclesHeliumSimpleAnalytical}\protect\protect\caption{Plots for Helium $\psi_{T1}$ for energy versus $\alpha$, variance versus $\alpha$, and variance as function of Monte Carlo cycles.}
 \label{fig01:alpha_Simple} 
 \end{figure}
 
@@ -327,7 +387,7 @@ force pulling the electron to the nucleus.
 \begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeEnergy}
 \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeVariance}
-\protect\caption{To be filled in}
+\protect\caption{Plots for Helium $\psi_{T2}$ for the energy versus the timestep, and the variance versus the timestep.}
 \label{fig02:timestep} 
 \end{figure}
 
@@ -342,7 +402,7 @@ than without the Jastrow factor.
 \begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
 \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaVariance}
-\protect\caption{To be filled in}
+\protect\caption{Using $\psi_{T2}$, plot of the energy versus alpha and beta, and plot of the variance versus $\alpha$ and $\beta$. }
 \label{fig03:AlphaBeta} 
 \end{figure}
 
@@ -353,8 +413,8 @@ only had time to run it for $10^{6}$ cycles. We then find the lowest
 energy to be $-14.4127$ with $\alpha=3.8$ and $\beta=0.293$. 
 
 From reseach papers we find the value for energy in the ground state
-of helium to be $-2.9037$ {[}Toichiro Kinoshita{]} and the value
-for energy in the ground state of beryllium to be $-14.667$ {[}Jacek
+of helium to be $-2.9037$ \cite{Kinoshita:1957:PR} and the value 
+for energy in the ground state of beryllium to be $-14.667$ \cite{Koput:2011:PCCP}.
 Koput{]}. In table \ref{EnergyComparisonTable} we compare results
 obtained with our Variational Monte Carlo method with results from
 various research papers. 
@@ -395,7 +455,7 @@ energies found in research papers.}
 		    Beryllium $\psi_{T2}$	& 3.8	&	 0.293
 		    \\ \hline
 	  \end{tabular}
-	  \caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values, with stepssize \(0.02\). Each Monte Carlo run went over \(10 000 000\), using importance sampling. Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values}
+	  \caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values, with stepssize \(0.02\). Each Monte Carlo run went over \(10 000 000\), using importance sampling. Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
 	  \label{tab:alpha_beta}
 \end{table}
 
@@ -416,10 +476,10 @@ energies found in research papers.}
 		    \\ \hline 
 		    Helium $\psi_{T2}$ & 86.76 & 19.98	& 4.342
 		    \\	\hline 
-		    Beryllium $\psi_{T2}$  	& &	 &
+		    Beryllium $\psi_{T2}$ & 1918.34  &	 &
  		    \\ \hline
 	  \end{tabular}
-	  \caption{The time to run a Monte Carlo run with \(10^7\) cycles. The closed expression for the local energy increased the computation time by a significant degree for each trialfunction }
+	  \caption{The time to run a Monte Carlo run with \(10^7\) cycles. The closed expression for the local energy increased the computation time by a significant degree for each trialfunction. }
 	  \label{tab:analyticVSNumeric}
 \end{table}
 
@@ -427,8 +487,27 @@ energies found in research papers.}
 
 	\subsection{Parameter grid  and values }
 		The algorithm by just minimizing the energy to find the best fits for \(\alpha\) and \(\beta\) could be improved since both the energy and it's variance should be minimized with a correct wavefunction. So the algorithm should take into account that and find the combined lowest energy and variance and use that to find the best values for the parameters. A homogeneous is used to search through the different \(\alpha\) and \(\beta\) and by improving this the speed of the program would be greatly improved. If for example it first did a coarse run, then found the best value searched in the vicinity of that point with a higher resolution it would be improved.
+\subsection{Conclusions}
 
+The Variational Monte Carlo method gives fairly good values. It is
+however important to use enough cycles to minimize any random fluctuations.
+We see that the Jastrow factor, which is not included in $\psi_{T1}$,
+is important to give values close to the theoretically right values.
+This is especially true for beryllium. It see also that it is favorable
+to use importance sampling over the less efficient brute force Metropolis
+algorithm. 
 
+There is a big difference in computation time between the helium and
+the beryllium runs as beryllium has twice the number of electrons.
+Beryllium is however a rather simple atom compared to others, so computing
+energies for more complicated atoms requires a fast algorithm (or
+lots of patience). It can also be wise to implement parallelization
+to speed up the computations.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\newpage
 \appendix
 	
 	\section{Testing the VMC}
@@ -437,7 +516,7 @@ energies found in research papers.}
 
 			\[ \Psi(\vb{R}) = r_1 e^{-r_1}  \qquad E_L(r_1) = -\frac{1}{r_1} - \frac{\alpha}{2} \left( \alpha - \frac{2}{r_1} \right) \]
 
-			The unit test a unit named Helium tests the VMC clalculation with a hydrogen wavefunction and returns the correct values.
+			The unit test a unit named Helium tests the VMC calculation with a hydrogen wavefunction and returns the correct values.
 
 
 

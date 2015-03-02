@@ -316,13 +316,38 @@ q(y,x)=\frac{G(x,y,\Delta t)|\Psi_{T}(y)|^{2}}{G(y,x,\Delta t)|\Psi_{T}(x)|^{2}}
 f_d=\frac{1}{n-d}\sum_{k=1}^{n-d}{\left(x_k-\bar{x}_n\right)\left(x_{k+d}-\bar{x}_n\right)}
 \]
 
+This can be used to give an actual form to the correction factor:\\
 
-			The solution is to use blocking, and the algorithm to do this is actually quite simple. The total amount of measurements is divided into blocks (hence the name) of a certain size, and for each block the standard deviation is obtained. When the standard deviation stops increasing as the block size does, the correlations are irrelevant and the value for it is set
+\[
+\tau1+2\sum_{d=1}^{n-1}{\frac{f_d}{var\left(x\right)}}
+\]
+
+This is the autocorrelation time and it relates the error with the variance:\\
+
+\[
+err^2=\frac{\tau}{n}var\left(x\right)
+\]
+
+And the inverse of the first factor is actually the number of effective measurements (that are actually useful since they contain information):\\
+
+\[
+n_{eff}=\frac{n}{\tau}
+\]
+
+The expression that relates the standard deviation with this correlation time is thus:\\
+
+\[
+\sigma=\sqrt{\left(\frac{1+2\tau/\Delta t}{n}\left(\bar{x^2}-\bar{x}^2\right)\right)}
+\]
+
+Where $\Delta t$ is the time between samples, and it's commonly smaller than $\tau$. The main problem is that to compute $\tau$ a lot of time is needed, and this is not feasible in most cases.\\
+
+			The solution is to use blocking, and the algorithm to do this is actually quite simple. The total amount of measurements is divided into blocks (hence the name) of a certain size, and for each block the standard deviation is obtained. When the standard deviation stops increasing as the block size does, the correlations are irrelevant and the value for it is ready.\\
 
 
 			\begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{figures/blockingheliumsimpleandalytical}
-\protect\caption{STD vs. blocksize. Here we see the trend }
+\protect\caption{STD vs. blocksize. Here we see the plateuing trend of the STD as the blocksize increases, but the problem is that as the blocksize decreases it should decrease as well and not increase. This problem will be fixed in the future.}
 \label{fig01:alpha_Simple} 
 \end{figure}
 
