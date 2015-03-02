@@ -37,7 +37,7 @@ int main() {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
+    solver->setTrialFunction(new Beryllium(solver));
 
 
 
@@ -47,8 +47,8 @@ int main() {
 //    runWithDiffConstants(solver);
 //    runSIWithDiffTimesteps(solver);
 //    runBlockingSampledRun(solver) ;
-//    runCompareAnalytical(solver);
-    runDiffNCycles(solver);
+    runCompareAnalytical(solver);
+//    runDiffNCycles(solver);
 
 
 //  return  UnitTest::RunAllTests();
