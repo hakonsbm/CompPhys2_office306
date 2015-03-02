@@ -3,5 +3,4 @@
 *.o
 /build-*/
 .*~
-source/outfiles
 *.pro.user.*
