@@ -143,6 +143,7 @@ def plotChargeDensity(data, name):
 # name = "HeliumSimpleAnalytical"
 name = "Beryllium";
 
+
 data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
 # datatime = np.genfromtxt("outfiles/" + name +"_timeStep_10M")
 # dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples_10M")
