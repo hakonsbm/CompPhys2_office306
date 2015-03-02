@@ -103,13 +103,14 @@ void VMCSolver::runMonteCarloIntegration() {
         if (m_blockSampling &&  cycle % 10 == 0) {
             samplefile << setw(15) << setprecision(8) << deltaE;
             samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
-            samplefile << setw(15) << setprecision(8) << rNew(0,0);
-            samplefile << setw(15) << setprecision(8) << rNew(0,1);
-            samplefile << setw(15) << setprecision(8) << rNew(0,2);
-            samplefile << setw(15) << setprecision(8) << rNew(1,0);
-            samplefile << setw(15) << setprecision(8) << rNew(1,1);
-            samplefile << setw(15) << setprecision(8) << rNew(1,2);
             samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
+
+            for(int i = 0; i < nParticles; )
+            {
+                    samplefile << setw(15) << setprecision(8) << rNew(i,0);
+                    samplefile << setw(15) << setprecision(8) << rNew(i,1);
+                    samplefile << setw(15) << setprecision(8) << rNew(i,2);
+            }
         }
     }
     if(m_blockSampling)
@@ -249,14 +250,14 @@ void VMCSolver::runMonteCarloIntegrationIS() {
 
         if (m_blockSampling &&  cycle % 10 == 0) {
             samplefile << setw(15) << setprecision(8) << deltaE;
-            samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
-            samplefile << setw(15) << setprecision(8) << rNew(0,0);
-            samplefile << setw(15) << setprecision(8) << rNew(0,1);
-            samplefile << setw(15) << setprecision(8) << rNew(0,2);
-            samplefile << setw(15) << setprecision(8) << rNew(1,0);
-            samplefile << setw(15) << setprecision(8) << rNew(1,1);
-            samplefile << setw(15) << setprecision(8) << rNew(1,2);
+            samplefile << setw(15) << setprecision(8) << energySquaredSum;
             samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
+            for(int i = 0; i < nParticles; )
+            {
+                    samplefile << setw(15) << setprecision(8) << rNew(i,0);
+                    samplefile << setw(15) << setprecision(8) << rNew(i,1);
+                    samplefile << setw(15) << setprecision(8) << rNew(i,2);
+            }
         }
     }
 
