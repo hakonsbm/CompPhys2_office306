@@ -16,6 +16,8 @@
 \usepackage{tikz}
 \usepackage{subcaption}
 \usepackage[utf8]{inputenc}
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
 
 
 
@@ -50,6 +52,7 @@
 \abstract{Fill in abstract}
 
 \section{Introduction}
+	
 
 \section{Methods}
 	\subsection{Monte Carlo of the Helium Atom}
@@ -215,12 +218,25 @@ that the optimal values are $\alpha=1.8$ and $\beta=1.05$.
 
 
 \subsection{Alpha and Beta Values}
-	With trialfunction HeliumJastrowAnalytical
-alpha =  1.8 , beta =  0.94  and the lowest energy was :  -2.8979105
 
-With trialfunction HeliumSimpleAnalytical
-alpha =  1.65 , beta =  0.0  and the lowest energy was :  -2.8442934
+\begin{table}
+\center
+		\begin{tabular}{| c | c| c |}
+		    \hline
+		   	\textbf{Trialfunction} & \(\mathbf{\alpha}\) & \(\mathbf{\beta}\)
+		    \\ \hline
+		    Helium Simple & 1.65 & -
+		    \\ \hline 
+		    Helium Jastrow & 1.8 & 0.94
+		    \\	\hline
+		    Beryllium	& -	&	-
+		    \\ \hline
+	  \end{tabular}
+	  \caption{The values we got from running the }
+	  \label{tab:alpha_beta}
+\end{table}
 
+	Table \ref{tab:alpha_beta} shows the values we got from 
 
 
 \section{Conclusions and perspectives}
