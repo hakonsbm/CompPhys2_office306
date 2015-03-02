@@ -5,6 +5,8 @@
 \BOOKMARK [2][-]{subsection.2.3}{Derivation of local energies}{section.2}% 5
 \BOOKMARK [1][-]{section.3}{Results and discussion}{}% 6
 \BOOKMARK [2][-]{subsection.3.1}{Alpha and Beta Values}{section.3}% 7
-\BOOKMARK [1][-]{section.4}{Conclusions and perspectives}{}% 8
-\BOOKMARK [1][-]{appendix.A}{Testing the VMC}{}% 9
-\BOOKMARK [2][-]{subsection.A.1}{Hydrogen Atom}{appendix.A}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Computational speed gain by using an analytical local energy}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Conclusions and perspectives}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Parameter grid and values }{section.4}% 10
+\BOOKMARK [1][-]{appendix.A}{Testing the VMC}{}% 11
+\BOOKMARK [2][-]{subsection.A.1}{Hydrogen Atom}{appendix.A}% 12
