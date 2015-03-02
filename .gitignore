@@ -3,6 +3,5 @@
 *.o
 /build-*/
 .*~
-*.png
 source/outfiles
 *.pro.user.*
