@@ -165,31 +165,50 @@
 \section{Results and discussion}
 	
 
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.45\linewidth]{figures/EnergyVsAlphaHeliumSimpleAnalytical}
-		\includegraphics[width=0.45\linewidth]{figures/VarianceVsAlphaHeliumSimpleAnalytical}
-		\caption{To be filled in}
-		  \label{fig01:alpha_Simple}
-	\end{figure}
+As a first attempt to solve the ground state energy for the helium
+atom we perform Variational Monte Carlo calculation with a brute force
+Metropolis sampling. We do this with two trial wave functions
+\[
+\psi_{T1}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}
+\]
+and 
+\[
+\psi_{T2}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}\exp{\left(\frac{r_{12}}{2(1+\beta r_{12})}\right)},
+\]
+using $\alpha$ and $\beta$ as variational parameters. Energy values
+for the simple wave function, $\psi_{T1}$, using only one variational
+parameter $\alpha$, are shown in figure \ref{fig01:alpha_Simple}.
+We run the Variational Monte Carlo calculation with $10^{7}$ cycles.
+As we see in the figures, the energy minimum occurs when we use $\alpha=1.65$.
+Using this value for $\alpha$ we get an energy of $-2.8442934$. 
+
+\begin{figure}
+\centering \includegraphics[width=0.45\linewidth]{figures/EnergyVsAlphaHeliumSimpleAnalytical}
+\includegraphics[width=0.45\linewidth]{figures/VarianceVsAlphaHeliumSimpleAnalytical}
+\protect\caption{To be filled in}
+\label{fig01:alpha_Simple} 
+\end{figure}
 
 
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeEnergy}
-		\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeVariance}
-		\caption{To be filled in}
-		  \label{fig02:timestep}
-	\end{figure}
+\begin{figure}
+\centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeEnergy}
+\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeVariance}
+\protect\caption{To be filled in}
+\label{fig02:timestep} 
+\end{figure}
 
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
-		\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaVariance}
-		\caption{To be filled in}
-		  \label{fig03:AlphaBeta}
-	\end{figure}
+We now look at our second trial function, $\psi_{T2}$. Running over
+different values for the two variables $\alpha$ and $\beta$, again
+with $10^{7}$ cycles in the Monte Carlo simulation, we get the results
+presented in figure \ref{fig03:AlphaBeta}. From this run we find
+that the optimal values are $\alpha=1.8$ and $\beta=1.05$. 
 
+\begin{figure}
+\centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
+\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaVariance}
+\protect\caption{To be filled in}
+\label{fig03:AlphaBeta} 
+\end{figure}
 
 \section{Conclusions and perspectives}
 
