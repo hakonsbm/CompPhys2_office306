@@ -211,6 +211,88 @@
 
 
 
+\subsection{Importance sampling}
+
+We now want to make the code more efficient, so we replace the brute
+force Metropolis algorithm with a walk in coordinate space biased
+by the trial wave function, an approach based on the Fokker-Planck
+equation and the Langevin equation for generation a trajectory in
+coordinate space. 
+
+For one particle or walker, a diffusion process characterized by a
+time-dependent probability density $P\left(x,t\right)$ in one dimension
+we have the Fokker-Planck equation
+\[
+\frac{\partial P}{\partial t}=D\frac{\partial}{\partial x}\left(\frac{\partial}{\partial x}-F\right)P\left(x,t\right),
+\]
+where $F$ is a drift term and $D$ is the diffusion coefficient. 
+
+The new positions in coordinate space are found using the Langevin
+equation with Euler's method. We go from the Langevin equation
+\[
+\frac{\partial x(t)}{\partial t}=DF(x(t))+\eta
+\]
+where$\eta$ is a random variable. This gives us a new position
+\[
+y=x+DF(x)\Delta t+\xi\sqrt{\Delta t}.
+\]
+Here $\xi$ is gaussian random variable and $\Delta t$ is a chosen
+time step. $D$ comes from the factor $1/2$ in the kinetic energy
+operator, and is therefore equal to $1/2$ in atomic units.
+
+The process of isotropic diffusion characterized by a time-dependent
+probability density $P\left(\mathbf{x},t\right)$ will, as an approximation,
+obey the Fokker-Planck equation
+\[
+\frac{\partial P}{\partial t}=\sum_{i}D\frac{\partial}{\partial\mathbf{x_{i}}}\left(\frac{\partial}{\partial\mathbf{x_{i}}}-\mathbf{F_{i}}\right)P(\mathbf{x},t),
+\]
+where $\mathbf{F}_{i}$ is component number $i$ of the drift term
+caused by an external potential, and $D$ is the diffusion coefficient.
+We set the left hand side equal to zero and obtain the convergence
+to a stationary probability density
+\[
+\frac{\partial^{2}P}{\partial{\mathbf{x_{i}}^{2}}}=P\frac{\partial}{\partial{\mathbf{x_{i}}}}\mathbf{F_{i}}+\mathbf{F_{i}}\frac{\partial}{\partial{\mathbf{x_{i}}}}P.
+\]
+
+
+Inserting the drift vector, $\mathbf{F}=g(\mathbf{x})\frac{\partial P}{\partial\mathbf{x}}$,
+we get
+\[
+\frac{\partial^{2}P}{\partial{\mathbf{x_{i}}^{2}}}=P\frac{\partial g}{\partial P}\left(\frac{\partial P}{\partial{\mathbf{x}_{i}}}\right)^{2}+Pg\frac{\partial^{2}P}{\partial{\mathbf{x}_{i}^{2}}}+g\left(\frac{\partial P}{\partial{\mathbf{x}_{i}}}\right)^{2}
+\]
+To meet the condition of stationary density the left hand side has
+to be zero. This means that the terms containing first and second
+order derivatives has to cancel each other, which is only possible
+if $g=\frac{1}{P}$. This yields
+\[
+\mathbf{F}=2\frac{1}{\Psi_{T}}\nabla\Psi_{T},
+\]
+known as the quantum force. This so-called force pushes the walker
+towards regions of configuration space where the trial wave function
+is large, thus increasing the efficiency of the simulation. This is
+a great improvement on the Metropolis algorithm where the walker has
+the same probability to move in every direction.
+
+From the Fokker-Planck equation we get a transition probability fiven
+by the Green's function
+\[
+G(y,x,\Delta t)=\frac{1}{(4\pi D\Delta t)^{3N/2}}\exp{\left(-(y-x-D\Delta tF(x))^{2}/4D\Delta t\right)}
+\]
+This means that the Metropolis algorithm
+\[
+A(y,x)=\mathrm{min}(1,q(y,x))),
+\]
+where 
+\[
+q(y,x)=\frac{|\Psi_{T}(y)|^{2}}{|\Psi_{T}(x)|^{2}},
+\]
+is replaced by the Metropolis-Hastings algorithm,
+\[
+q(y,x)=\frac{G(x,y,\Delta t)|\Psi_{T}(y)|^{2}}{G(y,x,\Delta t)|\Psi_{T}(x)|^{2}}
+\]
+
+
+
 
 \section{Results and discussion}
 	
