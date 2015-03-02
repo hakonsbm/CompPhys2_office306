@@ -245,8 +245,9 @@ void runCompareAnalytical(VMCSolver *solver)
 
     timeRunNumerical = 1.0*(end - start)/CLOCKS_PER_SEC;
 
-    cout << "Time to calculate analytic vs numerical" << timeRunAnalytic << " vs " << timeRunNumerical << endl;
-    cout << "Time run gain"  <<  (timeRunAnalytic - timeRunNumerical) / timeRunNumerical << endl;
+    cout << "Time to calculate analytic vs numerical " << timeRunAnalytic << " vs " << timeRunNumerical << endl;
+    cout << "Time run gain "  <<  (timeRunAnalytic - timeRunNumerical) / timeRunNumerical << endl;
+    cout << "Time ratia " << timeRunAnalytic/timeRunNumerical << endl;
 
 }
 

@@ -4,7 +4,7 @@ import scipy.stats as stats
 import mpl_toolkits.mplot3d.axes3d as p3
 
 
-def findLowestEnergy():
+def findLowestEnergy(data, name):
 
 	def LowestEnergy(data):
 		bestRun = np.argmin(data[:,0])
@@ -16,25 +16,12 @@ def findLowestEnergy():
 		return alpha, beta, energy
 
 
-	HeliumSimpleAnalytical = np.genfromtxt("outfiles/HeliumSimpleAnalytical_alpha_beta")
-	alpha, beta, energy = LowestEnergy(HeliumSimpleAnalytical)
-	print "With trialfunction HeliumSimpleAnalytical"
+	data = np.genfromtxt("outfiles/HeliumSimpleAnalytical_alpha_beta")
+	alpha, beta, energy = LowestEnergy(data)
+	print "With trialfunction " + name
 	print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
 
-	# HeliumSimpleNumerical = np.genfromtxt("outfiles/HeliumSimpleNumerical_alpha_beta")
-	# alpha, beta, energy = LowestEnergy(HeliumSimpleNumerical)
-	# print "With trialfunction HeliumSimpleNumerical"
-	# print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
 
-	HeliumJastrowAnalytical = np.genfromtxt("outfiles/HeliumJastrowAnalytical_alpha_beta")
-	alpha, beta, energy = LowestEnergy(HeliumJastrowAnalytical)
-	print "With trialfunction HeliumJastrowAnalytical"
-	print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
-
-	# HeliumJastrowNumerical = np.genfromtxt("outfiles/HeliumJastrowNumerical_alpha_beta")
-	# alpha, beta, energy = LowestEnergy(HeliumJastrowNumerical)
-	# print "With trialfunction HeliumJastrowNumerical"
-	# print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
 
 
 #Making the plots timesteps and energy
@@ -156,13 +143,13 @@ def plotChargeDensity(data, name):
 name = "HeliumSimpleAnalytical"
 # name = "Beryllium";
 
-# data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
-datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
+data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
+# datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
 # dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples")
 
 
-# findLowestEnergy()
-plotResultsVSTimestep(datatime , name)
+findLowestEnergy(data, name)
+# plotResultsVSTimestep(datatime , name)
 # plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
 # plotResultsVSTimestep(datatime , name)
