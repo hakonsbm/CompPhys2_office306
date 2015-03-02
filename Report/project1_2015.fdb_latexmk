@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1425292986 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1425292987
+["pdflatex"] 1425297255 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1425297257
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
@@ -159,16 +159,16 @@
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1304191498 325 2bcd023400636339210573e2b3ee298b ""
   "/usr/share/texmf/tex/latex/xcolor/xcolor.sty" 1339578534 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
   "figures/EnergyVsAlphaHeliumSimpleAnalytical.png" 1425234211 30011 7e5f71a0c025f5e8d5fedbe121d1b739 ""
-  "figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png" 1425273943 199518 711a83dbba5bca0ecda6f1f6854cbb2d ""
-  "figures/HeliumJastrowAnalyticalAlphaBetaVariance.png" 1425273943 170047 a10704e3b05c9e844bb4d32984f4169d ""
+  "figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png" 1425294865 199518 711a83dbba5bca0ecda6f1f6854cbb2d ""
+  "figures/HeliumJastrowAnalyticalAlphaBetaVariance.png" 1425294865 170047 a10704e3b05c9e844bb4d32984f4169d ""
   "figures/HeliumJastrowAnalyticalTimeEnergy.png" 1425235201 59929 46884fb7bcac232e6827f1849128d65b ""
   "figures/HeliumJastrowAnalyticalTimeVariance.png" 1425235201 54924 4764824ca106a394f7eaab0089fd33e4 ""
   "figures/VarianceVsAlphaHeliumSimpleAnalytical.png" 1425234691 26658 2e27320adceea83ee85eae86f9a22338 ""
-  "project1_2015.aux" 1425292987 2383 d3a2cdcbd977486d9d9360b6a06bc9f8 ""
-  "project1_2015.out" 1425292987 539 e1e795bf42c5e54589e27d428ace809b ""
-  "project1_2015.tex" 1425292986 9292 1406dfd4bc46c2678d0e830711473167 ""
+  "project1_2015.aux" 1425297256 2383 0312ef1471b459211a14645975920c9d ""
+  "project1_2015.out" 1425297256 539 e1e795bf42c5e54589e27d428ace809b ""
+  "project1_2015.tex" 1425297255 9439 103d831b9d1488dae9fb515db4b94cef ""
   (generated)
-  "project1_2015.aux"
-  "project1_2015.pdf"
   "project1_2015.log"
+  "project1_2015.pdf"
+  "project1_2015.aux"
   "project1_2015.out"

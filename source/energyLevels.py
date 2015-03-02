@@ -153,8 +153,8 @@ def plotChargeDensity(data, name):
 
 #Decide what we want to plot this time
 
-# name = "HeliumJastrowAnalytical"
-name = "Beryllium";
+name = "HeliumJastrowAnalytical"
+# name = "Beryllium";
 
 data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
 datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
