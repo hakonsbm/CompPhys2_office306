@@ -93,7 +93,7 @@ def plotEnergyVsAlphaBeta(data, name):
 
 def plotEnergyVsAlpha(data, name):
 
-	alpha = data[:,3]
+	alpha = data[:,2]
 	energy = data[:,0]
 	variance = data[:,1] - data[:,0]**2 
 
@@ -137,26 +137,52 @@ def plotChargeDensity(data, name):
 
 	return
 
+def plotVarVSnCycles(data, name):
+	
+	variance = np.sqrt(data[:,1] - data[:,0]**2)/np.sqrt(data[:,7]) 
+	nCycles = data[:, 7 ]
+
+
+
+	energyFig = pl.figure()
+	pl.title("Variance vs Cycles, " + name)
+
+	pl.plot(nCycles , variance)
+
+	pl.xlabel("Cycles")
+	pl.ylabel("Variance")
+
+	energyFig.savefig("../Report/figures/VarianceNCycles" + name)
+
+
+	return
+
+
 
 
 
 #Decide what we want to plot this time
 
 # name = "HeliumSimpleAnalytical"
+# name = "HeliumJastrowAnalytical"
 name = "Beryllium";
 
 
-#data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
+
+# data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
 datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
-# dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples_10M")
+# dataSample = np.genfromtxt("outfiles/" + name +"_samples")
+# dataCycles = np.genfromtxt("outfiles/" + name +"_nCycles")
 
 
-#findLowestEnergy(data, name)
-# plotResultsVSTimestep(datatime , name)
+# findLowestEnergy(data, name)
+plotResultsVSTimestep(datatime , name)
 # plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
-plotResultsVSTimestep(datatime , name)
-# plotChargeDensity(dataSample[0 : : 100, :], name)
+# plotResultsVSTimestep(datatime , name)
+# plotChargeDensity(dataSample[0 : : 10, :], name)
+# plotVarVSnCycles(dataCycles[1:,:], name)
+
 
 pl.show()
 

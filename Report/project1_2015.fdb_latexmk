@@ -1,5 +1,13 @@
 # Fdb version 3
-["pdflatex"] 1425319092 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1425319093
+["bibtex project1_2015"] 1425324878 "project1_2015.aux" "project1_2015.bbl" "project1_2015" 1425324880
+  "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
+  "project1_2015.aux" 1425324879 7647 d8dbf635af562afd087b3d6061dedb88 ""
+  "project1_2015.bcf" 0 -1 0 ""
+  "references.bib" 1425324822 763 519bae985a73752c1b2b9d3d51d0508f ""
+  (generated)
+  "project1_2015.bbl"
+  "project1_2015.blg"
+["pdflatex"] 1425324878 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1425324880
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
@@ -159,17 +167,18 @@
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfkeys.sty" 1304191498 274 4cad6e665cc93ac2ac979039a94fa1e1 ""
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1304191498 325 2bcd023400636339210573e2b3ee298b ""
   "/usr/share/texmf/tex/latex/xcolor/xcolor.sty" 1339578534 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "figures/EnergyVsAlphaHeliumSimpleAnalytical.png" 1425303871 32496 6cb7ad8a55a92ed4e0eb19999ee66242 ""
-  "figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png" 1425307808 144270 87f390d676efd4a5735a4ce3fde5200e ""
-  "figures/HeliumJastrowAnalyticalAlphaBetaVariance.png" 1425307808 149813 47e248015219ae3561c2aa1551ccc0f5 ""
+  "figures/EnergyVsAlphaHeliumSimpleAnalytical.png" 1425323818 33518 389aead0cda6c0ad1f5af345402ae2d8 ""
+  "figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png" 1425323507 129275 6b3dc415bb05ca1d92647f8b015bdd6b ""
+  "figures/HeliumJastrowAnalyticalAlphaBetaVariance.png" 1425323507 141183 a12ab835801554060713f7bae437c306 ""
   "figures/HeliumJastrowAnalyticalTimeEnergy.png" 1425235201 59929 46884fb7bcac232e6827f1849128d65b ""
   "figures/HeliumJastrowAnalyticalTimeVariance.png" 1425235201 54924 4764824ca106a394f7eaab0089fd33e4 ""
-  "figures/VarianceVsAlphaHeliumSimpleAnalytical.png" 1425303871 26377 520766e7634392b754977c57b07b9c29 ""
-  "project1_2015.aux" 1425319093 7213 001dbdd649b26d4e465d4998960b23fc ""
-  "project1_2015.out" 1425319093 929 f699b1b3cf9762639055e9c5ae0c5f50 ""
-  "project1_2015.tex" 1425319091 20407 8055f87738e19fbeb8b5dde80ab25a3a ""
+  "figures/VarianceVsAlphaHeliumSimpleAnalytical.png" 1425323952 134600 7530fcef5872c321da5b7b927607e04f ""
+  "project1_2015.aux" 1425324879 7647 d8dbf635af562afd087b3d6061dedb88 ""
+  "project1_2015.bbl" 1425324878 334 d84188f5736834d6e4ed7de1cad2a8ed "bibtex project1_2015"
+  "project1_2015.out" 1425324879 1065 980f75bba52acb0da3dd7d7c30fad3d5 ""
+  "project1_2015.tex" 1425324877 22245 81b2fc7f7ca0457ac64945eca3001167 ""
   (generated)
   "project1_2015.out"
-  "project1_2015.log"
   "project1_2015.aux"
+  "project1_2015.log"
   "project1_2015.pdf"
