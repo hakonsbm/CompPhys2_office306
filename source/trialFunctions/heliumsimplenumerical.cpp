@@ -14,7 +14,7 @@ HeliumSimpleNumerical::HeliumSimpleNumerical(VMCSolver *solver)
 
     solver->setCharge(2);
     solver->setNParticles(2);
-    solver->setAlpha(1.62);
+    solver->setAlpha(1.65);
     solver->setBeta(0);
 
 }

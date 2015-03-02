@@ -16,7 +16,6 @@ def findLowestEnergy(data, name):
 		return alpha, beta, energy
 
 
-	data = np.genfromtxt("outfiles/HeliumSimpleAnalytical_alpha_beta")
 	alpha, beta, energy = LowestEnergy(data)
 	print "With trialfunction " + name
 	print "alpha = ", alpha , ", beta = ", beta ,  " and the lowest energy was : " , energy
@@ -140,12 +139,12 @@ def plotChargeDensity(data, name):
 
 #Decide what we want to plot this time
 
-name = "HeliumSimpleAnalytical"
+name = "HeliumJastrowAnalytical"
 # name = "Beryllium";
 
-data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
-# datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
-# dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples")
+data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
+# datatime = np.genfromtxt("outfiles/" + name +"_timeStep_10M")
+# dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples_10M")
 
 
 findLowestEnergy(data, name)
