@@ -1,3 +1,0 @@
-scitools/easyviz
-scitools
-scitools/pyreport
