@@ -326,6 +326,8 @@ parameter $\alpha$, are shown in figure \ref{fig01:alpha_Simple}.
 We run the Variational Monte Carlo calculation with $10^{7}$ cycles.
 As we see in the figures, the energy minimum occurs when we use $\alpha=1.65$.
 Using this value for $\alpha$ we get an energy of $-2.8442934$. 
+The parameter $\alpha$ can be interpreted as a parameter for the
+force pulling the electron to the nucleus. 
 
 \begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{figures/EnergyVsAlphaHeliumSimpleAnalytical}
@@ -448,7 +450,7 @@ energies found in research papers.}
 
 			\[ \Psi(\vb{R}) = r_1 e^{-r_1}  \qquad E_L(r_1) = -\frac{1}{r_1} - \frac{\alpha}{2} \left( \alpha - \frac{2}{r_1} \right) \]
 
-			The unit test a unit named Helium tests the VMC clalculation with a hydrogen wavefunction and returns the correct values.
+			The unit test a unit named Helium tests the VMC calculation with a hydrogen wavefunction and returns the correct values.
 
 
 

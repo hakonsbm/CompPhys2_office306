@@ -27,17 +27,19 @@ def findLowestEnergy(data, name):
 #Making the plots timesteps and energy
 def plotResultsVSTimestep(data, name):
 
-	energy = data[:,0]
-	variance = data[:,1] - data[:,0]**2
-	timeStep = data[:,6]
 
+	energy = data[:,0]
+	variance = np.sqrt(data[:,1] - data[:,0]**2)/np.sqrt(1000000)
+	timeStep = data[:,6]
+	
+	print energy
 
 	timeFig = pl.figure()
 	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f'  % (data[0,3] , data[0,4]) + " for " + name)
 
 	pl.plot(timeStep , energy)
-	pl.xlabel("Energy")
-	pl.ylabel("Timestep")
+	pl.ylabel("Energy")
+	pl.xlabel("Timestep")
 
 	timeFig.savefig("../Report/figures/" + name + "TimeEnergy")
 
@@ -45,8 +47,8 @@ def plotResultsVSTimestep(data, name):
 	pl.title('Energy vs timestep, alpha = %.2f, beta = %.2f'  % (data[0,3] , data[0,4]) + " for " + name)
 
 	pl.plot(timeStep , variance)
-	pl.xlabel("Variance")
-	pl.ylabel("Timestep")
+	pl.ylabel("Variance")
+	pl.xlabel("Timestep")
 
 	timeFig.savefig("../Report/figures/" + name + "TimeVariance")
 
@@ -157,6 +159,7 @@ dataSample = np.genfromtxt("outfiles/" + name +"_samples")
 # plotEnergyVsAlpha(data, name)
 # plotResultsVSTimestep(datatime , name)
 plotChargeDensity(dataSample[0 : : 10, :], name)
+
 
 pl.show()
 
