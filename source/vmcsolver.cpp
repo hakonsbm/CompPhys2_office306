@@ -135,10 +135,12 @@ void VMCSolver::runMonteCarloIntegration() {
 
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
+    outfile << setw(15) << setprecision(8) << energyVar;
     outfile << setw(15) << setprecision(8) << m_alpha;
     outfile << setw(15) << setprecision(8) << m_beta;
     outfile << setw(15) << setprecision(8) << averageR12;
-    outfile << setw(15) << setprecision(8) << stepLength << endl;
+    outfile << setw(15) << setprecision(8) << stepLength;
+    outfile << nCycles << endl;
 }
 
 void VMCSolver::runMonteCarloIntegrationIS() {
@@ -281,10 +283,12 @@ void VMCSolver::runMonteCarloIntegrationIS() {
 
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
+    outfile << setw(15) << setprecision(8) << energyVar;
     outfile << setw(15) << setprecision(8) << m_alpha;
     outfile << setw(15) << setprecision(8) << m_beta;
     outfile << setw(15) << setprecision(8) << averageR12;
-    outfile << setw(15) << setprecision(8) << stepLength << endl;
+    outfile << setw(15) << setprecision(8) << stepLength;
+    outfile << nCycles << endl;
 }
 
 void VMCSolver::QuantumForce(const mat &r, mat &QForce)
