@@ -163,24 +163,24 @@ def plotVarVSnCycles(data, name):
 
 #Decide what we want to plot this time
 
-# name = "HeliumSimpleAnalytical"
+name = "HeliumSimpleAnalytical"
 # name = "HeliumJastrowAnalytical"
-name = "Beryllium";
+# name = "Beryllium";
 
 
 
 # data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
-datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
-# dataSample = np.genfromtxt("outfiles/" + name +"_samples")
+# datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
+dataSample = np.genfromtxt("outfiles/" + name +"_samples")
 # dataCycles = np.genfromtxt("outfiles/" + name +"_nCycles")
 
 
 # findLowestEnergy(data, name)
-plotResultsVSTimestep(datatime , name)
+# plotResultsVSTimestep(datatime , name)
 # plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
 # plotResultsVSTimestep(datatime , name)
-# plotChargeDensity(dataSample[0 : : 10, :], name)
+plotChargeDensity(dataSample[0 : : 10, :], name)
 # plotVarVSnCycles(dataCycles[1:,:], name)
 
 
