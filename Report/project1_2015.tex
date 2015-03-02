@@ -42,16 +42,20 @@
 \title{ Computational Physics II \\ FYS-4411 }
 \author{Gullik Vetvik Killie\\
 		Håkon S.B. Mørk\\
-		Jose Emeilio Ruiz Navarro
+		Jose Emilio Ruiz Navarro
 		}
 
 \begin{document}
 
 \maketitle
 
-\abstract{Fill in abstract}
+\abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: helium and beryllium. In the case of helium, the average distance between the electrons was computed as well, and two different hydrogen-like wavefunctions were used: one without taking into account the interaction between the two electrons and another one with a Jastrow factor dependent on the distance between the electrons $r_{12}$. The dependence on the timestep of the algorithm and the results was investigated as well, and no significant relation was found. Importance sampling was introduced as well to improve the program with more efficiency and make the results more precise. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor with and provide insight into the electronic structure of the beryllium atom.}
 
 \section{Introduction}
+
+VMC methods pose a very attractive alternative to other more complex ways of finding the ground state energies of simple atoms and molecules, like configuration-interaction calculations. The price to be paid in exchange for this simplicity is the sensitivity to the trial wave functions that are used, a VMC algorithm is very sensitive to how these are constructed, so they are one of the most important aspects to be considered (in this work, given the simple nature of the atoms which we will be working with, it's not so important to worry about the quality of the trial wave functions because very simple and basic ones are more than enough to reproduce the actual results). It shouldn't be forgotten that it is a variational method, and this implies that finding the optimal set of variational parameters is going to be the most important part of the calculation itself because it create a lot of problems if the search range for the parameters is illy defined and is not close enough to the variational minimum, namely, the results will have a poor quality if this happens. This means that the parameters need to be chosen very carefully, or a recursive search with decreasingly coarse spacing in the space of variational parameters is required if there is no deep knowledge about the system in question.\\
+
+Instead of evaluating a very complex multidimensional integral to compute the expectation value of an operator, like the hamiltonian in this case, a VMC calculation exploits the fact that the majority of the configuration space where the wave function belongs can be regarded as much less important than other parts, the values of the wave function are too small there and can be mostly ignored during the integration of the algorithm. To capitalize this, the Metropolis algorithm is added to the VMC method, as well as importance sampling.\\
 
 
 \section{Methods}
@@ -216,7 +220,7 @@
 We now want to make the code more efficient, so we replace the brute
 force Metropolis algorithm with a walk in coordinate space biased
 by the trial wave function, an approach based on the Fokker-Planck
-equation and the Langevin equation for generation a trajectory in
+equation and the Langevin equation for generating a trajectory in
 coordinate space. 
 
 For one particle or walker, a diffusion process characterized by a
@@ -273,8 +277,8 @@ is large, thus increasing the efficiency of the simulation. This is
 a great improvement on the Metropolis algorithm where the walker has
 the same probability to move in every direction.
 
-From the Fokker-Planck equation we get a transition probability fiven
-by the Green's function
+From the Fokker-Planck equation we get a transition probability given
+by Green's function
 \[
 G(y,x,\Delta t)=\frac{1}{(4\pi D\Delta t)^{3N/2}}\exp{\left(-(y-x-D\Delta tF(x))^{2}/4D\Delta t\right)}
 \]
@@ -291,6 +295,23 @@ is replaced by the Metropolis-Hastings algorithm,
 q(y,x)=\frac{G(x,y,\Delta t)|\Psi_{T}(y)|^{2}}{G(y,x,\Delta t)|\Psi_{T}(x)|^{2}}
 \]
 
+
+		\subsection{Blocking}
+			Blocking refers to a method to more accurately estimate the error of the values obtained by the VMC algorithm. It's actually a completely separate and independent process. The basic idea lies on the correlations between all the measurements. If these are important enough, they will produce an increase in the error that needs to be taken into account. The reason behind this is related to the effective amount of measurements, if there are correlations there will be measurements that will contain less information, so these won't be as valuable as the rest and it will be as if there are \textit{less} measurementes than we actually have. Obviously this is a problem, the usual identification of the error with $\sqrt{\frac{\sigma}{n}}$ will be overly optimistic and a correction is needed.\\
+
+\[
+f_d=\frac{1}{n-d}\sum_{k=1}^{n-d}{\left(x_k-\bar{x}_n\right)\left(x_{k+d}-\bar{x}_n\right)}
+\]
+
+
+			The solution is to use blocking, and the algorithm to do this is actually quite simple. The total amount of measurements is divided into blocks (hence the name) of a certain size, and for each block the standard deviation is obtained. When the standard deviation stops increasing as the block size does, the correlations are irrelevant and the value for it is set
+
+
+			\begin{figure}
+\centering \includegraphics[width=0.45\linewidth]{figures/blockingheliumsimpleandalytical}
+\protect\caption{STD vs. blocksize. Here we see the trend }
+\label{fig01:alpha_Simple} 
+\end{figure}
 
 
 
