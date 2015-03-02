@@ -139,7 +139,7 @@ def plotChargeDensity(data, name):
 
 #Decide what we want to plot this time
 
-name = "HeliumJastrowAnalytical"
+name = "HeliumSimpleAnalytical"
 # name = "Beryllium";
 
 data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
@@ -147,9 +147,9 @@ data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
 # dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples_10M")
 
 
-findLowestEnergy(data, name)
+# findLowestEnergy(data, name)
 # plotResultsVSTimestep(datatime , name)
-# plotEnergyVsAlphaBeta(data, name)
+plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
 # plotResultsVSTimestep(datatime , name)
 # plotChargeDensity(dataSample[0 : : 100, :], name)
