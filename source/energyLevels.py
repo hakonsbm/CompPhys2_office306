@@ -91,7 +91,7 @@ def plotEnergyVsAlphaBeta(data, name):
 
 def plotEnergyVsAlpha(data, name):
 
-	alpha = data[:,3]
+	alpha = data[:,2]
 	energy = data[:,0]
 	variance = data[:,1] - data[:,0]**2 
 
@@ -141,20 +141,22 @@ def plotChargeDensity(data, name):
 #Decide what we want to plot this time
 
 # name = "HeliumSimpleAnalytical"
+# name = "HeliumJastrowAnalytical"
 name = "Beryllium";
 
 
-data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
+
+# data = np.genfromtxt("outfiles/" + name + "_alpha_beta_10M")
 # datatime = np.genfromtxt("outfiles/" + name +"_timeStep_10M")
-# dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples_10M")
+dataSample = np.genfromtxt("outfiles/" + name +"_samples")
 
 
-findLowestEnergy(data, name)
+# findLowestEnergy(data, name)
 # plotResultsVSTimestep(datatime , name)
 # plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
 # plotResultsVSTimestep(datatime , name)
-# plotChargeDensity(dataSample[0 : : 100, :], name)
+plotChargeDensity(dataSample[0 : : 10, :], name)
 
 pl.show()
 

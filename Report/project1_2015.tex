@@ -70,13 +70,13 @@
 
 		\begin{align}
 			E[\hat{H}] &= \frac{\int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) E_L(\vb{R}))  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
-			\intertext{Since the denumeraor is a scalar constant after integrating it we can put it inside the integral in the numerator}
+			\intertext{Since the denumerator is a scalar constant after integrating it we can put it inside the integral in the numerator}
 			E[\hat{H}] &= \int{d\vb{R} \frac{\Psi_T^*(\vb{R}) \Psi_T(\vb{R})  }{\int{d\vb{R'} \Psi_T^*(\vb{R'}) \Psi_T(\vb{R'})}}  E_L(\vb{R})  }
 			\\
 			E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
 		\end{align}
 
-			This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral. 
+		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral. 
 
 		\begin{enumerate}
 			\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
@@ -116,6 +116,8 @@
 		\end{align}
 
 		A similar calculation applies for \(r_{12} \rightarrow 0\) and a trialfunction of the form   \[\Psi_T(r_1,r_2,r_{12}) = e^{-\alpha (r_1 + r_2)} e^{\beta r_{12}} \] should fulfill the condition that the wavefunction is finite everywhere.
+
+
 
 
 	\subsection{Beryllium atom}
@@ -209,6 +211,17 @@
 			E_L &= -\alpha^2 + (\alpha-Z) \left( \frac{1}{r_1} + \frac{1}{r_2} \right) + \frac{1}{r_{12}} 
 		\end{align}
 
+
+		\subsection{Verification of the model}
+			The wavefunction for a Hydrogen atom is known, see equation \eqref{eq:hydrogen}, a Monte Carlo calculation for an exact wavefunction will give a exact result.
+
+			\begin{align}
+			 \Psi(\rho ) = \alpha \rho e^{-\alpha\rho} \qquad \text{ With  local energy: } \qquad E_{L} (\rho) = - \frac{1}{\rho} - \frac{\alpha}{2} \left( \alpha - \frac{2}{\rho} \right) \label{eq:hydrogen}
+			\end{align}
+
+			If the VMC calculation is run with a Hydrogen atom with \(\alpha = 1\) it should produce an energy of exactly \( -0.5\) with \(0\) variance. A check for this is implemented as a unit test in the program.
+
+			The closed expressions of the local energy has also been verified by comparing them to numerical versions and checked that they produced similar values.
 
 
 \subsection{Importance sampling}
@@ -414,7 +427,7 @@ energies found in research papers.}
 		    \\ \hline 
 		    Helium $\psi_{T2}$ & 86.76 & 19.98	& 4.342
 		    \\	\hline 
-		    Beryllium $\psi_{T2}$  	& &	 &
+		    Beryllium $\psi_{T2}$ 1918.34 	& &	 &
  		    \\ \hline
 	  \end{tabular}
 	  \caption{The time to run a Monte Carlo run with \(10^7\) cycles. The closed expression for the local energy increased the computation time by a significant degree for each trialfunction }
