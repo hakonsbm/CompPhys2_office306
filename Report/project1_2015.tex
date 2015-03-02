@@ -159,11 +159,11 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\]
 		we need to take into account the spins of the electrons. We fix electrons
 		1 and 2 to have spin up, and electron 3 and 4 to have spin down. This
-		means that when the electrons have equal spins, we get
+		means that when the electrons have equal spins we get a factor
 		\[
 		a=\frac{1}{4},
 		\]
-		and if they have opposite spins, we get
+		and if they have opposite spins we get a factor
 		\[
 		a=\frac{1}{2}.
 		\]
@@ -215,20 +215,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			E_L &= -\alpha^2 + (\alpha-Z) \left( \frac{1}{r_1} + \frac{1}{r_2} \right) + \frac{1}{r_{12}} 
 		\end{align}
 
-
-		\subsection{Verification of the model}
-			The wavefunction for a Hydrogen atom is known, see equation \eqref{eq:hydrogen}, a Monte Carlo calculation for an exact wavefunction will give a exact result.
-
-			\begin{align}
-			 \Psi(\rho ) = \alpha \rho e^{-\alpha\rho} \qquad \text{ With  local energy: } \qquad E_{L} (\rho) = - \frac{1}{\rho} - \frac{\alpha}{2} \left( \alpha - \frac{2}{\rho} \right) \label{eq:hydrogen}
-			\end{align}
-
-			If the VMC calculation is run with a Hydrogen atom with \(\alpha = 1\) it should produce an energy of exactly \( -0.5\) with \(0\) variance. A check for this is implemented as a unit test in the program.
-
-			The closed expressions of the local energy has also been verified by comparing them to numerical versions and checked that they produced similar values.
-
-
-\subsection{Importance sampling}
+		\subsection{Importance sampling}
 
 We now want to make the code more efficient, so we replace the brute
 force Metropolis algorithm with a walk in coordinate space biased
@@ -307,7 +294,17 @@ is replaced by the Metropolis-Hastings algorithm,
 \[
 q(y,x)=\frac{G(x,y,\Delta t)|\Psi_{T}(y)|^{2}}{G(y,x,\Delta t)|\Psi_{T}(x)|^{2}}
 \]
+		
+		\subsection{Verification of the model}
+			The wavefunction for a Hydrogen atom is known, see equation \eqref{eq:hydrogen}, a Monte Carlo calculation for an exact wavefunction will give a exact result.
 
+			\begin{align}
+			 \Psi(\rho ) = \alpha \rho e^{-\alpha\rho} \qquad \text{ With  local energy: } \qquad E_{L} (\rho) = - \frac{1}{\rho} - \frac{\alpha}{2} \left( \alpha - \frac{2}{\rho} \right) \label{eq:hydrogen}
+			\end{align}
+
+			If the VMC calculation is run with a Hydrogen atom with \(\alpha = 1\) it should produce an energy of exactly \( -0.5\) with \(0\) variance. A check for this is implemented as a unit test in the program.
+
+			The closed expressions of the local energy has also been verified by comparing them to numerical versions and checked that they produced similar values.
 
 		\subsection{Blocking}
 			Blocking refers to a method to more accurately estimate the error of the values obtained by the VMC algorithm. It's actually a completely separate and independent process. The basic idea lies on the correlations between all the measurements. If these are important enough, they will produce an increase in the error that needs to be taken into account. The reason behind this is related to the effective amount of measurements, if there are correlations there will be measurements that will contain less information, so these won't be as valuable as the rest and it will be as if there are \textit{less} measurementes than we actually have. Obviously this is a problem, the usual identification of the error with $\sqrt{\frac{\sigma}{n}}$ will be overly optimistic and a correction is needed.\\
@@ -390,29 +387,29 @@ energy to be $-14.4127$ with $\alpha=3.8$ and $\beta=0.293$.
 From reseach papers we find the value for energy in the ground state
 of helium to be $-2.9037$ \cite{Kinoshita:1957:PR} and the value 
 for energy in the ground state of beryllium to be $-14.667$ \cite{Koput:2011:PCCP}.
-Koput{]}. In table \ref{EnergyComparisonTable} we compare results
+Koput{]}. In table \ref{tab:energyReference} we compare results
 obtained with our Variational Monte Carlo method with results from
 various research papers. 
 
 \begin{table}
-\centering %
-\begin{tabular}{|c|c|c|}
-\hline 
-Atom & VMC & References\tabularnewline
-\hline 
-\hline 
-Helium $\psi_{T1}$ & $-2.8442$ & $-2.9037$ \tabularnewline
-\hline 
-Helium $\psi_{T2}$ & $-2.8979$ & $-2.9037$ \tabularnewline
-\hline 
-Beryllium & $-14.4127$ & $-14.667$\tabularnewline
-\hline 
-\end{tabular}
+	\centering %
+	\begin{tabular}{|c|c|c|}
+		\hline 
+		Atom & VMC & References\tabularnewline
+		\hline 
+		\hline 
+		Helium $\psi_{T1}$ & $-2.8442$ & $-2.9037$ \tabularnewline
+		\hline 
+		Helium $\psi_{T2}$ & $-2.8979$ & $-2.9037$ \tabularnewline
+		\hline 
+		Beryllium & $-14.4127$ & $-14.667$\tabularnewline
+		\hline 
+	\end{tabular}
 
-\protect\caption{Comparison of energies found with Variational Monte Carlo method and
-energies found in research papers.}
-
-
+	\protect
+	\caption{Comparison of energies found with Variational Monte Carlo method and
+	energies found in research papers.}
+	\label{tab:energyReference}
 \end{table}
 
 \subsection{Alpha and Beta Values}
