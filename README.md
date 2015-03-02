@@ -1,36 +1,55 @@
 # CompPhys2_office306
 
 ########################################
+The Report is in the Report folder.
 
-Hi, I saw Haakon was adding importance sampling stuff now, so then I will stay away from it for now :)
+Variational Monte Carlo program and studies for Helium and Beryllium
+
+The program is run by opening the vmc.pro file with for example qt-creator.
+
+Then in the program there several trialfunction built in that all can be set in the main function.
+
+    HeliumSimpleAnalytical:   
+    HeliumSimpleNumerical:    
+    HeliumJastrowAnalytical:  
+    HeliumJastrowNumerical:  
+    Beryllium:               
+
+These are set by using the solver->setTrialFunction(new TrialFunction(solver));
+
+Then there are several option for which test that should be run:
+
+void runWithDiffConstants(VMCSolver *solver);
+void runSIWithDiffTimesteps(VMCSolver *solver);
+void runBlockingSampledRun(VMCSolver *solver);
+void runCompareAnalytical(VMCSolver *solver);
+void runDiffNCycles(VMCSolver *solver);
+
+There is also a program called energyLevels.py that makes different plots og the various data produced by the main program.
 
 
-#################################333
-
-Temporary result from run of the trial functions
-
-With trialfunction HeliumSimpleAnalytical
-alpha =  1.7 , beta =  0.0  and the lowest energy was :  -2.8451959
-With trialfunction HeliumSimpleNumerical
-alpha =  1.7 , beta =  0.0  and the lowest energy was :  -2.8451939
-With trialfunction HeliumJastrowAnalytical
-alpha =  1.8 , beta =  1.05  and the lowest energy was :  -2.8968802
-With trialfunction HeliumJastrowNumerical
 
 
-###############################333
-Adding some more trialfunctions done, probably error in the analytical expression for the trial function with the Jastrow Cooefficient. Next we should probably clean up the runMonteCarlo() so it only runs a monte carlo, and all of the other stuff is done somwhere else
 
-Gullik
 
-###################################33
-I'll add classes for the analytical solution to trial function 1 and 2, and a numerical for trial function 2 today :)
-Gullik
 
-######################################33
-Added sepparate project and vmc files for importance sampling.
 
-Håkon
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
