@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1425309326 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1425309327
+["pdflatex"] 1425311354 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1425311355
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
@@ -165,11 +165,11 @@
   "figures/HeliumJastrowAnalyticalTimeEnergy.png" 1425235201 59929 46884fb7bcac232e6827f1849128d65b ""
   "figures/HeliumJastrowAnalyticalTimeVariance.png" 1425235201 54924 4764824ca106a394f7eaab0089fd33e4 ""
   "figures/VarianceVsAlphaHeliumSimpleAnalytical.png" 1425303871 26377 520766e7634392b754977c57b07b9c29 ""
-  "project1_2015.aux" 1425309327 2663 ae49eefd6332fad7e0ef09dffe5c9de1 ""
-  "project1_2015.out" 1425309327 610 47aa65630435b5884962bac1d1fcee94 ""
-  "project1_2015.tex" 1425309326 11575 ddf51942c24f5cb414527b542b218c0f ""
+  "project1_2015.aux" 1425311355 2719 3ffc585a014069f14d1b583a947fe352 ""
+  "project1_2015.out" 1425311355 610 47aa65630435b5884962bac1d1fcee94 ""
+  "project1_2015.tex" 1425311354 11442 a771d0fbec1962ea3d28620b4572d153 ""
   (generated)
   "project1_2015.log"
-  "project1_2015.pdf"
   "project1_2015.out"
   "project1_2015.aux"
+  "project1_2015.pdf"
