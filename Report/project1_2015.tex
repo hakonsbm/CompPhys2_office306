@@ -204,7 +204,9 @@ We now look at our second trial function, $\psi_{T2}$. Running over
 different values for the two variables $\alpha$ and $\beta$, again
 with $10^{7}$ cycles in the Monte Carlo simulation, we get the results
 presented in figure \ref{fig03:AlphaBeta}. From this run we find
-that the optimal values are $\alpha=1.8$ and $\beta=1.05$. 
+that the optimal values are $\alpha=1.8$ and $\beta=0.94$, and we
+get a minimum energy of $-2.8979105$, which is considerably better
+than without the Jastrow factor.
 
 \begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
@@ -214,12 +216,31 @@ that the optimal values are $\alpha=1.8$ and $\beta=1.05$.
 \end{figure}
 
 
-\subsection{Alpha and Beta Values}
-	With trialfunction HeliumJastrowAnalytical
-alpha =  1.8 , beta =  0.94  and the lowest energy was :  -2.8979105
+From reseach papers we find the value for energy in the ground state
+of helium to be $-2.9037$ {[}Toichiro Kinoshita{]} and the value
+for energy in the ground state of beryllium to be $-14.667$ {[}Jacek
+Koput{]}
 
-With trialfunction HeliumSimpleAnalytical
-alpha =  1.65 , beta =  0.0  and the lowest energy was :  -2.8442934
+\begin{table}
+\centering %
+\begin{tabular}{|c|c|c|}
+\hline 
+Atom & VMC & References\tabularnewline
+\hline 
+\hline 
+Helium $\psi_{T1}$ & $-2.8442$ & $-2.9037$ \tabularnewline
+\hline 
+Helium $\psi_{T2}$ & $-2.8979$ & $-2.9037$ \tabularnewline
+\hline 
+Beryllium &  & $-14.667$\tabularnewline
+\hline 
+\end{tabular}
+
+\protect\caption{Comparison of energies found with Variational Monte Carlo method and
+energies found in research papers.}
+
+
+\end{table}
 
 
 
