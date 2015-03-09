@@ -48,8 +48,8 @@ int main() {
     for(int i = minBlockSize; i < maxBlockSize + 1; i += count / dividend - count / (dividend + 1)) {
         mean = 0;
         averageSTD = 0;
+        numberOfBlocks = count / i;
         for(int j = 0; j < count; j += i) {
-            numberOfBlocks = count / i;
             average = 0;
             averageSquared = 0;
             std = 0;
