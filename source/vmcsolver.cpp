@@ -120,11 +120,15 @@ void VMCSolver::runMonteCarloIntegration() {
     }
     double energy = energySum/(nCycles * nParticles);
     double energySquared = energySquaredSum/(nCycles * nParticles);
-    energyVar = sqrt((energySquared - energy*energy) / nCycles);  //Should we add this /(nCycles * nParticles)
+    m_energyVar = sqrt((energySquared - energy*energy) / nCycles);  //Should we add this /(nCycles * nParticles)
     averageR12 /= (double) nCycles;
 
+    //Storing the energy and variance calculated, used in searching for the best fit for alpha and beta
+    storeEnergy(energy);
+//    storeVariance(m_energyVar); //Not necessary it was already calculated
+
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
-    cout << "Variance: " << energyVar << endl;
+    cout << "Variance: " << m_energyVar << endl;
     cout << "Moves: " << moves << endl;
     cout << "Accepted moves: " << acc_moves << endl;
     cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
@@ -136,7 +140,7 @@ void VMCSolver::runMonteCarloIntegration() {
 
     outfile << setw(15) << setprecision(8) << energy;
     outfile << setw(15) << setprecision(8) << energySquared;
-    outfile << setw(15) << setprecision(8) << energyVar;
+    outfile << setw(15) << setprecision(8) << m_energyVar;
     outfile << setw(15) << setprecision(8) << m_alpha;
     outfile << setw(15) << setprecision(8) << m_beta;
     outfile << setw(15) << setprecision(8) << averageR12;
@@ -272,6 +276,10 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     double energySquared = energySquaredSum/(nCycles * nParticles);
     double energyVar = sqrt((energySquared - energy*energy) / nCycles);
     averageR12 /= (double) nCycles;
+
+    //Storing the energy and variance calculated, used in searching for the best fit for alpha and beta
+    storeEnergy(energy);
+    storeVariance(energyVar); //Not necessary it was already calculated
 
     cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
     cout << "Variance: " << energyVar << endl;

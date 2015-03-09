@@ -23,6 +23,7 @@ void runSIWithDiffTimesteps(VMCSolver *solver);
 void runBlockingSampledRun(VMCSolver *solver);
 void runCompareAnalytical(VMCSolver *solver);
 void runDiffNCycles(VMCSolver *solver);
+void runFindAlphaBeta(VMCSolver *solver);
 
 
 
@@ -37,7 +38,7 @@ int main() {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Beryllium(solver));
+    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
 
 
 
@@ -47,12 +48,173 @@ int main() {
 //    runWithDiffConstants(solver);
 //    runSIWithDiffTimesteps(solver);
 //    runBlockingSampledRun(solver) ;
-    runCompareAnalytical(solver);
+//    runCompareAnalytical(solver);
 //    runDiffNCycles(solver);
+    runFindAlphaBeta(solver);
 
 
 //  return  UnitTest::RunAllTests();
     return 0;
+}
+
+void runFindAlphaBeta(VMCSolver *solver)
+{
+    //Now the search for ALpha Beta should be improved by doing a more smart search, so it will first do a coarse mesh over the range
+    //find the best fit for it, then make a new fine rmesh around the best fit and do a new search and so on.
+    //It will aslo make a better fit by taking into account both the variance (which should be zero) and the energy (which should be as low as possible),
+    //when the lowest energy and variance does not agree anymore the limit for the resulition of the search has been reached, if not specified in some other way.
+
+
+    double alphaMin = 0.7*solver->getCharge();
+    double alphaMax = 1.2* solver->getCharge();
+    double betaMin = 0.3;
+    double betaMax = 0.4;
+
+    int nSteps = 3;    //Coarseness of mesh
+    int nMeshes = 4;    //Number of times it should decrease the mesh
+    double meshRangeAlpha = alphaMax - alphaMin;   //Used to recalculate the mesh
+    double meshRangeBeta = betaMax - betaMin;
+
+    double bestAlphaEnergy = 1000;    //The currently best values for alpha and beta, both found by minimizing energy and variance respectively
+    double bestBetaEnergy = 1000;
+    double bestAlphaVariance = 1000;
+    double bestBetaVariance = 1000;
+    double lowestVariance = 1000;
+    double lowestEnergy = 1000;
+
+    double dAlpha ;
+    double dBeta ;
+
+    bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
+    solver->switchbBlockSampling(false);
+    solver->setCycles(1000000);
+
+    //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
+    //vmcSolver class
+    string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
+    char const * outfilePath = (pathString + string("_alpha_beta")).c_str();
+    outfile.open(outfilePath);
+
+    clock_t start, end;     //To keep track of the time
+    for(int i = 0; i < nMeshes; i++)
+    {
+        //Recalculates the mesh to be finer
+        dAlpha = (alphaMax-alphaMin)/ (double) nSteps;
+        dBeta = (betaMax-betaMin)/ (double) nSteps;
+
+        for(double alpha = alphaMin ; alpha <= alphaMax; alpha += dAlpha) {
+            solver->setAlpha(alpha);
+            if(solver->trialFunction()->simpleFlag) {
+                if(ImportanceSampling)
+                {
+                    start = clock();
+                        solver->runMonteCarloIntegrationIS();
+                    end = clock();
+
+                    double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
+                    cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+                }
+                else {
+                    start = clock();
+                        solver->calculateOptimalSteplength();
+                    end = clock();
+
+                    double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
+
+                    start = clock();
+                        solver->runMonteCarloIntegration();
+                    end = clock();
+
+                    double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
+
+                    cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
+                    cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+                }
+
+                if( solver->getEnergyVar() < lowestVariance )
+                {
+                    lowestVariance = solver->getEnergyVar();
+                    bestAlphaVariance = alpha;
+                }
+
+                if(solver->getEnergy() < lowestEnergy)
+                {
+                    lowestEnergy = solver->getEnergy();
+                    bestAlphaEnergy = alpha;
+                }
+
+            } else
+            {
+                for(double beta = betaMin ; beta <= betaMax; beta += dBeta) {
+
+
+                    solver->setBeta(beta);
+                    if(ImportanceSampling)
+                    {
+                        start = clock();
+                            solver->runMonteCarloIntegrationIS();
+                        end = clock();
+
+                        double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
+                        cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+                    }
+                    else {
+
+                        start = clock();
+                            solver->calculateOptimalSteplength();
+                        end = clock();
+
+                        double timeOptimalStepLength = 1.0*(end - start)/CLOCKS_PER_SEC;
+
+                        start = clock();
+                            solver->runMonteCarloIntegration();
+                        end = clock();
+
+                        double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
+
+                        cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
+                        cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+                    }
+
+                    if( solver->getEnergyVar() < lowestVariance )
+                    {
+                        lowestVariance = solver->getEnergyVar();
+                        bestAlphaVariance = alpha;
+                        bestBetaVariance = beta;
+                    }
+
+                    if(solver->getEnergy() < lowestEnergy)
+                    {
+                        lowestEnergy = solver->getEnergy();
+                        bestAlphaEnergy = alpha;
+                        bestBetaEnergy = beta;
+                    }
+                }
+            }
+        }
+        cout << " The lowest variance, " << lowestVariance << ", is found with alpha  " << bestAlphaVariance  << " and beta " << bestBetaVariance << endl;
+        cout << " The lowest energy, " << lowestEnergy << ", is found with alpha  " << bestAlphaEnergy  << " and beta " << bestBetaEnergy << endl;
+
+        if(bestAlphaVariance != bestAlphaEnergy)
+            break;
+
+//        if(bestBetaEnergy != bestBetaVariance)        //Not canceling the loop because of beta, since beta has a very small influence on the values and could fail because of randomness
+//            break;
+
+        meshRangeAlpha = meshRangeAlpha/2.;
+        alphaMin = bestAlphaEnergy - meshRangeAlpha/2.;
+        alphaMax = bestAlphaEnergy + meshRangeAlpha/2.;
+
+
+        meshRangeBeta = meshRangeBeta/2.;
+        betaMin = bestBetaEnergy - meshRangeBeta/2.;
+        betaMax = bestBetaEnergy + meshRangeBeta/2.;
+
+        cout << "New mesh is; " << alphaMax << " - " << alphaMin << endl;
+        cout << "and for beta:" << betaMax << " - " << betaMin << endl;
+
+
+    }
 }
 
 void runWithDiffConstants(VMCSolver *solver)
@@ -60,7 +222,7 @@ void runWithDiffConstants(VMCSolver *solver)
     //Settings for which values it should be cycled over and if we want to use importance sampling or now
 
     double alpha_min = 0.7*solver->getCharge();
-    double alpha_max = 1.2* solver->getCharge();
+    double alpha_max = 1.5* solver->getCharge();
 
     int nSteps = 10;
 
@@ -71,7 +233,7 @@ void runWithDiffConstants(VMCSolver *solver)
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
-    solver->setCycles(10000000);
+    solver->setCycles(1000000);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class

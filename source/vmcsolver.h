@@ -41,8 +41,12 @@ public:
     double getH2()  {return h2;}
     double getStepLength() {return stepLength;}
     void switchbBlockSampling(bool onOff) { m_blockSampling = onOff;}
-    double getEnergyVar() {return energyVar;}
 
+
+    double getEnergyVar() {return m_energyVar;}
+    double getEnergy() {return m_energy;}
+    void storeEnergy(double energy) {m_energy = energy;}
+    void storeVariance(double variance) {m_energyVar = variance;}
 
 private:
     TrialFunction *m_trialFunction;
@@ -65,7 +69,9 @@ private:
     double h2;
     long idum;
     int nCycles;
-    double energyVar;
+
+    double m_energyVar;
+    double m_energy;
 
     double D; // diffusion constant
     // double timestep; // timestep for gaussian deviate (using steplength)
