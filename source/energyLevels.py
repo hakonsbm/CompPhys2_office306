@@ -163,7 +163,7 @@ def plotVarVSnCycles(data, name):
 
 #Decide what we want to plot this time
 
-name = "HeliumSimpleAnalytical"
+# name = "HeliumSimpleAnalytical"
 # name = "HeliumJastrowAnalytical"
 # name = "Beryllium";
 
