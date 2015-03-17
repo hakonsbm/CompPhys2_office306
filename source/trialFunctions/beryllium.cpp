@@ -42,6 +42,7 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
             for(int k = 0; k < solver->getNDimensions(); k++) {
                 rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
             }
+            rij = sqrt(rij);
             a = spins(spin_count);
             product = product * exp(a*rij/(1+beta*rij));
             spin_count++;
