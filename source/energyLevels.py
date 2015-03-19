@@ -134,9 +134,6 @@ def plotChargeDensity(data, name):
 	ax.set_zlabel('Energy')
 
 	fig.savefig("../Report/figures/VarianceVsAlpha" + name)
-
-
-
 	return
 
 def plotVarVSnCycles(data, name):

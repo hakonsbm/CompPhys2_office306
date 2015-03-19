@@ -345,7 +345,7 @@ Where $\Delta t$ is the time between samples, and it's commonly smaller than $\t
 			\begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{figures/blockingheliumsimpleandalytical}
 \protect\caption{STD vs. blocksize. Here we see the plateuing trend of the STD as the blocksize increases, but the problem is that as the blocksize decreases it should decrease as well and not increase. This problem will be fixed in the future.}
-\label{fig01:alpha_Simple} 
+\label{fig01:std_Stuff} 
 \end{figure}
 
 
@@ -518,6 +518,23 @@ to speed up the computations.
 	\section{Fitting Alpha and Beta values}
 		Now the search for \(\alpha\) and \(\beta\) is done by a smart search. It will first do a coarse mesh over a range, then find the best fit for it
 		and do a new finer mesh around the best fit and do a new search and so on. The variance is zero for an exact wavefunction and the better wavefunction the lower the energy, both of these facts are used to decide the best fit for the parameters. When the variance best fit and energy best fit does not agree the accuracy of the parameters is reached and it stops. This is done in the function runFindAlphaBeta(WMCSolver *solver).
+
+	\section{Local Energies with the Jastrow Factor}
+		From earlier we have a general form of the local energy with derivations with regard tothe radius, to incorporate the correlation factor it is easiest to seperate the trial function into to parts, \( \Psi_T(\vb{r_i}, \vb{r_{ij}}) = \Psi_S(\vb{r_i})\Psi_J(\vb{r_{ij}}) \), one a function of the radius and one a function of the distance between an electron and another electron. 
+
+		\begin{align}
+			E_L = \sum_{i,i<j}{  -\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{r_i} + \pdv{\Psi_T}{r_i} \frac{ 2 }{ r_i } \right)  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }}
+		\end{align}
+		Let us first treat the terms with derivatives seperately.
+
+		\begin{align}
+			-\frac{1}{2\Psi_T}\pdv{\Psi_T}{r_i} \frac{ 2 }{ r_i } &= -\frac{1}{\Psi_S\Psi_J} \frac{1}{r_i} \left( \pdv{\Psi_S}{r_i}\Psi_J + \Psi_S\pdv{\Psi_J}{r_i} \right)
+			\intertext{Since the correlations terms of the trialfunctions are of the form \( \Psi_J = \exp{\frac{r_{ij}}{2(1+\beta r_{ij})} } \) we change the derivative factor \[ \pdv{\Psi_J}{r_i}  = \pdv{r_{ij}}{r_i} \pdv{\Psi_J}{r_{ij}} = \pdv{ \vb{r_i} - \vb{r_j} } {} \]}
+		\end{align}
+
+
+
+
 
 \end{document}
 
