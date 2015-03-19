@@ -38,7 +38,7 @@ int main() {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
+    solver->setTrialFunction(new Beryllium(solver));
 
 
 

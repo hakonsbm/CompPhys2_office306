@@ -1,5 +1,8 @@
 #include "lib.h"
 #include <cmath>
+#include <armadillo>
+#include <new>
+using namespace arma;
 /*
 ** The function
 **         ran2()
@@ -103,3 +106,74 @@ double GaussianDeviate(long * idum)
     return gset;
   }
 } // end function for gaussian deviates
+
+// the function ludcmp from c++ library file from FYS3150, modified to use armadillo
+void ludcmp(mat &a, int n, int *indx, double *d)
+{
+   int      i, imax, j, k;
+   double   big, dum, sum, temp, *vv;
+
+  vv = new(std::nothrow) double [n];
+  if(!vv) {
+    printf("\n\nError in function ludcm():");
+    printf("\nNot enough memory for vv[%d]\n",n);
+    exit(1);
+  }
+
+   *d = 1.0;                              // no row interchange yet
+   for(i = 0; i < n; i++) {     // loop over rows to get scaling information
+      big = ZERO;
+      for(j = 0; j < n; j++) {
+         if((temp = fabs(a(i, j))) > big) big = temp;
+      }
+      if(big == ZERO) {
+         printf("\n\nSingular matrix in routine ludcmp()\n");
+         exit(1);
+      }
+      vv[i] = 1.0/big;                 // save scaling */
+   } // end i-loop */
+
+   for(j = 0; j < n; j++) {     // loop over columns of Crout's method
+      for(i = 0; i< j; i++) {   // not i = j
+         sum = a(i, j);
+     for(k = 0; k < i; k++) sum -= a(i, k)*a(k, j);
+     a(i, j) = sum;
+      }
+      big = ZERO;   // initialization for search for largest pivot element
+      for(i = j; i< n; i++) {
+         sum = a(i, j);
+     for(k = 0; k < j; k++) sum -= a(i, k)*a(k, j);
+     a(i, j) = sum;
+     if((dum = vv[i]*fabs(sum)) >= big) {
+        big = dum;
+        imax = i;
+     }
+      } // end i-loop
+      if(j != imax) {    // do we need to interchange rows ?
+         for(k = 0;k< n; k++) {       // yes
+        dum        = a(imax, k);
+        a(imax, k) = a(j, k);
+        a(j, k)    = dum;
+     }
+     (*d)    *= -1;            // and change the parit of d
+     vv[imax] = vv[j];         // also interchange scaling factor
+      }
+      indx[j] = imax;
+      if(fabs(a(j, j)) < ZERO)  a(j, j) = ZERO;
+
+        /*
+        ** if the pivot element is zero the matrix is singular
+        ** (at least to the precision of the algorithm). For
+        ** some application of singular matrices, it is desirable
+        ** to substitute ZERO for zero,
+        */
+
+      if(j < (n - 1)) {                   // divide by pivot element
+         dum = 1.0/a(j, j);
+     for(i=j+1;i < n; i++) a(i, j) *= dum;
+      }
+   } // end j-loop over columns
+
+   delete [] vv;   // release local memory
+
+}  // End: function ludcmp()
