@@ -519,7 +519,7 @@ to speed up the computations.
 		Now the search for \(\alpha\) and \(\beta\) is done by a smart search. It will first do a coarse mesh over a range, then find the best fit for it
 		and do a new finer mesh around the best fit and do a new search and so on. The variance is zero for an exact wavefunction and the better wavefunction the lower the energy, both of these facts are used to decide the best fit for the parameters. When the variance best fit and energy best fit does not agree the accuracy of the parameters is reached and it stops. This is done in the function runFindAlphaBeta(WMCSolver *solver).
 
-	\section{Derivation of local energies}
+	\subsection{New take derivation of local energies sympy}
 		The local energy of is dependant on the Hamiltonian and the wavefunction describing the system, the Hamiltonian incorporates both a kinetic energy part given by \( \frac{\nabla_i^2}{2} \) for each particle
 		and a potential energy part given by \(\frac{Z}{r_i}\) and \(\frac{1}{r_{ij}}\), where \(Z\) is the charge of the center, \(r_i\) is the distance for electron \(i\) to the atom center and \(r_{ij}\) is the distance between electron \(l\) and \(m\). Then the local energy is given by the following:
 
@@ -550,8 +550,6 @@ to speed up the computations.
 		\begin{align}
 			E_L = \sum_{i,i<j}{  -\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{r_i} + \pdv{\Psi_T}{r_i} \frac{ 2 }{ r_i } \right)  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }} \label{eq:localEnergy}
 		\end{align}
-
-		
 
 	\section{Local Energies with the Jastrow Factor}
 		From earlier we have a general form of the local energy with derivations with regard tothe radius, to incorporate the correlation factor it is easiest to seperate the trial function into to parts, \( \Psi_T(\vb{r_i}, \vb{r_{ij}}) = \Psi_S(\vb{r_i})\Psi_J(\vb{r_{ij}}) \), one a function of the radius and one a function of the distance between an electron and another electron. 

@@ -33,17 +33,22 @@ VMCSolver::VMCSolver():
 
 }
 
-void VMCSolver::runMasterIntegration(int nargs, char* args[])
+void VMCSolver::runMasterIntegration(int nargs, char *args[])
 {
     //MPI initializations
         int numprocs, my_rank;
-        MPI_Init (&nargs, &args);
+        MPI_Init(&nargs, &args);
+
         MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
         MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
 //        cout << "Hello world, I have rank " << my_rank << " out of "
 //        << numprocs << endl;
         double totalEnergy = 0;
+        double totalEnergySquared = 0;
         double totalEnergyVar = 0;
+        double totalMoves = 0;
+        double totalRatio = 0;
+        double totalAverageR12 = 0;
 
 
         nCycles = nCycles/numprocs;
@@ -51,10 +56,44 @@ void VMCSolver::runMasterIntegration(int nargs, char* args[])
 
         MPI_Reduce(&m_energy, &totalEnergy, 1, MPI_DOUBLE,
                       MPI_SUM, 0 , MPI_COMM_WORLD);
-        MPI_Reduce( &m_energyVar, &totalEnergyVar, 1, MPI_DOUBLE,
+        MPI_Reduce(&m_energyVar, &totalEnergyVar, 1, MPI_DOUBLE,
                     MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_energySquared, &totalEnergySquared, 1, MPI_DOUBLE,
+                   MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_moves, &totalMoves, 1, MPI_DOUBLE,
+                   MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_ratio, &totalRatio, 1, MPI_DOUBLE,
+                   MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_averageR12, &totalAverageR12, 1, MPI_DOUBLE,
+                   MPI_SUM, 0 , MPI_COMM_WORLD);
 
+        //A lot of the data should be averaged over the results from the different threads
+        totalEnergy /=numprocs;
+        totalEnergyVar /= numprocs;
+        totalEnergySquared /= numprocs;
+        totalAverageR12 /= numprocs;
+        totalRatio /= numprocs;
 
+        if(my_rank == 0)
+        {
+            cout << "Energy: " << totalEnergy << " Energy (squared sum): " << totalEnergySquared << endl;
+            cout << "Variance: " << totalEnergyVar << endl;
+            cout << "Moves: " << totalMoves << endl;
+            cout << "Ratio: " <<  totalRatio << endl;
+            cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+            cout << "Average distance between the electrons: " << totalAverageR12 << endl;
+            cout << "Steplength: " << stepLength << endl;
+
+            //Write results to file
+            outfile << setw(15) << setprecision(8) << totalEnergy;
+            outfile << setw(15) << setprecision(8) << totalEnergySquared;
+            outfile << setw(15) << setprecision(8) << totalEnergyVar;
+            outfile << setw(15) << setprecision(8) << m_alpha;
+            outfile << setw(15) << setprecision(8) << m_beta;
+            outfile << setw(15) << setprecision(8) << totalAverageR12;
+            outfile << setw(15) << setprecision(8) << stepLength;
+            outfile << setw(15) << nCycles << endl;
+        }
 
         // End MPI
         MPI_Finalize ();
@@ -192,32 +231,34 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         cout << "blockSampling" << endl;
     }
 
-    double energy = energySum/(nCycles * nParticles);
-    double energySquared = energySquaredSum/(nCycles * nParticles);
-    double energyVar = sqrt((energySquared - energy*energy) / nCycles);
-    averageR12 /= (double) nCycles;
+    m_energy = energySum/(nCycles * nParticles);
+    m_energySquared = energySquaredSum/(nCycles * nParticles);
+    m_energyVar = sqrt((m_energySquared - m_energy*m_energy) / nCycles);
+    m_averageR12 = averageR12 / (double) nCycles;
+    m_ratio = (double) acc_moves/(double) moves;
+    m_moves = moves;
 
     //Storing the energy and variance calculated, used in searching for the best fit for alpha and beta
-    storeEnergy(energy);
+//    storeEnergy(energy);
 //    storeVariance(energyVar); //Not necessary it was already calculated
 
-    cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
-    cout << "Variance: " << energyVar << endl;
-    cout << "Moves: " << moves << endl;
-    cout << "Accepted moves: " << acc_moves << endl;
-    cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
-    cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
-    cout << "Average distance between the electrons: " << averageR12 << endl;
-    cout << "Steplength: " << stepLength << endl;
+//    cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
+//    cout << "Variance: " << energyVar << endl;
+//    cout << "Moves: " << moves << endl;
+//    cout << "Accepted moves: " << acc_moves << endl;
+//    cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
+//    cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+//    cout << "Average distance between the electrons: " << averageR12 << endl;
+//    cout << "Steplength: " << stepLength << endl;
 
-    outfile << setw(15) << setprecision(8) << energy;
-    outfile << setw(15) << setprecision(8) << energySquared;
-    outfile << setw(15) << setprecision(8) << energyVar;
-    outfile << setw(15) << setprecision(8) << m_alpha;
-    outfile << setw(15) << setprecision(8) << m_beta;
-    outfile << setw(15) << setprecision(8) << averageR12;
-    outfile << setw(15) << setprecision(8) << stepLength;
-    outfile << setw(15) << nCycles << endl;
+//    outfile << setw(15) << setprecision(8) << m_energy;
+//    outfile << setw(15) << setprecision(8) << m_energySquared;
+//    outfile << setw(15) << setprecision(8) << m_energyVar;
+//    outfile << setw(15) << setprecision(8) << m_alpha;
+//    outfile << setw(15) << setprecision(8) << m_beta;
+//    outfile << setw(15) << setprecision(8) << m_averageR12;
+//    outfile << setw(15) << setprecision(8) << stepLength;
+//    outfile << setw(15) << nCycles << endl;
 }
 
 void VMCSolver::QuantumForce(const mat &r, mat &QForce)

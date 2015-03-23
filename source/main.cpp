@@ -25,8 +25,10 @@ void runBlockingSampledRun(VMCSolver *solver);
 void runCompareAnalytical(VMCSolver *solver);
 void runDiffNCycles(VMCSolver *solver);
 void runFindAlphaBeta(VMCSolver *solver);
+void runCompareParallelize(VMCSolver * solver,int nargs, char* args[]);
 
-int main(int nargs, char* args[]) {
+int main(int nargs, char* args[])
+{
 
     // Choices for the alpha and beta values that is set in the creation of the trialFunctions are:
     //
@@ -37,7 +39,7 @@ int main(int nargs, char* args[]) {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
+    solver->setTrialFunction(new Beryllium(solver));
 
 
 
@@ -50,13 +52,7 @@ int main(int nargs, char* args[]) {
 //    runCompareAnalytical(solver);
 //    runDiffNCycles(solver);
 //    runFindAlphaBeta(solver);
-
-    string pathString = "../source/outfiles/Test";
-    char const * outfilePath = (pathString).c_str();
-    outfile.open(outfilePath);
-
-    solver->runMasterIntegration(nargs,args);
-
+    runCompareParallelize(solver, nargs, args);
 
 
 
@@ -440,12 +436,32 @@ void runDiffNCycles(VMCSolver *solver)
         solver->setCycles(nCycles);
 
         solver->runMonteCarloIntegrationIS();
-
     }
 
     outfile.close();
 
 }
+
+void runCompareParallelize(VMCSolver * solver, int nargs, char* args[])
+{
+    solver->setCycles(1000000);
+    double start, end;
+
+    //Need to make a python script to run it with different number of nodes
+
+       start = MPI_Wtime();
+       solver->runMasterIntegration(nargs, args);
+       end = MPI_Wtime();
+
+
+    cout << "Time used for the unparallelized code is: " << end - start << endl;
+
+
+
+
+    return;
+}
+
 
 
 
