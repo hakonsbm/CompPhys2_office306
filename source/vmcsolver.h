@@ -17,6 +17,7 @@ class VMCSolver
 public:
     VMCSolver();
 
+    void runMasterIntegration(int nargs, char* args[]);
     void runMonteCarloIntegration();
     void runMonteCarloIntegrationIS();
 

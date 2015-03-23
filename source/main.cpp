@@ -10,12 +10,13 @@
 #include <iostream>
 #include <time.h>
 #include <unittest++/UnitTest++.h>
-#include <omp.h>
-
+//#include <omp.h>
+#include <mpi.h>
 
 using namespace std;
 ofstream outfile;
 ofstream samplefile;
+
 
 //This runs through with several different alpha and beta values and prints the results
 void runWithDiffConstants(VMCSolver *solver);
@@ -25,10 +26,8 @@ void runCompareAnalytical(VMCSolver *solver);
 void runDiffNCycles(VMCSolver *solver);
 void runFindAlphaBeta(VMCSolver *solver);
 
+int main(int nargs, char* args[]) {
 
-
-
-int main() {
     // Choices for the alpha and beta values that is set in the creation of the trialFunctions are:
     //
     //HeliumSimpleAnalytical:   alpha = 1.62    beta = 0
@@ -38,7 +37,7 @@ int main() {
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Beryllium(solver));
+    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
 
 
 
@@ -50,7 +49,15 @@ int main() {
 //    runBlockingSampledRun(solver) ;
 //    runCompareAnalytical(solver);
 //    runDiffNCycles(solver);
-    runFindAlphaBeta(solver);
+//    runFindAlphaBeta(solver);
+
+    string pathString = "../source/outfiles/Test";
+    char const * outfilePath = (pathString).c_str();
+    outfile.open(outfilePath);
+
+    solver->runMasterIntegration(nargs,args);
+
+
 
 
 //  return  UnitTest::RunAllTests();

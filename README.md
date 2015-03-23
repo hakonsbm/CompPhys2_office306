@@ -1,6 +1,12 @@
 # CompPhys2_office306
 
 ########################################
+
+To run it in QT creator make sure that the run settings is set according to this guide
+
+http://dragly.org/2012/03/14/developing-mpi-applications-in-qt-creator/
+
+########################################
 The Report is in the Report folder.
 
 Variational Monte Carlo program and studies for Helium and Beryllium

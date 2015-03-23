@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex project2_2015"] 1426767036 "project2_2015.aux" "project2_2015.bbl" "project2_2015" 1426768095
+["bibtex project2_2015"] 1427104525 "project2_2015.aux" "project2_2015.bbl" "project2_2015" 1427104527
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "project2_2015.aux" 1426768095 9377 4bbf85b4fdd7be0a45c536e34205647d ""
+  "project2_2015.aux" 1427104526 9563 30e276f49f6fa3bd3c93b3f36866d74b ""
   "project2_2015.bcf" 0 -1 0 ""
   "references.bib" 1425328520 763 519bae985a73752c1b2b9d3d51d0508f ""
   (generated)
   "project2_2015.blg"
   "project2_2015.bbl"
-["pdflatex"] 1426768094 "project2_2015.tex" "project2_2015.pdf" "project2_2015" 1426768095
+["pdflatex"] 1427104525 "project2_2015.tex" "project2_2015.pdf" "project2_2015" 1427104527
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
@@ -175,10 +175,10 @@
   "figures/VarianceNCyclesHeliumSimpleAnalytical.png" 1425328520 33203 09ea50095b0c4caf5b6db0e1b8ab7fdd ""
   "figures/VarianceVsAlphaHeliumSimpleAnalytical.png" 1425900946 33022 473b4e42d0d8ec49e883f5719ea9fc16 ""
   "figures/blockingheliumsimpleandalytical.png" 1425328948 46655 e077c88186427838f22e06448290e86b ""
-  "project2_2015.aux" 1426768095 9377 4bbf85b4fdd7be0a45c536e34205647d ""
-  "project2_2015.bbl" 1426767036 334 d84188f5736834d6e4ed7de1cad2a8ed "bibtex project2_2015"
-  "project2_2015.out" 1426768095 1264 b678c73ebac6ab27ddafd860f8b1bbd2 ""
-  "project2_2015.tex" 1426768094 29854 ffa251d4c620712d3eb1c67f31dbb888 ""
+  "project2_2015.aux" 1427104526 9563 30e276f49f6fa3bd3c93b3f36866d74b ""
+  "project2_2015.bbl" 1427104525 334 d84188f5736834d6e4ed7de1cad2a8ed "bibtex project2_2015"
+  "project2_2015.out" 1427104526 1329 6b66f111356c42469735edfc5fc11336 ""
+  "project2_2015.tex" 1427104524 35851 fb86751beb15e816958ea42e014a94a0 ""
   (generated)
   "project2_2015.aux"
   "project2_2015.pdf"
