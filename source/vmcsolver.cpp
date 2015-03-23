@@ -8,6 +8,7 @@
 #include <cmath>
 #include <fstream>
 #include <iomanip>
+#include <mpi.h>
 
 
 using namespace arma;
@@ -32,123 +33,81 @@ VMCSolver::VMCSolver():
 
 }
 
-void VMCSolver::runMonteCarloIntegration() {
-    int acc_moves = 0;
-    int moves = 0;
-    double waveFunctionOld = 0;
-    double waveFunctionNew = 0;
-    double energySum = 0;
-    double energySquaredSum = 0;
-    double deltaE = 0;
-    double r12 = 0;
-    double averageR12 = 0;
+void VMCSolver::runMasterIntegration(int nargs, char *args[])
+{
+    //MPI initializations
+        int numprocs, my_rank;
+        MPI_Init(&nargs, &args);
 
-    rOld = zeros<mat>(nParticles, nDimensions);
-    rNew = zeros<mat>(nParticles, nDimensions);
+        MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
+        MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
+//        cout << "Hello world, I have rank " << my_rank << " out of "
+//        << numprocs << endl;
+        double totalEnergy = 0;
+        double totalEnergySquared = 0;
+        double totalEnergyVar = 0;
+        double totalMoves = 0;
+        double totalRatio = 0;
+        double totalAverageR12 = 0;
 
-    //initial trial positions
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = 0; j < nDimensions; j++) {
-            rOld(i,j) = stepLength * (ran2(&idum) - 0.5);
-        }
-    }
 
-    rNew = rOld;
-    //loop over Monte Carlo cycles
-    int print_cycle = 0;
+        nCycles = nCycles/numprocs;
+        runMonteCarloIntegrationIS();
 
-    for(int cycle = 0; cycle < nCycles; cycle++) {
-        if(cycle == print_cycle)
+        MPI_Reduce(&m_energy, &totalEnergy, 1, MPI_DOUBLE,
+                      MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_energyVar, &totalEnergyVar, 1, MPI_DOUBLE,
+                    MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_energySquared, &totalEnergySquared, 1, MPI_DOUBLE,
+                   MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_moves, &totalMoves, 1, MPI_DOUBLE,
+                   MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_ratio, &totalRatio, 1, MPI_DOUBLE,
+                   MPI_SUM, 0 , MPI_COMM_WORLD);
+        MPI_Reduce(&m_averageR12, &totalAverageR12, 1, MPI_DOUBLE,
+                   MPI_SUM, 0 , MPI_COMM_WORLD);
+
+        //A lot of the data should be averaged over the results from the different threads
+        totalEnergy /=numprocs;
+        totalEnergyVar /= numprocs;
+        totalEnergySquared /= numprocs;
+        totalAverageR12 /= numprocs;
+        totalRatio /= numprocs;
+
+        if(my_rank == 0)
         {
-            cout << (double)cycle*100./nCycles << " %" << endl;
-            print_cycle += (double) nCycles/4;
+            cout << "Energy: " << totalEnergy << " Energy (squared sum): " << totalEnergySquared << endl;
+            cout << "Variance: " << totalEnergyVar << endl;
+            cout << "Moves: " << totalMoves << endl;
+            cout << "Ratio: " <<  totalRatio << endl;
+            cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+            cout << "Average distance between the electrons: " << totalAverageR12 << endl;
+            cout << "Steplength: " << stepLength << endl;
+
+            //Write results to file
+            outfile << setw(15) << setprecision(8) << totalEnergy;
+            outfile << setw(15) << setprecision(8) << totalEnergySquared;
+            outfile << setw(15) << setprecision(8) << totalEnergyVar;
+            outfile << setw(15) << setprecision(8) << m_alpha;
+            outfile << setw(15) << setprecision(8) << m_beta;
+            outfile << setw(15) << setprecision(8) << totalAverageR12;
+            outfile << setw(15) << setprecision(8) << stepLength;
+            outfile << setw(15) << nCycles << endl;
         }
-        //Store the current value of the wave function
-        waveFunctionOld = trialFunction()->waveFunction(rOld, this);
 
-        //New position to test
-        for(int i = 0; i < nParticles; i++) {
-            for(int j = 0; j < nDimensions; j++) {
-                rNew(i,j) = rOld(i,j) + stepLength*(ran2(&idum) - 0.5);
-            }
-            //Recalculate the value of the wave function
-            waveFunctionNew = trialFunction()->waveFunction(rNew, this);
-
-            //Check for step acceptance (if yes, update position, if no, reset position)
-            if(ran2(&idum) <= (waveFunctionNew*waveFunctionNew) / (waveFunctionOld*waveFunctionOld)) {
-                acc_moves += 1;
-                for(int j = 0; j < nDimensions; j++) {
-                    rOld(i,j) = rNew(i,j);
-                    waveFunctionOld = waveFunctionNew;
-                }
-            }
-            else {
-                for(int j = 0; j < nDimensions; j++) {
-                   rNew(i,j) = rOld(i,j);
-                }
-            }
-            moves += 1;
-            //update energies
-            deltaE = trialFunction()->localEnergy(rNew, this);
-            energySum += deltaE;
-            energySquaredSum += deltaE*deltaE;
-        }
-        //we need to find the average value of r12
-        r12 = 0;
-//        for(int k = 0; k < nDimensions; k++) {
-//            r12 += (rNew(0,k) - rNew(1,k)) * (rNew(0,k) - rNew(1,k));
-//        }
-        averageR12 += sqrt(r12);
-
-        if (m_blockSampling &&  cycle % 10 == 0) {
-            samplefile << setw(15) << setprecision(8) << deltaE;
-            samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
-            samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
-
-            for(int i = 0; i < nParticles; )
-            {
-                    samplefile << setw(15) << setprecision(8) << rNew(i,0);
-                    samplefile << setw(15) << setprecision(8) << rNew(i,1);
-                    samplefile << setw(15) << setprecision(8) << rNew(i,2);
-            }
-        }
-    }
-    if(m_blockSampling)
-    {
-        samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
-        cout << "blockSampling" << endl;
-    }
-    double energy = energySum/(nCycles * nParticles);
-    double energySquared = energySquaredSum/(nCycles * nParticles);
-    m_energyVar = sqrt((energySquared - energy*energy) / nCycles);  //Should we add this /(nCycles * nParticles)
-    averageR12 /= (double) nCycles;
-
-    //Storing the energy and variance calculated, used in searching for the best fit for alpha and beta
-    storeEnergy(energy);
-//    storeVariance(m_energyVar); //Not necessary it was already calculated
-
-    cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
-    cout << "Variance: " << m_energyVar << endl;
-    cout << "Moves: " << moves << endl;
-    cout << "Accepted moves: " << acc_moves << endl;
-    cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
-    cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
-    cout << "Average distance between the electrons: " << averageR12 << endl;
-    cout << "Steplength: " << stepLength << endl;
+        // End MPI
+        MPI_Finalize ();
 
 
-
-    outfile << setw(15) << setprecision(8) << energy;
-    outfile << setw(15) << setprecision(8) << energySquared;
-    outfile << setw(15) << setprecision(8) << m_energyVar;
-    outfile << setw(15) << setprecision(8) << m_alpha;
-    outfile << setw(15) << setprecision(8) << m_beta;
-    outfile << setw(15) << setprecision(8) << averageR12;
-    outfile << setw(15) << setprecision(8) << stepLength;
-    outfile << setw(15) << nCycles << endl;
 }
 
+
+
 void VMCSolver::runMonteCarloIntegrationIS() {
+
+    //Make sure that the threads have different seeds
+    idum = clock();
+
 //    char const *outfilename = "../source/outfiles/Test";// + trialFunction()->m_outfileName;
     int acc_moves = 0;
     int moves = 0;
@@ -272,32 +231,34 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         cout << "blockSampling" << endl;
     }
 
-    double energy = energySum/(nCycles * nParticles);
-    double energySquared = energySquaredSum/(nCycles * nParticles);
-    double energyVar = sqrt((energySquared - energy*energy) / nCycles);
-    averageR12 /= (double) nCycles;
+    m_energy = energySum/(nCycles * nParticles);
+    m_energySquared = energySquaredSum/(nCycles * nParticles);
+    m_energyVar = sqrt((m_energySquared - m_energy*m_energy) / nCycles);
+    m_averageR12 = averageR12 / (double) nCycles;
+    m_ratio = (double) acc_moves/(double) moves;
+    m_moves = moves;
 
     //Storing the energy and variance calculated, used in searching for the best fit for alpha and beta
-    storeEnergy(energy);
-    storeVariance(energyVar); //Not necessary it was already calculated
+//    storeEnergy(energy);
+//    storeVariance(energyVar); //Not necessary it was already calculated
 
-    cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
-    cout << "Variance: " << energyVar << endl;
-    cout << "Moves: " << moves << endl;
-    cout << "Accepted moves: " << acc_moves << endl;
-    cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
-    cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
-    cout << "Average distance between the electrons: " << averageR12 << endl;
-    cout << "Steplength: " << stepLength << endl;
+//    cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
+//    cout << "Variance: " << energyVar << endl;
+//    cout << "Moves: " << moves << endl;
+//    cout << "Accepted moves: " << acc_moves << endl;
+//    cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
+//    cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+//    cout << "Average distance between the electrons: " << averageR12 << endl;
+//    cout << "Steplength: " << stepLength << endl;
 
-    outfile << setw(15) << setprecision(8) << energy;
-    outfile << setw(15) << setprecision(8) << energySquared;
-    outfile << setw(15) << setprecision(8) << energyVar;
-    outfile << setw(15) << setprecision(8) << m_alpha;
-    outfile << setw(15) << setprecision(8) << m_beta;
-    outfile << setw(15) << setprecision(8) << averageR12;
-    outfile << setw(15) << setprecision(8) << stepLength;
-    outfile << setw(15) << nCycles << endl;
+//    outfile << setw(15) << setprecision(8) << m_energy;
+//    outfile << setw(15) << setprecision(8) << m_energySquared;
+//    outfile << setw(15) << setprecision(8) << m_energyVar;
+//    outfile << setw(15) << setprecision(8) << m_alpha;
+//    outfile << setw(15) << setprecision(8) << m_beta;
+//    outfile << setw(15) << setprecision(8) << m_averageR12;
+//    outfile << setw(15) << setprecision(8) << stepLength;
+//    outfile << setw(15) << nCycles << endl;
 }
 
 void VMCSolver::QuantumForce(const mat &r, mat &QForce)
@@ -395,4 +356,118 @@ void VMCSolver::calculateOptimalSteplength() {
     cout << endl << "Steplength: " << stepLength << endl;
 }
 
+void VMCSolver::runMonteCarloIntegration() {
+    int acc_moves = 0;
+    int moves = 0;
+    double waveFunctionOld = 0;
+    double waveFunctionNew = 0;
+    double energySum = 0;
+    double energySquaredSum = 0;
+    double deltaE = 0;
+    double r12 = 0;
+    double averageR12 = 0;
 
+    rOld = zeros<mat>(nParticles, nDimensions);
+    rNew = zeros<mat>(nParticles, nDimensions);
+
+    //initial trial positions
+    for(int i = 0; i < nParticles; i++) {
+        for(int j = 0; j < nDimensions; j++) {
+            rOld(i,j) = stepLength * (ran2(&idum) - 0.5);
+        }
+    }
+
+    rNew = rOld;
+    //loop over Monte Carlo cycles
+    int print_cycle = 0;
+
+    for(int cycle = 0; cycle < nCycles; cycle++) {
+        if(cycle == print_cycle)
+        {
+            cout << (double)cycle*100./nCycles << " %" << endl;
+            print_cycle += (double) nCycles/4;
+        }
+        //Store the current value of the wave function
+        waveFunctionOld = trialFunction()->waveFunction(rOld, this);
+
+        //New position to test
+        for(int i = 0; i < nParticles; i++) {
+            for(int j = 0; j < nDimensions; j++) {
+                rNew(i,j) = rOld(i,j) + stepLength*(ran2(&idum) - 0.5);
+            }
+            //Recalculate the value of the wave function
+            waveFunctionNew = trialFunction()->waveFunction(rNew, this);
+
+            //Check for step acceptance (if yes, update position, if no, reset position)
+            if(ran2(&idum) <= (waveFunctionNew*waveFunctionNew) / (waveFunctionOld*waveFunctionOld)) {
+                acc_moves += 1;
+                for(int j = 0; j < nDimensions; j++) {
+                    rOld(i,j) = rNew(i,j);
+                    waveFunctionOld = waveFunctionNew;
+                }
+            }
+            else {
+                for(int j = 0; j < nDimensions; j++) {
+                   rNew(i,j) = rOld(i,j);
+                }
+            }
+            moves += 1;
+            //update energies
+            deltaE = trialFunction()->localEnergy(rNew, this);
+            energySum += deltaE;
+            energySquaredSum += deltaE*deltaE;
+        }
+        //we need to find the average value of r12
+        r12 = 0;
+//        for(int k = 0; k < nDimensions; k++) {
+//            r12 += (rNew(0,k) - rNew(1,k)) * (rNew(0,k) - rNew(1,k));
+//        }
+        averageR12 += sqrt(r12);
+
+        if (m_blockSampling &&  cycle % 10 == 0) {
+            samplefile << setw(15) << setprecision(8) << deltaE;
+            samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
+            samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
+
+            for(int i = 0; i < nParticles; )
+            {
+                    samplefile << setw(15) << setprecision(8) << rNew(i,0);
+                    samplefile << setw(15) << setprecision(8) << rNew(i,1);
+                    samplefile << setw(15) << setprecision(8) << rNew(i,2);
+            }
+        }
+    }
+    if(m_blockSampling)
+    {
+        samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+        cout << "blockSampling" << endl;
+    }
+    double energy = energySum/(nCycles * nParticles);
+    double energySquared = energySquaredSum/(nCycles * nParticles);
+    m_energyVar = sqrt((energySquared - energy*energy) / nCycles);  //Should we add this /(nCycles * nParticles)
+    averageR12 /= (double) nCycles;
+
+    //Storing the energy and variance calculated, used in searching for the best fit for alpha and beta
+    storeEnergy(energy);
+//    storeVariance(m_energyVar); //Not necessary it was already calculated
+
+    cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
+    cout << "Variance: " << m_energyVar << endl;
+    cout << "Moves: " << moves << endl;
+    cout << "Accepted moves: " << acc_moves << endl;
+    cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
+    cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+    cout << "Average distance between the electrons: " << averageR12 << endl;
+    cout << "Steplength: " << stepLength << endl;
+
+
+
+    outfile << setw(15) << setprecision(8) << energy;
+    outfile << setw(15) << setprecision(8) << energySquared;
+    outfile << setw(15) << setprecision(8) << m_energyVar;
+    outfile << setw(15) << setprecision(8) << m_alpha;
+    outfile << setw(15) << setprecision(8) << m_beta;
+    outfile << setw(15) << setprecision(8) << averageR12;
+    outfile << setw(15) << setprecision(8) << stepLength;
+    outfile << setw(15) << nCycles << endl;
+}

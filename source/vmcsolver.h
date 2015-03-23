@@ -17,6 +17,7 @@ class VMCSolver
 public:
     VMCSolver();
 
+    void runMasterIntegration(int nargs, char* args[]);
     void runMonteCarloIntegration();
     void runMonteCarloIntegrationIS();
 
@@ -70,8 +71,13 @@ private:
     long idum;
     int nCycles;
 
+    //Each thread should store data as common accessible doubles, so they can be merged into the the master thread
     double m_energyVar;
     double m_energy;
+    double m_energySquared;
+    double m_averageR12;
+    double m_ratio;
+    double m_moves;
 
     double D; // diffusion constant
     // double timestep; // timestep for gaussian deviate (using steplength)

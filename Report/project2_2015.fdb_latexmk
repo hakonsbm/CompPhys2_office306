@@ -1,12 +1,13 @@
 # Fdb version 3
-["bibtex project2_2015"] 1425898901 "project2_2015.aux" "project2_2015.bbl" "project2_2015" 1425898902
+["bibtex project2_2015"] 1427104525 "project2_2015.aux" "project2_2015.bbl" "project2_2015" 1427104527
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "project2_2015.aux" 1425898902 9267 9f13f414028a89b21dd42ed55ce6f337 ""
+  "project2_2015.aux" 1427104526 9563 30e276f49f6fa3bd3c93b3f36866d74b ""
   "project2_2015.bcf" 0 -1 0 ""
   "references.bib" 1425328520 763 519bae985a73752c1b2b9d3d51d0508f ""
   (generated)
+  "project2_2015.blg"
   "project2_2015.bbl"
-["pdflatex"] 1425898901 "project2_2015.tex" "project2_2015.pdf" "project2_2015" 1425898902
+["pdflatex"] 1427104525 "project2_2015.tex" "project2_2015.pdf" "project2_2015" 1427104527
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
@@ -166,20 +167,20 @@
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfkeys.sty" 1304191498 274 4cad6e665cc93ac2ac979039a94fa1e1 ""
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1304191498 325 2bcd023400636339210573e2b3ee298b ""
   "/usr/share/texmf/tex/latex/xcolor/xcolor.sty" 1339578534 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "figures/EnergyVsAlphaHeliumSimpleAnalytical.png" 1425328520 33518 389aead0cda6c0ad1f5af345402ae2d8 ""
+  "figures/EnergyVsAlphaHeliumSimpleAnalytical.png" 1425900946 29411 bcb3f33e3b43699eb0e17aea34b75fb3 ""
   "figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png" 1425328520 188878 2bfbb860ee8cc4600bea261fdbff0c38 ""
   "figures/HeliumJastrowAnalyticalAlphaBetaVariance.png" 1425328520 177001 4f17a04353660a93714f7b51c8058548 ""
   "figures/HeliumJastrowAnalyticalTimeEnergy.png" 1425328520 59929 46884fb7bcac232e6827f1849128d65b ""
   "figures/HeliumJastrowAnalyticalTimeVariance.png" 1425328520 54924 4764824ca106a394f7eaab0089fd33e4 ""
   "figures/VarianceNCyclesHeliumSimpleAnalytical.png" 1425328520 33203 09ea50095b0c4caf5b6db0e1b8ab7fdd ""
-  "figures/VarianceVsAlphaHeliumSimpleAnalytical.png" 1425329340 167563 3f68dd2972eb84809e6cc6c07e43d1a8 ""
+  "figures/VarianceVsAlphaHeliumSimpleAnalytical.png" 1425900946 33022 473b4e42d0d8ec49e883f5719ea9fc16 ""
   "figures/blockingheliumsimpleandalytical.png" 1425328948 46655 e077c88186427838f22e06448290e86b ""
-  "project2_2015.aux" 1425898902 9267 9f13f414028a89b21dd42ed55ce6f337 ""
-  "project2_2015.bbl" 1425898901 334 d84188f5736834d6e4ed7de1cad2a8ed "bibtex project2_2015"
-  "project2_2015.out" 1425898902 1189 2166f0fc99eac9b1121289f4a731fb52 ""
-  "project2_2015.tex" 1425898898 28695 be9200d509ae54edcc11ec464bf0609d ""
+  "project2_2015.aux" 1427104526 9563 30e276f49f6fa3bd3c93b3f36866d74b ""
+  "project2_2015.bbl" 1427104525 334 d84188f5736834d6e4ed7de1cad2a8ed "bibtex project2_2015"
+  "project2_2015.out" 1427104526 1329 6b66f111356c42469735edfc5fc11336 ""
+  "project2_2015.tex" 1427104524 35851 fb86751beb15e816958ea42e014a94a0 ""
   (generated)
-  "project2_2015.log"
+  "project2_2015.aux"
   "project2_2015.pdf"
   "project2_2015.out"
-  "project2_2015.aux"
+  "project2_2015.log"
