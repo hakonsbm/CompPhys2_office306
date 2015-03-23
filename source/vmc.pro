@@ -10,22 +10,26 @@ QMAKE_CFLAGS_DEBUG += -fopenmp
 
 SOURCES += main.cpp \
     vmcsolver.cpp \
-    lib.cpp \
     trialFunctions/trialfunction.cpp \
     trialFunctions/heliumsimpleanalytical.cpp \
     trialFunctions/heliumjastrownumerical.cpp \
     trialFunctions/heliumjastrowanalytical.cpp \
     trialFunctions/heliumsimplenumerical.cpp \
     trialFunctions/beryllium.cpp \
-    trialFunctions/hydrogen.cpp
+    trialFunctions/hydrogen.cpp \
+    trialFunctions/neon.cpp \
+    libm.cpp \
+    lib.cpp
 
 HEADERS += \
     vmcsolver.h \
-    lib.h \
     trialFunctions/trialfunction.h \
     trialFunctions/heliumsimpleanalytical.h \
     trialFunctions/heliumjastrownumerical.h \
     trialFunctions/heliumjastrowanalytical.h \
     trialFunctions/heliumsimplenumerical.h \
     trialFunctions/beryllium.h \
-    trialFunctions/hydrogen.h
+    trialFunctions/hydrogen.h \
+    trialFunctions/neon.h \
+    libm.h \
+    lib.h
