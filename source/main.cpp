@@ -6,6 +6,7 @@
 #include "trialFunctions/heliumsimplenumerical.h"
 #include "trialFunctions/hydrogen.h"
 #include "trialFunctions/beryllium.h"
+#include "trialFunctions/neon.h"
 
 #include <iostream>
 #include <time.h>
@@ -39,7 +40,7 @@ int main(int nargs, char* args[])
     //Beryllium:                alpha = 4.0     beta = 0.31
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Beryllium(solver));
+    solver->setTrialFunction(new Neon(solver));
 
 
 
