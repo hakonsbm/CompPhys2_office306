@@ -63,7 +63,7 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
         }
     }
 
-    ludcmp(slater, solver->getNParticles(), trash, moretrash);
+//    ludcmp(slater, solver->getNParticles(), trash, moretrash);
 
     for(int i = 0; i < solver->getNParticles(); i++) {
         wf *= slater[i][i];

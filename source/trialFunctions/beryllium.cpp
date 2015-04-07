@@ -189,8 +189,14 @@ double Beryllium::SlaterDeterminant(const mat &r, int nParticles,
      *     (b20 b21 c22 c23)
      *     (b30 b31 b32 c33)
      */
+
+
+
     ludcmp(detUp, Nhalf, indx, &d1);
     ludcmp(detDown, Nhalf, indx, &d2);
+
+
+
     // compute SD as c00*c11*..*cnn
     SD = 1;
     for (i = 0; i < Nhalf; ++i)
