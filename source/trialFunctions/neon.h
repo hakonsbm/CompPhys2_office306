@@ -21,7 +21,7 @@ public:
 private:
     double psi1s(double ri, double alpha); // Ansatz functions
     double psi2s(double ri, double alpha); // only for testing.
-    double phi(double ri, double alpha, int M);
+    double phi(double ri, double alpha, int M, const vec &ri_vec);
     double SlaterDeterminant(const mat &r, int nParticles, int nDimensions, double alpha);
     mat detUp;
     mat detDown;

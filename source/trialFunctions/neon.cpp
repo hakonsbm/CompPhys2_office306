@@ -54,7 +54,6 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
             spin_count++;
         }
     }
-<<<<<<< HEAD
     /*
     wf = (psi1s(argument[0], alpha)*psi2s(argument[1], alpha)
         -psi1s(argument[1], alpha)*psi2s(argument[0], alpha))*
@@ -62,30 +61,9 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
         -psi1s(argument[3], alpha)*psi2s(argument[2], alpha));
     */
     SD = SlaterDeterminant(r, solver->getNParticles(), solver->getNDimensions(), alpha);
-    cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
+    //cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
     //return wf*product;
     return SD*product;
-=======
-    for(int i = 0; i < solver->getNParticles(); i++) {
-        for(int j = 0; j < solver->getNDimensions(); j++) {
-            if((i == 0) || (i == 1)) {
-                slater[i][j] = psi1s(argument[j], alpha);}
-            else if((i == 2) || (i == 3)) {
-                slater[i][j] = psi2s(argument[j], alpha);}
-            else if((i > 3) && (i < 10)) {
-                slater[i][j] = psi2p(argument[j], alpha);}
-        }
-    }
-
-//    ludcmp(slater, solver->getNParticles(), trash, moretrash);
-
-    for(int i = 0; i < solver->getNParticles(); i++) {
-        wf *= slater[i][i];
-    }
-    wf /= 720*sqrt(7);
-
-    return wf*product;
->>>>>>> 39a4a093904fbe0dfbc3254134437c9129f95137
 }
 
 double Neon::localEnergy(const mat &r, VMCSolver *solver)
@@ -162,7 +140,7 @@ double Neon::psi2s(double ri, double alpha)
     return (1-alpha*ri/2.0)*exp(-alpha*ri/2.0);
 }
 
-double Neon::phi(double ri, double alpha, int M)
+double Neon::phi(double ri, double alpha, int M, const vec &ri_vec)
 {
     // returns an ansatz based on matrix row, M, in the SD
     if (M == 0)
@@ -176,9 +154,8 @@ double Neon::phi(double ri, double alpha, int M)
     }
     else if (M>=2 && M<=4)
     {
-        cout << alpha << " " << ri << endl;
-        return alpha*ri*exp(-alpha*ri/2.0); // 2p
-
+        int dimension = M-2;
+        return alpha*ri_vec(dimension)*exp(-alpha*ri/2.0); // 2p
     }
 }
 
@@ -202,23 +179,29 @@ double Neon::SlaterDeterminant(const mat &r, int nParticles,
         {
             // for detUp
             ri = 0;
+            vec ri_dims(3);
             for (j = 0; j < nDimensions; ++j) {
                  ri += r(i,j)*r(i,j);
-
+                 ri_dims(j) = r(i,j);
             }
             ri = sqrt(ri);
-            detUp(i,M) =  phi(ri, alpha, M);
+            //cout << ri << endl;
+            detUp(i,M) =  phi(ri, alpha, M, ri_dims);
 
             // for detDown
             ri = 0;
-            for (j = 0; j < nDimensions; ++j) ri += r(i + Nhalf,j)*r(i + Nhalf,j);
+            for (j = 0; j < nDimensions; ++j) {
+                ri += r(i + Nhalf,j)*r(i + Nhalf,j);
+                ri_dims(j) = r(i,j);
+            }
             ri = sqrt(ri);
-            detDown(i,M) =  phi(ri, alpha, M);
+            detDown(i,M) =  phi(ri, alpha, M, ri_dims);
         }
+        //cout << "^" << M << endl;
     }
-    cout << r << endl;
-    cout << detUp << endl<<endl;
-    cout << detDown << endl;
+    //cout << r << endl;
+    //cout << detUp << endl<<endl;
+    //cout << detDown << endl;
     // decompose A (phi matrix) to B & C
     /*
      * End up with
@@ -229,8 +212,8 @@ double Neon::SlaterDeterminant(const mat &r, int nParticles,
      */
     ludcmp(detUp, Nhalf, indx, &d1);
     ludcmp(detDown, Nhalf, indx, &d2);
-    cout << detUp << endl<<endl;
-    cout << detDown << endl;
+    //cout << detUp << endl<<endl;
+    //cout << detDown << endl;
     // compute SD as c00*c11*..*cnn
     SD = 1;
     for (i = 0; i < Nhalf; ++i)
