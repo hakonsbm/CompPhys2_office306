@@ -54,6 +54,7 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
             spin_count++;
         }
     }
+<<<<<<< HEAD
     /*
     wf = (psi1s(argument[0], alpha)*psi2s(argument[1], alpha)
         -psi1s(argument[1], alpha)*psi2s(argument[0], alpha))*
@@ -64,6 +65,27 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
     cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
     //return wf*product;
     return SD*product;
+=======
+    for(int i = 0; i < solver->getNParticles(); i++) {
+        for(int j = 0; j < solver->getNDimensions(); j++) {
+            if((i == 0) || (i == 1)) {
+                slater[i][j] = psi1s(argument[j], alpha);}
+            else if((i == 2) || (i == 3)) {
+                slater[i][j] = psi2s(argument[j], alpha);}
+            else if((i > 3) && (i < 10)) {
+                slater[i][j] = psi2p(argument[j], alpha);}
+        }
+    }
+
+//    ludcmp(slater, solver->getNParticles(), trash, moretrash);
+
+    for(int i = 0; i < solver->getNParticles(); i++) {
+        wf *= slater[i][i];
+    }
+    wf /= 720*sqrt(7);
+
+    return wf*product;
+>>>>>>> 39a4a093904fbe0dfbc3254134437c9129f95137
 }
 
 double Neon::localEnergy(const mat &r, VMCSolver *solver)

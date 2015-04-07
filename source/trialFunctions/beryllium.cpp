@@ -57,7 +57,8 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
     */
     SD = SlaterDeterminant(r, solver->getNParticles(), solver->getNDimensions(), alpha);
     //cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
-    return wf*product;
+    //return wf*product;
+    return SD*product;
 }
 
 double Beryllium::localEnergy(const mat &r, VMCSolver *solver)

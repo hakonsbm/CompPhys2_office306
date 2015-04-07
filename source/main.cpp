@@ -450,9 +450,10 @@ void runCompareParallelize(VMCSolver * solver, int nargs, char* args[])
     double start, end;
 
     //Need to make a python script to run it with different number of nodes
-
+    //Or we can do it manually with changing the projoect build
        start = MPI_Wtime();
        solver->runMasterIntegration(nargs, args);
+//       solver->runMonteCarloIntegrationIS();
        end = MPI_Wtime();
 
 
@@ -468,8 +469,6 @@ void runCompareParallelize(VMCSolver * solver, int nargs, char* args[])
 
 
 TEST(Hydrogen) {
-
-
 
     VMCSolver *solver = new VMCSolver();
     solver->setTrialFunction(new Hydrogen(solver));
