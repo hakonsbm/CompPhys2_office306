@@ -31,7 +31,6 @@ SOURCES += main.cpp \
     trialFunctions/beryllium.cpp \
     trialFunctions/hydrogen.cpp \
     trialFunctions/neon.cpp \
-    libm.cpp \
     lib.cpp
 
 HEADERS += \
@@ -44,5 +43,4 @@ HEADERS += \
     trialFunctions/beryllium.h \
     trialFunctions/hydrogen.h \
     trialFunctions/neon.h \
-    libm.h \
     lib.h

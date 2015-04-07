@@ -70,6 +70,7 @@ private:
     double h2;
     long idum;
     int nCycles;
+    int my_rank;
 
     //Each thread should store data as common accessible doubles, so they can be merged into the the master thread
     double m_energyVar;

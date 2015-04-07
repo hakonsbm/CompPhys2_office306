@@ -6,6 +6,7 @@
 #include "trialFunctions/heliumsimplenumerical.h"
 #include "trialFunctions/hydrogen.h"
 #include "trialFunctions/beryllium.h"
+#include "trialFunctions/neon.h"
 
 #include <iostream>
 #include <time.h>
@@ -37,9 +38,10 @@ int main(int nargs, char* args[])
     //HeliumJastrowAnalytical:  alpha = 1.8     beta = 1.05     1.843 0.34
     //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
     //Beryllium:                alpha = 4.0     beta = 0.31
+    //Neon:                     alpha = 10.22   beta = 0.091
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Beryllium(solver));
+    solver->setTrialFunction(new Neon(solver));
 
 
 
@@ -444,7 +446,7 @@ void runDiffNCycles(VMCSolver *solver)
 
 void runCompareParallelize(VMCSolver * solver, int nargs, char* args[])
 {
-    solver->setCycles(1000000);
+    solver->setCycles(1000);
     double start, end;
 
     //Need to make a python script to run it with different number of nodes

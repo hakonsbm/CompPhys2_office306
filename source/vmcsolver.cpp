@@ -28,7 +28,8 @@ VMCSolver::VMCSolver():
     h2(1000000),
     idum(-1),
     nCycles(100000),
-    D(0.5)
+    D(0.5),
+    my_rank(0)
 {
 
 }
@@ -36,7 +37,7 @@ VMCSolver::VMCSolver():
 void VMCSolver::runMasterIntegration(int nargs, char *args[])
 {
     //MPI initializations
-        int numprocs, my_rank;
+        int numprocs;
         MPI_Init(&nargs, &args);
 
         MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
@@ -49,6 +50,7 @@ void VMCSolver::runMasterIntegration(int nargs, char *args[])
         double totalMoves = 0;
         double totalRatio = 0;
         double totalAverageR12 = 0;
+
 
 
         nCycles = nCycles/numprocs;
@@ -137,11 +139,15 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     int print_cycle = 0;
     for(int cycle = 0; cycle < nCycles; cycle++) {
 
-        if(cycle == print_cycle)
+        if(my_rank == 0)
         {
-            cout << (double)cycle*100./nCycles << " %" << endl;
-            print_cycle +=(double) nCycles/4;
+            if(cycle == print_cycle)
+            {
+                cout << (double)cycle*100./nCycles << " %" << endl;
+                print_cycle +=(double) nCycles/100;
+            }
         }
+
 
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
