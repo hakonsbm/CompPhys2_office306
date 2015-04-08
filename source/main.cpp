@@ -26,10 +26,13 @@ void runBlockingSampledRun(VMCSolver *solver);
 void runCompareAnalytical(VMCSolver *solver);
 void runDiffNCycles(VMCSolver *solver);
 void runFindAlphaBeta(VMCSolver *solver);
-void runCompareParallelize(VMCSolver * solver,int nargs, char* args[]);
+void runCompareParallelize(VMCSolver * solver);
 
 int main(int nargs, char* args[])
 {
+
+    return  UnitTest::RunAllTests();
+
 
     // Choices for the alpha and beta values that is set in the creation of the trialFunctions are:
     //
@@ -42,6 +45,7 @@ int main(int nargs, char* args[])
 
     VMCSolver *solver = new VMCSolver();
     solver->setTrialFunction(new Neon(solver));
+    solver->mpiArguments(nargs, args);
 
 
 
@@ -54,11 +58,10 @@ int main(int nargs, char* args[])
 //    runCompareAnalytical(solver);
 //    runDiffNCycles(solver);
 //    runFindAlphaBeta(solver);
-    runCompareParallelize(solver, nargs, args);
+//    runCompareParallelize(solver);
 
 
 
-//  return  UnitTest::RunAllTests();
     return 0;
 }
 
@@ -444,15 +447,15 @@ void runDiffNCycles(VMCSolver *solver)
 
 }
 
-void runCompareParallelize(VMCSolver * solver, int nargs, char* args[])
+void runCompareParallelize(VMCSolver * solver)
 {
-    solver->setCycles(1000);
+    solver->setCycles(10000);
     double start, end;
 
     //Need to make a python script to run it with different number of nodes
     //Or we can do it manually with changing the projoect build
        start = MPI_Wtime();
-       solver->runMasterIntegration(nargs, args);
+       solver->runMasterIntegration();
 //       solver->runMonteCarloIntegrationIS();
        end = MPI_Wtime();
 
@@ -468,11 +471,4 @@ void runCompareParallelize(VMCSolver * solver, int nargs, char* args[])
 
 
 
-TEST(Hydrogen) {
 
-    VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Hydrogen(solver));
-    solver->runMonteCarloIntegration();
-    CHECK_EQUAL(0., solver->getEnergyVar());
-
-}

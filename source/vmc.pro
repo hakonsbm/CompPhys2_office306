@@ -31,7 +31,9 @@ SOURCES += main.cpp \
     trialFunctions/beryllium.cpp \
     trialFunctions/hydrogen.cpp \
     trialFunctions/neon.cpp \
-    lib.cpp
+    lib.cpp \
+    tests.cpp \
+    derivatives.cpp
 
 HEADERS += \
     vmcsolver.h \
@@ -43,4 +45,5 @@ HEADERS += \
     trialFunctions/beryllium.h \
     trialFunctions/hydrogen.h \
     trialFunctions/neon.h \
-    lib.h
+    lib.h \
+    derivatives.h

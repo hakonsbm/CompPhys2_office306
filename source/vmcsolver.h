@@ -7,17 +7,18 @@
 #include "trialFunctions/heliumsimpleanalytical.h"
 #include "trialFunctions/heliumjastrownumerical.h"
 #include "trialFunctions/heliumjastrowanalytical.h"
+#include "derivatives.h"
 
 using namespace arma;
 
-class TrialFunction; class HeliumSimpleNumerically;
+class TrialFunction; class Derivatives;
 
 class VMCSolver
 {
 public:
     VMCSolver();
 
-    void runMasterIntegration(int nargs, char* args[]);
+    void runMasterIntegration();
     void runMonteCarloIntegration();
     void runMonteCarloIntegrationIS();
 
@@ -30,6 +31,9 @@ public:
     void setNParticles(int P) {nParticles = P;}
     void setStepLength(double inStepLength) {stepLength = inStepLength;}
     void setCycles(double cycles) {nCycles = cycles; }
+
+    void initiateDerivatives(Derivatives *derivatives) {m_derivatives = derivatives; }
+    Derivatives *derivatives(){return m_derivatives;}
 
     TrialFunction *trialFunction(){return m_trialFunction;}
 
@@ -49,8 +53,11 @@ public:
     void storeEnergy(double energy) {m_energy = energy;}
     void storeVariance(double variance) {m_energyVar = variance;}
 
+    void mpiArguments( int nargs, char* args[]){ m_nargs = nargs; m_args = args; }
+
 private:
     TrialFunction *m_trialFunction;
+    Derivatives *m_derivatives;
 
     double waveFunction(const mat &r);
     double localEnergy(const mat &r);
@@ -70,7 +77,11 @@ private:
     double h2;
     long idum;
     int nCycles;
+
+    //Variables for the MPI implementation
     int my_rank;
+    int m_nargs;
+    char** m_args;
 
     //Each thread should store data as common accessible doubles, so they can be merged into the the master thread
     double m_energyVar;
