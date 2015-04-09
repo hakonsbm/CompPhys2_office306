@@ -31,7 +31,7 @@ void runCompareParallelize(VMCSolver * solver);
 int main(int nargs, char* args[])
 {
 
-    return  UnitTest::RunAllTests();
+    //return  UnitTest::RunAllTests();
 
 
     // Choices for the alpha and beta values that is set in the creation of the trialFunctions are:
@@ -58,7 +58,7 @@ int main(int nargs, char* args[])
 //    runCompareAnalytical(solver);
 //    runDiffNCycles(solver);
 //    runFindAlphaBeta(solver);
-//    runCompareParallelize(solver);
+    runCompareParallelize(solver);
 
 
 
@@ -449,7 +449,7 @@ void runDiffNCycles(VMCSolver *solver)
 
 void runCompareParallelize(VMCSolver * solver)
 {
-    solver->setCycles(10000);
+    solver->setCycles(1000);
     double start, end;
 
     //Need to make a python script to run it with different number of nodes
@@ -459,8 +459,11 @@ void runCompareParallelize(VMCSolver * solver)
 //       solver->runMonteCarloIntegrationIS();
        end = MPI_Wtime();
 
+    if (solver->getMy_Rank()==0)
+    {
+        cout << "Time used for the unparallelized code is: " << end - start << endl;
+    }
 
-    cout << "Time used for the unparallelized code is: " << end - start << endl;
 
 
 

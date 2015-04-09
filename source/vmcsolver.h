@@ -45,6 +45,7 @@ public:
     double getH()   {return h;}
     double getH2()  {return h2;}
     double getStepLength() {return stepLength;}
+    int getMy_Rank() {return my_rank;}
     void switchbBlockSampling(bool onOff) { m_blockSampling = onOff;}
 
 

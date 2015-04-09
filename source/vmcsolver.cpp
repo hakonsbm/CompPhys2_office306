@@ -161,7 +161,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             if(cycle == print_cycle)
             {
                 cout << (double)cycle*100./nCycles << " %" << endl;
-                print_cycle +=(double) nCycles/100;
+                print_cycle +=(double) nCycles/10;
             }
         }
 
