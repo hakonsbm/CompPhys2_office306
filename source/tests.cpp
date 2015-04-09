@@ -9,6 +9,7 @@
 #include "trialFunctions/neon.h"
 
 #include <unittest++/UnitTest++.h>
+#include <mpi.h>
 
 
 TEST(Hydrogen) {
@@ -26,11 +27,28 @@ TEST(Derivatives)
 {
     cout << endl << "Running Derivatives test" << endl << endl;
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new HeliumSimpleNumerical(solver));
+    solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
 
 //    solver->derivatives()->numericalDerivative(solver);
 
+    double analytic, numerical;
+
     solver->runMasterIntegration();
+
+    analytic = solver->getEnergy();
+
+
+    solver->setTrialFunction(new HeliumSimpleNumerical(solver));
+
+    solver->runMasterIntegration();
+
+    numerical = solver->getEnergy();
+
+    cout << "The difference was " << analytic - numerical << endl;
+
+
+
+    MPI_Finalize ();
 
     CHECK_EQUAL(0 , 0);
 }

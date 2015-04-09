@@ -55,7 +55,7 @@ void VMCSolver::runMasterIntegration()
 
     //MPI initializations
         int numprocs;
-        MPI_Init(&m_nargs, &m_args);
+//        MPI_Init(&m_nargs, &m_args);
 
         MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
         MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
@@ -114,8 +114,8 @@ void VMCSolver::runMasterIntegration()
             outfile << setw(15) << nCycles << endl;
         }
 
-        // End MPI
-        MPI_Finalize ();
+//        // End MPI
+//        MPI_Finalize ();
 
 
 }

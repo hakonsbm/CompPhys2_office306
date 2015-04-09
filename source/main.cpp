@@ -30,8 +30,9 @@ void runCompareParallelize(VMCSolver * solver);
 
 int main(int nargs, char* args[])
 {
+    MPI_Init(&nargs, &args);
 
-    //return  UnitTest::RunAllTests();
+    return  UnitTest::RunAllTests();
 
 
     // Choices for the alpha and beta values that is set in the creation of the trialFunctions are:
@@ -45,7 +46,7 @@ int main(int nargs, char* args[])
 
     VMCSolver *solver = new VMCSolver();
     solver->setTrialFunction(new Neon(solver));
-    solver->mpiArguments(nargs, args);
+//    solver->mpiArguments(nargs, args);
 
 
 
@@ -61,6 +62,8 @@ int main(int nargs, char* args[])
     runCompareParallelize(solver);
 
 
+    // End MPI
+    MPI_Finalize ();
 
     return 0;
 }
