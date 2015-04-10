@@ -11,9 +11,17 @@ Derivatives::~Derivatives()
 
 }
 
-double Derivatives::numericalDerivative(VMCSolver *solver)
+double Derivatives::numericalDoubleDerivative(VMCSolver *solver)
 {
     cout << "Doing a numerical derivation" << endl;
+    double nParticles = solver->getNParticles();
+    double nDimensions = solver->getNDimensions();
+    double charge = solver->getCharge();
+    double h = solver->getH();
+    double h2 = solver->getH2();
+
+
+
 
 
 }

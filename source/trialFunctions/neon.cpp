@@ -14,7 +14,7 @@ Neon::Neon(VMCSolver *solver)
 
     solver->setCharge(10);
     solver->setNParticles(10);
-    solver->setAlpha(10.22);
+    solver->setAlpha(10);
     solver->setBeta(0.091);
 }
 
@@ -63,7 +63,7 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
     SD = SlaterDeterminant(r, solver->getNParticles(), solver->getNDimensions(), alpha);
     //cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
     //return wf*product;
-    return SD*product;
+    return SD;//*product;
 }
 
 double Neon::localEnergy(const mat &r, VMCSolver *solver)
@@ -114,17 +114,17 @@ double Neon::localEnergy(const mat &r, VMCSolver *solver)
         }
         potentialEnergy -= charge / sqrt(rSingleParticle);
     }
-    // Contribution from electron-electron potential
-    double r12 = 0;
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = i + 1; j < nParticles; j++) {
-            r12 = 0;
-            for(int k = 0; k < nDimensions; k++) {
-                r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
-            }
-            potentialEnergy += 1 / sqrt(r12);
-        }
-    }
+//    // Contribution from electron-electron potential
+//    double r12 = 0;
+//    for(int i = 0; i < nParticles; i++) {
+//        for(int j = i + 1; j < nParticles; j++) {
+//            r12 = 0;
+//            for(int k = 0; k < nDimensions; k++) {
+//                r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+//            }
+//            potentialEnergy += 1 / sqrt(r12);
+//        }
+//    }
 
     return kineticEnergy + potentialEnergy;
 }
@@ -155,6 +155,12 @@ double Neon::phi(double ri, double alpha, int M, const vec &ri_vec)
     else if (M>=2 && M<=4)
     {
         int dimension = M-2;
+
+//        cout << "Using a p2 shell for dimension " << M << endl;
+//        cout << ri_vec << endl;
+//        cout << ri_vec(dimension) << endl;
+
+
         return alpha*ri_vec(dimension)*exp(-alpha*ri/2.0); // 2p
     }
 }
@@ -185,23 +191,32 @@ double Neon::SlaterDeterminant(const mat &r, int nParticles,
                  ri_dims(j) = r(i,j);
             }
             ri = sqrt(ri);
-            //cout << ri << endl;
+
+//            cout << "We are at electrom i = " << i << endl;
+//            cout << r << endl;
+//            cout << "picked out these coordinates "  << endl <<  ri_dims << endl;
+
             detUp(i,M) =  phi(ri, alpha, M, ri_dims);
 
             // for detDown
             ri = 0;
             for (j = 0; j < nDimensions; ++j) {
                 ri += r(i + Nhalf,j)*r(i + Nhalf,j);
-                ri_dims(j) = r(i,j);
+                ri_dims(j) = r(i+Nhalf,j);
             }
             ri = sqrt(ri);
             detDown(i,M) =  phi(ri, alpha, M, ri_dims);
+
+//            cout << "We are at electrom i = " << i + Nhalf << endl;
+//            cout << r << endl;
+//            cout << "picked out these coordinates "  << endl <<  ri_dims << endl;
+
         }
         //cout << "^" << M << endl;
     }
-    //cout << r << endl;
-    //cout << detUp << endl<<endl;
-    //cout << detDown << endl;
+//    cout << r << endl;
+//    cout << detUp << endl<<endl;
+//    cout << detDown << endl;
     // decompose A (phi matrix) to B & C
     /*
      * End up with
@@ -212,8 +227,10 @@ double Neon::SlaterDeterminant(const mat &r, int nParticles,
      */
     ludcmp(detUp, Nhalf, indx, &d1);
     ludcmp(detDown, Nhalf, indx, &d2);
-    //cout << detUp << endl<<endl;
-    //cout << detDown << endl;
+
+//    cout << "After LU-deomposition " << endl;
+//    cout << detUp << endl<<endl;
+//    cout << detDown << endl;
     // compute SD as c00*c11*..*cnn
     SD = 1;
     for (i = 0; i < Nhalf; ++i)

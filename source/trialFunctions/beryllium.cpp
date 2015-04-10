@@ -58,7 +58,7 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
     SD = SlaterDeterminant(r, solver->getNParticles(), solver->getNDimensions(), alpha);
     //cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
     //return wf*product;
-    return SD*product;
+    return SD;//*product;
 }
 
 double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
@@ -110,16 +110,16 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
         potentialEnergy -= charge / sqrt(rSingleParticle);
     }
     // Contribution from electron-electron potential
-    double r12 = 0;
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = i + 1; j < nParticles; j++) {
-            r12 = 0;
-            for(int k = 0; k < nDimensions; k++) {
-                r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
-            }
-            potentialEnergy += 1 / sqrt(r12);
-        }
-    }
+//    double r12 = 0;
+//    for(int i = 0; i < nParticles; i++) {
+//        for(int j = i + 1; j < nParticles; j++) {
+//            r12 = 0;
+//            for(int k = 0; k < nDimensions; k++) {
+//                r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+//            }
+//            potentialEnergy += 1 / sqrt(r12);
+//        }
+//    }
 
     return kineticEnergy + potentialEnergy;
 }
@@ -165,6 +165,7 @@ double Beryllium::SlaterDeterminant(const mat &r, int nParticles,
     detUp = zeros<mat>(Nhalf, Nhalf);
     detDown = zeros<mat>(Nhalf, Nhalf);
     // fill matrix detUp and detDown
+
     for (M = 0; M <  Nhalf; ++M)
     {
         for (i = 0; i < Nhalf; ++i)

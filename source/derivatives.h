@@ -8,7 +8,7 @@ class Derivatives
 public:
     Derivatives();
     ~Derivatives();
-    double numericalDerivative(VMCSolver *solver);
+    double numericalDoubleDerivative(VMCSolver *solver);
 };
 
 #endif // DERIVATIVES_H

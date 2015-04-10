@@ -50,5 +50,5 @@ TEST(Derivatives)
 
     MPI_Finalize ();
 
-    CHECK_EQUAL(0 , 0);
+    CHECK_CLOSE(fabs(analytic - numerical) , 0, 0.05 );
 }

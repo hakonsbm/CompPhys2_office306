@@ -55,8 +55,6 @@ double HeliumSimpleNumerical::localEnergy(const mat &r, VMCSolver *solver)
 
     double waveFunctionCurrent = waveFunction(r, solver);
 
-
-
     // Kinetic energy
 
     double kineticEnergy = 0;

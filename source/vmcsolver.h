@@ -54,7 +54,7 @@ public:
     void storeEnergy(double energy) {m_energy = energy;}
     void storeVariance(double variance) {m_energyVar = variance;}
 
-//    void mpiArguments( int nargs, char* args[]){ m_nargs = nargs; m_args = args; }
+    void mpiArguments( int nargs, char* args[]){ m_nargs = nargs; m_args = args; }
 
 private:
     TrialFunction *m_trialFunction;
@@ -81,8 +81,8 @@ private:
 
     //Variables for the MPI implementation
     int my_rank;
-//    int m_nargs;
-//    char** m_args;
+    int m_nargs;
+    char** m_args;
 
     //Each thread should store data as common accessible doubles, so they can be merged into the the master thread
     double m_energyVar;
