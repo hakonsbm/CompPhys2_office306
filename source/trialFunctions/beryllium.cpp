@@ -55,7 +55,7 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
         (psi1s(argument[2], alpha)*psi2s(argument[3], alpha)
         -psi1s(argument[3], alpha)*psi2s(argument[2], alpha));
     */
-    SD = SlaterDeterminant(r, solver->getNParticles(), solver->getNDimensions(), alpha);
+    SD = SlaterDeterminant(r, alpha, solver);
     //cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
     //return wf*product;
     return SD;//*product;
@@ -135,52 +135,51 @@ double Beryllium::psi2s(double ri, double alpha)
     return (1-alpha*ri/2.0)*exp(-alpha*ri/2.0);
 }
 
-double Beryllium::phi(double ri, double alpha, int M)
+double Beryllium::phi(const mat &r, double alpha, int i, int j, VMCSolver *solver)
 {
     // returns an ansatz based on matrix row, M, in the SD
-    if (M == 0)
+    int nDimensions = solver->getNDimensions();
+    double ri = 0;
+    for (int k = 0; k < nDimensions; ++k) ri += r(i,k)*r(i,k);
+    ri = sqrt(ri);
+
+    if (j == 0)
     {
         return exp(-alpha*ri); // 1s
     }
-    else if (M == 1)
+    else if (j == 1)
     {
         return (1-alpha*ri/2.0)*exp(-alpha*ri/2.0); // 2s
     }
-    else if (M>=2 && M<=4)
+    else if (j>=2 && j<=4)
     {
-        return alpha*ri*exp(-alpha*ri/2.0); // 2p
+        int dimension = j-2;
+        return alpha*r(i,dimension)*exp(-alpha*ri/2.0); // 2p
     }
 }
 
 
 
-
-double Beryllium::SlaterDeterminant(const mat &r, int nParticles,
-                                    int nDimensions, double alpha)
+double Beryllium::SlaterDeterminant(const mat &r,double alpha, VMCSolver *solver)
 {
-    int i, j, Nhalf, M, *indx;
-    double d1, d2, SD, ri;
+    int i, j, Nhalf, *indx;
+    double d1, d2, SD;
+    int nParticles= solver->getNParticles();
     Nhalf = nParticles/2;
     indx = new int [Nhalf];
     detUp = zeros<mat>(Nhalf, Nhalf);
     detDown = zeros<mat>(Nhalf, Nhalf);
     // fill matrix detUp and detDown
 
-    for (M = 0; M <  Nhalf; ++M)
+    for (int k = 0; k <  Nhalf; ++k)
     {
         for (i = 0; i < Nhalf; ++i)
         {
             // for detUp
-            ri = 0;
-            for (j = 0; j < nDimensions; ++j) ri += r(i,j)*r(i,j);
-            ri = sqrt(ri);
-            detUp(i,M) =  phi(ri, alpha, M);
+            detUp(i,k) =  phi(r, alpha, i, k, solver);
 
             // for detDown
-            ri = 0;
-            for (j = 0; j < nDimensions; ++j) ri += r(i + Nhalf,j)*r(i + Nhalf,j);
-            ri = sqrt(ri);
-            detDown(i,M) =  phi(ri, alpha, M);
+            detDown(i,k) =  phi(r, alpha, i+Nhalf, k, solver);
         }
     }
     // decompose A (phi matrix) to B & C
@@ -191,8 +190,10 @@ double Beryllium::SlaterDeterminant(const mat &r, int nParticles,
      *     (b20 b21 c22 c23)
      *     (b30 b31 b32 c33)
      */
+
     ludcmp(detUp, Nhalf, indx, &d1);
     ludcmp(detDown, Nhalf, indx, &d2);
+
     // compute SD as c00*c11*..*cnn
     SD = 1;
     for (i = 0; i < Nhalf; ++i)
