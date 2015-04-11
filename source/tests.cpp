@@ -7,12 +7,17 @@
 #include "trialFunctions/hydrogen.h"
 #include "trialFunctions/beryllium.h"
 #include "trialFunctions/neon.h"
+#include "lib.h"
 
 #include <unittest++/UnitTest++.h>
 #include <mpi.h>
+#include <armadillo>
+
+using namespace arma;
 
 
-TEST(Hydrogen) {
+TEST(Hydrogenic) {
+
 
     cout << endl << "Running Hydrogen test" << endl << endl;
 
@@ -21,17 +26,42 @@ TEST(Hydrogen) {
     solver->runMonteCarloIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
 
+
+    cout << endl << "Running Helium test" << endl << endl;
+    solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
+    solver->switchElectronInteraction(false);
+    solver->setAlpha(solver->getCharge());
+    solver->runMasterIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+
 }
+
 
 TEST(Derivatives)
 {
     cout << endl << "Running Derivatives test" << endl << endl;
+
+
     VMCSolver *solver = new VMCSolver();
     solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
 
-//    solver->derivatives()->numericalDerivative(solver);
+//    double nParticles = solver->getNParticles();
+//    double nDimensions = solver->getNDimensions();
+//    long int idum = -1;
+//    mat r = zeros<mat>(nParticles, nDimensions);
+
+//    //random position to test the analytical derivation against the numerical;
+//    for(int i = 0; i < nParticles; i++) {
+//        for(int j = 0; j < nDimensions(); j++) {
+//            r(i,j) = GaussianDeviate(&idum)*sqrt(stepLength);
+//        }
+//    }
+
+//////    solver->derivatives()->numericalDerivative(solver);
 
     double analytic, numerical;
+//    analytic = numerical;
+
 
     solver->runMasterIntegration();
 
@@ -48,7 +78,9 @@ TEST(Derivatives)
 
 
 
-    MPI_Finalize ();
 
     CHECK_CLOSE(fabs(analytic - numerical) , 0, 0.05 );
+
+    MPI_Finalize ();
+
 }

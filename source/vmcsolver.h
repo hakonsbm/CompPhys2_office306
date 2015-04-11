@@ -47,6 +47,11 @@ public:
     double getStepLength() {return stepLength;}
     int getMy_Rank() {return my_rank;}
     void switchbBlockSampling(bool onOff) { m_blockSampling = onOff;}
+    void switchElectronInteraction(bool onOff) {m_electronInteraction = onOff;}
+    bool getElectronInteration () {return m_electronInteraction; }
+    void switchJastrow(bool onOff) {m_Jastrow = onOff;}
+    bool getJastrow() {return m_Jastrow; }
+
 
 
     double getEnergyVar() {return m_energyVar;}
@@ -65,6 +70,9 @@ private:
 
     bool importanceSampling;    //When this flag is true it uses importance sampling instead of regular sampling
     bool m_blockSampling;
+
+    bool m_electronInteraction;
+    bool m_Jastrow;
 
 
     int nDimensions;

@@ -26,6 +26,7 @@ double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
 
 double HeliumSimpleAnalytical::localEnergy(const mat &r, VMCSolver *solver)
 {
+    double kineticEnergy, potentialEnergy;
 
     double r1 = norm(r.row(0));
     double r2 = norm(r.row(1));
@@ -34,6 +35,17 @@ double HeliumSimpleAnalytical::localEnergy(const mat &r, VMCSolver *solver)
     double alpha = solver->getAlpha();
     double charge = solver->getCharge();
 
+    kineticEnergy = solver->derivatives()->analyticalSimpleDoubleDerivative(r,solver);
+//    kineticEnergy = alpha*(1./r1+1./r2) - pow(alpha,2);
+
+    //Taking away the electron electron interaction, used for some tests with Hydrogenic wavesfunctions
+    if(solver->getElectronInteration())
+        potentialEnergy = - charge*(1./r1+1./r2) + 1./(r12);
+    else
+        potentialEnergy = - charge*(1./r1+1./r2);
+
+
     //Returns the local energy, EL = (a-Z)(1/r1+1/r2)+1/r12-alpha^2)
-    return (alpha - charge)*(1./r1+1./r2) + 1./(r12) - pow(alpha,2);
+        return kineticEnergy + potentialEnergy;
+
 }

@@ -30,9 +30,7 @@ void runCompareParallelize(VMCSolver * solver);
 
 int main(int nargs, char* args[])
 {
-//    MPI_Init(&nargs, &args);
 
-//    return  UnitTest::RunAllTests();
 
 
     // Choices for the alpha and beta values that is set in the creation of the trialFunctions are:
@@ -45,8 +43,14 @@ int main(int nargs, char* args[])
     //Neon:                     alpha = 10.22   beta = 0.091
 
     VMCSolver *solver = new VMCSolver();
-    solver->setTrialFunction(new Neon(solver));
+
+    MPI_Init(&nargs, &args);
     solver->mpiArguments(nargs, args);
+
+    return  UnitTest::RunAllTests();
+
+
+    solver->setTrialFunction(new Neon(solver));
 
 
 
@@ -59,11 +63,11 @@ int main(int nargs, char* args[])
 //    runCompareAnalytical(solver);
 //    runDiffNCycles(solver);
 //    runFindAlphaBeta(solver);
-    runCompareParallelize(solver);
+//    runCompareParallelize(solver);
 
 
 //    // End MPI
-//    MPI_Finalize ();
+    MPI_Finalize ();
 
     return 0;
 }
@@ -452,7 +456,7 @@ void runDiffNCycles(VMCSolver *solver)
 
 void runCompareParallelize(VMCSolver * solver)
 {
-    solver->setCycles(1000);
+    solver->setCycles(10000);
     double start, end;
 
     //Need to make a python script to run it with different number of nodes

@@ -30,7 +30,9 @@ VMCSolver::VMCSolver():
     nCycles(100000),
     D(0.5),
     my_rank(0)
+
 {
+    switchElectronInteraction(true);
     initiateDerivatives(new Derivatives);
 }
 
@@ -39,22 +41,10 @@ VMCSolver::VMCSolver():
 void VMCSolver::runMasterIntegration()
 {
 
-//    char** t_args  = args;
-
-//    cout << "The regular arguments" << endl<< endl;
-//    cout << "*args[]" << *args << endl;
-//    cout << "args[]" << args << endl;
-//    cout << "&args[]" << &args << endl;
-
-//    cout << "The ones stored in the class" << endl << endl;
-//    cout << "*m_args[]" << *t_args << endl;
-//    cout << "m_args[]" << t_args << endl;
-//    cout << "&m_args[]" << &t_args << endl;
-//    cout << nargs << endl;
 
     //MPI initializations
         int numprocs;
-        MPI_Init(&m_nargs, &m_args);
+//        MPI_Init(&m_nargs, &m_args);
 
         MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
         MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
@@ -113,8 +103,8 @@ void VMCSolver::runMasterIntegration()
             outfile << setw(15) << nCycles << endl;
         }
 
-        // End MPI
-        MPI_Finalize ();
+//        // End MPI
+//        MPI_Finalize ();
 
 
 }
