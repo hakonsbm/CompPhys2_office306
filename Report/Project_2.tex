@@ -128,11 +128,17 @@
 			R_{SD} &= \frac{|\vb{D}^{new}|}{|\vb{D}^{old}|} = \frac{\sum_{j=0}^N D_{ij}^{new} C_{ji}^{new} }{\sum_{j=0}^N D_{ij}^{old} C_{ji}^{old} }
 		\end{align}
 
-		Since we are only moving one particle at a time and the cofactor term relies on the other rows it doesn't change \(C^{new}_{jk} = C^{old}_{jk}\) in one movement. Combining this with equation \eqref{eq:inverseMatrix} we get
+		Since we are only moving one particle at a time and the cofactor term relies on the other rows it doesn't change, \(C^{new}_{ij} = C^{old}_{ij}\) in one movement. Combining this with equation \eqref{eq:inverseMatrix} we get
 
 		\begin{align}
-			R_{SD} &=  \frac{\sum_{j=0}^N D_{ij}^{new} (D_{ij}^{old})^{-1} |D^{old}| }{\sum_{j=0}^N D_{ij}^{old} (D_{ij}^{old})^{-1} |D^{old}| }
+			R_{SD} &=  \frac{\sum_{j=0}^N D_{ij}^{new} (D_{ji}^{old})^{-1} |D^{old}| }{\sum_{j=0}^N D_{ij}^{old} (D_{ji}^{old})^{-1} |D^{old}| }
 		\end{align}
+
+		Since \(\vb{D}\) is invertible, \(\vb{D}\vb{D}^{-1} = \vb{1}\), the ratio becomes
+
+		\begin{align}
+			R_{SD} &= \sum_{j = 0}^{N}D_{ij}^{new}(D_{ji}^{old})^{-1} = \sum_{j = 0}^{N} \phi_j(\vb{x}^{new}_i) D_{ji}^{-1}(\vb{x}^{old}) 
+		\end{align} 
 
 
 \end{document}

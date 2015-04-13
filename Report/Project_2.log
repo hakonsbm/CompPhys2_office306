@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  13 APR 2015 21:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  13 APR 2015 21:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2050,20 +2050,20 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 51.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 138.
- [2] [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 138.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 144.
+ [3]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 144.
  (./Project_2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 138.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 138.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 144.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 144.
 Package rerunfilecheck Info: File `Project_2.out' has not changed.
 (rerunfilecheck)             Checksum: A40E0923779DBD29A658A3E3B8DA5355;131.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 138.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 144.
  ) 
 Here is how much of TeX's memory you used:
- 25004 strings out of 493304
- 469386 string characters out of 6139871
+ 25005 strings out of 493304
+ 469399 string characters out of 6139871
  594028 words of memory out of 5000000
  27975 multiletter control sequences out of 15000+600000
  18153 words of font info for 53 fonts, out of 8000000 for 9000
@@ -2086,10 +2086,10 @@ ic/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200
 mf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/publi
 c/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.
 pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on Project_2.pdf (3 pages, 220703 bytes).
+Output written on Project_2.pdf (3 pages, 221304 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 111 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
+ 138 PDF objects out of 1000 (max. 8388607)
+ 112 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
  29 words of extra memory for PDF output out of 10000 (max. 10000000)
 
