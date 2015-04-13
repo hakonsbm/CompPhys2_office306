@@ -50,7 +50,7 @@ int main(int nargs, char* args[])
     return  UnitTest::RunAllTests();
 
 
-    solver->setTrialFunction(new Neon(solver));
+    solver->setTrialFunction(new Beryllium(solver));
 
 
 

@@ -50,6 +50,10 @@ double Derivatives::numericalDoubleDerivative(const mat &r, VMCSolver *solver)
 
 double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver)
 {
+    //This calculates the simple parts of the trialfunctions that are without interaction between the molecules
+    //Calculates (nabla Psi_S) /Psi_S
+    // d²/dx² (sum_i  e^(-alpha r_i ) ) / sum_i  e^(-alpha r_i )
+
     double alpha = solver->getAlpha();
 
     double derivative = 0;
@@ -61,4 +65,5 @@ double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *so
 
     return derivative;
 }
+
 

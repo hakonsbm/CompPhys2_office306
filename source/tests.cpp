@@ -25,6 +25,7 @@ TEST(Hydrogenic) {
     solver->setTrialFunction(new Hydrogen(solver));
     solver->runMonteCarloIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-1./2, solver->getEnergy());
 
 
     cout << endl << "Running Helium test" << endl << endl;
@@ -33,7 +34,7 @@ TEST(Hydrogenic) {
     solver->setAlpha(solver->getCharge());
     solver->runMasterIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
-
+    CHECK_EQUAL(-4, solver->getEnergy());
 }
 
 

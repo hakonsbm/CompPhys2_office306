@@ -56,6 +56,7 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
         -psi1s(argument[3], alpha)*psi2s(argument[2], alpha));
     */
     SD = SlaterDeterminant(r, alpha, solver);
+
     //cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
     //return wf*product;
     return SD;//*product;
