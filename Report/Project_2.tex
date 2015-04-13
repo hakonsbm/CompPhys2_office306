@@ -51,6 +51,8 @@
 
 \abstract{}
 
+\section{Theorystuff}
+
 \subsection{Efficient calculation of derivatives}
 	Calculating the derivatives involved in the VMC calculation numerically is slow in that they entail several calls to the wavefunctions in addition to introducing an extra numerical error. Here we will show how we have found divided up the derivatives and found analytic expressions for all the parts.
 
@@ -60,6 +62,15 @@
 	\end{align}
 
 	where \(D_\uparrow\), \(D_\downarrow\) and \(\Psi_C\) is the spin up and down part of the Slater determinant and the Jastrow factor respectively.
+
+	\subsubsection{Gradient ratio}
+		For quantum force we need to calculate the gradient ratio of the trialfunction which is given by
+
+		\begin{align}
+			\frac{\nabla \Psi_T}{ \Psi_T } &= \frac{\nabla( \Psi_D\Psi_C  )}{ \Psi_D\Psi_C } = \frac{ \nabla \Psi_D }{\Psi_D } + \frac{\nabla \Psi_C}{\Psi_C}
+			\\
+			&= \frac{\nabla |D_\uparrow|}{|D_\uparrow|} + \frac{ \nabla |D_\downarrow|}{|D_\downarrow|} + \frac{\nabla \Psi_C}{\Psi_C} 
+		\end{align}
 
 	\subsubsection{Kinetic Energy}
 		From the Hamiltonian the expectation value of kinetic energy for each electron is given by
@@ -93,6 +104,35 @@
 			\frac{\nabla^2 \Psi_T}{\Psi_T} &= \frac{\nabla^2 |D_\uparrow|}{|D_\uparrow|} + \frac{\nabla^2 |D_\downarrow|}{|D_\downarrow|} + 2 \left( \frac{\nabla |D_\uparrow|}{|D_\uparrow|} + \frac{\nabla |D_\downarrow|}{|D_\downarrow|} \right) \cdot \frac{\nabla\Psi_C}{\Psi_C} +  \frac{\nabla^2\Psi_C}{\Psi_C}
 		\end{align}
 
-		Now we have \(4\) different types of ratios we need to find an expression for, \( \frac{\nabla^2 |D|}{|D|} \) , \(\frac{\nabla |D|}{|D|} \), \( \frac{\nabla^2\Psi_C}{\Psi_C} \) and \( \frac{\nabla\Psi_C}{\Psi_C} \).
+		Now we have \(4\) different types of ratios we need to find an expression for \( \frac{\nabla^2 |D|}{|D|} \) , \(\frac{\nabla |D|}{|D|} \), \( \frac{\nabla^2\Psi_C}{\Psi_C} \) and \( \frac{\nabla\Psi_C}{\Psi_C} \) to calculate both the gradient and laplacian ratios of the wavefunction.
+
+		\subsubsection{Determinant ratios}
+		To tackle the determinant ratios we need to introduce some notation. Let an element in the determinant matrix, \(|D|\),  be described by
+
+		\begin{align}
+			D_{ij} = \phi_j(\vb{r}_i)
+		\end{align}
+
+		where \(\phi_j\) is the j'th single particle wavefunction and \( \vb{r}_i \) is the position of the i'th particle. 
+
+		The inverse of a matrix is given by transposing it and dividing by the determinant, so the determinant can be written as
+
+		\begin{align}
+			|D| &= \frac{\vb{D}^T}{\vb{D^{-1}}} = \sum_{j=1}^{N}{\frac{C_{ji}  }{ D^{-1}_{ij} } } = \sum_{j=1}^{N}{ D_{ij}C_{ji} }
+			\label{eq:inverseMatrix}
+		\end{align}
+
+		This gives the ratio of the new and old Slater determinants the following
+
+		\begin{align}
+			R_{SD} &= \frac{|\vb{D}^{new}|}{|\vb{D}^{old}|} = \frac{\sum_{j=0}^N D_{ij}^{new} C_{ji}^{new} }{\sum_{j=0}^N D_{ij}^{old} C_{ji}^{old} }
+		\end{align}
+
+		Since we are only moving one particle at a time and the cofactor term relies on the other rows it doesn't change \(C^{new}_{jk} = C^{old}_{jk}\) in one movement. Combining this with equation \eqref{eq:inverseMatrix} we get
+
+		\begin{align}
+			R_{SD} &=  \frac{\sum_{j=0}^N D_{ij}^{new} (D_{ij}^{old})^{-1} |D^{old}| }{\sum_{j=0}^N D_{ij}^{old} (D_{ij}^{old})^{-1} |D^{old}| }
+		\end{align}
+
 
 \end{document}
