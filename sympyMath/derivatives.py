@@ -3,23 +3,33 @@ import sympy as sp
 sp.init_printing()
 
 alpha, beta, Z = sp.symbols('alpha beta Z', positive = True)
-xi, yi, zi= sp.symbols('xi yi zi', positive = True)
+x_i, y_i, z_i= sp.symbols('x_i y_i z_i', positive = True)
 
-ri = sp.sqrt(xi*xi + yi*yi + zi*zi)
+r_i = sp.sqrt(x_i*x_i + y_i*y_i + z_i*z_i)
 
-psi1S = sp.exp(-alpha *ri)
 
-psi2S = (1-alpha*ri/2)*sp.exp(-alpha *ri)
 
-psi2P = alpha*ri*sp.exp(-alpha*ri/2)
+psi1S = sp.exp(-alpha *r_i)
 
-Ri = sp.symbols('ri')
+psi2S = (1-alpha*r_i/2)*sp.exp(-alpha *r_i)
+
+psi2P = alpha*r_i*sp.exp(-alpha*r_i/2)
+
+R_i = sp.symbols('r_i')
+
 
 def printDerivatives(psi):
 	print "Calculating the derivatives for the wavefunction "
-	print "psi : ", psi
-	print "d/dx : ", (sp.diff(psi,xi) + sp.diff(psi,yi) + sp.diff(psi, zi)).subs(ri,Ri).factor()
-	print "d2/dx2 : " , (sp.diff(psi,xi,2) + sp.diff(psi,yi,2) + sp.diff(psi,zi,2)).factor().subs(ri,Ri)
+	print "psi : ", psi.subs(r_i,R_i)
+	print "d/dx : ", (sp.diff(psi,x_i) + sp.diff(psi,y_i) + sp.diff(psi, z_i)).subs(r_i,R_i).factor()
+	print "d2/dx2 : " , ((sp.diff(psi,x_i,2) + sp.diff(psi,y_i,2) + sp.diff(psi,z_i,2))
+		.factor().subs(r_i,R_i).collect(alpha**2).subs(r_i**2,R_i**2))
+	print 
+	print "Now in latex format "
+	print "psi : ", sp.printing.latex(psi.subs(r_i,R_i))
+	print "d/dx : ", sp.printing.latex((sp.diff(psi,x_i) + sp.diff(psi,y_i) + sp.diff(psi, z_i)).subs(r_i,R_i).factor())
+	print "d2/dx2 : " , sp.printing.latex((sp.diff(psi,x_i,2) + sp.diff(psi,y_i,2) + sp.diff(psi,z_i,2))
+		.factor().subs(r_i,R_i).collect(alpha**2).subs(r_i**2,R_i**2))
 	print 
 
 printDerivatives(psi1S)

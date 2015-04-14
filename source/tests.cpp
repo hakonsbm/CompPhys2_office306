@@ -38,7 +38,7 @@ TEST(Hydrogenic) {
 
     cout << endl << "Running Beryllium test" << endl << endl;
     solver->setTrialFunction(new Beryllium(solver));
-    solver->switchElectronInteraction(false);
+    solver->switchElectronInteraction(true);
     solver->setAlpha(solver->getCharge());
     solver->runMasterIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
