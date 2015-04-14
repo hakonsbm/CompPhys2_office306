@@ -42,9 +42,17 @@ TEST(Hydrogenic) {
     solver->setAlpha(solver->getCharge());
     solver->runMasterIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
-    CHECK_EQUAL(-4, solver->getEnergy());
+    CHECK_EQUAL(-20, solver->getEnergy());
 
     exit(0);
+
+    cout << endl << "Running Neon test" << endl << endl;
+    solver->setTrialFunction(new Neon(solver));
+    solver->switchElectronInteraction(false);
+    solver->setAlpha(solver->getCharge());
+    solver->runMasterIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-4, solver->getEnergy());
 }
 
 

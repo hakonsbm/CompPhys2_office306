@@ -8,10 +8,11 @@
 #include "trialFunctions/heliumjastrownumerical.h"
 #include "trialFunctions/heliumjastrowanalytical.h"
 #include "derivatives.h"
+#include "slaterdeterminant.h"
 
 using namespace arma;
 
-class TrialFunction; class Derivatives;
+class TrialFunction; class Derivatives; class SlaterDeterminant;
 
 class VMCSolver
 {
@@ -34,6 +35,10 @@ public:
 
     void initiateDerivatives(Derivatives *derivatives) {m_derivatives = derivatives; }
     Derivatives *derivatives(){return m_derivatives;}
+
+    void initiateSlaterDeterminant(SlaterDeterminant *determinant) {m_slaterDeterminant = determinant;}
+    SlaterDeterminant *determinant() {return m_slaterDeterminant;}
+
 
     TrialFunction *trialFunction(){return m_trialFunction;}
 
@@ -64,6 +69,8 @@ public:
 private:
     TrialFunction *m_trialFunction;
     Derivatives *m_derivatives;
+    SlaterDeterminant *m_slaterDeterminant;
+
 
     double waveFunction(const mat &r);
     double localEnergy(const mat &r);

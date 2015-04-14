@@ -33,7 +33,8 @@ SOURCES += main.cpp \
     trialFunctions/neon.cpp \
     lib.cpp \
     tests.cpp \
-    derivatives.cpp
+    derivatives.cpp \
+    slaterdeterminant.cpp
 
 HEADERS += \
     vmcsolver.h \
@@ -46,4 +47,5 @@ HEADERS += \
     trialFunctions/hydrogen.h \
     trialFunctions/neon.h \
     lib.h \
-    derivatives.h
+    derivatives.h \
+    slaterdeterminant.h

@@ -7,6 +7,7 @@
 #include "trialFunctions/hydrogen.h"
 #include "trialFunctions/beryllium.h"
 #include "trialFunctions/neon.h"
+#include "slaterdeterminant.h"
 
 #include <iostream>
 #include <time.h>

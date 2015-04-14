@@ -27,13 +27,14 @@ VMCSolver::VMCSolver():
     h(0.001),
     h2(1000000),
     idum(-1),
-    nCycles(100000),
+    nCycles(10000),
     D(0.5),
     my_rank(0)
 
 {
     switchElectronInteraction(true);
     initiateDerivatives(new Derivatives);
+    initiateSlaterDeterminant(new SlaterDeterminant);
 }
 
 
