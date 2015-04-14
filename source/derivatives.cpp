@@ -66,22 +66,56 @@ double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *so
     return derivative;
 }
 
-double Derivatives::analyticalPsi1SDerivative(const mat &r, VMCSolver *solver)
+double Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
-    return -solver->getAlpha();
+    double alpha = solver->getAlpha();
+
+    double derivative = - alpha * (r(particleTag,1) + r(particleTag,2) + r(particleTag,3)) * exp(-alpha*norm(r.row(particleTag))) / norm(r.row(particleTag));
+
+    return derivative;
 }
 
-double Derivatives::analyticalPsi1SDoubleDerivative(const mat &r, VMCSolver *solver)
+double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
-    return solver->getAlpha()*solver->getAlpha();
+    double alpha = solver->getAlpha();
+
+    double derivative = alpha * (alpha * norm(r.row(particleTag)) - 2) * exp(-alpha*norm(r.row(particleTag))) / norm(r.row(particleTag));
+
+    return derivative;
 }
 
-double Derivatives::analyticalPsi2SDerivative(const mat &r, VMCSolver *solver)
+double Derivatives::analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
-    //d/dx (1-alpha*r_i/2)exp(-alpha*r_i/2)
+    double alpha = solver->getAlpha();
 
-    return 0;
+    double derivative = alpha * (alpha * norm(r.row(particleTag))-3) * (r(particleTag,1) + r(particleTag,2) + r(particleTag,3)) * exp(-alpha*norm(r.row(particleTag))) / (2 * norm(r.row(particleTag)));
+
+    return derivative;
 }
 
+double Derivatives::analyticalPsi2SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
+{
+    double alpha = solver->getAlpha();
 
+    double derivative = - alpha * alpha * (alpha * r(particleTag,1) * r(particleTag,1) + alpha * r(particleTag,2) * r(particleTag,2) + alpha * r(particleTag,3) * r(particleTag,3) + 6 / alpha - 6 * norm(r.row(particleTag))) * exp(-alpha*norm(r.row(particleTag))) / (2 * norm(r.row(particleTag)));
 
+    return derivative;
+}
+
+double Derivatives::analyticalPsi2PDerivative(int particleTag, const mat &r, VMCSolver *solver)
+{
+    double alpha = solver->getAlpha();
+
+    double derivative = -alpha * (alpha * norm(r.row(particleTag)) - 2) * (r(particleTag,1) + r(particleTag,2) + r(particleTag,3)) * exp(-alpha*norm(r.row(particleTag)) / 2) / (2 * norm(r.row(particleTag)));
+
+    return derivative;
+}
+
+double Derivatives::analyticalPsi2PDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
+{
+    double alpha = solver->getAlpha();
+
+    double derivative = alpha * alpha * (alpha * r(particleTag,1) * r(particleTag,1) + alpha * r(particleTag,2) * r(particleTag,2) + alpha * r(particleTag,3) * r(particleTag,3) + 8 / alpha - 8 * norm(r.row(particleTag))) * exp(-alpha*norm(r.row(particleTag)) / 2) / (4 * norm(r.row(particleTag)));
+
+    return derivative;
+}

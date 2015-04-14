@@ -17,9 +17,12 @@ public:
 
     double analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver);
 
-    double analyticalPsi1SDerivative(const mat &r, VMCSolver *solver);
-    double analyticalPsi1SDoubleDerivative(const mat &r, VMCSolver *solver);
-    double analyticalPsi2SDerivative(const mat &r, VMCSolver *solver);
+    double analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver);
+    double analyticalPsi1SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver);
+    double analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSolver *solver);
+    double analyticalPsi2SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver);
+    double analyticalPsi2PDerivative(int particleTag, const mat &r, VMCSolver *solver);
+    double analyticalPsi2PDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver);
 };
 
 #endif // DERIVATIVES_H
