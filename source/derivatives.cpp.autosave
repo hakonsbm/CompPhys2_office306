@@ -77,8 +77,10 @@ double Derivatives::analyticalPsi1SDoubleDerivative(const mat &r, VMCSolver *sol
 }
 
 double Derivatives::analyticalPsi2SDerivative(const mat &r, VMCSolver *solver)
-{
-
+{   
+    //d/dx (1-alpha*r_i/2)exp(-alpha*r_i/2)
+    
+    return 
 }
 
 

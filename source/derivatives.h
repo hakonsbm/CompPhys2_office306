@@ -17,6 +17,9 @@ public:
 
     double analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver);
 
+    double analyticalPsi1SDerivative(const mat &r, VMCSolver *solver);
+    double analyticalPsi1SDoubleDerivative(const mat &r, VMCSolver *solver);
+    double analyticalPsi2SDerivative(const mat &r, VMCSolver *solver);
 };
 
 #endif // DERIVATIVES_H
