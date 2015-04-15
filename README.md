@@ -44,6 +44,11 @@ runCompareParallelize
 
 `Cycles` is the number of cycles in the Monte Carlo solver.
 
+Example:
+```
+-n 4 vmc Neon runCompareParallelize 100
+```
+
 There is also a program called energyLevels.py that makes different plots og the various data produced by the main program.
 
 
