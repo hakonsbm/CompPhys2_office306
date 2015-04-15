@@ -14,18 +14,21 @@ Variational Monte Carlo program and studies for Helium and Beryllium
 The program is run by opening the vmc.pro file with for example qt-creator.
 
 Set run arguments to
-
+```
 	-n [p] vmc [Atom] [Test] [Cycles]
-
+```
 p is number of processes.
 Atom is the trialfunction. Options:
+```
     HeliumSimpleAnalytical   
     HeliumSimpleNumerical    
     HeliumJastrowAnalytical
     HeliumJastrowNumerical  
     Beryllium
     Neon
+```
 Test is the test to be run. Options:
+
 	runWithDiffConstants
 	runSIWithDiffTimesteps
 	runBlockingSampledRun
