@@ -7,10 +7,7 @@ Variational Monte Carlo program and studies for Helium and Beryllium
 
 #### Running the program
 
-To run it in QT creator make sure that the run settings is set according to this guide
-
-http://dragly.org/2012/03/14/developing-mpi-applications-in-qt-creator/
-
+To run it in QT creator make sure that the run settings is set according to [this](http://dragly.org/2012/03/14/developing-mpi-applications-in-qt-creator/) guide.
 
 The program is run by opening the vmc.pro file with for example qt-creator.
 
