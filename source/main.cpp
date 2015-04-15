@@ -28,6 +28,7 @@ void runCompareAnalytical(VMCSolver *solver);
 void runDiffNCycles(VMCSolver *solver);
 void runFindAlphaBeta(VMCSolver *solver);
 void runCompareParallelize(VMCSolver * solver);
+int runTests(VMCSolver *solver);
 
 int main(int nargs, char* args[])
 {
@@ -78,6 +79,7 @@ int main(int nargs, char* args[])
     else if((string)args[2]=="runDiffNCycles") runDiffNCycles(solver);
     else if((string)args[2]=="runFindAlphaBeta") runFindAlphaBeta(solver);
     else if((string)args[2]=="runCompareParallelize") runCompareParallelize(solver);
+    else if((string)args[2]=="runTests") runTests(solver);
     else {if(my_rank==0) cout << args[2]  << " is not a valid runtype" << endl; exit(1);}
 
     // End MPI
@@ -488,6 +490,12 @@ void runCompareParallelize(VMCSolver * solver)
 
     return;
 }
+
+int runTests(VMCSolver *solver)
+{
+    return  UnitTest::RunAllTests();
+}
+
 
 
 

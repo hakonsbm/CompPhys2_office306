@@ -13,7 +13,11 @@ HeliumSimpleAnalytical::HeliumSimpleAnalytical(VMCSolver *solver)
 
 double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
 {
+    double alpha = solver->getAlpha();
     vec rpos(solver->getNParticles());
+    double SD;
+
+
     for(int i = 0; i < solver->getNParticles(); i++) {
         double rSingleParticle = 0;
         for(int j = 0; j < solver->getNDimensions(); j++) {
@@ -22,7 +26,12 @@ double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
         rpos[i] = sqrt(rSingleParticle);
     }
 
-    return exp(-accu(rpos) * solver->getAlpha());
+    SD = solver->determinant()->calculateDeterminant(r,alpha,solver);
+
+    cout << SD << endl;
+    cout << exp(-accu(rpos) * alpha) << endl;
+
+    return exp(-accu(rpos) * alpha);
 }
 
 double HeliumSimpleAnalytical::localEnergy(const mat &r, VMCSolver *solver)
