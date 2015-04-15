@@ -115,7 +115,7 @@ void runFindAlphaBeta(VMCSolver *solver)
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+//    solver->setCycles(1000000);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -261,7 +261,7 @@ void runWithDiffConstants(VMCSolver *solver)
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+//    solver->setCycles(1000000);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -347,7 +347,7 @@ void runWithDiffConstants(VMCSolver *solver)
 void runSIWithDiffTimesteps(VMCSolver *solver)
 {
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+//    solver->setCycles(1000000);
 
     int nSteps = 100;
     double time_min = 0.01;
@@ -400,7 +400,7 @@ void runBlockingSampledRun(VMCSolver *solver)
 
     char const * outfilePath = (pathString + string("_blockingSamples")).c_str();
 
-    solver->setCycles(1000000);
+//    solver->setCycles(1000000);
 
     samplefile.open(outfilePath);
 
@@ -417,7 +417,7 @@ void runCompareAnalytical(VMCSolver *solver)
 
 
     solver->switchbBlockSampling(false);
-    solver->setCycles(10000000);
+//    solver->setCycles(10000000);
 
     clock_t start, end;     //To keep track of the time
 
@@ -469,7 +469,7 @@ void runDiffNCycles(VMCSolver *solver)
 
 void runCompareParallelize(VMCSolver * solver)
 {
-    solver->setCycles(1000);
+//    solver->setCycles(1000);
     double start, end;
 
     //Need to make a python script to run it with different number of nodes
