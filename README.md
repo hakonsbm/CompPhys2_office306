@@ -13,23 +13,27 @@ Variational Monte Carlo program and studies for Helium and Beryllium
 
 The program is run by opening the vmc.pro file with for example qt-creator.
 
-Then in the program there several trialfunction built in that all can be set in the main function.
+Set run arguments to
 
-    HeliumSimpleAnalytical:   
-    HeliumSimpleNumerical:    
-    HeliumJastrowAnalytical:  
-    HeliumJastrowNumerical:  
-    Beryllium:               
+	-n [p] vmc [Atom] [Test] [Cycles]
 
-These are set by using the solver->setTrialFunction(new TrialFunction(solver));
-
-Then there are several option for which test that should be run:
-
-void runWithDiffConstants(VMCSolver *solver);
-void runSIWithDiffTimesteps(VMCSolver *solver);
-void runBlockingSampledRun(VMCSolver *solver);
-void runCompareAnalytical(VMCSolver *solver);
-void runDiffNCycles(VMCSolver *solver);
+p is number of processes.
+Atom is the trialfunction. Options:
+    HeliumSimpleAnalytical   
+    HeliumSimpleNumerical    
+    HeliumJastrowAnalytical
+    HeliumJastrowNumerical  
+    Beryllium
+    Neon
+Test is the test to be run. Options:
+	runWithDiffConstants
+	runSIWithDiffTimesteps
+	runBlockingSampledRun
+	runCompareAnalytical
+	runDiffNCycles
+	runFindAlphaBeta
+	runCompareParallelize
+Cycles is the number of cycles in the Monte Carlo solver.
 
 There is also a program called energyLevels.py that makes different plots og the various data produced by the main program.
 
