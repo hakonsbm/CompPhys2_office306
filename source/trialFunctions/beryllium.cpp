@@ -73,12 +73,17 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
         // and correlations functions. First up is the (d²/dx² |Dup|)/|Dup| and (d²/dx² |Ddown|)/|Ddown|
 //        cout << "Calccualting kinetic Energy "<< endl;
         kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r, solver);
-
+//        cout << "detUpAndUpINverse" << endl;
+//        cout << solver->determinant()->detUp << endl;
+//        cout << solver->determinant()->detUpInverse << endl;
         kineticEnergy *= -1./2.;
     }
     else
         kineticEnergy = solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
 
+    cout << endl<< "KineticEnergy by the numerical: " << solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver)) << endl;
+
+    cout << " KineticEnergy by the analytical: " << solver->determinant()->laplacianSlaterDeterminant(r, solver)/(-2.) << endl << endl;
 
 
     // Potential energy

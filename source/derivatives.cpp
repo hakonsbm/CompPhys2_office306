@@ -55,12 +55,14 @@ double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *so
     // d²/dx² (sum_i  e^(-alpha r_i ) ) / sum_i  e^(-alpha r_i )
 
     double alpha = solver->getAlpha();
+    double ri;
 
     double derivative = 0;
 
     for(int i = 0; i < solver->getNParticles(); i++)
     {
-        derivative += alpha/(norm(r.row(i))) - pow(alpha,2)/2.;
+        ri = norm(r.row(i));
+        derivative += alpha/ri * (alpha*ri - 2.);
     }
 
     return derivative;
@@ -78,8 +80,9 @@ double Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMC
 double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
     double alpha = solver->getAlpha();
+    double ri = norm(r.row(particleTag));
 
-    double derivative = alpha * (alpha * norm(r.row(particleTag)) - 2) /* * exp(-alpha*norm(r.row(particleTag)))*/ / norm(r.row(particleTag));
+    double derivative = alpha * (alpha * ri - (2./ri) )  * exp(-alpha*ri);
 
     return derivative;
 }
@@ -98,8 +101,9 @@ double Derivatives::analyticalPsi2SDoubleDerivative(int particleTag, const mat &
 
 //    cout << "ParticleTag : " << particleTag <<endl;
     double alpha = solver->getAlpha();
+    double ri = norm(r.row(particleTag));
 
-    double derivative = - alpha * alpha * (alpha * r(particleTag,0) * r(particleTag,0) + alpha * r(particleTag,1) * r(particleTag,1) + alpha * r(particleTag,2) * r(particleTag,2) + 6 / alpha - 6 * norm(r.row(particleTag))) /* * exp(-alpha*norm(r.row(particleTag)))*/ / (2 * norm(r.row(particleTag)));
+    double derivative = - (alpha / (2.*ri*ri)) * (alpha*alpha*ri*ri - 6.*alpha*ri + 6.) * exp(-alpha*ri);
 
     return derivative;
 }

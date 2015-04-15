@@ -143,13 +143,12 @@ double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *so
 {
     //Shall impliment (d²/dx² |D|)/|D|
 
-    int i, j, nHalf, *indx;
+    int i, j, nHalf;
     double derivative;
     int nParticles= solver->getNParticles();
     double alpha = solver->getAlpha();
 
     nHalf = nParticles/2;
-    indx = new int [nHalf];
 
     updateSlaterMatrices(r,solver);
 
@@ -159,12 +158,12 @@ double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *so
     {
         for(j = 0; j < nHalf; j++)
         {
-
-            derivative  += laplacianPhi(r, alpha, i, j, solver);
+            derivative += laplacianPhi(r, alpha, i, j, solver) * detUpInverse(j,i);
+            derivative += laplacianPhi(r, alpha, i + nHalf, j, solver) * detDownInverse(j,i);
         }
     }
 
-    return 0;
+    return derivative;
 
 
 }

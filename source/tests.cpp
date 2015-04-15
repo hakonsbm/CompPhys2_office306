@@ -31,10 +31,15 @@ TEST(Hydrogenic) {
     cout << endl << "Running Helium test" << endl << endl;
     solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
     solver->switchElectronInteraction(false);
+    solver->trialFunction()->setAnalytical(true);
     solver->setAlpha(solver->getCharge());
+    solver->setCycles(1);
     solver->runMasterIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
     CHECK_EQUAL(-4, solver->getEnergy());
+
+    exit(0);
+
 
     cout << endl << "Running Beryllium test" << endl << endl;
     solver->setTrialFunction(new Beryllium(solver));
