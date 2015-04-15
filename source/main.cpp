@@ -471,7 +471,8 @@ void runCompareParallelize(VMCSolver * solver)
 {
 //    solver->setCycles(1000);
     double start, end;
-
+    int numprocs;
+    MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
     //Need to make a python script to run it with different number of nodes
     //Or we can do it manually with changing the projoect build
        start = MPI_Wtime();
@@ -481,7 +482,7 @@ void runCompareParallelize(VMCSolver * solver)
 
     if (solver->getMy_Rank()==0)
     {
-        cout << "Time used for the unparallelized code is: " << end - start << endl;
+        cout << "Time used with "<< numprocs << " processes: " << end - start << endl;
     }
 
 
