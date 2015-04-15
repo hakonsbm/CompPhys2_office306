@@ -48,28 +48,40 @@ int main(int nargs, char* args[])
     MPI_Init(&nargs, &args);
     solver->mpiArguments(nargs, args);
 
-    return  UnitTest::RunAllTests();
+    //return  UnitTest::RunAllTests();
 
+    // Command line argument parsing
+    int my_rank;
+    MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
 
-    solver->setTrialFunction(new Beryllium(solver));
+    if((string)args[1]=="HeliumSimpleAnalytical") solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
+    else if((string)args[1]=="HeliumSimpleNumerical") solver->setTrialFunction(new HeliumSimpleNumerical(solver));
+    else if((string)args[1]=="HeliumJastrowAnalytical") solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
+    else if((string)args[1]=="HeliumJastrowNumerical") solver->setTrialFunction(new HeliumJastrowNumerical(solver));
+    else if((string)args[1]=="Beryllium") solver->setTrialFunction(new Beryllium(solver));
+    else if((string)args[1]=="Neon") solver->setTrialFunction(new Neon(solver));
+    else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
+    if(my_rank==0)
+    {
+        cout<<"Atom: "<< args[1]<<endl;
+        cout<<"Run: "<< args[2]<<endl;
+        cout<<"Cycles: "<< args[3]<<endl;
+    }
 
+    solver->setCycles(atoi(args[3]));
 
+    if((string)args[2]=="runWithDiffConstants") runWithDiffConstants(solver);
+    else if((string)args[2]=="runSIWithDiffTimesteps") runSIWithDiffTimesteps(solver);
+    else if((string)args[2]=="runBlockingSampledRun") runBlockingSampledRun(solver);
+    else if((string)args[2]=="runCompareAnalytical") runCompareAnalytical(solver);
+    else if((string)args[2]=="runDiffNCycles") runDiffNCycles(solver);
+    else if((string)args[2]=="runFindAlphaBeta") runFindAlphaBeta(solver);
+    else if((string)args[2]=="runCompareParallelize") runCompareParallelize(solver);
+    else {if(my_rank==0) cout << args[2]  << " is not a valid runtype" << endl; exit(1);}
 
-    //Enable this if you want to calculate for all the different alpha and beta values to find the best ones.
-    //Look for the program energyLevels.py to find which values were the best
-//    runWithDiffConstants(solver);
-//    runSIWithDiffTimesteps(solver);
-//    runBlockingSampledRun(solver) ;
-//    runCompareAnalytical(solver);
-//    runDiffNCycles(solver);
-//    runFindAlphaBeta(solver);
-//    runCompareParallelize(solver);
-
-
-//    // End MPI
+    // End MPI
     MPI_Finalize ();
-
     return 0;
 }
 
@@ -103,7 +115,7 @@ void runFindAlphaBeta(VMCSolver *solver)
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+//    solver->setCycles(1000000);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -249,7 +261,7 @@ void runWithDiffConstants(VMCSolver *solver)
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+//    solver->setCycles(1000000);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -335,7 +347,7 @@ void runWithDiffConstants(VMCSolver *solver)
 void runSIWithDiffTimesteps(VMCSolver *solver)
 {
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
+//    solver->setCycles(1000000);
 
     int nSteps = 100;
     double time_min = 0.01;
@@ -388,7 +400,7 @@ void runBlockingSampledRun(VMCSolver *solver)
 
     char const * outfilePath = (pathString + string("_blockingSamples")).c_str();
 
-    solver->setCycles(1000000);
+//    solver->setCycles(1000000);
 
     samplefile.open(outfilePath);
 
@@ -405,7 +417,7 @@ void runCompareAnalytical(VMCSolver *solver)
 
 
     solver->switchbBlockSampling(false);
-    solver->setCycles(10000000);
+//    solver->setCycles(10000000);
 
     clock_t start, end;     //To keep track of the time
 
@@ -457,9 +469,10 @@ void runDiffNCycles(VMCSolver *solver)
 
 void runCompareParallelize(VMCSolver * solver)
 {
-    solver->setCycles(10000);
+//    solver->setCycles(1000);
     double start, end;
-
+    int numprocs;
+    MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
     //Need to make a python script to run it with different number of nodes
     //Or we can do it manually with changing the projoect build
        start = MPI_Wtime();
@@ -469,7 +482,7 @@ void runCompareParallelize(VMCSolver * solver)
 
     if (solver->getMy_Rank()==0)
     {
-        cout << "Time used for the unparallelized code is: " << end - start << endl;
+        cout << "Time used with "<< numprocs << " processes: " << end - start << endl;
     }
 
 
