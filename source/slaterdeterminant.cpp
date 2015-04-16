@@ -36,10 +36,8 @@ double SlaterDeterminant::phi(const mat &r, double alpha, int i, int j, VMCSolve
 }
 
 
-double SlaterDeterminant::calculateDeterminant(const mat &r, double alpha, VMCSolver *solver) {}
 
-double SlaterDeterminant::laplacianPhi(const mat &r, double alpha, int i, int j, VMCSolver *solver) {}
-
+double SlaterDeterminant::laplacianPhi(const mat &r, double alpha, int i, int j, VMCSolver *solver)
 {
     int nDimensions = solver->getNDimensions();
     double derivative;
@@ -140,88 +138,88 @@ double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSol
     return d1*d2*SD;
 }
 
-double SlaterDeterminant::determinantRatioUp(const mat &r, VMCSolver *solver, Derivatives *der)
-{
-    double determinantRatio = 0;
-    int nHalf = solver->getNParticles() / 2;
-    mat inverse = detUp.i;
-    for(int i = 0; i < nHalf; i++) {
-        for(int j = 0; j < nHalf; j++) {
-            if(j == 0) {
-                determinantRatio += der->analyticalPsi1SDerivative(i, &r, *solver) * inverse(j,i);
-            }
-            else if(j == 1) {
-                determinantRatio += der->analyticalPsi2SDerivative(i, &r, *solver) * inverse(j,i);
-            }
-            else if((j >= 2) && (nHalf > 2)) {
-                determinantRatio += der->analyticalPsi2PDerivative(i, &r, *solver) * inverse(j,i);
-            }
-        }
-    }
-    return determinantRatio / solver->getMHR();
-}
+//double SlaterDeterminant::determinantRatioUp(const mat &r, VMCSolver *solver, Derivatives *der)
+//{
+//    double determinantRatio = 0;
+//    int nHalf = solver->getNParticles() / 2;
+//    mat inverse = detUp.i;
+//    for(int i = 0; i < nHalf; i++) {
+//        for(int j = 0; j < nHalf; j++) {
+//            if(j == 0) {
+//                determinantRatio += der->analyticalPsi1SDerivative(i, &r, *solver) * inverse(j,i);
+//            }
+//            else if(j == 1) {
+//                determinantRatio += der->analyticalPsi2SDerivative(i, &r, *solver) * inverse(j,i);
+//            }
+//            else if((j >= 2) && (nHalf > 2)) {
+//                determinantRatio += der->analyticalPsi2PDerivative(i, &r, *solver) * inverse(j,i);
+//            }
+//        }
+//    }
+//    return determinantRatio / solver->getMHR();
+//}
 
-double SlaterDeterminant::determinantRatioDown(const mat &r, VMCSolver *solver, Derivatives *der)
-{
-    double determinantRatio = 0;
-    int nHalf = solver->getNParticles() / 2;
-    mat inverse = detDown.i;
-    for(int i = 0; i < nHalf; i++) {
-        for(int j = 0; j < nHalf; j++) {
-            if(j == 0) {
-                determinantRatio += der->analyticalPsi1SDerivative(i + nHalf, &r, *solver) * inverse(j,i);
-            }
-            else if(j == 1) {
-                determinantRatio += der->analyticalPsi2SDerivative(i + nHalf, &r, *solver) * inverse(j,i);
-            }
-            else if((j >= 2) && (nHalf > 2)) {
-                determinantRatio += der->analyticalPsi2PDerivative(i + nHalfi, &r, *solver) * inverse(j,i);
-            }
-        }
-    }
-    return determinantRatio / solver->getMHR();
-}
+//double SlaterDeterminant::determinantRatioDown(const mat &r, VMCSolver *solver, Derivatives *der)
+//{
+//    double determinantRatio = 0;
+//    int nHalf = solver->getNParticles() / 2;
+//    mat inverse = detDown.i;
+//    for(int i = 0; i < nHalf; i++) {
+//        for(int j = 0; j < nHalf; j++) {
+//            if(j == 0) {
+//                determinantRatio += der->analyticalPsi1SDerivative(i + nHalf, &r, *solver) * inverse(j,i);
+//            }
+//            else if(j == 1) {
+//                determinantRatio += der->analyticalPsi2SDerivative(i + nHalf, &r, *solver) * inverse(j,i);
+//            }
+//            else if((j >= 2) && (nHalf > 2)) {
+//                determinantRatio += der->analyticalPsi2PDerivative(i + nHalfi, &r, *solver) * inverse(j,i);
+//            }
+//        }
+//    }
+//    return determinantRatio / solver->getMHR();
+//}
 
-double SlaterDeterminant::determinantLaplacianRatioUp(const mat &r, VMCSolver *solver, Derivatives *der)
-{
-    double determinantRatio = 0;
-    int nHalf = solver->getNParticles() / 2;
-    mat inverse = detUp.i;
-    for(int i = 0; i < nHalf; i++) {
-        for(int j = 0; j < solver->getNParticles() / 2; j++) {
-            if(j == 0) {
-                determinantRatio += der->analyticalPsi1SDoubleDerivative(i, &r, *solver) * inverse(j,i);
-            }
-            else if(j == 1) {
-                determinantRatio += der->analyticalPsi2SDoubleDerivative(i, &r, *solver) * inverse(j,i);
-            }
-            else if((j >= 2) && (nHalf > 2)) {
-                determinantRatio += der->analyticalPsi2PDoubleDerivative(i, &r, *solver) * inverse(j,i);
-            }
-        }
-    }
-    return determinantRatio;
-}
+//double SlaterDeterminant::determinantLaplacianRatioUp(const mat &r, VMCSolver *solver, Derivatives *der)
+//{
+//    double determinantRatio = 0;
+//    int nHalf = solver->getNParticles() / 2;
+//    mat inverse = detUp.i;
+//    for(int i = 0; i < nHalf; i++) {
+//        for(int j = 0; j < solver->getNParticles() / 2; j++) {
+//            if(j == 0) {
+//                determinantRatio += der->analyticalPsi1SDoubleDerivative(i, &r, *solver) * inverse(j,i);
+//            }
+//            else if(j == 1) {
+//                determinantRatio += der->analyticalPsi2SDoubleDerivative(i, &r, *solver) * inverse(j,i);
+//            }
+//            else if((j >= 2) && (nHalf > 2)) {
+//                determinantRatio += der->analyticalPsi2PDoubleDerivative(i, &r, *solver) * inverse(j,i);
+//            }
+//        }
+//    }
+//    return determinantRatio;
+//}
 
-double SlaterDeterminant::determinantLaplacianRatioDown(const mat &r, VMCSolver *solver, Derivatives *der)
-{
-    double determinantRatio = 0;
-    int nHalf = solver->getNParticles() / 2;
-    mat inverse = detDown.i;
-    for(int i = 0; i < nHalf; i++) {
-        for(int j = 0; j < nHalf; j++) {
-            if(j == 0) {
-                determinantRatio += der->analyticalPsi1SDoubleDerivative(i + nHalf, &r, *solver) * inverse(j,i);
-            }
-            else if(j == 1) {
-                determinantRatio += der->analyticalPsi2SDoubleDerivative(i + nHalf, &r, *solver) * inverse(j,i);
-            }
-            else if((j >= 2) && (nHalf > 2)) {
-                determinantRatio += der->analyticalPsi2PDoubleDerivative(i + nHalf, &r, *solver) * inverse(j,i);
-            }
-        }
-    }
-    return determinantRatio;
+//double SlaterDeterminant::determinantLaplacianRatioDown(const mat &r, VMCSolver *solver, Derivatives *der)
+//{
+//    double determinantRatio = 0;
+//    int nHalf = solver->getNParticles() / 2;
+//    mat inverse = detDown.i;
+//    for(int i = 0; i < nHalf; i++) {
+//        for(int j = 0; j < nHalf; j++) {
+//            if(j == 0) {
+//                determinantRatio += der->analyticalPsi1SDoubleDerivative(i + nHalf, &r, *solver) * inverse(j,i);
+//            }
+//            else if(j == 1) {
+//                determinantRatio += der->analyticalPsi2SDoubleDerivative(i + nHalf, &r, *solver) * inverse(j,i);
+//            }
+//            else if((j >= 2) && (nHalf > 2)) {
+//                determinantRatio += der->analyticalPsi2PDoubleDerivative(i + nHalf, &r, *solver) * inverse(j,i);
+//            }
+//        }
+//    }
+//    return determinantRatio;
 
 double SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solver)
 {
