@@ -206,6 +206,9 @@ void VMCSolver::runMonteCarloIntegrationIS() {
                     rOld(i,j) = rNew(i,j);
                     QForceOld(i,j) = QForceNew(i,j);
                     waveFunctionOld = waveFunctionNew;
+                    determinant()->updateSlaterMatrices(rNew,this); //Updating the matrices after moving the particle :)
+
+
                 }
 
             }
@@ -213,12 +216,14 @@ void VMCSolver::runMonteCarloIntegrationIS() {
                 for(int j = 0; j < nDimensions; j++) {
                    rNew(i,j) = rOld(i,j);
                    QForceNew(i,j) = QForceOld(i,j);
+
                 }
             }
 
 
             moves += 1;
             //update energies
+
             deltaE = trialFunction()->localEnergy(rNew, this);
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;
@@ -419,6 +424,7 @@ void VMCSolver::runMonteCarloIntegration() {
             for(int j = 0; j < nDimensions; j++) {
                 rNew(i,j) = rOld(i,j) + stepLength*(ran2(&idum) - 0.5);
             }
+//            determinant()->updateSlaterMatrices(rNew,this); //Updating |D| and |D|⁻1, should only be done once
             //Recalculate the value of the wave function
             waveFunctionNew = trialFunction()->waveFunction(rNew, this);
 
@@ -437,6 +443,8 @@ void VMCSolver::runMonteCarloIntegration() {
             }
             moves += 1;
             //update energies
+//            determinant()->updateSlaterMatrices(rNew,this);
+
             deltaE = trialFunction()->localEnergy(rNew, this);
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;

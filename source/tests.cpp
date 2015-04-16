@@ -38,7 +38,7 @@ TEST(Hydrogenic) {
     CHECK_EQUAL(0., solver->getEnergyVar());
     CHECK_EQUAL(-4, solver->getEnergy());
 
-//    exit(0);
+    exit(0);
 
 
     cout << endl << "Running Beryllium test" << endl << endl;

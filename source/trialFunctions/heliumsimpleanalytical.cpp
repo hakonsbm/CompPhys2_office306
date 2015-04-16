@@ -49,6 +49,8 @@ double HeliumSimpleAnalytical::localEnergy(const mat &r, VMCSolver *solver)
 
     double charge = solver->getCharge();
 
+//    solver->determinant()->updateSlaterMatrices(r,solver);
+
     kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r,solver)/(-2.);
 
 //    kineticEnergy = solver->derivatives()->analyticalSimpleDoubleDerivative(r,solver)/(-2.);

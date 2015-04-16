@@ -471,7 +471,13 @@ void runDiffNCycles(VMCSolver *solver)
 
 void runCompareParallelize(VMCSolver * solver)
 {
-//    solver->setCycles(1000);
+    //TestSettings
+    solver->switchElectronInteraction(true);
+    solver->trialFunction()->setAnalytical(false);
+    solver->setAlpha(solver->getCharge());
+
+
+
     double start, end;
     int numprocs;
     MPI_Comm_size (MPI_COMM_WORLD, &numprocs);

@@ -45,20 +45,16 @@ double SlaterDeterminant::laplacianPhi(const mat &r, double alpha, int i, int j,
     if (j == 0)
     {
         derivative = solver->derivatives()->analyticalPsi1SDoubleDerivative(i,r,solver);
-//        cout << derivative << endl;
-
         return derivative;  // d²/dx² 1s
     }
     else if (j == 1)
     {
-//        cout << "i: " << i << endl;
-//        cout << "r" << endl<< r << endl;
         derivative = solver->derivatives()->analyticalPsi2SDoubleDerivative(i,r,solver);
 
         return derivative; // d²/dx²  2s
     }
     else if (j>=2 && j<=4)
-    {   //Not done yet
+    {
         int dimension = j-2;
         derivative = solver->derivatives()->analyticalPsi2PDoubleDerivative( i, dimension, r, solver );
 
@@ -111,7 +107,7 @@ double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSol
     mat tempDetDown = zeros<mat>(Nhalf, Nhalf);
 
     // fill matrix detUp and detDown
-    updateSlaterMatrices(r, solver);
+//    updateSlaterMatrices(r, solver);
 
     tempDetUp = detUp;
     tempDetDown = detDown;
@@ -237,7 +233,7 @@ double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *so
 
     nHalf = nParticles/2;
 
-    updateSlaterMatrices(r,solver);
+//    updateSlaterMatrices(r,solver);
 
     derivative = 0;
     //Calculating the sum of the particles derivatives
