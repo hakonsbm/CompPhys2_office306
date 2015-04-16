@@ -10,6 +10,7 @@ using namespace std;
 Beryllium::Beryllium(VMCSolver *solver)
 {
     simpleFlag = false;
+    m_analytical = false;
     m_outfileName = "Beryllium";
 
     solver->setCharge(4);
@@ -20,7 +21,8 @@ Beryllium::Beryllium(VMCSolver *solver)
     //Giving the particles in Beryllium it's spin, the first half up and the second part down
     // up = 0 and down = 1
     spin << 0 << 0 << 1 << 1;
-    cout << spin << endl;
+
+
 }
 
 double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
@@ -40,13 +42,15 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
                     rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
                 }
                 rij = sqrt(rij);
-                a = corrolationFactor(i,j);
+                a = spinFactor(i,j);
                 product = product * exp(a*rij/(1+beta*rij));
             }
         }
     }
 
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
+
+
 
     return SD*product;
 }
@@ -57,37 +61,30 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
     double nParticles = solver->getNParticles();
     double nDimensions = solver->getNDimensions();
     double charge = solver->getCharge();
-    double h = solver->getH();
-    double h2 = solver->getH2();
-
-
-    mat rPlus = zeros<mat>(nParticles, nDimensions);
-    mat rMinus = zeros<mat>(nParticles, nDimensions);
-
-    rPlus = rMinus = r;
-
-    double waveFunctionMinus = 0;
-    double waveFunctionPlus = 0;
-
-    double waveFunctionCurrent = waveFunction(r, solver);
-
-
 
     // Kinetic energy
 
     double kineticEnergy = 0;
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = 0; j < nDimensions; j++) {
-            rPlus(i,j) += h;
-            rMinus(i,j) -= h;
-            waveFunctionMinus = waveFunction(rMinus, solver);
-            waveFunctionPlus = waveFunction(rPlus, solver);
-            kineticEnergy -= (waveFunctionMinus + waveFunctionPlus - 2 * waveFunctionCurrent);
-            rPlus(i,j) = r(i,j);
-            rMinus(i,j) = r(i,j);
-        }
+
+    if(m_analytical)
+    {
+        // Here we want to calculate the Kinetic part of the energy that consists of
+        // sum_particles -(d²/dx² Psi)/(2*Psi), we do that by seperating the trialfunction into single particle functions
+        // and correlations functions. First up is the (d²/dx² |Dup|)/|Dup| and (d²/dx² |Ddown|)/|Ddown|
+//        cout << "Calccualting kinetic Energy "<< endl;
+        kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r, solver);
+//        cout << "detUpAndUpINverse" << endl;
+//        cout << solver->determinant()->detUp << endl;
+//        cout << solver->determinant()->detUpInverse << endl;
+        kineticEnergy *= -1./2.;
     }
-    kineticEnergy = 0.5 * h2 * kineticEnergy / waveFunctionCurrent;
+    else
+        kineticEnergy = solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
+
+    cout << endl<< "KineticEnergy by the numerical: " << solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver)) << endl;
+
+    cout << " KineticEnergy by the analytical: " << solver->determinant()->laplacianSlaterDeterminant(r, solver)/(-2.) << endl << endl;
+
 
     // Potential energy
     double potentialEnergy = 0;
@@ -117,7 +114,7 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
     return kineticEnergy + potentialEnergy;
 }
 
-double Beryllium::corrolationFactor(int i, int j)     //The corrolation factor a in the Jastrow factor 1/2 if opposite spin or 1/4 if same
+double Beryllium::spinFactor(int i, int j)     //The corrolation factor a in the Jastrow factor 1/2 if opposite spin or 1/4 if same
 {
     if(spin(i) == spin(j))
         return 1./4.;

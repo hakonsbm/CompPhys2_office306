@@ -141,10 +141,16 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         }
     }
 
+    //Set up the Slater Matrices after the move
+    determinant()->updateSlaterMatrices(rOld,this);
+
     rNew = rOld;
     //loop over Monte Carlo cycles
     int print_cycle = 0;
     for(int cycle = 0; cycle < nCycles; cycle++) {
+
+//        determinant()->updateSlaterMatrices(rOld,this);
+
 
         if(my_rank == 0)
         {
@@ -181,6 +187,8 @@ void VMCSolver::runMonteCarloIntegrationIS() {
 
 
 
+
+
             //  we compute the log of the ratio of the greens functions to be used in the
             //  Metropolis-Hastings algorithm
             GreensFunction = 0.0;
@@ -199,6 +207,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
                     QForceOld(i,j) = QForceNew(i,j);
                     waveFunctionOld = waveFunctionNew;
                 }
+
             }
             else {
                 for(int j = 0; j < nDimensions; j++) {
@@ -206,6 +215,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
                    QForceNew(i,j) = QForceOld(i,j);
                 }
             }
+
 
             moves += 1;
             //update energies
