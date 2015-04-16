@@ -50,6 +50,7 @@ public:
     double getH()   {return h;}
     double getH2()  {return h2;}
     double getStepLength() {return stepLength;}
+    double getMHR() {return MHRatio;}
     int getMy_Rank() {return my_rank;}
     void switchbBlockSampling(bool onOff) { m_blockSampling = onOff;}
     void switchElectronInteraction(bool onOff) {m_electronInteraction = onOff;}
@@ -110,6 +111,7 @@ private:
     double D; // diffusion constant
     // double timestep; // timestep for gaussian deviate (using steplength)
     double GreensFunction;
+    double MHRatio;
 
 
     mat rOld;
