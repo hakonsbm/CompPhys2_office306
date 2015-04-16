@@ -168,4 +168,132 @@
 			\frac{1}{\Psi_C}\pdv{\Psi_C}{x_k} &= \sum_{i=1}^{k-1}\frac{1}{g_{ik}}\pdv{g_{ik}}{x_k} +  \sum_{i=k+1}^{N}\frac{1}{g_{ki}}\pdv{g_{ki}}{x_k}
 		\end{align}
 
+	\subsubsection{Correlation-to-correlation ratio}
+
+		We have $N\left(N-1\right)/2$ relative distances $r_{ij}$. We can
+		write these in a matrix storage format, where they form a strictly
+		upper triangular matrix
+		\[
+		\mathbf{r}\equiv\left(\begin{array}{ccccc}
+		0 & r_{1,2} & r_{1,3} & \dots & r_{1,N}\\
+		\vdots & 0 & r_{2,3} & \dots & r_{2,N}\\
+		\vdots & \vdots & 0 & \ddots & \vdots\\
+		\vdots & \vdots & \vdots & \ddots & r_{N-1,N}\\
+		0 & 0 & 0 & \dots & 0
+		\end{array}\right)
+		\]
+		This upper triangular matrix form also applies to $g=g\left(r_{ij}\right)$.
+
+		The correlation-to-correlation ratio, or ratio between Jastrow factors
+		is given by
+		\[
+		R_{C}=\frac{\Psi_{C}^{new}}{\Psi_{C}^{cur}}=\prod_{i=1}^{k-1}\frac{g_{ik}^{new}}{g_{ik}^{cur}}\prod_{i=k+1}^{N}\frac{g_{ki}^{new}}{g_{ki}^{cur}}
+		\]
+		or in the Pade-Jastrow form
+		\[
+		R_{C}=\frac{\Psi_{C}^{\mathrm{new}}}{\Psi_{C}^{\mathrm{cur}}}=\frac{\exp U_{new}}{\exp U_{cur}}=\exp \Delta U
+		\]
+		where 
+		\[
+		\Delta U =
+		\sum_{i=1}^{k-1}\big(f_{ik}^\mathrm{new}-f_{ik}^\mathrm{cur}\big)
+		+
+		\sum_{i=k+1}^{N}\big(f_{ki}^\mathrm{new}-f_{ki}^\mathrm{cur}\big)
+		\]
+
+	\subsubsection{The $\nabla \Psi_{C}/\Psi_{C}$ ratio}
+		We continue by finding a useful expression for the quantum force and kinetic energy, the ratio $\nabla\Psi_{C}/\Psi_{C}$. It has,
+		for all dimensions, the form
+		\[
+		\frac{\mathbf{\nabla}_{i}\Psi_{C}}{\Psi_{C}}=\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{i}}
+		\]
+		where $i$ runs over all particles. Since the g-terms aren't differentiated
+		they cancel with their corresponding terms in the denominator, so
+		only $N-1$ terms survive the first derivative. We get
+		\[
+		\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{1}{g_{ik}}\frac{\partial g_{ik}}{\partial x_{k}}+\sum_{i=k+1}^{N}\frac{1}{g_{ki}}\frac{\partial g_{ki}}{\partial x_{k}}
+		\]
+		For the exponential form we get almost the same, by just replacing
+		$g_{ij}$ with $\exp\left(f_{ij}\right)$ and we get
+		\[
+		\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{\partial g_{ik}}{\partial x_{k}}+\sum_{i=k+1}^{N}\frac{\partial g_{ki}}{\partial x_{k}}
+		\]
+		We now use the identity
+		\[
+		\frac{\partial}{\partial x_{i}}g_{ij}=-\frac{\partial}{\partial x_{j}}g_{ij}
+		\]
+		and get expressions where the derivatives that act on the particle
+		are represented by the second index of $g$
+		\[
+		\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{1}{g_{ik}}\frac{\partial g_{ik}}{\partial x_{k}}-\sum_{i=k+1}^{N}\frac{1}{g_{ki}}\frac{\partial g_{ki}}{\partial x_{i}}
+		\]
+		and for the exponential case
+		\[
+		\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{\partial g_{ik}}{\partial x_{k}}-\sum_{i=k+1}^{N}\frac{\partial g_{ki}}{\partial x_{i}}
+		\]
+
+
+		Since we have that the correlation function is depending on the relative
+		distance we use the chain rule
+		\[
+		\frac{\partial g_{ij}}{\partial x_{j}}=\frac{\partial g_{ij}}{\partial r_{ij}}\frac{\partial r_{ij}}{\partial x_{j}}=\frac{x_{j}-x_{i}}{r_{ij}}\frac{\partial g_{ij}}{\partial r_{ij}}
+		\]
+		 After substitution we get
+		\[
+		\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{1}{g_{ik}}\frac{\mathbf{r_{ik}}}{r_{ik}}\frac{\partial g_{ik}}{\partial r_{ik}}-\sum_{i=k+1}^{N}\frac{1}{g_{ki}}\frac{\mathbf{r_{ki}}}{r_{ki}}\frac{\partial g_{ki}}{\partial r_{ki}}
+		\]
+		For the Pade-Jastrow form we set $\ensuremath{g_{ij}\equiv g(r_{ij})=e^{f(r_{ij})}=e^{f_{ij}}}$
+		and 
+		\[
+		\frac{\partial g_{ij}}{\partial r_{ij}}=g_{ij}\frac{\partial f_{ij}}{\partial r_{ij}}
+		\]
+		and arrive at 
+		\[
+		\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{\mathbf{r_{ik}}}{r_{ik}}\frac{\partial f_{ik}}{\partial r_{ik}}-\sum_{i=k+1}^{N}\frac{\mathbf{r_{ki}}}{r_{ki}}\frac{\partial f_{ki}}{\partial r_{ki}}
+		\]
+		where we have the relative vectorial distance 
+		\[
+		\mathbf{r}_{ij}=|\mathbf{r}_{j}-\mathbf{r}_{i}|=(x_{j}-x_{i})\mathbf{e}_{1}+(y_{j}-y_{i})\mathbf{e}_{2}+(z_{j}-z_{i})\mathbf{e}_{3}
+		\]
+		With a linear Padé-Jastrow we set
+		\[
+		f_{ij}=\frac{ar_{ij}}{(1+\beta r_{ij})}
+		\]
+		with the corresponding closed form expression
+		\[
+		\frac{\partial f_{ij}}{\partial r_{ij}}=\frac{a}{(1+\beta r_{ij})^{2}}
+		\]
+	\subsubsection{The $\nabla^{2} \Psi_{C}/\Psi_{C}$ ratio}
+		For the kinetic energy we also need the second derivative of the Jastrow
+		factor divided by the Jastrow factor. We start with this
+		\[
+		\left[\frac{\mathbf{\nabla}^{2}\Psi_{C}}{\Psi_{C}}\right]_{x}=\ 2\sum_{k=1}^{N}\sum_{i=1}^{k-1}\frac{\partial^{2}g_{ik}}{\partial x_{k}^{2}}\ +\ \sum_{k=1}^{N}\left(\sum_{i=1}^{k-1}\frac{\partial g_{ik}}{\partial x_{k}}-\sum_{i=k+1}^{N}\frac{\partial g_{ki}}{\partial x_{i}}\right)^{2}
+		\]
+		But we have another, simpler form for the function
+		\[
+		\Psi_{C}=\prod_{i<j}\exp f(r_{ij})=\exp\left\{ \sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}\right\} 
+		\]
+		and for particle $k$ we have
+		\[
+		\frac{\mathbf{\nabla}_{k}^{2}\Psi_{C}}{\Psi_{C}}=\sum_{ij\ne k}\frac{(\mathbf{r}_{k}-\mathbf{r}_{i})(\mathbf{r}_{k}-\mathbf{r}_{j})}{r_{ki}r_{kj}}f'(r_{ki})f'(r_{kj})+\sum_{j\ne k}\left(f''(r_{kj})+\frac{2}{r_{kj}}f'(r_{kj})\right)
+		\]
+		We use 
+		\[
+		f(r_{ij})=\frac{ar_{ij}}{1+\beta r_{ij}}
+		\]
+		and with
+		\[
+		\begin{array}{ccc}
+		g'(r_{kj})=dg(r_{kj})/dr_{kj} & \quad\mbox{and}\quad & g''(r_{kj})=d^{2}g(r_{kj})/dr_{kj}^{2}\end{array}
+		\]
+		we find that for particle $k$ we have
+		\[
+		\frac{\mathbf{\nabla}_{k}^{2}\Psi_{C}}{\Psi_{C}}=\sum_{ij\ne k}\frac{(\mathbf{r}_{k}-\mathbf{r}_{i})(\mathbf{r}_{k}-\mathbf{r}_{j})}{r_{ki}r_{kj}}\frac{a}{(1+\beta r_{ki})^{2}}\frac{a}{(1+\beta r_{kj})^{2}}+\sum_{j\ne k}\left(\frac{2a}{r_{kj}(1+\beta r_{kj})^{2}}-\frac{2a\beta}{(1+\beta r_{kj})^{3}}\right)
+		\]
+		And for the linear Padé-Jastrow we get the closed form result 
+		\[
+		\frac{\partial^{2}f_{ij}}{\partial r_{ij}^{2}}=-\frac{2a_{ij}\beta_{ij}}{\left(1+\beta_{ij}r_{ij}\right)^{3}}
+		\]
+
+
 \end{document}
