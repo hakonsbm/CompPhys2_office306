@@ -58,7 +58,9 @@ double SlaterDeterminant::laplacianPhi(const mat &r, double alpha, int i, int j,
     else if (j>=2 && j<=4)
     {   //Not done yet
         int dimension = j-2;
-        return 0; // d²/dx²  2p
+        derivative = solver->derivatives()->analyticalPsi2PDoubleDerivative( i, dimension, r, solver );
+
+        return derivative; // d²/dx²  2p
     }
 }
 
@@ -159,6 +161,7 @@ double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *so
         for(j = 0; j < nHalf; j++)
         {
             derivative += laplacianPhi(r, alpha, i, j, solver) * detUpInverse(j,i);
+
             derivative += laplacianPhi(r, alpha, i + nHalf, j, solver) * detDownInverse(j,i);
         }
     }

@@ -11,9 +11,9 @@ r_i = sp.sqrt(x_i*x_i + y_i*y_i + z_i*z_i)
 
 psi1S = sp.exp(-alpha *r_i)
 
-psi2S = (1-alpha*r_i/2)*sp.exp(-alpha *r_i)
+psi2S = (1-alpha*r_i/2)*sp.exp(-alpha *r_i /2 )
 
-psi2P = alpha*r_i*sp.exp(-alpha*r_i/2)
+psi2P = alpha*x_i*sp.exp(-alpha*r_i/2)
 
 R_i = sp.symbols('r_i')
 
@@ -31,6 +31,14 @@ def printDerivatives(psi):
 	print "d2/dx2 : " , sp.printing.latex((sp.diff(psi,x_i,2) + sp.diff(psi,y_i,2) + sp.diff(psi,z_i,2))
 		.factor().subs(r_i,R_i).collect(alpha**2).subs(r_i**2,R_i**2))
 	print 
+	print "Now in c format "
+	print "psi : ", sp.printing.ccode(psi.subs(r_i,R_i))
+	print "d/dx : ", sp.printing.ccode((sp.diff(psi,x_i) + sp.diff(psi,y_i) + sp.diff(psi, z_i)).subs(r_i,R_i).factor())
+	print "d2/dx2 : " , sp.printing.ccode((sp.diff(psi,x_i,2) + sp.diff(psi,y_i,2) + sp.diff(psi,z_i,2))
+		.factor().subs(r_i,R_i).collect(alpha**2).subs(r_i**2,R_i**2))
+	print 
+	print "#############################################################################3"
+	print
 
 printDerivatives(psi1S)
 printDerivatives(psi2S)

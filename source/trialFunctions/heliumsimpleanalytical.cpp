@@ -28,8 +28,13 @@ double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
 
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver);
 
-    cout << SD << endl;
-    cout << exp(-accu(rpos) * alpha) << endl;
+
+//    cout << "Starting new run" << endl << endl;
+//    cout << "detUp is" << solver->determinant()->detUp << endl;
+//    cout << "detDown is" << solver->determinant()->detDown << endl;
+
+//    cout << "SlaterDeterminant is " << SD << endl;
+//    cout << "Correct wavefunction is: "  << exp(-accu(rpos) * alpha) << endl << endl;
 
     return exp(-accu(rpos) * alpha);
 }
@@ -44,8 +49,9 @@ double HeliumSimpleAnalytical::localEnergy(const mat &r, VMCSolver *solver)
 
     double charge = solver->getCharge();
 
-    kineticEnergy = solver->derivatives()->analyticalSimpleDoubleDerivative(r,solver)/(-2.);
-//    kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r,solver)/(-2.);
+    kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r,solver)/(-2.);
+
+//    kineticEnergy = solver->derivatives()->analyticalSimpleDoubleDerivative(r,solver)/(-2.);
 //    cout << "r: " << endl << r << endl;
 //    cout << "r1: " << r1 << endl;
 //    cout << "r2: " << r2 << endl;

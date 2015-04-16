@@ -147,15 +147,32 @@
 		Calculated in  derivatives.py.
 
 		\begin{center}
-			\begin{tabular}{| c | c | c |}
+			\begin{tabular}{| c | c | c | c |}
 			\bottomrule
-			\( \psi_i\)	& \( \pdv{\psi_i}{r_i} \) & \( \pdv[2]{\psi_i}{r_i} \)
+			& \( \psi_i\)	& \( \pdv{\psi_i}{r_i} \) & \( \pdv[2]{\psi_i}{r_i} \)
 			\\ \hline
-			\( e^{- \alpha ri} \) &  \( - \frac{\alpha}{r_{i}} \left(x_{i} + y_{i} + z_{i}\right) e^{- \alpha r_{i}} \)	&	\(\frac{\alpha}{r_{i}} \left(\alpha r_{i} - 2\right) e^{- \alpha r_{i}} \)
+				\(\psi_{1S}\)
+				&
+				\( e^{- \alpha ri} \) 
+				&
+				\( - \frac{\alpha}{r_{i}} \left(x_{i} + y_{i} + z_{i}\right) e^{- \alpha r_{i}} \)	
+				&
+				\(\frac{\alpha}{r_{i}} \left(\alpha r_{i} - 2\right) e^{- \alpha r_{i}} \)
 			\\	\hline
-			\( \left(- \frac{\alpha r_{i}}{2} + 1\right) e^{- \alpha r_{i}} \) &  \( \frac{\alpha e^{- \alpha r_{i}}}{2 r_{i}} \left(\alpha r_{i} - 3\right) \left(x_{i} + y_{i} + z_{i}\right) \)	&	\( - \frac{\alpha e^{- \alpha r_{i}}}{2 r_{i}} \left(\alpha^{2} r_{i}^{2} - 6 \alpha r_{i} + 6\right) \)
+				\(\psi_{2S}\)
+				&
+				\( \left(- \frac{\alpha r_{i}}{2} + 1\right) e^{- \frac{\alpha r_{i}}{2}} \)&  
+				\( \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{4 r_{i}} \left(\alpha r_{i} - 4\right) \left(x_{i} + y_{i} + z_{i}\right) \)	
+				&	
+				\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{8 r_{i}} \left(\alpha^{2} r_{i}^{2} - 10 \alpha r_{i} + 16\right) \)
 			\\	\hline
-			\( \alpha r_{i} e^{- \frac{\alpha r_{i}}{2}} \) &  \( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha r_{i} - 2\right) \left(x_{i} + y_{i} + z_{i}\right) \) & \( \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{4 r_{i}} \left(\alpha^{2} r_{i}^{2} - 8 \alpha r_{i} + 8\right) \)
+				\(\psi_{2P}\)
+				&
+				\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \) 
+				&
+				\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha x_{i}^{2} + \alpha x_{i} y_{i} + \alpha x_{i} z_{i} - 2 r_{i}\right) \) 
+				&
+				\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 			\\ \toprule
 			\end{tabular}
 		\end{center}

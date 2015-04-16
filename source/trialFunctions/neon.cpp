@@ -32,15 +32,12 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
     alpha = solver -> getAlpha();
     beta = solver -> getBeta();
     //vec argument(solver->getNParticles());
+    if(solver->getElectronInteration())
+    {
     for(int i = 0; i < solver->getNParticles(); i++) {
         //argument[i] = 0.0;
         rSingleParticle = 0;
-        /*
-        for(int j = 0; j < solver->getNDimensions(); j++) {
-            rSingleParticle += r(i,j) * r(i,j);
-        }
-        argument[i] = sqrt(rSingleParticle);
-        */
+
         for(int j = i + 1; j < solver->getNParticles(); j++) {
             rij = 0;
             for(int k = 0; k < solver->getNDimensions(); k++) {
@@ -54,15 +51,11 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
             spin_count++;
         }
     }
-    /*
-    wf = (psi1s(argument[0], alpha)*psi2s(argument[1], alpha)
-        -psi1s(argument[1], alpha)*psi2s(argument[0], alpha))*
-        (psi1s(argument[2], alpha)*psi2s(argument[3], alpha)
-        -psi1s(argument[3], alpha)*psi2s(argument[2], alpha));
-    */
+    }
+
+
     SD = SlaterDeterminant(r, alpha, solver);
-    //cout << "wf / SD: " << wf << " / " << SD << endl; // check if we get the expected value
-    //return wf*product;
+
     return SD*product;
 }
 
@@ -91,18 +84,19 @@ double Neon::localEnergy(const mat &r, VMCSolver *solver)
     // Kinetic energy
 
     double kineticEnergy = 0;
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = 0; j < nDimensions; j++) {
-            rPlus(i,j) += h;
-            rMinus(i,j) -= h;
-            waveFunctionMinus = waveFunction(rMinus, solver);
-            waveFunctionPlus = waveFunction(rPlus, solver);
-            kineticEnergy -= (waveFunctionMinus + waveFunctionPlus - 2 * waveFunctionCurrent);
-            rPlus(i,j) = r(i,j);
-            rMinus(i,j) = r(i,j);
-        }
+    if(m_analytical)
+    {
+        kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r, solver);
+        kineticEnergy *= -1./2.;
+    } else
+    {
+        kineticEnergy = solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
+
     }
-    kineticEnergy = 0.5 * h2 * kineticEnergy / waveFunctionCurrent;
+//        cout << endl<< "KineticEnergy by the numerical: " << solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver)) << endl;
+
+//        cout << " KineticEnergy by the analytical: " << solver->determinant()->laplacianSlaterDeterminant(r, solver)/(-2.) << endl << endl;
+
 
     // Potential energy
     double potentialEnergy = 0;
@@ -115,16 +109,20 @@ double Neon::localEnergy(const mat &r, VMCSolver *solver)
         potentialEnergy -= charge / sqrt(rSingleParticle);
     }
     // Contribution from electron-electron potential
-    double r12 = 0;
-    for(int i = 0; i < nParticles; i++) {
-        for(int j = i + 1; j < nParticles; j++) {
-            r12 = 0;
-            for(int k = 0; k < nDimensions; k++) {
-                r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+    if(solver->getElectronInteration())
+    {
+        double r12 = 0;
+        for(int i = 0; i < nParticles; i++) {
+            for(int j = i + 1; j < nParticles; j++) {
+                r12 = 0;
+                for(int k = 0; k < nDimensions; k++) {
+                    r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+                }
+                potentialEnergy += 1 / sqrt(r12);
             }
-            potentialEnergy += 1 / sqrt(r12);
         }
     }
+
 
     return kineticEnergy + potentialEnergy;
 }
