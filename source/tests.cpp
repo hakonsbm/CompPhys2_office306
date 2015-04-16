@@ -33,12 +33,12 @@ TEST(Hydrogenic) {
     solver->switchElectronInteraction(false);
     solver->trialFunction()->setAnalytical(true);
     solver->setAlpha(solver->getCharge());
-    solver->setCycles(1);
+    solver->setCycles(1000);
     solver->runMasterIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
     CHECK_EQUAL(-4, solver->getEnergy());
 
-    exit(0);
+//    exit(0);
 
 
     cout << endl << "Running Beryllium test" << endl << endl;
@@ -46,20 +46,24 @@ TEST(Hydrogenic) {
     solver->switchElectronInteraction(false);
     solver->trialFunction()->setAnalytical(true);
     solver->setAlpha(solver->getCharge());
-    solver->setCycles(10000);
+    solver->setCycles(1000);
     solver->runMasterIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
     CHECK_EQUAL(-20, solver->getEnergy());
 
-    exit(0);
+//    exit(0);
 
     cout << endl << "Running Neon test" << endl << endl;
     solver->setTrialFunction(new Neon(solver));
     solver->switchElectronInteraction(false);
+    solver->trialFunction()->setAnalytical(true);
+    solver->setCycles(1000);
     solver->setAlpha(solver->getCharge());
     solver->runMasterIntegration();
     CHECK_EQUAL(0., solver->getEnergyVar());
-    CHECK_EQUAL(-4, solver->getEnergy());
+    CHECK_EQUAL(-200., solver->getEnergy());
+
+    exit(0);
 }
 
 

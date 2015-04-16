@@ -62,7 +62,8 @@ double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *so
     for(int i = 0; i < solver->getNParticles(); i++)
     {
         ri = norm(r.row(i));
-        derivative += alpha/ri * (alpha*ri - 2.);
+        derivative += (alpha*alpha - (2.*alpha)/ri);
+//        cout << "Particle " << i << " correct : r: " << ri << " derivative: " << (alpha*alpha - (2.*alpha)/ri) << endl;
     }
 
     return derivative;
@@ -82,7 +83,10 @@ double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &
     double alpha = solver->getAlpha();
     double ri = norm(r.row(particleTag));
 
-    double derivative = alpha * (alpha * ri - (2./ri) )  * exp(-alpha*ri);
+    double derivative = alpha * (alpha  - (2./ri) )  * exp(-alpha*ri);
+
+//    cout << "Particle " << particleTag << " New : r: " << ri << " derivative: " << alpha * (alpha - (2./ri) )   << endl;
+
 
     return derivative;
 }
@@ -103,7 +107,7 @@ double Derivatives::analyticalPsi2SDoubleDerivative(int particleTag, const mat &
     double alpha = solver->getAlpha();
     double ri = norm(r.row(particleTag));
 
-    double derivative = - (alpha / (2.*ri*ri)) * (alpha*alpha*ri*ri - 6.*alpha*ri + 6.) * exp(-alpha*ri);
+    double derivative = -1.0L/8.0L*alpha*(pow(alpha, 2)*pow(ri, 2) - 10*alpha*ri + 16)*exp(-1.0L/2.0L*alpha*ri)/ri;//- (alpha / (2.*ri*ri)) * (alpha*alpha*ri*ri - 6.*alpha*ri + 6.) * exp(-alpha*ri/2.);
 
     return derivative;
 }
@@ -117,11 +121,13 @@ double Derivatives::analyticalPsi2PDerivative(int particleTag, const mat &r, VMC
     return derivative;
 }
 
-double Derivatives::analyticalPsi2PDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
+double Derivatives::analyticalPsi2PDoubleDerivative(int particleTag, int dimension, const mat &r, VMCSolver *solver)
 {
     double alpha = solver->getAlpha();
+    double r_i = norm(r.row(particleTag)) ;
+    double x_i = r(particleTag,dimension);
 
-    double derivative = alpha * alpha * (alpha * r(particleTag,1) * r(particleTag,1) + alpha * r(particleTag,2) * r(particleTag,2) + alpha * r(particleTag,3) * r(particleTag,3) + 8 / alpha - 8 * norm(r.row(particleTag))) /* * exp(-alpha*norm(r.row(particleTag)) / 2)*/ / (4 * norm(r.row(particleTag)));
+    double derivative = (1.0L/4.0L)*pow(alpha, 2)*x_i*(alpha*r_i - 8)*exp(-1.0L/2.0L*alpha*r_i)/r_i;
 
     return derivative;
 }

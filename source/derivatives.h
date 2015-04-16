@@ -22,7 +22,7 @@ public:
     double analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSolver *solver);
     double analyticalPsi2SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver);
     double analyticalPsi2PDerivative(int particleTag, const mat &r, VMCSolver *solver);
-    double analyticalPsi2PDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver);
+    double analyticalPsi2PDoubleDerivative(int particleTag, int dimension, const mat &r, VMCSolver *solver);
 };
 
 #endif // DERIVATIVES_H

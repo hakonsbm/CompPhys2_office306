@@ -199,7 +199,8 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             GreensFunction = exp(GreensFunction);
 
             // The Metropolis test is performed by moving one particle at the time
-            if(ran2(&idum) <= GreensFunction*(waveFunctionNew*waveFunctionNew) / (waveFunctionOld*waveFunctionOld)) {
+            MHRatio = GreensFunction*(waveFunctionNew*waveFunctionNew) / (waveFunctionOld*waveFunctionOld);
+            if(ran2(&idum) <= MHRatio) {
                 acc_moves += 1;
                 for(int j = 0; j < nDimensions; j++) {
                     rOld(i,j) = rNew(i,j);
