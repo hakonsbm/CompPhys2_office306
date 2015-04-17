@@ -645,6 +645,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			\]
 
 	\subsection{Implementation of MPI}
+		As the calculations now become increasingly complex and heavy we implement MPI to make use of multiple processors. Personal computers today usually have two, four or sometimes eight processors, which will give a fairly good speedup to our calculations. With bigger atoms or systems it is crucial to implement a way to distribute calculation to multiple processors.
+		
+		Implementing MPI in the Monte Carlo method is very easy. As we deal with statistical values we can easily split up the problem. Each process will run its own set of samples. The number of samples used by each process is simply $n/p$, where $n$ is the total number of samples we want to do, and $p$ is the number of processes. In the end all processors send their results to the master process, which takes the average of all the values. 
 
 \section{Results and discussion}
 
@@ -652,6 +655,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 	We use Alpha and Beta values for Beryllium found in project 1, so the only Alpha and Beta values we have to find are for Neon.
 
 	\subsection{Speedup with MPI}
+		With 1, 2, 3 and 4 processes. FIGURE
 
 	\subsection{Onebody densities / Comparisons / Without Jastrow}
 
