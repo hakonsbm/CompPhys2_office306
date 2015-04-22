@@ -693,12 +693,64 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		Implementing MPI in the Monte Carlo method is very easy. As we deal with statistical values we can easily split up the problem. Each process will run its own set of samples. The number of samples used by each process is simply $n/p$, where $n$ is the total number of samples we want to do, and $p$ is the number of processes. In the end all processors send their results to the master process, which sums up the values and takes the average over all processes.
 
 \section{Results and discussion}
+	\begin{table}
+		\center
+			\begin{tabular}{|c|c|c|}
+			    \hline
+			   	Atom & VMC & References
+			    \\ \hline
+			    Beryllium & $-14.4127$ & $-14.667$
+			    \\ \hline 
+			    Neon & TODO & TODO 
+			    \\	\hline 
+		  \end{tabular}
+		  \caption{Comparison of energies found with Variational Monte Carlo method and
+		energies found in research papers.}
+		\label{tab:energyReference}
+	\end{table}
+
+	Reference to table \ref{tab:energyReference}.
+
 
 	\subsection{Alpha and Beta Values}
-	We use Alpha and Beta values for Beryllium found in project 1, so the only Alpha and Beta values we have to find are for Neon.
+		\begin{table}
+		\center
+				\begin{tabular}{| c | c| c |}
+				    \hline
+				   	\textbf{Trialfunction} & \(\mathbf{\alpha}\) & \(\mathbf{\beta}\)
+				    \\ \hline
+				    Beryllium $\psi_{T2}$	& 3.8	&	 0.293
+				    \\ \hline 
+				    Neon $\psi_{T2}$	&	10.22	&	0.091
+				    \\	\hline 
+			  \end{tabular}
+			  \caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values. For Beryllium each Monte Carlo run went over \(10 000 000\), using importance sampling. For Neon each run went over \(5 000\), also with importance sampling Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
+			  \label{tab:alpha_beta}
+		\end{table}
+
+		We use Alpha and Beta values for Beryllium found in project 1, so the only Alpha and Beta values we have to find are for Neon. Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. FIGURES
 
 	\subsection{Speedup with MPI}
-		With 1, 2, 3 and 4 processes. FIGURE
+		\begin{table}
+		\center
+				\begin{tabular}{| c | c| c| c| c|}
+				    \hline
+				   	\textbf{Num. of processes} &	1	&	2	&	3	&	4	
+				    \\ \hline
+				    \textbf{Time to exec [s]}	&	1.0	&	1.97	&	2.90	&	3.35	
+				    \\	\hline 
+			  \end{tabular}
+			  \caption{MPI speedup}
+			  \label{tab:MPI_speedup}
+		\end{table}
+
+		\begin{figure}
+		\centering \includegraphics[width=0.45\linewidth]{../source/outfiles/processor_number_time_comparison}
+		\protect\caption{MPI speedup}
+		\label{fig:MPI_speedup} 
+		\end{figure}
+
+		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs. 
 
 	\subsection{Onebody densities / Comparisons / Without Jastrow}
 

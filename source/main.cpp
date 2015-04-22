@@ -52,8 +52,10 @@ int main(int nargs, char* args[])
     //return  UnitTest::RunAllTests();
 
     // Command line argument parsing
-    int my_rank;
+    int my_rank, numprocs, nCycles;
     MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
+    MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
+    nCycles = atoi(args[3])/numprocs;
 
     if((string)args[1]=="HeliumSimpleAnalytical") solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
     else if((string)args[1]=="HeliumSimpleNumerical") solver->setTrialFunction(new HeliumSimpleNumerical(solver));
@@ -70,7 +72,7 @@ int main(int nargs, char* args[])
         cout<<"Cycles: "<< args[3]<<endl;
     }
 
-    solver->setCycles(atoi(args[3]));
+    solver->setCycles(nCycles);
 
     if((string)args[2]=="runWithDiffConstants") runWithDiffConstants(solver);
     else if((string)args[2]=="runSIWithDiffTimesteps") runSIWithDiffTimesteps(solver);
@@ -250,16 +252,20 @@ void runFindAlphaBeta(VMCSolver *solver)
 void runWithDiffConstants(VMCSolver *solver)
 {
     //Settings for which values it should be cycled over and if we want to use importance sampling or now
-
-    double alpha_min = 0.7*solver->getCharge();
-    double alpha_max = 1.5* solver->getCharge();
+    int my_rank;
+    MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
+    double alpha_min = 9.5;//0.7*solver->getCharge();
+    double alpha_max = 10.5;//1.5* solver->getCharge();
 
     int nSteps = 10;
 
-    double beta_min = 0.3;
-    double beta_max = 0.4;
+    double beta_min = 0.05;
+    double beta_max = 0.13;
     double d_alpha = (alpha_max-alpha_min)/ (double) nSteps;
     double d_beta = (beta_max-beta_min)/ (double) nSteps;
+
+    solver->switchElectronInteraction(true);
+    solver->trialFunction()->setAnalytical(false);
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
@@ -285,7 +291,7 @@ void runWithDiffConstants(VMCSolver *solver)
             if(ImportanceSampling)
             {
                 start = clock();
-                    solver->runMonteCarloIntegrationIS();
+                    solver->runMasterIntegration();
                 end = clock();
 
                 double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
@@ -315,11 +321,11 @@ void runWithDiffConstants(VMCSolver *solver)
                 if(ImportanceSampling)
                 {
                     start = clock();
-                        solver->runMonteCarloIntegrationIS();
+                    solver->runMasterIntegration();
                     end = clock();
 
                     double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
-                    cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+                    if(my_rank == 0) cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
                 }
                 else {
                     start = clock();
@@ -474,7 +480,7 @@ void runCompareParallelize(VMCSolver * solver)
     //TestSettings
     solver->switchElectronInteraction(true);
     solver->trialFunction()->setAnalytical(false);
-    solver->setAlpha(solver->getCharge());
+    //solver->setAlpha(solver->getCharge());
 
 
 
