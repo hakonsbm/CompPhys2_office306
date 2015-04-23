@@ -181,8 +181,11 @@ void VMCSolver::runMonteCarloIntegrationIS() {
                 }
             }
             //Recalculate the value of the wave function
+            determinant()->updateSlaterMatrices(rNew,this);
+
             waveFunctionNew = trialFunction()->waveFunction(rNew, this);
-            QuantumForce(rNew, QForceNew); QForceNew = QForceNew*h/waveFunctionNew; // possible typo
+            QuantumForce(rNew, QForceNew);
+            QForceNew = QForceNew*h/waveFunctionNew; // possible typo
 
 
 
@@ -205,8 +208,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
                     rOld(i,j) = rNew(i,j);
                     QForceOld(i,j) = QForceNew(i,j);
                     waveFunctionOld = waveFunctionNew;
-                    determinant()->updateSlaterMatrices(rNew,this); //Updating the matrices after moving the particle :)
-
+//                    determinant()->updateSlaterMatrices(rNew,this); //Updating the matrices after moving the particle :)
 
                 }
 
@@ -215,7 +217,7 @@ void VMCSolver::runMonteCarloIntegrationIS() {
                 for(int j = 0; j < nDimensions; j++) {
                    rNew(i,j) = rOld(i,j);
                    QForceNew(i,j) = QForceOld(i,j);
-
+                   determinant()->updateSlaterMatrices(rOld,this); //Updating the matrices after moving the particle :)
                 }
             }
 

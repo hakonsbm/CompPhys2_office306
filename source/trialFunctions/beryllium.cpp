@@ -23,6 +23,7 @@ Beryllium::Beryllium(VMCSolver *solver)
     spin << 0 << 0 << 1 << 1;
 
 
+
 }
 
 double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
@@ -50,8 +51,6 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
 
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 
-
-
     return SD*product;
 }
 
@@ -61,15 +60,19 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
     double nParticles = solver->getNParticles();
     double nDimensions = solver->getNDimensions();
     double charge = solver->getCharge();
+    vec gradientSlater, gradientJastrow;
 
     // Kinetic energy
 
     double kineticEnergy = 0;
 
     if(m_analytical)
-    {
-        kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r, solver);
-
+    {   //Calculates the kinetic energy as the ratios of -1/2* ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
+        kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
+//        gradientJastrow = solver->derivatives()->analyticalCorrelationDerivative(r,solver);
+        gradientSlater = solver->determinant()->gradientSlaterDeterminant(r,solver);
+//        kineticEnergy += 2*(dot(solver->determinant()->gradientSlaterDeterminant(r,solver), solver->derivatives()->analyticalCorrelationDerivative(r,solver));
+        kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
         kineticEnergy *= -1./2.;
     }
     else

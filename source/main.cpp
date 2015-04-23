@@ -479,8 +479,8 @@ void runCompareParallelize(VMCSolver * solver)
 {
     //TestSettings
     solver->switchElectronInteraction(true);
-    solver->trialFunction()->setAnalytical(false);
-    //solver->setAlpha(solver->getCharge());
+    solver->trialFunction()->setAnalytical(true);
+//    solver->setAlpha(solver->getCharge());
 
 
 
