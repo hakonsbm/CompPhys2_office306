@@ -69,10 +69,13 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
     if(m_analytical)
     {   //Calculates the kinetic energy as the ratios of -1/2* ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
         kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
-//        gradientJastrow = solver->derivatives()->analyticalCorrelationDerivative(r,solver);
-        gradientSlater = solver->determinant()->gradientSlaterDeterminant(r,solver);
-//        kineticEnergy += 2*(dot(solver->determinant()->gradientSlaterDeterminant(r,solver), solver->derivatives()->analyticalCorrelationDerivative(r,solver));
+
         kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
+
+        gradientJastrow = solver->derivatives()->analyticalCorrelationDerivative(r,solver);
+        gradientSlater = solver->determinant()->gradientSlaterDeterminant(r,solver);
+        kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
+
         kineticEnergy *= -1./2.;
     }
     else
