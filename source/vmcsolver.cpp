@@ -59,8 +59,7 @@ void VMCSolver::runMasterIntegration()
         double totalAverageR12 = 0;
 
 
-
-        nCycles = nCycles/numprocs;
+        //nCycles = nCycles/numprocs;
         runMonteCarloIntegrationIS();
 
         MPI_Reduce(&m_energy, &totalEnergy, 1, MPI_DOUBLE,
