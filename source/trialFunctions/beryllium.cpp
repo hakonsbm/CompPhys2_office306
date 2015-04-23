@@ -68,14 +68,8 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
 
     if(m_analytical)
     {
-        // Here we want to calculate the Kinetic part of the energy that consists of
-        // sum_particles -(d²/dx² Psi)/(2*Psi), we do that by seperating the trialfunction into single particle functions
-        // and correlations functions. First up is the (d²/dx² |Dup|)/|Dup| and (d²/dx² |Ddown|)/|Ddown|
-//        cout << "Calccualting kinetic Energy "<< endl;
         kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r, solver);
-//        cout << "detUpAndUpINverse" << endl;
-//        cout << solver->determinant()->detUp << endl;
-//        cout << solver->determinant()->detUpInverse << endl;
+
         kineticEnergy *= -1./2.;
     }
     else

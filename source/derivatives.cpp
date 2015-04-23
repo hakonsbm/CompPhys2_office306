@@ -147,4 +147,63 @@ double Derivatives::analyticalPsi2PDoubleDerivative(int particleTag, int dimensi
     return derivative;
 }
 
+double Derivatives::fDerivative(int i, int j, const mat &r, VMCSolver *solver)
+{
+    //Calculates the d/dx f_ij derivative
+    double beta = solver->getBeta();
+    double a = solver->trialFunction()->spinFactor(i,j);
+    double rij = norm(r.row(i) - r.row(j));
+
+    return a/pow(1+beta*rij , 2);
+}
+double Derivatives::fDoubleDerivative(int i, int j, const mat &r, VMCSolver *solver)
+{
+    //Calculates the d²/dx² f_ij derivative
+    double beta = solver->getBeta();
+    double a = solver->trialFunction()->spinFactor(i,j);
+    double rij = norm(r.row(i) - r.row(j));
+
+    return -2*a*beta/pow(1+beta*rij , 3);
+}
+
+
+
+vec Derivatives::analyticalCorrelationDerivative( const mat &r, VMCSolver *solver)
+{
+    //This sums over all the electrons and calculates the total correlation gradient ratio term
+
+
+    int nParticles = solver->getNParticles();
+    vec gradient = zeros (3);
+    vec rik = zeros (3);
+    vec rki = zeros (3);
+
+    //Calculates the interaction from all the particles earlier
+    for(int k = 0; k < nParticles; k++)
+    {
+        cout << k << endl;
+           for(int i = 0; i < k-1; i ++)
+           {
+
+               rik = (r.row(i) - r.row(k)).t();
+               gradient += rik / norm(rik) * fDerivative(i,k,r, solver);
+
+           }
+           for(int i = k +1 ; i < nParticles - 1 ; i ++)
+           {
+
+               rki = (r.row(k) - r.row(i)).t();
+               gradient -= rki / norm(rki) * fDerivative(k,i, r, solver);
+               cout << norm(rki) << endl;
+
+           }
+
+    }
+
+
+
+    return gradient;
+}
+
+
 

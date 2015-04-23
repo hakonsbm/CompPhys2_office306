@@ -1,5 +1,6 @@
-#ifndef HYDROGEN_H
-#define HYDROGEN_H
+#ifndef HELIUM_H
+#define HELIUM_H
+
 
 #include "trialfunction.h"
 #include "../vmcsolver.h"
@@ -10,16 +11,15 @@ using namespace arma;
 
 class VMCSolver;
 
-class Hydrogen : public TrialFunction
+class Helium : public TrialFunction
 {
+
 public:
-
-    ~Hydrogen();
-
-    Hydrogen(VMCSolver* solver);
+    Helium(VMCSolver* solver);
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
     virtual double localEnergy(const mat &r, VMCSolver *solver );
 
+
 };
 
-#endif // HYDROGEN_H
+#endif // HELIUM_H

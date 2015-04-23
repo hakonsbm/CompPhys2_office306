@@ -385,6 +385,46 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 	\subsection{Verification of the model}
 
+		%Need to check up some stuff when including this.
+		\subsubsection{Verification of the Slater determinant and the laplacian Slater determinan ratio}
+			To verify that the Slater determinant part of the trialfunctions is working correctly we use the fact that the states for a hydrogen atom can be calculated analytically, see for example Griffiths textbook \cite{griffiths2005introduction}, and is given by
+
+			\begin{align}
+				E_n = -\frac{E_1}{n^2}  \qquad \text{; where } n  \text{ is the principal statenumber}
+			\end{align}
+
+			By considering the other atoms without interaction between the electrons we can achieve an analytical solution by the same method.
+			\begin{center}
+				\begin{tabular}{| c | c |}
+				\bottomrule
+				Atom & Energy
+				\\ \hline 
+				Hydrogen 	& \( E_1 = -\frac{1}{2} \)
+				\\ \hline 
+				Helium 		& \( E_1 = -4\)
+				\\ \hline Beryllium		& \( E_1 = -20 \)
+				\\ \hline Neon		& \( E_1 = -200 \)
+				\\ \toprule
+				\end{tabular}
+			\end{center}
+
+		\subsubsection{Verification of the Padè-Jastrow part.}
+			To verify that the part of the code that treats the correlation part of the kinetic energy we calculate we check that it reproduces the correct results in the total energy and variation, but we also perform some tests of the various part by considering the Helium atom where we calculate certain parts of the sums by hand and then compare the results with the ones given by the ratio machinery. 
+
+			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\nabla\frac{\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} we get
+
+			\begin{align}
+				\frac{\nabla\Psi_C}{\Psi_C} &= \frac{1}{\Psi_c} \pdv{\Psi_C}{x_k} = \frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right) - \frac{\vb{r_{21}}}{r_{21}}\pdv{}{r_{21}}\left( \frac{r_{21}}{2(1+\beta r_{21})} \right)
+				\\
+				&= 2\frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right)
+				\\
+				&= \frac{\vb{r_{12}}}{r_{12}} \frac{1}{(1+\beta r_{12})^2}
+			\end{align}
+
+			By testing
+
+
+
 	\subsection{Efficient calculation of derivatives}
 		Calculating the derivatives involved in the VMC calculation numerically is slow in that they entail several calls to the wavefunctions in addition to introducing an extra numerical error. Here we will show how we have found divided up the derivatives and found analytic expressions for all the parts.
 
@@ -621,7 +661,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			and arrive at 
 			
 			\begin{align}
-				\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{\mathbf{r_{ik}}}{r_{ik}}\frac{\partial f_{ik}}{\partial r_{ik}}-\sum_{i=k+1}^{N}\frac{\mathbf{r_{ki}}}{r_{ki}}\frac{\partial f_{ki}}{\partial r_{ki}}
+				\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{\mathbf{r_{ik}}}{r_{ik}}\frac{\partial f_{ik}}{\partial r_{ik}}-\sum_{i=k+1}^{N}\frac{\mathbf{r_{ki}}}{r_{ki}}\frac{\partial f_{ki}}{\partial r_{ki}} \label{eq:gradient_ratio_Jastrow}
 			\end{align}
 			
 			where we have the relative vectorial distance 
@@ -704,6 +744,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 \section{Conclusions}
 
+
+\bibliographystyle{plain}
+\bibliography{references}
 
 
 \end{document}

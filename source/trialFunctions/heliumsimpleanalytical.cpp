@@ -36,7 +36,7 @@ double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
 //    cout << "SlaterDeterminant is " << SD << endl;
 //    cout << "Correct wavefunction is: "  << exp(-accu(rpos) * alpha) << endl << endl;
 
-    return exp(-accu(rpos) * alpha);
+    return SD;//exp(-accu(rpos) * alpha);
 }
 
 double HeliumSimpleAnalytical::localEnergy(const mat &r, VMCSolver *solver)

@@ -1,5 +1,13 @@
 # Fdb version 3
-["pdflatex"] 1429185973 "Project_2.tex" "Project_2.pdf" "Project_2" 1429185973
+["bibtex Project_2"] 1429613520 "Project_2.aux" "Project_2.bbl" "Project_2" 1429614428
+  "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
+  "Project_2.aux" 1429614428 5477 3f64d314c1a269334ca5d9f1bf3c8be6 ""
+  "Project_2.bcf" 0 -1 0 ""
+  "references.bib" 1429609200 916 087b62743a2eeb9be055f8779cb02bc9 ""
+  (generated)
+  "Project_2.bbl"
+  "Project_2.blg"
+["pdflatex"] 1429614428 "Project_2.tex" "Project_2.pdf" "Project_2" 1429614428
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
@@ -159,11 +167,13 @@
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfkeys.sty" 1304191498 274 4cad6e665cc93ac2ac979039a94fa1e1 ""
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1304191498 325 2bcd023400636339210573e2b3ee298b ""
   "/usr/share/texmf/tex/latex/xcolor/xcolor.sty" 1339578534 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "Project_2.aux" 1429185973 1976 1240a593628c33e050e09d048baaef43 ""
-  "Project_2.out" 1429185973 131 a40e0923779dbd29a658a3e3b8da5355 ""
-  "Project_2.tex" 1429185973 7942 b79b3c31f5aa982cf0837e9488e077f0 ""
+  "Project_2.aux" 1429614428 5477 3f64d314c1a269334ca5d9f1bf3c8be6 ""
+  "Project_2.bbl" 1429613520 167 15b67b5a932d79e97d24237ce9c25bc2 "bibtex Project_2"
+  "Project_2.out" 1429614428 1148 dd3363422d71ec13391afb8379aa6aed ""
+  "Project_2.tex" 1429614428 38263 390e9a05fb2c47953ed8234e4b22bb90 ""
+  "figures/blockingheliumsimpleandalytical.png" 1425328948 46655 e077c88186427838f22e06448290e86b ""
   (generated)
   "Project_2.pdf"
-  "Project_2.aux"
-  "Project_2.log"
   "Project_2.out"
+  "Project_2.log"
+  "Project_2.aux"

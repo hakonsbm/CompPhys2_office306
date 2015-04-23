@@ -48,7 +48,6 @@ double HeliumJastrowAnalytical::waveFunction(const mat &r, VMCSolver *solver)
             }
         }
     }
-
     return exp(-accu(rpos) * alpha) * exp(r12 / (2.0*(1 + beta * r12))) ;
 }
 

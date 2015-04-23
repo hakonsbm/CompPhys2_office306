@@ -32,6 +32,7 @@ double HeliumSimpleNumerical::waveFunction(const mat &r, VMCSolver *solver)
         }
         rpos[i] = sqrt(rSingleParticle);
     }
+
     return exp(-accu(rpos) * solver->getAlpha());
 }
 
