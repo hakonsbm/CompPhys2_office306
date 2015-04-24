@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Methods}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Monte Carlo of the Helium Atom}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Beryllium atom}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Neon atom}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Derivation of local energies}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Importance sampling}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Blocking}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.7}{Calculating the Slater determinant}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.8}{Verification of the model}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.9}{Efficient calculation of derivatives}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.10}{Implementation of MPI}{section.2}% 12
+\BOOKMARK [1][-]{section.3}{Results and discussion}{}% 13
+\BOOKMARK [2][-]{subsection.3.1}{Alpha and Beta Values}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.2}{Speedup with MPI}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.3}{Onebody densities / Comparisons / Without Jastrow}{section.3}% 16
+\BOOKMARK [1][-]{section.4}{Conclusions}{}% 17

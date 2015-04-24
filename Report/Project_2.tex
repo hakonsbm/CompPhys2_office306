@@ -66,7 +66,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			E[\hat{H}] = \expval{\hat{H}}{\Psi_T} = \frac{\int{d\vb{R} \Psi_T^*(\vb{R})\hat{H} \Psi_T(\vb{R})  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
 		\end{align}
 
-		Let us introduce a local energy: 
+		Let us introduce a local energy:
 
 		\begin{align}
 			E_L(\hat{H}) &= \frac{1}{ \Psi_T(\vb{R}) } \hat{H} \Psi_T(\vb{R}))
@@ -80,7 +80,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
 		\end{align}
 
-		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral. 
+		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral.
 
 		\begin{enumerate}
 			\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
@@ -110,13 +110,13 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\begin{align}
 			\phi_{1s}({\bf r_{i}})=e^{-\alpha r_{i}},
 		\end{align}
-		and 
+		and
 		\begin{align}
 			\phi_{2s}({\bf r_{i}})=\left(1-\alpha r_{i}/2\right)e^{-\alpha r_{i}/2}.
 		\end{align}
-		The Slater determinant is calculated using these ansatzes. 
+		The Slater determinant is calculated using these ansatzes.
 
-		Furthermore, for the Jastrow factor, 
+		Furthermore, for the Jastrow factor,
 		\begin{align}
 			\Psi_{C}=\prod_{i<j}g(r_{ij})=\exp{\sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}},
 		\end{align}
@@ -134,13 +134,13 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 	\subsection{Neon atom}
 		Wishing to extend our variational Monte Carlo machinery further we implement Neon. Neon has ten electrons, so it is a big jump from Helium and Beryllium. Therefore we also have to implement a better way to handle the Slater determinant than we did in the previous project. The trial wave function for Neon can be written as
 		\begin{equation}
-		   \psi_{T}({\bf r_1},{\bf r_2}, \dots,{\bf r_{10}}) = 
+		   \psi_{T}({\bf r_1},{\bf r_2}, \dots,{\bf r_{10}}) =
 		   Det\left(\phi_{1}({\bf r_1}),\phi_{2}({\bf r_2}),
 		   \dots,\phi_{10}({\bf r_{10}})\right)
-		   \prod_{i<j}^{10}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)}, 
+		   \prod_{i<j}^{10}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)},
 		\end{equation}
-		Now we need to include the $2p$ wave function as well. It is given as 
-		\begin{equation} 
+		Now we need to include the $2p$ wave function as well. It is given as
+		\begin{equation}
 			\phi_{2p}({\bf r_i}) = \alpha {\bf r_i}e^{-\alpha r_i/2}.
 		\end{equation}
 		where $ {\bf r_i} = \sqrt{r_{i_x}^2+r_{i_y}^2+r_{i_z}^2}$.
@@ -182,7 +182,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		force Metropolis algorithm with a walk in coordinate space biased
 		by the trial wave function, an approach based on the Fokker-Planck
 		equation and the Langevin equation for generating a trajectory in
-		coordinate space. 
+		coordinate space.
 
 		For one particle or walker, a diffusion process characterized by a
 		time-dependent probability density $P\left(x,t\right)$ in one dimension
@@ -190,7 +190,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\begin{align}
 			\frac{\partial P}{\partial t}=D\frac{\partial}{\partial x}\left(\frac{\partial}{\partial x}-F\right)P\left(x,t\right),
 		\end{align}
-		where $F$ is a drift term and $D$ is the diffusion coefficient. 
+		where $F$ is a drift term and $D$ is the diffusion coefficient.
 
 		The new positions in coordinate space are found using the Langevin
 		equation with Euler's method. We go from the Langevin equation
@@ -207,7 +207,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 		The process of isotropic diffusion characterized by a time-dependent
 		probability density $P\left(\mathbf{x},t\right)$ will, as an approximation,
-		obey the Fokker-Planck equation 
+		obey the Fokker-Planck equation
 		\begin{align}
 			\frac{\partial P}{\partial t}=\sum_{i}D\frac{\partial}{\partial\mathbf{x_{i}}}\left(\frac{\partial}{\partial\mathbf{x_{i}}}-\mathbf{F_{i}}\right)P(\mathbf{x},t),
 		\end{align}
@@ -247,7 +247,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\begin{align}
 			A(y,x)=\mathrm{min}(1,q(y,x))),
 		\end{align}
-		where 
+		where
 		\begin{align}
 			q(y,x)=\frac{|\Psi_{T}(y)|^{2}}{|\Psi_{T}(x)|^{2}},
 		\end{align}
@@ -295,7 +295,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					\begin{figure}
 		\centering \includegraphics[width=0.45\linewidth]{figures/blockingheliumsimpleandalytical}
 		\protect\caption{STD vs. blocksize. Here we see the plateuing trend of the STD as the blocksize increases, but the problem is that as the blocksize decreases it should decrease as well and not increase. This problem will be fixed in the future.}
-		\label{fig01:std_Stuff} 
+		\label{fig01:std_Stuff}
 		\end{figure}
 
 	\subsection{Calculating the Slater determinant}
@@ -320,7 +320,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		 &  & -\det\uparrow(1,4)\det\downarrow(3,2)+\det\uparrow(2,3)\det\downarrow(1,4)\\
 		 &  & -\det\uparrow(2,4)\det\downarrow(1,3)+\det\uparrow(3,4)\det\downarrow(1,2)
 		\end{eqnarray*}
-		Here we have defined the Slater determinant for spin up as 
+		Here we have defined the Slater determinant for spin up as
 		\begin{align}
 			\det\uparrow(1,2)=\frac{1}{\sqrt{2}}\left|\begin{array}{cc}
 			\psi_{100\uparrow}(\mathbf{r}_{1}) & \psi_{100\uparrow}(\mathbf{r}_{2})\\
@@ -337,7 +337,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		And the total determinant is of course still zero.
 
 		Further, it can be shown that for the variational energy we can approximate
-		the Slater determinant as 
+		the Slater determinant as
 		\begin{align}
 			\Phi(\mathbf{r}_{1},\mathbf{r}_{2},\dots\mathbf{r}_{N})\propto\det\uparrow\det\downarrow
 		\end{align}
@@ -398,9 +398,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				\begin{tabular}{| c | c |}
 				\bottomrule
 				Atom & Energy
-				\\ \hline 
+				\\ \hline
 				Hydrogen 	& \( E_1 = -\frac{1}{2} \)
-				\\ \hline 
+				\\ \hline
 				Helium 		& \( E_1 = -4\)
 				\\ \hline Beryllium		& \( E_1 = -20 \)
 				\\ \hline Neon		& \( E_1 = -200 \)
@@ -409,7 +409,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			\end{center}
 
 		\subsubsection{Verification of the Padè-Jastrow part.}
-			To verify that the part of the code that treats the correlation part of the kinetic energy we calculate we check that it reproduces the correct results in the total energy and variation, but we also perform some tests of the various part by considering the Helium atom where we calculate certain parts of the sums by hand and then compare the results with the ones given by the ratio machinery. 
+			To verify that the part of the code that treats the correlation part of the kinetic energy we calculate we check that it reproduces the correct results in the total energy and variation, but we also perform some tests of the various part by considering the Helium atom where we calculate certain parts of the sums by hand and then compare the results with the ones given by the ratio machinery.
 
 			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\nabla\frac{\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} we get
 
@@ -441,7 +441,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			\begin{align}
 				\frac{\nabla \Psi_T}{ \Psi_T } &= \frac{\nabla( \Psi_D\Psi_C  )}{ \Psi_D\Psi_C } = \frac{ \nabla \Psi_D }{\Psi_D } + \frac{\nabla \Psi_C}{\Psi_C}
 				\\
-				&= \frac{\nabla |D_\uparrow|}{|D_\uparrow|} + \frac{ \nabla |D_\downarrow|}{|D_\downarrow|} + \frac{\nabla \Psi_C}{\Psi_C} 
+				&= \frac{\nabla |D_\uparrow|}{|D_\uparrow|} + \frac{ \nabla |D_\downarrow|}{|D_\downarrow|} + \frac{\nabla \Psi_C}{\Psi_C}
 			\end{align}
 
 		\subsubsection{Kinetic Energy}
@@ -485,7 +485,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				D_{ij} = \phi_j(\vb{r}_i)
 			\end{align}
 
-			where \(\phi_j\) is the j'th single particle wavefunction and \( \vb{r}_i \) is the position of the i'th particle. 
+			where \(\phi_j\) is the j'th single particle wavefunction and \( \vb{r}_i \) is the position of the i'th particle.
 
 			The inverse of a matrix is given by transposing it and dividing by the determinant, so the determinant can be written as
 
@@ -509,8 +509,8 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			Since \(\vb{D}\) is invertible, \(\vb{D}\vb{D}^{-1} = \vb{1}\), the ratio becomes
 
 			\begin{align}
-				R_{SD} &= \sum_{j = 0}^{N}D_{ij}^{new}(D_{ji}^{old})^{-1} = \sum_{j = 0}^{N} \phi_j(\vb{x}^{new}_i) D_{ji}^{-1}(\vb{x}^{old}) 
-			\end{align} 
+				R_{SD} &= \sum_{j = 0}^{N}D_{ij}^{new}(D_{ji}^{old})^{-1} = \sum_{j = 0}^{N} \phi_j(\vb{x}^{new}_i) D_{ji}^{-1}(\vb{x}^{old})
+			\end{align}
 
 		\subsubsection{Gradient determinant Ratio}
 
@@ -525,24 +525,41 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				\\ \hline
 					\(\psi_{1S}\)
 					&
-					\( e^{- \alpha ri} \) 
+					\( e^{- \alpha ri} \)
 					&
-					\( - \frac{\alpha}{r_{i}} \left(x_{i} + y_{i} + z_{i}\right) e^{- \alpha r_{i}} \)	
+					\( - \frac{\alpha}{r_{i}} \left(x_{i}\^{i} + y_{i}\^{j} + z_{i}\^{k}\right) e^{- \alpha r_{i}} \)
 					&
 					\(\frac{\alpha}{r_{i}} \left(\alpha r_{i} - 2\right) e^{- \alpha r_{i}} \)
 				\\	\hline
 					\(\psi_{2S}\)
 					&
-					\( \left(- \frac{\alpha r_{i}}{2} + 1\right) e^{- \frac{\alpha r_{i}}{2}} \)&  
-					\( \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{4 r_{i}} \left(\alpha r_{i} - 4\right) \left(x_{i} + y_{i} + z_{i}\right) \)	
-					&	
+					\( \left(- \frac{\alpha r_{i}}{2} + 1\right) e^{- \frac{\alpha r_{i}}{2}} \)
+					&
+					\( \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{4 r_{i}} \left(\alpha r_{i} - 4\right) \left(x_{i}\^{i} + y_{i}\^{j} + z_{i}\^{k}\right) \)
+					&
 					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{8 r_{i}} \left(\alpha^{2} r_{i}^{2} - 10 \alpha r_{i} + 16\right) \)
 				\\	\hline
-					\(\psi_{2P}\)
+					\(\psi_{2Px}\)
 					&
-					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \) 
+					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha x_{i}^{2} + \alpha x_{i} y_{i} + \alpha x_{i} z_{i} - 2 r_{i}\right) \) 
+					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha x_{i}^{2}\^{i} + \alpha x_{i} y_{i}\^{j} + \alpha x_{i} z_{i}\^{k} - 2 r_{i}\right) \)
+					&
+					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
+				\\	\hline
+					\(\psi_{2Py}\)
+					&
+					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
+					&
+					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha y_{i} x_{i}\^{i} + \alpha y_{i}^{2}\^{j} + \alpha y_{i} z_{i}\^{k} - 2 r_{i}\right) \)
+					&
+					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
+				\\	\hline
+					\(\psi_{2Pz}\)
+					&
+					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
+					&
+					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha z_{i} x_{i}\^{i} + \alpha z_{i} y_{i}\^{j} + \alpha z_{i}^{2}\^{k} - 2 r_{i}\right) \)
 					&
 					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 				\\ \toprule
@@ -575,19 +592,19 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 			The correlation-to-correlation ratio, or ratio between Jastrow factors
 			is given by
-			
+
 			\begin{align}
 				R_{C}=\frac{\Psi_{C}^{new}}{\Psi_{C}^{cur}}=\prod_{i=1}^{k-1}\frac{g_{ik}^{new}}{g_{ik}^{cur}}\prod_{i=k+1}^{N}\frac{g_{ki}^{new}}{g_{ki}^{cur}}
 			\end{align}
-			
+
 			or in the Padé-Jastrow form
-			
+
 			\begin{align}
 				R_{C}=\frac{\Psi_{C}^{\mathrm{new}}}{\Psi_{C}^{\mathrm{cur}}}=\frac{\exp U_{new}}{\exp U_{cur}}=\exp \Delta U
 			\end{align}
-			
-			where 
-			
+
+			where
+
 			\begin{align}
 				\Delta U =
 				\sum_{i=1}^{k-1}\big(f_{ik}^\mathrm{new}-f_{ik}^\mathrm{cur}\big)
@@ -598,41 +615,41 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\subsubsection{The $\nabla \Psi_{C}/\Psi_{C}$ ratio}
 			We continue by finding a useful expression for the quantum force and kinetic energy, the ratio $\nabla\Psi_{C}/\Psi_{C}$. It has,
 			for all dimensions, the form
-			
+
 			\begin{align}
 				\frac{\mathbf{\nabla}_{i}\Psi_{C}}{\Psi_{C}}=\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{i}}
 			\end{align}
-			
+
 			where $i$ runs over all particles. Since the g-terms aren't differentiated
 			they cancel with their corresponding terms in the denominator, so
 			only $N-1$ terms survive the first derivative. We get
-			
+
 			\begin{align}
 				\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{1}{g_{ik}}\frac{\partial g_{ik}}{\partial x_{k}}+\sum_{i=k+1}^{N}\frac{1}{g_{ki}}\frac{\partial g_{ki}}{\partial x_{k}}
 			\end{align}
-			
+
 			For the exponential form we get almost the same, by just replacing
 			$g_{ij}$ with $\exp\left(f_{ij}\right)$ and we get
-			
+
 			\begin{align}
 				\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{\partial g_{ik}}{\partial x_{k}}+\sum_{i=k+1}^{N}\frac{\partial g_{ki}}{\partial x_{k}}
 			\end{align}
-			
+
 			We now use the identity
-			
+
 			\begin{align}
 				\frac{\partial}{\partial x_{i}}g_{ij}=-\frac{\partial}{\partial x_{j}}g_{ij}
 			\end{align}
-			
+
 			and get expressions where the derivatives that act on the particle
 			are represented by the second index of $g$
-			
+
 			\begin{align}
 				\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{1}{g_{ik}}\frac{\partial g_{ik}}{\partial x_{k}}-\sum_{i=k+1}^{N}\frac{1}{g_{ki}}\frac{\partial g_{ki}}{\partial x_{i}}
 			\end{align}
-			
+
 			and for the exponential case
-			
+
 			\begin{align}
 				\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{\partial g_{ik}}{\partial x_{k}}-\sum_{i=k+1}^{N}\frac{\partial g_{ki}}{\partial x_{i}}
 			\end{align}
@@ -640,96 +657,96 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 			Since we have that the correlation function is depending on the relative
 			distance we use the chain rule
-			
+
 			\begin{align}
 				\frac{\partial g_{ij}}{\partial x_{j}}=\frac{\partial g_{ij}}{\partial r_{ij}}\frac{\partial r_{ij}}{\partial x_{j}}=\frac{x_{j}-x_{i}}{r_{ij}}\frac{\partial g_{ij}}{\partial r_{ij}}
 			\end{align}
-			
+
 			After substitution we get
-			
+
 			\begin{align}
 				\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{1}{g_{ik}}\frac{\mathbf{r_{ik}}}{r_{ik}}\frac{\partial g_{ik}}{\partial r_{ik}}-\sum_{i=k+1}^{N}\frac{1}{g_{ki}}\frac{\mathbf{r_{ki}}}{r_{ki}}\frac{\partial g_{ki}}{\partial r_{ki}}
 			\end{align}
-			
+
 			For the Padé-Jastrow form we set $\ensuremath{g_{ij}\equiv g(r_{ij})=e^{f(r_{ij})}=e^{f_{ij}}}$
-			and 
-			
+			and
+
 			\begin{align}
 				\frac{\partial g_{ij}}{\partial r_{ij}}=g_{ij}\frac{\partial f_{ij}}{\partial r_{ij}}
 			\end{align}
-			
-			and arrive at 
-			
+
+			and arrive at
+
 			\begin{align}
 				\frac{1}{\Psi_{C}}\frac{\partial\Psi_{C}}{\partial x_{k}}=\sum_{i=1}^{k-1}\frac{\mathbf{r_{ik}}}{r_{ik}}\frac{\partial f_{ik}}{\partial r_{ik}}-\sum_{i=k+1}^{N}\frac{\mathbf{r_{ki}}}{r_{ki}}\frac{\partial f_{ki}}{\partial r_{ki}} \label{eq:gradient_ratio_Jastrow}
 			\end{align}
-			
-			where we have the relative vectorial distance 
-			
+
+			where we have the relative vectorial distance
+
 			\begin{align}
 				\mathbf{r}_{ij}=|\mathbf{r}_{j}-\mathbf{r}_{i}|=(x_{j}-x_{i})\mathbf{e}_{1}+(y_{j}-y_{i})\mathbf{e}_{2}+(z_{j}-z_{i})\mathbf{e}_{3}
 			\end{align}
-			
+
 			With a linear Padé-Jastrow we set
-			
+
 			\begin{align}
 				f_{ij}=\frac{ar_{ij}}{(1+\beta r_{ij})}
 			\end{align}
-			
+
 			with the corresponding closed form expression
-			
+
 			\begin{align}
 				\frac{\partial f_{ij}}{\partial r_{ij}}=\frac{a}{(1+\beta r_{ij})^{2}}
 			\end{align}
-		
+
 		\subsubsection{The $\nabla^{2} \Psi_{C}/\Psi_{C}$ ratio}
 			For the kinetic energy we also need the second derivative of the Jastrow
 			factor divided by the Jastrow factor. We start with this
-			
+
 			\begin{align}
 				\left[\frac{\mathbf{\nabla}^{2}\Psi_{C}}{\Psi_{C}}\right]_{x}=\ 2\sum_{k=1}^{N}\sum_{i=1}^{k-1}\frac{\partial^{2}g_{ik}}{\partial x_{k}^{2}}\ +\ \sum_{k=1}^{N}\left(\sum_{i=1}^{k-1}\frac{\partial g_{ik}}{\partial x_{k}}-\sum_{i=k+1}^{N}\frac{\partial g_{ki}}{\partial x_{i}}\right)^{2}
 			\end{align}
-			
+
 			But we have another, simpler form for the function
-			
+
 			\begin{align}
-				\Psi_{C}=\prod_{i<j}\exp f(r_{ij})=\exp\left\{ \sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}\right\} 
+				\Psi_{C}=\prod_{i<j}\exp f(r_{ij})=\exp\left\{ \sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}\right\}
 			\end{align}
-			
+
 			and for particle $k$ we have
-			
+
 			\begin{align}
 				\frac{\mathbf{\nabla}_{k}^{2}\Psi_{C}}{\Psi_{C}}=\sum_{ij\ne k}\frac{(\mathbf{r}_{k}-\mathbf{r}_{i})(\mathbf{r}_{k}-\mathbf{r}_{j})}{r_{ki}r_{kj}}f'(r_{ki})f'(r_{kj})+\sum_{j\ne k}\left(f''(r_{kj})+\frac{2}{r_{kj}}f'(r_{kj})\right)
 			\end{align}
-			
-			We use 
-			
+
+			We use
+
 			\begin{align}
 				f(r_{ij})=\frac{ar_{ij}}{1+\beta r_{ij}}
 			\end{align}
-			
+
 			and with
-			
+
 			\begin{align}
 				\begin{array}{ccc}
 				g'(r_{kj})=dg(r_{kj})/dr_{kj} & \quad\mbox{and}\quad & g''(r_{kj})=d^{2}g(r_{kj})/dr_{kj}^{2}\end{array}
 			\end{align}
-			
+
 			we find that for particle $k$ we have
-			
+
 			\begin{align}
 				\frac{\mathbf{\nabla}_{k}^{2}\Psi_{C}}{\Psi_{C}}=\sum_{ij\ne k}\frac{(\mathbf{r}_{k}-\mathbf{r}_{i})(\mathbf{r}_{k}-\mathbf{r}_{j})}{r_{ki}r_{kj}}\frac{a}{(1+\beta r_{ki})^{2}}\frac{a}{(1+\beta r_{kj})^{2}}+\sum_{j\ne k}\left(\frac{2a}{r_{kj}(1+\beta r_{kj})^{2}}-\frac{2a\beta}{(1+\beta r_{kj})^{3}}\right)
 			\end{align}
-			
-			And for the linear Padé-Jastrow we get the closed form result 
-			
+
+			And for the linear Padé-Jastrow we get the closed form result
+
 			\begin{align}
 				\frac{\partial^{2}f_{ij}}{\partial r_{ij}^{2}}=-\frac{2a_{ij}\beta_{ij}}{\left(1+\beta_{ij}r_{ij}\right)^{3}}
 			\end{align}
 
 	\subsection{Implementation of MPI}
 		As the calculations now become increasingly complex and heavy we implement MPI to make use of multiple processors. Personal computers today usually have two, four or sometimes eight processors, which will give a fairly good speedup to our calculations. With bigger atoms or systems it is crucial to implement a way to distribute calculation to multiple processors.
-		
+
 		Implementing MPI in the Monte Carlo method is very easy. As we deal with statistical values we can easily split up the problem. Each process will run its own set of samples. The number of samples used by each process is simply $n/p$, where $n$ is the total number of samples we want to do, and $p$ is the number of processes. In the end all processors send their results to the master process, which sums up the values and takes the average over all processes.
 
 \section{Results and discussion}
@@ -740,9 +757,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			   	Atom & VMC & References
 			    \\ \hline
 			    Beryllium & $-14.4127$ & $-14.667$
-			    \\ \hline 
-			    Neon & TODO & TODO 
-			    \\	\hline 
+			    \\ \hline
+			    Neon & TODO & TODO
+			    \\	\hline
 		  \end{tabular}
 		  \caption{Comparison of energies found with Variational Monte Carlo method and
 		energies found in research papers.}
@@ -760,9 +777,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				   	\textbf{Trialfunction} & \(\mathbf{\alpha}\) & \(\mathbf{\beta}\)
 				    \\ \hline
 				    Beryllium $\psi_{T2}$	& 3.8	&	 0.293
-				    \\ \hline 
+				    \\ \hline
 				    Neon $\psi_{T2}$	&	10.22	&	0.091
-				    \\	\hline 
+				    \\	\hline
 			  \end{tabular}
 			  \caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values. For Beryllium each Monte Carlo run went over \(10 000 000\), using importance sampling. For Neon each run went over \(5 000\), also with importance sampling Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
 			  \label{tab:alpha_beta}
@@ -775,10 +792,10 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\center
 				\begin{tabular}{| c | c| c| c| c|}
 				    \hline
-				   	\textbf{Num. of processes} &	1	&	2	&	3	&	4	
+				   	\textbf{Num. of processes} &	1	&	2	&	3	&	4
 				    \\ \hline
-				    \textbf{Time to exec [s]}	&	1.0	&	1.97	&	2.90	&	3.35	
-				    \\	\hline 
+				    \textbf{Time to exec [s]}	&	1.0	&	1.97	&	2.90	&	3.35
+				    \\	\hline
 			  \end{tabular}
 			  \caption{MPI speedup}
 			  \label{tab:MPI_speedup}
@@ -787,10 +804,10 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\begin{figure}
 		\centering \includegraphics[width=0.45\linewidth]{../source/outfiles/processor_number_time_comparison}
 		\protect\caption{MPI speedup}
-		\label{fig:MPI_speedup} 
+		\label{fig:MPI_speedup}
 		\end{figure}
 
-		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs. 
+		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs.
 
 	\subsection{Onebody densities / Comparisons / Without Jastrow}
 
