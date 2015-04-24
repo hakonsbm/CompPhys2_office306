@@ -69,16 +69,13 @@ double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *so
     return derivative;
 }
 
-double Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver)
+vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
-    double x_i = r(particleTag, 0);
-    double y_i = r(particleTag, 1);
-    double z_i = r(particleTag, 2);
 
 
-    double derivative = -alpha*(x_i + y_i + z_i)*exp(-alpha*r_i)/r_i;
+    vec derivative = -alpha*r.row(particleTag)*exp(-alpha*r_i)/r_i;
 
     return derivative;
 }
@@ -96,17 +93,14 @@ double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &
     return derivative;
 }
 
-double Derivatives::analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSolver *solver)
+vec Derivatives::analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
 
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
-    double x_i = r(particleTag, 0);
-    double y_i = r(particleTag, 1);
-    double z_i = r(particleTag, 2);
 
 
-    double derivative = (1.0L/4.0L)*alpha*(alpha*r_i - 4)*(x_i + y_i + z_i)*exp(-1.0L/2.0L*alpha*r_i)/r_i;
+    vec derivative = (1.0L/4.0L)*alpha*(alpha*r_i - 4)*r.row(particleTag)*exp(-1.0L/2.0L*alpha*r_i)/r_i;
 
     return derivative;
 }
@@ -123,15 +117,20 @@ double Derivatives::analyticalPsi2SDoubleDerivative(int particleTag, const mat &
     return derivative;
 }
 
-double Derivatives::analyticalPsi2PDerivative(int particleTag, const mat &r, VMCSolver *solver)
+vec Derivatives::analyticalPsi2PDerivative(int particleTag, int dimension, const mat &r, VMCSolver *solver)
 {
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
     double x_i = r(particleTag, 0);
     double y_i = r(particleTag, 1);
     double z_i = r(particleTag, 2);
+    double o_i = r(particleTag, dimension);
+    double factor = -1.0L/2.0L*o_i*alpha*exp(-1.0L/2.0L*alpha*r_i)/r_i;
+    vec derivative;
 
-    double derivative = -1.0L/2.0L*alpha*(alpha*pow(x_i, 2) + alpha*x_i*y_i + alpha*x_i*z_i - 2*r_i)*exp(-1.0L/2.0L*alpha*r_i)/r_i;
+    derivative(0) = factor*(alpha*x_i - 2*r_i);
+    derivative(1) = factor*(alpha*y_i - 2*r_i);
+    derivative(2) = factor*(alpha*z_i - 2*r_i);
 
     return derivative;
 }
@@ -154,8 +153,9 @@ double Derivatives::fDerivative(int i, int j, const mat &r, VMCSolver *solver)
     double a = solver->trialFunction()->spinFactor(i,j);
     double rij = norm(r.row(i) - r.row(j));
 
-    return a/pow(1+beta*rij , 2);
+    return a/pow(1+beta*rij, 2);
 }
+
 double Derivatives::fDoubleDerivative(int i, int j, const mat &r, VMCSolver *solver)
 {
     //Calculates the d²/dx² f_ij derivative
@@ -163,7 +163,7 @@ double Derivatives::fDoubleDerivative(int i, int j, const mat &r, VMCSolver *sol
     double a = solver->trialFunction()->spinFactor(i,j);
     double rij = norm(r.row(i) - r.row(j));
 
-    return -2*a*beta/pow(1+beta*rij , 3);
+    return -2*a*beta/pow(1+beta*rij, 3);
 }
 
 
@@ -171,7 +171,6 @@ double Derivatives::fDoubleDerivative(int i, int j, const mat &r, VMCSolver *sol
 vec Derivatives::analyticalCorrelationDerivative( const mat &r, VMCSolver *solver)
 {
     //This sums over all the electrons and calculates the total correlation gradient ratio term
-
 
     int nParticles = solver->getNParticles();
     vec gradient = zeros (3);
@@ -184,26 +183,45 @@ vec Derivatives::analyticalCorrelationDerivative( const mat &r, VMCSolver *solve
         cout << k << endl;
            for(int i = 0; i < k-1; i ++)
            {
-
                rik = (r.row(i) - r.row(k)).t();
-               gradient += rik / norm(rik) * fDerivative(i,k,r, solver);
+               gradient += rik / norm(rik) * fDerivative(i,k,r,solver);
 
+           }
+           for(int i = k +1 ; i < nParticles - 1 ; i ++)
+           {
+               rki = (r.row(k) - r.row(i)).t();
+               gradient -= rki / norm(rki) * fDerivative(k,i,r,solver);
+               //cout << norm(rki) << endl;
+           }
+    }
+    return gradient;
+}
+
+double Derivatives::analyticalCorrelationDoubleDerivative( const mat &r, VMCSolver *solver)
+{
+    //This sums over all the electrons and calculates the total correlation gradient ratio term
+
+    int nParticles = solver->getNParticles();
+    int nDimensions = solver->getNDimensions();
+    double gradient = 0;
+    vec rik = zeros (3);
+    vec rki = zeros (3);
+
+    //Calculates the interaction from all the particles earlier
+    for(int k = 0; k < nParticles; k++)
+    {
+        cout << k << endl;
+           for(int i = 0; i < k-1; i ++)
+           {
+               rik = (r.row(i) - r.row(k)).t();
+               gradient += (nDimensions - 1) / norm(rik) * fDerivative(i,k,r,solver) + fDoubleDerivative(i,k,r,solver);
            }
            for(int i = k +1 ; i < nParticles - 1 ; i ++)
            {
 
                rki = (r.row(k) - r.row(i)).t();
-               gradient -= rki / norm(rki) * fDerivative(k,i, r, solver);
-               cout << norm(rki) << endl;
-
+               gradient -= (nDimensions - 1) / norm(rki) * fDerivative(k,i,r,solver) + fDoubleDerivative(k,i,r,solver);
            }
-
     }
-
-
-
-    return gradient;
+    return gradient;//DON'T FORGET TO ADD THE SUMMAND OF (∇Ψ_C/Ψ_C)² TO THE VARIABLE GRADIENT HERE WHEN YOU CALL THE FUNCTION TO GET ∇Ψ/Ψ, SEE EQUATION (16.38)
 }
-
-
-
