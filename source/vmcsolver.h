@@ -97,6 +97,7 @@ private:
 
     //Variables for the MPI implementation
     int my_rank;
+    int numprocs;
     int m_nargs;
     char** m_args;
 

@@ -15,6 +15,7 @@ TrialFunction::TrialFunction()
 
 double TrialFunction::spinFactor(int i, int j)
 {
+
     if(spin(i) == spin(j))
         return 1./4.;
     else

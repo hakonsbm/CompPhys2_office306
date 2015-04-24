@@ -403,6 +403,8 @@ void runSIWithDiffTimesteps(VMCSolver *solver)
 void runBlockingSampledRun(VMCSolver *solver)
 {
     solver->switchbBlockSampling(true);
+    solver->switchElectronInteraction(true);
+    solver->trialFunction()->setAnalytical(false);
 
     string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
 
@@ -412,7 +414,7 @@ void runBlockingSampledRun(VMCSolver *solver)
 
     samplefile.open(outfilePath);
 
-    solver->runMonteCarloIntegrationIS();
+    solver->runMasterIntegration();
 
     samplefile.close();
 
@@ -480,7 +482,7 @@ void runCompareParallelize(VMCSolver * solver)
     //TestSettings
     solver->switchElectronInteraction(true);
     solver->trialFunction()->setAnalytical(false);
-    //solver->setAlpha(solver->getCharge());
+//    solver->setAlpha(solver->getCharge());
 
 
 

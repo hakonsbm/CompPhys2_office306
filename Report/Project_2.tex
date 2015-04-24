@@ -49,7 +49,7 @@
 
 \maketitle
 
-\abstract{By using Variational Monte Carlo methods with importance sampling, blocking and MPI we find the ground state energies of Beryllium and Neon. We also calculate the onebody density with and without the Jastrow factor. SOME RESULTS}
+\abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: Beryllium and Neon. The program uses importance sampling to improve the program with more efficiency and make the results more precise. To further improve the efficiency MPI has been implemented as well. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor with and provide insight into the electronic structure of the atoms.}
 
 
 \section{Introduction}
@@ -103,6 +103,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		we can write the trial wave function for beryllium as
 		\begin{equation}
 			\psi_{T}({\bf r_{1}},{\bf r_{2}},{\bf r_{3}},{\bf r_{4}})=Det\left(\phi_{1}({\bf r_{1}}),\phi_{2}({\bf r_{2}}),\phi_{3}({\bf r_{3}}),\phi_{4}({\bf r_{4}})\right)\prod_{i<j}^{4}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)},
+			\label{eq:BerylliumTrialFunction}
 		\end{equation}
 		where $Det$ is a Slater determinant and the single-particle wave
 		functions are the hydrogen wave functions for the 1s and 2s orbitals.
@@ -138,6 +139,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		   Det\left(\phi_{1}({\bf r_1}),\phi_{2}({\bf r_2}),
 		   \dots,\phi_{10}({\bf r_{10}})\right)
 		   \prod_{i<j}^{10}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)},
+		   \label{eq:NeonTrialFunction}
 		\end{equation}
 		Now we need to include the $2p$ wave function as well. It is given as
 		\begin{equation}
@@ -292,10 +294,11 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					The solution is to use blocking, and the algorithm to do this is actually quite simple. The total amount of measurements is divided into blocks (hence the name) of a certain size, and for each block the standard deviation is obtained. When the standard deviation stops increasing as the block size does, the correlations are irrelevant and the value for it is ready.\\
 
 
-					\begin{figure}
-		\centering \includegraphics[width=0.45\linewidth]{figures/blockingheliumsimpleandalytical}
-		\protect\caption{STD vs. blocksize. Here we see the plateuing trend of the STD as the blocksize increases, but the problem is that as the blocksize decreases it should decrease as well and not increase. This problem will be fixed in the future.}
-		\label{fig01:std_Stuff}
+		\begin{figure}
+			\centering \includegraphics[width=0.45\linewidth]{figures/Beryllium_blocking}
+			\centering \includegraphics[width=0.45\linewidth]{figures/Neon_blocking}
+			\protect\caption{STD vs. blocksize with $10^{5}$ MC cycles.  The STD should have a plateuing trend as the blocksize increases.} \label{fig01:std_Stuff}
+
 		\end{figure}
 
 	\subsection{Calculating the Slater determinant}
@@ -411,7 +414,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\subsubsection{Verification of the Padè-Jastrow part.}
 			To verify that the part of the code that treats the correlation part of the kinetic energy we calculate we check that it reproduces the correct results in the total energy and variation, but we also perform some tests of the various part by considering the Helium atom where we calculate certain parts of the sums by hand and then compare the results with the ones given by the ratio machinery.
 
-			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\nabla\frac{\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} we get
+			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\nabla\frac{\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} on Helium we get
 
 			\begin{align}
 				\frac{\nabla\Psi_C}{\Psi_C} &= \frac{1}{\Psi_c} \pdv{\Psi_C}{x_k} = \frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right) - \frac{\vb{r_{21}}}{r_{21}}\pdv{}{r_{21}}\left( \frac{r_{21}}{2(1+\beta r_{21})} \right)
@@ -421,7 +424,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				&= \frac{\vb{r_{12}}}{r_{12}} \frac{1}{(1+\beta r_{12})^2}
 			\end{align}
 
-			By testing
+			Testing the that the program reproduces this for the helium atom indicates the \(\frac{\nabla \Psi_C}{\Psi_C}\) is being calculated correctly.
 
 
 
@@ -756,17 +759,27 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			    \hline
 			   	Atom & VMC & References
 			    \\ \hline
-			    Beryllium & $-14.4127$ & $-14.667$
+			    Beryllium & $-14.3795$ & $-14.667$
 			    \\ \hline
-			    Neon & TODO & TODO
+			    Neon & $-146.958$ & TODO
 			    \\	\hline
 		  \end{tabular}
 		  \caption{Comparison of energies found with Variational Monte Carlo method and
-		energies found in research papers.}
+		energies found in research papers \cite{Koput:2011:PCCP} \cite{NEON}.}
 		\label{tab:energyReference}
 	\end{table}
 
-	Reference to table \ref{tab:energyReference}.
+	We attempt to solve the ground state energy for the Beryllium atom and Neon atom using a Variational Monte Carlo calculation with importance sampling. We have used the trial functions \eqref{eq:BerylliumTrialFunction} for Beryllium and \eqref{eq:NeonTrialFunction} for Neon which uses $\alpha$ and $\beta$ as variational parameters.
+
+	For Beryllium we have the Alpha and Beta values $\alpha=4.0$ and $\beta=0.31$. We use $10^{6}$ cycles and find the energy to be $-14.3795$, with a variance of $0.0020$.
+	For Neon, with $5 \times 10^{5}$ cycles we get an energy of $-146.958$ with a variance of $0.0261$.
+
+	From reseach papers we find the value for energy in the ground state
+	of Beryllium to be $-14.667$ \cite{Koput:2011:PCCP} and the value
+	for energy in the ground state of Neon to be $TODO$ \cite{NEON}.
+	In table \ref{tab:energyReference} we compare results
+	obtained with our Variational Monte Carlo method with results from
+	various research papers.
 
 
 	\subsection{Alpha and Beta Values}
@@ -785,7 +798,14 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			  \label{tab:alpha_beta}
 		\end{table}
 
-		We use Alpha and Beta values for Beryllium found in project 1, so the only Alpha and Beta values we have to find are for Neon. Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. FIGURES
+		\begin{figure}
+			\centering \includegraphics[width=0.45\linewidth]{figures/Neon_alpha_beta}
+			\centering \includegraphics[width=0.45\linewidth]{figures/Neon_alpha_beta_var}
+			\protect\caption{Energy (left) and variance (right) for different Alpha and Beta values for Neon.}
+			\label{fig:alpha_beta_comparison}
+		\end{figure}
+
+		We use Alpha and Beta values for Beryllium found in project 1, so the only Alpha and Beta values we have to find are for Neon. Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. A plot of different energies and variance given by different Alpha and Beta values are shown in figure \ref{fig:alpha_beta_comparison}.
 
 	\subsection{Speedup with MPI}
 		\begin{table}
@@ -802,7 +822,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\end{table}
 
 		\begin{figure}
-		\centering \includegraphics[width=0.45\linewidth]{../source/outfiles/processor_number_time_comparison}
+		\centering \includegraphics[width=0.45\linewidth]{figures/processor_number_time_comparison}
 		\protect\caption{MPI speedup}
 		\label{fig:MPI_speedup}
 		\end{figure}
@@ -810,12 +830,16 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs.
 
 	\subsection{Onebody densities / Comparisons / Without Jastrow}
+		As we see in the verification section, without interaction the energies behave like hydrogen like wave functions. Comparing with the energies we obtain when also using interaction in the calculations we see that the Jastrow factor offers a good improvement on the energy, especially for larger systems.
 
 \section{Conclusions}
+	Again we see that the Variational Monte Carlo method gives good values, also for larger systems like Neon, as long as we deal with the interaction between the particles using the Jastrow factor. We have implemented the possibility of using MPI as this reduces the time to run simulations considerably. With a larger system we also needed a better way to handle the Slater Determinant. Optimizing the calculations of the Slater Determinant is still ongoing.
+
+	SOMETHING ABOUT ENERGIES
 
 
-\bibliographystyle{plain}
 \bibliography{references}
+\bibliographystyle{plain}
 
 
 \end{document}

@@ -152,8 +152,12 @@ double Derivatives::fDerivative(int i, int j, const mat &r, VMCSolver *solver)
     double beta = solver->getBeta();
     double a = solver->trialFunction()->spinFactor(i,j);
     double rij = norm(r.row(i) - r.row(j));
+<<<<<<< HEAD
 
     return a/pow(1+beta*rij, 2);
+=======
+    return a/pow(1+beta*rij , 2);
+>>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
 }
 
 double Derivatives::fDoubleDerivative(int i, int j, const mat &r, VMCSolver *solver)
@@ -180,21 +184,83 @@ vec Derivatives::analyticalCorrelationDerivative( const mat &r, VMCSolver *solve
     //Calculates the interaction from all the particles earlier
     for(int k = 0; k < nParticles; k++)
     {
-        cout << k << endl;
-           for(int i = 0; i < k-1; i ++)
+           for(int i = 0; i < k; i ++)
            {
                rik = (r.row(i) - r.row(k)).t();
+<<<<<<< HEAD
                gradient += rik / norm(rik) * fDerivative(i,k,r,solver);
+=======
+               gradient = gradient + rik / norm(rik) * fDerivative(i,k,r, solver);
+>>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
 
            }
-           for(int i = k +1 ; i < nParticles - 1 ; i ++)
+           for(int i = k +1 ; i < nParticles  ; i ++)
            {
                rki = (r.row(k) - r.row(i)).t();
+<<<<<<< HEAD
                gradient -= rki / norm(rki) * fDerivative(k,i,r,solver);
                //cout << norm(rki) << endl;
+=======
+               gradient = gradient + rki / norm(rki) * fDerivative(k,i, r, solver);
+>>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
            }
     }
+<<<<<<< HEAD
     return gradient;
+=======
+
+    return gradient;
+}
+
+double Derivatives::analyticalCorrelationDoubleDerivative(const mat &r, VMCSolver *solver)
+{
+    //Not properly tested yet
+
+    vec rki = zeros(3);
+    vec rkj = zeros(3);
+
+    int nParticles = solver->getNParticles();
+
+    int i, j, k;
+
+//    cout << "Got ehre" << endl;
+    double laplacian = 0;
+
+    //Summing over all the electrons
+    for (k = 0; k < nParticles ; k ++)
+    {
+        //Summing over the part with correlation between the other electrons than electron k
+        for(i = k + 1 ; i < nParticles ; i ++)
+        {
+            for(j = i + 1; j < nParticles ; j ++)
+            {
+//                cout << "Sum 1" << endl;
+                rkj = (r.row(k) - r.row(j)).t();
+                rki = (r.row(k) - r.row(i)).t();
+                laplacian = laplacian + dot(rkj,rkj) / (norm(rki)*norm(rkj)) * fDerivative(k,j,r,solver) * fDerivative(k,i,r,solver) ;
+
+            }
+        }
+
+        //Summing over the d²/dx² part of the expression
+        for(j = 0; j < nParticles ; j ++)
+        {
+//            if(j != k)
+//            {
+//            cout << "Sum 2" << endl;
+//            rkj = (r.row(k) - r.row(j)).t();
+//            laplacian = laplacian + fDoubleDerivative(k,j, r, solver) + 2.*fDerivative(k,j,r, solver)/ norm(rkj);
+
+//            cout << "Sum 2 end" << endl;
+//            }
+        }
+
+    }
+
+
+
+    return laplacian;
+>>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
 }
 
 double Derivatives::analyticalCorrelationDoubleDerivative( const mat &r, VMCSolver *solver)
@@ -207,6 +273,7 @@ double Derivatives::analyticalCorrelationDoubleDerivative( const mat &r, VMCSolv
     vec rik = zeros (3);
     vec rki = zeros (3);
 
+<<<<<<< HEAD
     //Calculates the interaction from all the particles earlier
     for(int k = 0; k < nParticles; k++)
     {
@@ -225,3 +292,8 @@ double Derivatives::analyticalCorrelationDoubleDerivative( const mat &r, VMCSolv
     }
     return gradient;//DON'T FORGET TO ADD THE SUMMAND OF (∇Ψ_C/Ψ_C)² TO THE VARIABLE GRADIENT HERE WHEN YOU CALL THE FUNCTION TO GET ∇Ψ/Ψ, SEE EQUATION (16.38)
 }
+=======
+
+
+
+>>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f

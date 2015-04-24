@@ -11,6 +11,7 @@ int main() {
     ifstream inFile;
     ofstream outFile;
     vector <double> energy;
+    vector <double> energySquared;
     double tmp1;
     double tmp2;
     double tmp3;
@@ -22,19 +23,23 @@ int main() {
     int count = 0;
     int numberOfBlocks = 0;
     int maxBlockSize = 0;
-    int minBlockSize = 100;
+    int minBlockSize = 10;
     outFile.open("outputSTD.dat");
-    inFile.open("input.dat");
-    while (!inFile.eof()) {
+    inFile.open("../outfiles/Beryllium_blockingSamples");
+    cout << "reading file" <<endl;
+    while (inFile && count<=1000000) {
         inFile >> tmp1 >> tmp2 >> tmp3 >> tmp4;
         energy.push_back(tmp1);
+        energySquared.push_back(tmp2);
         count++;
+        cout << count << tmp1 << endl;
     }
     count--;
     energy.pop_back();
     energySquared.pop_back();
     inFile.close();
     maxBlockSize = count / 4;
+    cout << "blocking calculation" << minBlockSize << " " <<  maxBlockSize <<endl;
     for(int i = minBlockSize; i < maxBlockSize + 1; i++) {
         if(count % i != 0)continue;
         mean = 0;

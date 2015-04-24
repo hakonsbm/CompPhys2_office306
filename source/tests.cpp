@@ -66,12 +66,14 @@ TEST(Hydrogenic) {
 
 TEST(HeliumJastrow)
 {
+
+
     cout << "Testing The analytical version of the Helium wavefunction" << endl;
 
     double oldVersion, newVersion;
 
 
-
+    //Testing the machinery for the gradient ratio of Psi_C vs a calcualted ratio
     VMCSolver *solver = new VMCSolver();
 
     solver->setTrialFunction(new Helium(solver));
@@ -83,6 +85,7 @@ TEST(HeliumJastrow)
 
     mat r = zeros (2,3);
     vec correct = zeros (3);
+    vec calculated = zeros(3);
     double r12 = 0;
 
     double particles = 2;
@@ -100,13 +103,18 @@ TEST(HeliumJastrow)
 
     r12 = norm(r.row(0) - r.row(1));
     correct= ((r.row(0) - r.row(1)).t())  / (r12 * pow(1+(beta*r12), 2)) ;
+    calculated = solver->derivatives()->analyticalCorrelationDerivative(r,solver) ;
 
-    cout << correct << endl;
+    CHECK_CLOSE( correct(0) , calculated(0), 0.001  );
+    CHECK_CLOSE( correct(1) , calculated(1), 0.001  );
+    CHECK_CLOSE( correct(2) , calculated(2), 0.001  );
 
-    cout << solver->derivatives()->analyticalCorrelationDerivative(r,solver) << endl;
+
+    //Checking the laplacian ratio of Psi_C vs a calculated one.
+//    cout << solver->derivatives()->analyticalCorrelationDoubleDerivative(r, solver) << endl;
 
 
-    exit(0);
+//    exit(0);
 }
 
 
