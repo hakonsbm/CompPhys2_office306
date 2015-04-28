@@ -206,7 +206,6 @@ vec SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
 
 //    updateSlaterMatrices(r,solver);
 
-<<<<<<< HEAD
     //Calculating the sum of the particles derivatives
     for(int i = 0; i < nHalf; i ++) //Sums over the particles
     {
@@ -219,13 +218,7 @@ vec SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
     }
 
     return derivative;
-=======
-vec SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solver)
-{
-       //Shall calculate (d/dx |D|)/|D|
 
-    return zeros(3);
->>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
 }
 
 double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *solver)

@@ -152,12 +152,9 @@ double Derivatives::fDerivative(int i, int j, const mat &r, VMCSolver *solver)
     double beta = solver->getBeta();
     double a = solver->trialFunction()->spinFactor(i,j);
     double rij = norm(r.row(i) - r.row(j));
-<<<<<<< HEAD
 
     return a/pow(1+beta*rij, 2);
-=======
-    return a/pow(1+beta*rij , 2);
->>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
+
 }
 
 double Derivatives::fDoubleDerivative(int i, int j, const mat &r, VMCSolver *solver)
@@ -187,27 +184,17 @@ vec Derivatives::analyticalCorrelationDerivative( const mat &r, VMCSolver *solve
            for(int i = 0; i < k; i ++)
            {
                rik = (r.row(i) - r.row(k)).t();
-<<<<<<< HEAD
-               gradient += rik / norm(rik) * fDerivative(i,k,r,solver);
-=======
                gradient = gradient + rik / norm(rik) * fDerivative(i,k,r, solver);
->>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
 
            }
            for(int i = k +1 ; i < nParticles  ; i ++)
            {
                rki = (r.row(k) - r.row(i)).t();
-<<<<<<< HEAD
                gradient -= rki / norm(rki) * fDerivative(k,i,r,solver);
                //cout << norm(rki) << endl;
-=======
-               gradient = gradient + rki / norm(rki) * fDerivative(k,i, r, solver);
->>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
            }
     }
-<<<<<<< HEAD
-    return gradient;
-=======
+
 
     return gradient;
 }
@@ -260,40 +247,33 @@ double Derivatives::analyticalCorrelationDoubleDerivative(const mat &r, VMCSolve
 
 
     return laplacian;
->>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
 }
 
-double Derivatives::analyticalCorrelationDoubleDerivative( const mat &r, VMCSolver *solver)
-{
-    //This sums over all the electrons and calculates the total correlation gradient ratio term
+//double Derivatives::analyticalCorrelationDoubleDerivative( const mat &r, VMCSolver *solver)
+//{
+//    //This sums over all the electrons and calculates the total correlation gradient ratio term
 
-    int nParticles = solver->getNParticles();
-    int nDimensions = solver->getNDimensions();
-    double gradient = 0;
-    vec rik = zeros (3);
-    vec rki = zeros (3);
+//    int nParticles = solver->getNParticles();
+//    int nDimensions = solver->getNDimensions();
+//    double gradient = 0;
+//    vec rik = zeros (3);
+//    vec rki = zeros (3);
 
-<<<<<<< HEAD
-    //Calculates the interaction from all the particles earlier
-    for(int k = 0; k < nParticles; k++)
-    {
-        cout << k << endl;
-           for(int i = 0; i < k-1; i ++)
-           {
-               rik = (r.row(i) - r.row(k)).t();
-               gradient += (nDimensions - 1) / norm(rik) * fDerivative(i,k,r,solver) + fDoubleDerivative(i,k,r,solver);
-           }
-           for(int i = k +1 ; i < nParticles - 1 ; i ++)
-           {
+//    //Calculates the interaction from all the particles earlier
+//    for(int k = 0; k < nParticles; k++)
+//    {
+//        cout << k << endl;
+//           for(int i = 0; i < k-1; i ++)
+//           {
+//               rik = (r.row(i) - r.row(k)).t();
+//               gradient += (nDimensions - 1) / norm(rik) * fDerivative(i,k,r,solver) + fDoubleDerivative(i,k,r,solver);
+//           }
+//           for(int i = k +1 ; i < nParticles - 1 ; i ++)
+//           {
 
-               rki = (r.row(k) - r.row(i)).t();
-               gradient -= (nDimensions - 1) / norm(rki) * fDerivative(k,i,r,solver) + fDoubleDerivative(k,i,r,solver);
-           }
-    }
-    return gradient;//DON'T FORGET TO ADD THE SUMMAND OF (∇Ψ_C/Ψ_C)² TO THE VARIABLE GRADIENT HERE WHEN YOU CALL THE FUNCTION TO GET ∇Ψ/Ψ, SEE EQUATION (16.38)
-}
-=======
-
-
-
->>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
+//               rki = (r.row(k) - r.row(i)).t();
+//               gradient -= (nDimensions - 1) / norm(rki) * fDerivative(k,i,r,solver) + fDoubleDerivative(k,i,r,solver);
+//           }
+//    }
+//    return gradient;//DON'T FORGET TO ADD THE SUMMAND OF (∇Ψ_C/Ψ_C)² TO THE VARIABLE GRADIENT HERE WHEN YOU CALL THE FUNCTION TO GET ∇Ψ/Ψ, SEE EQUATION (16.38)
+//}

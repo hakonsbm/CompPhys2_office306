@@ -1,15 +1,27 @@
 # Python script to run vmc
 
+#	Options for runtype
+#
+# runWithDiffConstants
+# runSIWithDiffTimesteps
+# runBlockingSampledRun
+# runCompareAnalytical
+# runDiffNCycles
+# runFindAlphaBeta
+# runCompareParallelize
+# runTests
+#
+
 import os
 import subprocess as sp
 import re
 
-path = "../build-vmc-hakonsbm" # Change to your QT build directory
+path = "../build-vmc-Desktop-Debug" # Change to your QT build directory
 
-n_procs = "2" # processes
+n_procs = "1" # processes
 atom = "Beryllium" # atom
-runtype = "runCompareParallelize" # runtype
-cycles = "1000" # Monte Carlo cycles
+runtype = "runBlockingSampledRun" # runtype
+cycles = "100" # Monte Carlo cycles
 
 os.chdir(path)
 output = sp.check_output(["/usr/bin/mpirun","-n", n_procs, "vmc", atom, runtype, cycles])

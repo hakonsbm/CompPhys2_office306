@@ -121,19 +121,33 @@ def plotChargeDensity(data, name):
 	y1 = data[:,3]
 	z1 = data[:,4]
 
-	x2 = data[:,5]
-	y2 = data[:,6]
-	z2 = data[:,7]
+	# x2 = data[:,5]
+	# y2 = data[:,6]
+	# z2 = data[:,7]
+
+	r2 = data[:, 5:8]
+	# r1 = data[:, 2:5]
+
+	# norm = r1[:, 0]**2 + r1[:,1]**2 + r1[:,2]**2
+	norm = x1**2 + y1**2 + z1**2
+
+	norm = sorted(norm)
+
+	# print norm
 
 	fig = pl.figure()
-	ax = p3.Axes3D(fig)
-	pl.title("Energy vs alpha and beta, " + name)
-	ax.scatter(x1,y1,z1)
-	ax.set_xlabel('alpha')
-	ax.set_ylabel('beta')
-	ax.set_zlabel('Energy')
+	# ax = p3.Axes3D(fig)
+	pl.title("Charge Density of " + name)
 
-	fig.savefig("../Report/figures/VarianceVsAlpha" + name)
+	pl.hist(norm, normed=True, bins=100)
+
+
+	# ax.scatter(x1,y1,z1)
+	# ax.set_xlabel('x')
+	# ax.set_ylabel('y')
+	# ax.set_zlabel('z')
+
+	fig.savefig("../Report/figures/ChargeDensity" + name)
 	return
 
 def plotVarVSnCycles(data, name):
@@ -162,24 +176,25 @@ def plotVarVSnCycles(data, name):
 
 #Decide what we want to plot this time
 
-name = "HeliumSimpleAnalytical"
+# name = "HeliumSimpleAnalytical"
 # name = "HeliumJastrowAnalytical"
-# name = "Beryllium";
+name = "Beryllium"
+# name = "Neon"
 
 
 
-data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
+# data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
 # datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
-# dataSample = np.genfromtxt("outfiles/" + name +"_samples")
+dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples")
 # dataCycles = np.genfromtxt("outfiles/" + name +"_nCycles")
 
 
 # findLowestEnergy(data, name)
 # plotResultsVSTimestep(datatime , name)
 # plotEnergyVsAlphaBeta(data, name)
-plotEnergyVsAlpha(data, name)
+# plotEnergyVsAlpha(data, name)
 # plotResultsVSTimestep(datatime , name)
-# plotChargeDensity(dataSample[0 : : 10, :], name)
+plotChargeDensity(dataSample, name)
 # plotVarVSnCycles(dataCycles[1:,:], name)
 
 

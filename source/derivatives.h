@@ -25,11 +25,8 @@ public:
     double analyticalPsi2PDoubleDerivative(int particleTag, int dimension, const mat &r, VMCSolver *solver);
 
     vec analyticalCorrelationDerivative(const mat &r, VMCSolver *solver);
-<<<<<<< HEAD
     double analyticalCorrelationDoubleDerivative( const mat &r, VMCSolver *solver);
-=======
-    double analyticalCorrelationDoubleDerivative(const mat &r, VMCSolver * solver);
->>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
+
     double fDerivative(int i, int j, const mat &r, VMCSolver *solver);
     double fDoubleDerivative(int i, int j, const mat &r, VMCSolver *solver);
 };

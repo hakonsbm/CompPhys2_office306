@@ -390,8 +390,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 		%Need to check up some stuff when including this.
 		\subsubsection{Verification of the Slater determinant and the laplacian Slater determinan ratio}
-			To verify that the Slater determinant part of the trialfunctions is working correctly we use the fact that the states for a hydrogen atom can be calculated analytically, see for example Griffiths textbook \cite{griffiths2005introduction}, and is given by
-
+			To verify that the Slater determinant part of the trialfunctions is working correctly we use the fact that the states for a hydrogen atom can be calculated analytically, see for example Griffiths textbook  \cite{griffiths2005introduction}, and is given by
 			\begin{align}
 				E_n = -\frac{E_1}{n^2}  \qquad \text{; where } n  \text{ is the principal statenumber}
 			\end{align}
@@ -530,7 +529,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					&
 					\( e^{- \alpha ri} \)
 					&
-					\( - \frac{\alpha}{r_{i}} \left(x_{i}\^{i} + y_{i}\^{j} + z_{i}\^{k}\right) e^{- \alpha r_{i}} \)
+					\( - \frac{\alpha}{r_{i}} \left(x_{i}\vu{i} + y_{i}\vu{j} + z_{i}\vu{k}\right) e^{- \alpha r_{i}} \)
 					&
 					\(\frac{\alpha}{r_{i}} \left(\alpha r_{i} - 2\right) e^{- \alpha r_{i}} \)
 				\\	\hline
@@ -538,7 +537,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					&
 					\( \left(- \frac{\alpha r_{i}}{2} + 1\right) e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{4 r_{i}} \left(\alpha r_{i} - 4\right) \left(x_{i}\^{i} + y_{i}\^{j} + z_{i}\^{k}\right) \)
+					\( \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{4 r_{i}} \left(\alpha r_{i} - 4\right) \left(x_{i}\vu{i} + y_{i}\vu{j} + z_{i}\vu{k}\right) \)
 					&
 					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{8 r_{i}} \left(\alpha^{2} r_{i}^{2} - 10 \alpha r_{i} + 16\right) \)
 				\\	\hline
@@ -546,7 +545,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					&
 					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha x_{i}^{2}\^{i} + \alpha x_{i} y_{i}\^{j} + \alpha x_{i} z_{i}\^{k} - 2 r_{i}\right) \)
+					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha x_{i}^{2}\vu{i} + \alpha x_{i} y_{i}\vu{j} + \alpha x_{i} z_{i}\vu{k} - 2 r_{i}\right) \)
 					&
 					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 				\\	\hline
@@ -554,7 +553,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					&
 					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha y_{i} x_{i}\^{i} + \alpha y_{i}^{2}\^{j} + \alpha y_{i} z_{i}\^{k} - 2 r_{i}\right) \)
+					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha y_{i} x_{i}\vu{i} + \alpha y_{i}^{2}\vu{j} + \alpha y_{i} z_{i}\vu{k} - 2 r_{i}\right) \)
 					&
 					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 				\\	\hline
@@ -562,7 +561,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					&
 					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha z_{i} x_{i}\^{i} + \alpha z_{i} y_{i}\^{j} + \alpha z_{i}^{2}\^{k} - 2 r_{i}\right) \)
+					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha z_{i} x_{i}\vu{i} + \alpha z_{i} y_{i}\vu{j} + \alpha z_{i}^{2}\vu{k} - 2 r_{i}\right) \)
 					&
 					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 				\\ \toprule
@@ -753,7 +752,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		Implementing MPI in the Monte Carlo method is very easy. As we deal with statistical values we can easily split up the problem. Each process will run its own set of samples. The number of samples used by each process is simply $n/p$, where $n$ is the total number of samples we want to do, and $p$ is the number of processes. In the end all processors send their results to the master process, which sums up the values and takes the average over all processes.
 
 \section{Results and discussion}
+
 	\begin{table}
+
 		\center
 			\begin{tabular}{|c|c|c|}
 			    \hline
@@ -761,22 +762,22 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			    \\ \hline
 			    Beryllium & $-14.3795$ & $-14.667$
 			    \\ \hline
-			    Neon & $-146.958$ & TODO
+			    Neon & $-127.936$ &  \(-128.928\)
 			    \\	\hline
 		  \end{tabular}
 		  \caption{Comparison of energies found with Variational Monte Carlo method and
-		energies found in research papers \cite{Koput:2011:PCCP} \cite{NEON}.}
+		energies found in research papers \cite{Koput:2011:PCCP} \cite{QUA:QUA560090204} }
 		\label{tab:energyReference}
 	\end{table}
 
 	We attempt to solve the ground state energy for the Beryllium atom and Neon atom using a Variational Monte Carlo calculation with importance sampling. We have used the trial functions \eqref{eq:BerylliumTrialFunction} for Beryllium and \eqref{eq:NeonTrialFunction} for Neon which uses $\alpha$ and $\beta$ as variational parameters.
 
 	For Beryllium we have the Alpha and Beta values $\alpha=4.0$ and $\beta=0.31$. We use $10^{6}$ cycles and find the energy to be $-14.3795$, with a variance of $0.0020$.
-	For Neon, with $5 \times 10^{5}$ cycles we get an energy of $-146.958$ with a variance of $0.0261$.
+	For Neon, with $5 \times 10^{5}$ cycles we get an energy of $-127.936$ with a variance of $0.0548$.
 
 	From reseach papers we find the value for energy in the ground state
 	of Beryllium to be $-14.667$ \cite{Koput:2011:PCCP} and the value
-	for energy in the ground state of Neon to be $TODO$ \cite{NEON}.
+	for energy in the ground state of Neon to be \(-128.928\) \cite{QUA:QUA560090204}.
 	In table \ref{tab:energyReference} we compare results
 	obtained with our Variational Monte Carlo method with results from
 	various research papers.
@@ -838,7 +839,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 	SOMETHING ABOUT ENERGIES
 
 
-\bibliography{references}
+\bibliography{project_2}
 \bibliographystyle{plain}
 
 

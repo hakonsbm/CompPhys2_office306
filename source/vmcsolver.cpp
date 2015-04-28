@@ -246,21 +246,22 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             samplefile << setw(15) << setprecision(8) << deltaE;
             samplefile << setw(15) << setprecision(8) << energySquaredSum;
             samplefile << setw(15) << setprecision(8) << sqrt(r12);
-            samplefile << setw(15) << setprecision(8) << 1 << endl;
+            samplefile << setw(15) << setprecision(8) << 1;
 
-            /*for(int i = 0; i < nParticles; i++)
+            for(int i = 0; i < nParticles; i++)
             {
                     samplefile << setw(15) << setprecision(8) << rNew(i,0);
                     samplefile << setw(15) << setprecision(8) << rNew(i,1);
-                    samplefile << setw(15) << setprecision(8) << rNew(i,2);
-            }*/
+                    samplefile << setw(15) << setprecision(8) << rNew(i,2) ;
+            }
+            samplefile << endl;
         }
     }
 
     if(m_blockSampling)
     {
-        //samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
-        //cout << "blockSampling" << endl;
+        samplefile << "#Alpha: " << m_alpha << " and beta: " << m_beta << endl;
+        cout << "blockSampling" << endl;
     }
 
     m_energy = energySum/(nCycles * nParticles);
@@ -464,7 +465,7 @@ void VMCSolver::runMonteCarloIntegration() {
             samplefile << setw(15) << setprecision(8) << deltaE*deltaE;
             samplefile << setw(15) << setprecision(8) << sqrt(r12) << endl;
 
-            for(int i = 0; i < nParticles; )
+            for(int i = 0; i < nParticles; i++ )
             {
                     samplefile << setw(15) << setprecision(8) << rNew(i,0);
                     samplefile << setw(15) << setprecision(8) << rNew(i,1);

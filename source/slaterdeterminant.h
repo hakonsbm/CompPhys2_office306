@@ -20,14 +20,9 @@ public:
     double phi(const mat &r, double alpha, int i, int j, VMCSolver *solver);
 //    double SlaterDeterminant::determinantRatioUp(const mat &r, VMCSolver *solver, Derivatives *der);
 //    double SlaterDeterminant::determinantRatioDown(const mat &r, VMCSolver *solver, Derivatives *der);
-<<<<<<< HEAD
     vec gradientPhi(const mat &r, int i, int j, VMCSolver *solver);
     double laplacianPhi(const mat &r, int i, int j, VMCSolver *solver);
-=======
-//    double SlaterDeterminant::determinantLaplacianRatioUp(const mat &r, VMCSolver *solver, Derivatives *der);
-//    double SlaterDeterminant::determinantLaplacianRatioDown(const mat &r, VMCSolver *solver, Derivatives *der);
-    double laplacianPhi( const mat &r, double alpha, int i, int j, VMCSolver *solver);
->>>>>>> be6af1ebcd312b68aeb0c74e650ec16d881f998f
+
     vec gradientSlaterDeterminant(const mat &r , VMCSolver *solver);
     double laplacianSlaterDeterminant(const mat &r , VMCSolver *solver);
 
