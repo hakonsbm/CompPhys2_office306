@@ -117,27 +117,91 @@ def plotEnergyVsAlpha(data, name):
 
 def plotChargeDensity(data, name):
 
-	x1 = data[:,2]
-	y1 = data[:,3]
-	z1 = data[:,4]
+	if(name == "Beryllium"):
+		nElectrons = 4
+	else: 
+		if (name == "Neon"):
+			nElectrons = 10
+		else:
+			if (name == "HeliumJastrowAnalytical"):
+				nElectrons = 2
 
-	# x2 = data[:,5]
-	# y2 = data[:,6]
-	# z2 = data[:,7]
 
-	r2 = data[:, 5:8]
-	# r1 = data[:, 2:5]
+	norm = np.ndarray(shape=(0), dtype=float, order='F')
 
-	# norm = r1[:, 0]**2 + r1[:,1]**2 + r1[:,2]**2
-	norm = x1**2 + y1**2 + z1**2
+	datapoints = data.shape[0]
+	ylimit = (0, 3)
+	xlimit = (0, 15)
+
+	for i in range(0 , nElectrons):
+		lower = 4 + 3*i
+		upper = 7 + 3*i
+		r = data[: , lower : upper ]
+		normTemp = r[:, 0]**2 + r[:,1]**2 + r[:,2]**2
+		norm = np.append(norm,normTemp)
+		normTemp = sorted(normTemp)
+		# wavefunction = "\Psi_1S"
+		if (i == 0 ):
+			wavefunction = "\Psi_1S"
+			fig = pl.figure()
+	
+			pl.title("One - body density of " + name + "  " + wavefunction)
+			pl.xlabel("r^2")
+			pl.ylim(ylimit)
+			pl.xlim(xlimit)
+
+			pl.hist(norm, normed=True, bins=200)
+			fig.savefig("../Report/figures/ChargeDensity_" + name + "_" + wavefunction )
+		if (i == 1):
+			wavefunction = "\Psi_2S"
+			fig = pl.figure()
+			pl.title("One - body density of " + name + "  " + wavefunction)
+			pl.xlabel("r^2")
+			pl.ylim(ylimit)
+			pl.xlim(xlimit)
+
+			pl.hist(norm, normed=True, bins=200)
+			fig.savefig("../Report/figures/ChargeDensity_" + name + "_" + wavefunction )
+		if (i == 2 ):
+			wavefunction = "\Psi_2P"
+			fig = pl.figure()
+			pl.title("One - body density of " + name + "  " + wavefunction)
+			pl.xlabel("r^2")
+			pl.ylim(ylimit)
+			pl.xlim(xlimit)
+
+			pl.hist(norm, normed=True, bins=200)
+			fig.savefig("../Report/figures/ChargeDensity_" + name + "_" + wavefunction )
+
+		
+
+
+
+		
+
+
+
+####################################################
+	#If only one electron is wanted enable this
+
+	# electron = 0
+	# lower = 4 + 3*electron
+	# upper = 7 + 3*electron
+	# r = data[: , lower : upper ]
+####################################################
+
+	
+
+	# norm = x1**2 + y1**2 + z1**2
 
 	norm = sorted(norm)
-
+# 
 	# print norm
 
 	fig = pl.figure()
 	# ax = p3.Axes3D(fig)
 	pl.title("Charge Density of " + name)
+	pl.xlabel("r^2")
 
 	pl.hist(norm, normed=True, bins=100)
 
