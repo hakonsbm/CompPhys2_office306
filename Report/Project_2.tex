@@ -49,14 +49,14 @@
 
 \maketitle
 
-\abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: Beryllium and Neon. The program uses importance sampling to improve the program with more efficiency and make the results more precise. To further improve the efficiency MPI has been implemented as well. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor with and provide insight into the electronic structure of the atoms.}
+\abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: Beryllium and Neon. The program uses importance sampling to improve efficiency and make the results more precise. To further improve the efficiency, MPI has been implemented as well. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor and provide insight into the electronic structure of the atoms.}
 
 
 \section{Introduction}
 
-VMC methods pose a very attractive alternative to other more complex ways of finding the ground state energies of simple atoms and molecules, like configuration-interaction calculations. The price to be paid in exchange for this simplicity is the sensitivity to the trial wave functions that are used, a VMC algorithm is very sensitive to how these are constructed, so they are one of the most important aspects to be considered (in this work, given the simple nature of the atoms which we will be working with, it's not so important to worry about the quality of the trial wave functions because very simple and basic ones are more than enough to reproduce the actual results). It shouldn't be forgotten that it is a variational method, and this implies that finding the optimal set of variational parameters is going to be the most important part of the calculation itself because it create a lot of problems if the search range for the parameters is illy defined and is not close enough to the variational minimum, namely, the results will have a poor quality if this happens. This means that the parameters need to be chosen very carefully, or a recursive search with decreasingly coarse spacing in the space of variational parameters is required if there is no deep knowledge about the system in question.\\
+VMC methods pose a very attractive alternative to other more complex ways of finding the ground state energies of simple atoms and molecules, like configuration-interaction calculations. The price to be paid in exchange for this simplicity is the sensitivity to the trial wave functions that are used, a VMC algorithm is very sensitive to how these are constructed, so they are one of the most important aspects to be considered (in this work, given the simple nature of the atoms which we will be working with, it's not so important to worry about the quality of the trial wave functions because very simple and basic ones are more than enough to reproduce the actual results). It shouldn't be forgotten that it is a variational method, and this implies that finding the optimal set of variational parameters is going to be the most important part of the calculation itself because it would create a lot of problems if the search range for the parameters was illy defined and not close enough to the variational minimum, namely, the results would have a poor quality in this case. This means that the parameters need to be chosen very carefully, or a recursive search with decreasingly coarse spacing in the space of variational parameters is required if there is no deep knowledge about the system in question.
 
-Instead of evaluating a very complex multidimensional integral to compute the expectation value of an operator, like the hamiltonian in this case, a VMC calculation exploits the fact that the majority of the configuration space where the wave function belongs can be regarded as much less important than other parts, the values of the wave function are too small there and can be mostly ignored during the integration of the algorithm. To capitalize this, the Metropolis algorithm is added to the VMC method, as well as importance sampling.\\
+Instead of evaluating a very complex multidimensional integral to compute the expectation value of an operator, like the hamiltonian in this case, a VMC calculation exploits the fact that the majority of the configuration space where the wave function belongs can be regarded as much less important than other parts, the values of the wave function are too small there and can be mostly ignored during the integration of the algorithm. To capitalize this, the Metropolis algorithm is added to the VMC method, as well as importance sampling.
 
 \section{Methods}
 	\subsection{Monte Carlo of the Helium Atom}
@@ -69,11 +69,11 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		Let us introduce a local energy:
 
 		\begin{align}
-			E_L(\hat{H}) &= \frac{1}{ \Psi_T(\vb{R}) } \hat{H} \Psi_T(\vb{R}))
+			E_L(\hat{H}) &= \frac{1}{ \Psi_T(\vb{R}) } \hat{H} \Psi_T(\vb{R})
 		\end{align}
 
 		\begin{align}
-			E[\hat{H}] &= \frac{\int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) E_L(\vb{R}))  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
+			E[\hat{H}] &= \frac{\int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) E_L(\vb{R})  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
 			\intertext{Since the denumerator is a scalar constant after integrating it we can put it inside the integral in the numerator}
 			E[\hat{H}] &= \int{d\vb{R} \frac{\Psi_T^*(\vb{R}) \Psi_T(\vb{R})  }{\int{d\vb{R'} \Psi_T^*(\vb{R'}) \Psi_T(\vb{R'})}}  E_L(\vb{R})  }
 			\\
@@ -148,7 +148,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		where $ {\bf r_i} = \sqrt{r_{i_x}^2+r_{i_y}^2+r_{i_z}^2}$.
 
 	\subsection{Derivation of local energies}
-		The local energy of is dependant on the Hamiltonian and the wavefunction describing the system, the Hamiltonian incorporates both a kinetic energy part given by \( \frac{\nabla_i^2}{2} \) for each particle
+		The local energy is dependant on the Hamiltonian and the wavefunction describing the system, the Hamiltonian incorporates both a kinetic energy part given by \( \frac{\nabla_i^2}{2} \) for each particle
 		and a potential energy part given by \(\frac{Z}{r_i}\) and \(\frac{1}{r_{ij}}\), where \(Z\) is the charge of the center, \(r_i\) is the distance for electron \(i\) to the atom center and \(r_{ij}\) is the distance between electron \(l\) and \(m\). Then the local energy is given by the following:
 
 		\begin{align}
@@ -170,7 +170,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			\\
 			&= \sum_{m=1}^{3}{-\frac{1}{2\Psi_T} \left( \pdv{\Psi_T}{x_m}{r_i}\frac{x_m}{r_i} + \pdv{\Psi_T}{r_i} \pdv{}{x_m} \left(\frac{x_m}{r_i} \right) \right)_i}
 			\intertext{ The term \( \pdv{}{x_m} \left(\frac{x_m}{r_i} \right) \) becomes for the different values for \(m\),  \(\pdv{}{x_1}  \left( \frac{x_1}{\left( x_1^2 + x_2^2 + x_3^2 \right)^{1/2}} \right) = \frac{x_2^2 + x_3^2}{r_i^3}\) so all the values for \(m\) term it should sum up to \( \frac{ 2 (x_1^2 + x_2^2 + x_3^2) }{ r_i^3 } \) }
-			&= -\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{r_i}\frac{x_1^2 + x_2^2 + x_3^2}{r^2_i} + \pdv{\Psi_T}{r_i} \frac{ 2 (x_1^2 + x_2^2 + x_3^2) }{ r_i^3 } \right)_i
+			&= -\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{r_i}\frac{x_1^2 + x_2^2 + x_3^2}{r^2_i} + \pdv{\Psi_T}{r_i} \frac{ 2 (x_1^2 + x_2^2 + x_3^2) }{ r_i^3 } \right)
 			\\
 			&= -\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{r_i} + \pdv{\Psi_T}{r_i} \frac{ 2 }{ r_i } \right)
 		\end{align}
@@ -199,7 +199,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\begin{align}
 			\frac{\partial x(t)}{\partial t}=DF(x(t))+\eta
 		\end{align}
-		where$\eta$ is a random variable. This gives us a new position
+		where $\eta$ is a random variable. This gives us a new position
 		\begin{align}
 			y=x+DF(x)\Delta t+\xi\sqrt{\Delta t}.
 		\end{align}
@@ -243,7 +243,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		From the Fokker-Planck equation we get a transition probability given
 		by Green's function
 		\begin{align}
-			G(y,x,\Delta t)=\frac{1}{(4\pi D\Delta t)^{3N/2}}\exp{\left(-(y-x-D\Delta tF(x))^{2}/4D\Delta t\right)}
+			G(y,x,\Delta t)=\frac{1}{(4\pi D\Delta t)^{3N/2}}\exp{\left(-\frac{(y-x-D\Delta tF(x))^{2}}{/4D\Delta t}\right)}
 		\end{align}
 		This means that the Metropolis algorithm
 		\begin{align}
@@ -259,16 +259,16 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\end{align}
 
 	\subsection{Blocking}
-		Blocking refers to a method to more accurately estimate the error of the values obtained by the VMC algorithm. It's actually a completely separate and independent process. The basic idea lies on the correlations between all the measurements. If these are important enough, they will produce an increase in the error that needs to be taken into account. The reason behind this is related to the effective amount of measurements, if there are correlations there will be measurements that will contain less information, so these won't be as valuable as the rest and it will be as if there are \textit{less} measurementes than we actually have. Obviously this is a problem, the usual identification of the error with $\sqrt{\frac{\sigma}{n}}$ will be overly optimistic and a correction is needed.\\
+		Blocking refers to a method to more accurately estimate the error of the values obtained by the VMC algorithm. It's actually a completely separate and independent process. The basic idea lies on the correlations between all the measurements. If these are important enough, they will produce an increase in the error that needs to be taken into account. The reason behind this is related to the effective amount of measurements, if there are correlations there will be measurements that will contain less information, so these won't be as valuable as the rest and it will be as if there are \textit{less} measurementes than we actually have. Obviously this is a problem, the usual identification of the error with $\sqrt{\frac{\sigma}{n}}$ will be overly optimistic and a correction is needed.
 
 		\begin{align}
 			f_d=\frac{1}{n-d}\sum_{k=1}^{n-d}{\left(x_k-\bar{x}_n\right)\left(x_{k+d}-\bar{x}_n\right)}
 		\end{align}
 
-		This can be used to give an actual form to the correction factor:\\
+		Where $f_d$ is the correlation between measurements separated by a distance of $d$. This can be used to give an actual form to the correction factor:\\
 
 		\begin{align}
-			\tau1+2\sum_{d=1}^{n-1}{\frac{f_d}{var\left(x\right)}}
+			\tau=1+2\sum_{d=1}^{n-1}{\frac{f_d}{var\left(x\right)}}
 		\end{align}
 
 		This is the autocorrelation time and it relates the error with the variance:\\
@@ -297,7 +297,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\begin{figure}
 			\centering \includegraphics[width=0.45\linewidth]{figures/Beryllium_blocking}
 			\centering \includegraphics[width=0.45\linewidth]{figures/Neon_blocking}
-			\protect\caption{STD vs. blocksize with $10^{5}$ MC cycles.  The STD should have a plateuing trend as the blocksize increases.} \label{fig01:std_Stuff}
+			\protect\caption{STD vs. blocksize with $10^{5}$ MC cycles.  The STD should have a plateauing trend as the blocksize increases.} \label{fig01:std_Stuff}
 
 		\end{figure}
 
@@ -392,7 +392,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		\subsubsection{Verification of the Slater determinant and the laplacian Slater determinan ratio}
 			To verify that the Slater determinant part of the trialfunctions is working correctly we use the fact that the states for a hydrogen atom can be calculated analytically, see for example Griffiths textbook  \cite{griffiths2005introduction}, and is given by
 			\begin{align}
-				E_n = -\frac{E_1}{n^2}  \qquad \text{; where } n  \text{ is the principal statenumber}
+				E_n = -\frac{E_1}{n^2}  \qquad \text{; where } n  \text{ is the main state number}
 			\end{align}
 
 			By considering the other atoms without interaction between the electrons we can achieve an analytical solution by the same method.
@@ -411,9 +411,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			\end{center}
 
 		\subsubsection{Verification of the Padè-Jastrow part.}
-			To verify that the part of the code that treats the correlation part of the kinetic energy we calculate we check that it reproduces the correct results in the total energy and variation, but we also perform some tests of the various part by considering the Helium atom where we calculate certain parts of the sums by hand and then compare the results with the ones given by the ratio machinery.
+			To verify that the part of the code that treats the correlation part of the kinetic energy we calculate, we check that it reproduces the correct results in the total energy and variation, but we also perform some tests on various parts by considering the Helium atom, where we calculate certain parts of the sums by hand and then compare the results with the ones given by the ratio machinery.
 
-			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\nabla\frac{\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} on Helium we get
+			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\frac{\nabla\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} on Helium we get
 
 			\begin{align}
 				\frac{\nabla\Psi_C}{\Psi_C} &= \frac{1}{\Psi_c} \pdv{\Psi_C}{x_k} = \frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right) - \frac{\vb{r_{21}}}{r_{21}}\pdv{}{r_{21}}\left( \frac{r_{21}}{2(1+\beta r_{21})} \right)
@@ -423,12 +423,12 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				&= \frac{\vb{r_{12}}}{r_{12}} \frac{1}{(1+\beta r_{12})^2}
 			\end{align}
 
-			Testing the that the program reproduces this for the helium atom indicates the \(\frac{\nabla \Psi_C}{\Psi_C}\) is being calculated correctly.
+			Testing that the program reproduces this for the helium atom indicates the \(\frac{\nabla \Psi_C}{\Psi_C}\) is being calculated correctly.
 
 
 
 	\subsection{Efficient calculation of derivatives}
-		Calculating the derivatives involved in the VMC calculation numerically is slow in that they entail several calls to the wavefunctions in addition to introducing an extra numerical error. Here we will show how we have found divided up the derivatives and found analytic expressions for all the parts.
+		Calculating the derivatives involved in the VMC calculation numerically is slow in that they entail several calls to the wavefunctions in addition to introducing an extra numerical error. Here we will show how we have divided up the derivatives and found analytic expressions for all the parts.
 
 		The trialfunction can be factorized as
 		\begin{align}
@@ -438,7 +438,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		where \(D_\uparrow\), \(D_\downarrow\) and \(\Psi_C\) is the spin up and down part of the Slater determinant and the Jastrow factor respectively.
 
 		\subsubsection{Gradient ratio}
-			For quantum force we need to calculate the gradient ratio of the trialfunction which is given by
+			For the quantum force we need to calculate the gradient ratio of the trialfunction which is given by
 
 			\begin{align}
 				\frac{\nabla \Psi_T}{ \Psi_T } &= \frac{\nabla( \Psi_D\Psi_C  )}{ \Psi_D\Psi_C } = \frac{ \nabla \Psi_D }{\Psi_D } + \frac{\nabla \Psi_C}{\Psi_C}
@@ -523,7 +523,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			\begin{center}
 				\begin{tabular}{| c | c | c | c |}
 				\bottomrule
-				& \( \psi_i\)	& \( \pdv{\psi_i}{r_i} \) & \( \pdv[2]{\psi_i}{r_i} \)
+				& \( \psi_i\)	& \( \nabla\psi_i \) & \( \nabla^2\psi_i \)
 				\\ \hline
 					\(\psi_{1S}\)
 					&
@@ -602,7 +602,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			or in the Padé-Jastrow form
 
 			\begin{align}
-				R_{C}=\frac{\Psi_{C}^{\mathrm{new}}}{\Psi_{C}^{\mathrm{cur}}}=\frac{\exp U_{new}}{\exp U_{cur}}=\exp \Delta U
+				R_{C}=\frac{\Psi_{C}^{\mathrm{new}}}{\Psi_{C}^{\mathrm{cur}}}=\frac{\exp{\left(U_{new}\right)}}{\exp{\left(U_{cur}\right)}}=\exp{\left(\Delta U\right)}
 			\end{align}
 
 			where
@@ -815,7 +815,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				    \hline
 				   	\textbf{Num. of processes} &	1	&	2	&	3	&	4
 				    \\ \hline
-				    \textbf{Time to exec [s]}	&	1.0	&	1.97	&	2.90	&	3.35
+				    \textbf{Speedup}	&	1.0	&	1.97	&	2.90	&	3.35
 				    \\	\hline
 			  \end{tabular}
 			  \caption{MPI speedup}
@@ -836,7 +836,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 \section{Conclusions}
 	Again we see that the Variational Monte Carlo method gives good values, also for larger systems like Neon, as long as we deal with the interaction between the particles using the Jastrow factor. We have implemented the possibility of using MPI as this reduces the time to run simulations considerably. With a larger system we also needed a better way to handle the Slater Determinant. Optimizing the calculations of the Slater Determinant is still ongoing.
 
-	SOMETHING ABOUT ENERGIES
+	Taking a look at \ref{tab:energyReference} it is apparent that the results are quite precise. In the case of Beryllium, the experimental value is less than $2\%$ higher than the computational one, while for Neon, the difference is even less at barelely $1\%$. These results are very good considering the amount of resources that went into calculating them: a simple standard PC and a handful of hours were enough. Considering that a relatively simple and very well tested method was used to obtain these results it is very easy to see why VMC is so popular for solving quite complicated problems like calculating the ground state energies of non-trivial quantum mechanical systems.
 
 
 \bibliography{project_2}
