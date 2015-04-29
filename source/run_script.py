@@ -21,7 +21,7 @@ path = "../build-vmc-Desktop-Debug" # Change to your QT build directory
 n_procs = "1" # processes
 atom = "Beryllium" # atom
 runtype = "runBlockingSampledRun" # runtype
-cycles = "100" # Monte Carlo cycles
+cycles = "1000000" # Monte Carlo cycles
 
 os.chdir(path)
 output = sp.check_output(["/usr/bin/mpirun","-n", n_procs, "vmc", atom, runtype, cycles])
