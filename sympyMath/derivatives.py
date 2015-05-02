@@ -4,6 +4,7 @@ sp.init_printing()
 
 alpha, beta, Z = sp.symbols('alpha beta Z', positive = True)
 x_i, y_i, z_i= sp.symbols('x_i y_i z_i', positive = True)
+x_ij, y_ij, z_ij= sp.symbols('x_ij y_ij z_ij', positive = True)
 
 r_i = sp.sqrt(x_i*x_i + y_i*y_i + z_i*z_i)
 
@@ -42,26 +43,30 @@ def printDerivatives(psi):
 	print "#############################################################################3"
 	print
 
-printDerivatives(psi1S)
-printDerivatives(psi2S)
-printDerivatives(psi2P)
+# printDerivatives(psi1S)
+# printDerivatives(psi2S)
+# printDerivatives(psi2P)
 
 #Calculating some derivatives for the correlated part of the wavefunction
 
 def printCorrelationDerivatives(psi):
 	print "Calculating the correlation derivatives for the wavefunction "
 	print "psi : ", psi.subs(r_ij,R_ij)
-	print "d/drij : ", (sp.diff(psi,r_ij)).subs(r_ij,R_ij).factor()
-	print "d2/drij2 : " , sp.diff(psi,r_ij, 2).subs(r_ij,R_ij).factor()
+	print "d/drij : ", ( sp.diff(psi,x_ij) + sp.diff(psi, y_ij) + sp.diff(psi, z_ij) ).subs(r_ij,R_ij).factor()
+	print "d/drij : ", (( sp.diff(psi,x_ij, 2) + sp.diff(psi, y_ij, 2) + sp.diff(psi, z_ij, 2) ).subs(r_ij,R_ij).factor().subs(r_ij**2,R_ij**2))
 
 
-r_ij = sp.symbols('r_ij')
+r_ij = sp.sqrt( (x_ij)**2 +  (y_ij ) **2 + (z_ij )**2 )
 psi_C = sp.exp(r_ij / (2*(1+ r_ij*beta)))
 
 R_ij = sp.symbols('r_ij')
 
 printCorrelationDerivatives(psi_C)
 
+test = 6*beta**2*r_ij**4 - 6*beta**2*r_ij**2*x_ij**2 - 6*beta**2*r_ij**2*y_ij**2 - 6*beta**2*r_ij**2*z_ij**2 + 12*beta*r_ij**3
+
+print "Testing"
+print sp.printing.latex(test.subs(r_ij,R_ij).subs(r_ij**2,R_ij**2).subs(r_ij,R_ij).factor(r_ij**2))
 
 
 

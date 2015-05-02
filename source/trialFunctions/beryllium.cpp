@@ -70,11 +70,11 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
     {   //Calculates the kinetic energy as the ratios of -1/2* ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
         kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
 
-        kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
+//        kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
 
-        gradientJastrow = solver->derivatives()->analyticalCorrelationDerivative(r,solver);
-        gradientSlater = solver->determinant()->gradientSlaterDeterminant(r,solver);
-        kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
+//        gradientJastrow = solver->derivatives()->analyticalCorrelationDerivative(r,solver);
+//        gradientSlater = solver->determinant()->gradientSlaterDeterminant(r,solver);
+//        kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
 
         kineticEnergy *= -1./2.;
     }
@@ -114,13 +114,13 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
     return kineticEnergy + potentialEnergy;
 }
 
-double Beryllium::spinFactor(int i, int j)     //The corrolation factor a in the Jastrow factor 1/2 if opposite spin or 1/4 if same
-{
-    if(spin(i) == spin(j))
-        return 1./4.;
-    else
-        return 1./2.;
-}
+//double Beryllium::spinFactor(int i, int j)     //The corrolation factor a in the Jastrow factor 1/2 if opposite spin or 1/4 if same
+//{
+//    if(spin(i) == spin(j))
+//        return 1./4.;
+//    else
+//        return 1./2.;
+//}
 
 
 //double Beryllium::psi1s(double ri, double alpha)

@@ -14,8 +14,11 @@ public:
     Derivatives();
     ~Derivatives();
     double numericalDoubleDerivative(const mat &r, VMCSolver *solver);
+    void numericalGradient(mat &gradient, const mat &r, VMCSolver *solver);
 
-    double analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver);
+    void analyticalGradient(mat &gradient, const mat &r, VMCSolver *solver);
+
+//    double analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver);
 
     vec analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver);
     double analyticalPsi1SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver);

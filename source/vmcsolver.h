@@ -57,6 +57,7 @@ public:
     bool getElectronInteration () {return m_electronInteraction; }
     void switchJastrow(bool onOff) {m_Jastrow = onOff;}
     bool getJastrow() {return m_Jastrow; }
+    bool getRank() {return my_rank;}
 
 
 
@@ -120,6 +121,11 @@ private:
     mat QForceOld;
     mat QForceNew;
 
+    mat detUpOld;
+    mat detDownOld;
+
+    mat detUpNew;
+    mat detDownNew;
 
 };
 

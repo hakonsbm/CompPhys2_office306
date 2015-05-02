@@ -38,6 +38,7 @@ double SlaterDeterminant::phi(const mat &r, double alpha, int i, int j, VMCSolve
 
 vec SlaterDeterminant::gradientPhi(const mat &r, int i, int j, VMCSolver *solver)
 {
+    //i is th particleTag and j is the type of wavefunction
     vec derivative;
 
     if (j == 0)
@@ -62,6 +63,7 @@ vec SlaterDeterminant::gradientPhi(const mat &r, int i, int j, VMCSolver *solver
 
 double SlaterDeterminant::laplacianPhi(const mat &r, int i, int j, VMCSolver *solver)
 {
+    //i is th particleTag and j is the type of wavefunction
     double derivative;
 
     if (j == 0)
@@ -89,9 +91,8 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
     int i;
     int nHalf= solver->getNParticles()/2;
     double alpha = solver->getAlpha();
-    detUp = zeros<mat>(nHalf, nHalf);
-    detDown = zeros<mat>(nHalf, nHalf);
-
+    detUpOld = zeros<mat>(nHalf, nHalf);
+    detDownOld = zeros<mat>(nHalf, nHalf);
 
 
     for (int k = 0; k <  nHalf; ++k)
@@ -99,21 +100,21 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
         for (i = 0; i < nHalf; ++i)
         {
             // for detUp
-            detUp(i,k) =  phi(r, alpha, i, k, solver);
+            detUpOld(i,k) =  phi(r, alpha, i, k, solver);
 
-            // for detDown
-            detDown(i,k) =  phi(r, alpha, i + nHalf, k, solver);
+            // for detDownOld
+            detDownOld(i,k) =  phi(r, alpha, i + nHalf, k, solver);
         }
     }
 
     //If we are solving it analytically we also need the inverse of the slater matrix
     if(solver->trialFunction()->m_analytical)
     {
-        detUpInverse = zeros<mat>(nHalf, nHalf);
-        detDownInverse = zeros<mat>(nHalf, nHalf);
+        detUpInverseOld = zeros<mat>(nHalf, nHalf);
+        detDownInverseOld = zeros<mat>(nHalf, nHalf);
 
-        detUpInverse = detUp.i();
-        detDownInverse = detDown.i();
+        detUpInverseOld = detUpOld.i();
+        detDownInverseOld = detDownOld.i();
     }
 
 }
@@ -126,13 +127,14 @@ double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSol
     Nhalf = nParticles/2;
     indx = new int [Nhalf];
     mat tempDetUp = zeros<mat>(Nhalf, Nhalf);
-    mat tempDetDown = zeros<mat>(Nhalf, Nhalf);
+    mat tempdetDownOld = zeros<mat>(Nhalf, Nhalf);
 
-    // fill matrix detUp and detDown
-    updateSlaterMatrices(r, solver);
+    // fill matrix detUp and detDownOld
+//    updateSlaterMatrices(r, solver);
 
-    tempDetUp = detUp;
-    tempDetDown = detDown;
+
+    tempDetUp = detUpOld;
+    tempdetDownOld = detDownOld;
 
     // decompose A (phi matrix) to B & C
     /*
@@ -144,64 +146,29 @@ double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSol
      */
 
     ludcmp(tempDetUp, Nhalf, indx, &d1);
-    ludcmp(tempDetDown, Nhalf, indx, &d2);
+    ludcmp(tempdetDownOld, Nhalf, indx, &d2);
 
     // compute SD as c00*c11*..*cnn
     SD = 1;
     for (i = 0; i < Nhalf; ++i)
     {
-        SD *= tempDetUp(i, i)*tempDetDown(i, i);
+        SD *= tempDetUp(i, i)*tempdetDownOld(i, i);
     }
     // return SD
     return d1*d2*SD;
 }
 
-//double SlaterDeterminant::determinantRatioUp(const mat &r, VMCSolver *solver, Derivatives *der)
-//{
-//    double determinantRatio = 0;
-//    int nHalf = solver->getNParticles() / 2;
-//    mat inverse = detUp.i();
-//    for(int i = 0; i < nHalf; i++) {
-//        for(int j = 0; j < nHalf; j++) {
-//            if(j == 0) {
-//                determinantRatio += der->analyticalPsi1SDerivative(i, &r, *solver) * inverse(j,i);
-//            }
-//            else if(j == 1) {
-//                determinantRatio += der->analyticalPsi2SDerivative(i, &r, *solver) * inverse(j,i);
-//            }
-//            else if((j >= 2) && (nHalf > 2)) {
-//                determinantRatio += der->analyticalPsi2PDerivative(i, &r, *solver) * inverse(j,i);
-//            }
-//        }
-//    }
-//    return determinantRatio / solver->getMHR();
-//}
 
-//double SlaterDeterminant::determinantRatioDown(const mat &r, VMCSolver *solver, Derivatives *der)
-//{
-//    double determinantRatio = 0;
-//    int nHalf = solver->getNParticles() / 2;
-//    mat inverse = detDown.i();
-//    for(int i = 0; i < nHalf; i++) {
-//        for(int j = 0; j < nHalf; j++) {
-//            if(j == 0) {
-//                determinantRatio += der->analyticalPsi1SDerivative(i + nHalf, &r, *solver) * inverse(j,i);
-//            }
-//            else if(j == 1) {
-//                determinantRatio += der->analyticalPsi2SDerivative(i + nHalf, &r, *solver) * inverse(j,i);
-//            }
-//            else if((j >= 2) && (nHalf > 2)) {
-//                determinantRatio += der->analyticalPsi2PDerivative(i + nHalfi, &r, *solver) * inverse(j,i);
-//            }
-//        }
-//    }
-//    return determinantRatio / solver->getMHR();
-//}
-
-vec SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solver)
+mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solver)
 {
-    vec derivative = zeros (3);
+
+    //Not functinoining properly, needs to be several vectors since we need a seperate tracking of "force" on each particle,
+    // 3 coordinates per particle
+
     int nParticles= solver->getNParticles();
+    int nDimensions = solver->getNDimensions();
+    mat gradient = zeros (nParticles, nDimensions);
+
     int nHalf = nParticles/2;
 
 //    updateSlaterMatrices(r,solver);
@@ -211,13 +178,15 @@ vec SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
     {
         for(int j = 0; j < nHalf; j++)
         {
-            derivative += gradientPhi(r, i, j, solver) * detUpInverse(j,i);
+            cout << gradientPhi(r, i, j, solver).t() << endl;
+            cout << "gradientPhi(r, i, j, solver)" << endl;
+//            gradient.row(i) += (gradientPhi(r, i, j, solver) * detUpInverseOld(j,i)).t();
 
-            derivative += gradientPhi(r, i + nHalf, j, solver) * detDownInverse(j,i);
+//            gradient.row(i + nHalf) += gradientPhi(r, i + nHalf, j, solver) * detDownInverseOld(j,i);
         }
     }
 
-    return derivative;
+    return gradient;
 
 }
 
@@ -227,16 +196,16 @@ double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *so
     int nParticles= solver->getNParticles();
     int nHalf = nParticles/2;
 
-//    updateSlaterMatrices(r,solver);
+    updateSlaterMatrices(r,solver);
 
     //Calculating the sum of the particles derivatives
     for(int i = 0; i < nHalf; i ++) //Sums over the particles
     {
         for(int j = 0; j < nHalf; j++)
         {
-            derivative += laplacianPhi(r, i, j, solver) * detUpInverse(j,i);
+            derivative += laplacianPhi(r, i, j, solver) * detUpInverseOld(j,i);
 
-            derivative += laplacianPhi(r, i + nHalf, j, solver) * detDownInverse(j,i);
+            derivative += laplacianPhi(r, i + nHalf, j, solver) * detDownInverseOld(j,i);
         }
     }
 

@@ -4,6 +4,7 @@
 #include "trialFunctions/heliumjastrownumerical.h"
 #include "trialFunctions/heliumsimpleanalytical.h"
 #include "trialFunctions/heliumsimplenumerical.h"
+#include "trialFunctions/helium.h"
 #include "trialFunctions/hydrogen.h"
 #include "trialFunctions/beryllium.h"
 #include "trialFunctions/neon.h"
@@ -63,6 +64,7 @@ int main(int nargs, char* args[])
     else if((string)args[1]=="HeliumJastrowNumerical") solver->setTrialFunction(new HeliumJastrowNumerical(solver));
     else if((string)args[1]=="Beryllium") solver->setTrialFunction(new Beryllium(solver));
     else if((string)args[1]=="Neon") solver->setTrialFunction(new Neon(solver));
+    else if((string)args[1]=="Helium") solver->setTrialFunction(new Helium(solver));
     else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
     if(my_rank==0)
@@ -481,7 +483,7 @@ void runCompareParallelize(VMCSolver * solver)
 {
     //TestSettings
     solver->switchElectronInteraction(true);
-    solver->trialFunction()->setAnalytical(false);
+    solver->trialFunction()->setAnalytical(true);
 //    solver->setAlpha(solver->getCharge());
 
 

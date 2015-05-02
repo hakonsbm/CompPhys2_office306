@@ -4,6 +4,7 @@ Helium::Helium(VMCSolver *solver)
 {
 
     simpleFlag = false;
+    m_analytical = false;
     m_outfileName = "Helium";
 
     solver->setCharge(2);
@@ -39,6 +40,7 @@ double Helium::waveFunction(const mat &r, VMCSolver *solver)
         }
     }
 
+
 //    cout << "Before SD" << endl;
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 //    cout << SD << endl;
@@ -53,16 +55,29 @@ double Helium::localEnergy(const mat &r, VMCSolver *solver)
     double r1 = norm(r.row(0));
     double r2 = norm(r.row(1));
     double r12 = norm(r.row(0) - r.row(1));
+    vec gradientSlater, gradientJastrow;
+
 
     double charge = solver->getCharge();
 
 
     if(m_analytical)
     {
-        kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r, solver)/(-2.);
+    //Calculates the kinetic energy as the ratios of -1/2* ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
+            kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
+        if(solver->getElectronInteration())
+        {
+            kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
+//            cout << solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) << endl;
+            gradientJastrow = solver->derivatives()->analyticalCorrelationDerivative(r,solver);
+            gradientSlater = solver->determinant()->gradientSlaterDeterminant(r,solver);
+            kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
+        }
+
+            kineticEnergy *= -1./2.;
     }
     else
-        kineticEnergy = solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
+        kineticEnergy =  solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
 
 
     //Taking away the electron electron interaction, used for some tests with Hydrogenic wavesfunctions

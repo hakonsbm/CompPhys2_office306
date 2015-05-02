@@ -23,13 +23,15 @@ public:
     vec gradientPhi(const mat &r, int i, int j, VMCSolver *solver);
     double laplacianPhi(const mat &r, int i, int j, VMCSolver *solver);
 
-    vec gradientSlaterDeterminant(const mat &r , VMCSolver *solver);
+    mat gradientSlaterDeterminant(const mat &r , VMCSolver *solver);
     double laplacianSlaterDeterminant(const mat &r , VMCSolver *solver);
 
-    mat detUp;
-    mat detDown;
-    mat detUpInverse;
-    mat detDownInverse;
+    mat detUpOld;
+    mat detDownOld;
+    mat detUpInverseOld;
+    mat detDownInverseOld;
+
+
 };
 
 #endif // SLATERDETERMINANT_H

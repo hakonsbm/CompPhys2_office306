@@ -299,10 +299,19 @@ void VMCSolver::QuantumForce(const mat &r, mat &QForce)
     mat rPlus = zeros<mat>(nParticles, nDimensions);
     mat rMinus = zeros<mat>(nParticles, nDimensions);
 
+    if(my_rank == 0)
+    {
+//    cout << "Got into QForce" << endl;
+//    cout << r << endl;
+//    cout << rMinus << endl;
+//    cout << r(nParticles - 1, nDimensions -1) << endl;
+    }
+
     rPlus = rMinus = r;
 
     double waveFunctionMinus = 0;
     double waveFunctionPlus = 0;
+
 
 //    double waveFunctionCurrent = trialFunction()->waveFunction(r, this);
 

@@ -11,6 +11,43 @@ Derivatives::~Derivatives()
 
 }
 
+void Derivatives::numericalGradient(mat &gradient, const mat &r, VMCSolver *solver)
+{
+    //This calculates a numerical derivative, which is a half of the quantum force
+
+    double nParticles = solver->getNParticles();
+    double nDimensions = solver->getNDimensions();
+    mat rPlus = zeros<mat>(nParticles, nDimensions);
+    mat rMinus = zeros<mat>(nParticles, nDimensions);
+    double h = solver->getH();
+
+    rPlus = rMinus = r;
+
+    double waveFunctionMinus = 0;
+    double waveFunctionPlus = 0;
+
+//    double waveFunctionCurrent = trialFunction()->waveFunction(r, this);
+
+    // Kinetic energy
+
+//    double kineticEnergy = 0;
+    for(int i = 0; i < nParticles; i++) {
+        for(int j = 0; j < nDimensions; j++) {
+            rPlus(i,j) += h;
+            rMinus(i,j) -= h;
+            waveFunctionMinus = solver->trialFunction()->waveFunction(rMinus, solver);
+            waveFunctionPlus = solver->trialFunction()->waveFunction(rPlus, solver);
+            gradient(i,j) =  (waveFunctionPlus-waveFunctionMinus);
+            rPlus(i,j) = r(i,j);
+            rMinus(i,j) = r(i,j);
+        }
+    }
+
+    gradient /=2.;
+
+}
+
+
 double Derivatives::numericalDoubleDerivative(const mat &r, VMCSolver *solver)
 {
 //    cout << "Doing a numerical derivation" << endl;
@@ -48,34 +85,48 @@ double Derivatives::numericalDoubleDerivative(const mat &r, VMCSolver *solver)
     return doubleDerivative;
 }
 
-double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver)
+void Derivatives::analyticalGradient(mat &gradient, const mat &r, VMCSolver *solver)
 {
-    //This calculates the simple parts of the trialfunctions that are without interaction between the molecules
-    //Calculates (nabla Psi_S) /Psi_S
-    // d²/dx² (sum_i  e^(-alpha r_i ) ) / sum_i  e^(-alpha r_i )
 
-    double alpha = solver->getAlpha();
-    double ri;
 
-    double derivative = 0;
+    solver->determinant()->gradientSlaterDeterminant(r, solver);
 
-    for(int i = 0; i < solver->getNParticles(); i++)
-    {
-        ri = norm(r.row(i));
-        derivative += (alpha*alpha - (2.*alpha)/ri);
-//        cout << "Particle " << i << " correct : r: " << ri << " derivative: " << (alpha*alpha - (2.*alpha)/ri) << endl;
-    }
+    //Testing
+//    cout << analyticalPsi1SDerivative(1,r,solver) << endl;
 
-    return derivative;
+
 }
+
+
+
+//double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver)
+//{
+//    //This calculates the simple parts of the trialfunctions that are without interaction between the molecules
+//    //Calculates (nabla Psi_S) /Psi_S
+//    // d²/dx² (sum_i  e^(-alpha r_i ) ) / sum_i  e^(-alpha r_i )
+
+//    double alpha = solver->getAlpha();
+//    double ri;
+
+//    double derivative = 0;
+
+//    for(int i = 0; i < solver->getNParticles(); i++)
+//    {
+//        ri = norm(r.row(i));
+//        derivative += (alpha*alpha - (2.*alpha)/ri);
+////        cout << "Particle " << i << " correct : r: " << ri << " derivative: " << (alpha*alpha - (2.*alpha)/ri) << endl;
+//    }
+
+//    return derivative;
+//}
 
 vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
+    vec derivative = zeros (solver->getNDimensions());
 
-
-    vec derivative = -alpha*r.row(particleTag)*exp(-alpha*r_i)/r_i;
+    derivative = (-alpha*r.row(particleTag)*exp(-alpha*r_i)/r_i).t();
 
     return derivative;
 }
@@ -100,7 +151,7 @@ vec Derivatives::analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSol
     double r_i = norm(r.row(particleTag));
 
 
-    vec derivative = (1.0L/4.0L)*alpha*(alpha*r_i - 4)*r.row(particleTag)*exp(-1.0L/2.0L*alpha*r_i)/r_i;
+    vec derivative = ((1.0L/4.0L)*alpha*(alpha*r_i - 4)*r.row(particleTag)*exp(-1.0L/2.0L*alpha*r_i)/r_i).t();
 
     return derivative;
 }
@@ -190,7 +241,7 @@ vec Derivatives::analyticalCorrelationDerivative( const mat &r, VMCSolver *solve
            for(int i = k +1 ; i < nParticles  ; i ++)
            {
                rki = (r.row(k) - r.row(i)).t();
-               gradient -= rki / norm(rki) * fDerivative(k,i,r,solver);
+               gradient += rki / norm(rki) * fDerivative(k,i,r,solver);
                //cout << norm(rki) << endl;
            }
     }
@@ -232,19 +283,17 @@ double Derivatives::analyticalCorrelationDoubleDerivative(const mat &r, VMCSolve
         //Summing over the d²/dx² part of the expression
         for(j = 0; j < nParticles ; j ++)
         {
-//            if(j != k)
-//            {
+            if(j != k)
+            {
 //            cout << "Sum 2" << endl;
-//            rkj = (r.row(k) - r.row(j)).t();
-//            laplacian = laplacian + fDoubleDerivative(k,j, r, solver) + 2.*fDerivative(k,j,r, solver)/ norm(rkj);
+            rkj = (r.row(k) - r.row(j)).t();
+            laplacian = laplacian + fDoubleDerivative(k,j, r, solver) + 2.*fDerivative(k,j,r, solver)/ norm(rkj);
 
 //            cout << "Sum 2 end" << endl;
-//            }
+            }
         }
 
     }
-
-
 
     return laplacian;
 }
