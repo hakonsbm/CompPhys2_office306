@@ -271,27 +271,6 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     m_ratio = (double) acc_moves/(double) moves;
     m_moves = moves;
 
-    //Storing the energy and variance calculated, used in searching for the best fit for alpha and beta
-//    storeEnergy(energy);
-//    storeVariance(energyVar); //Not necessary it was already calculated
-
-//    cout << "Energy: " << energy << " Energy (squared sum): " << energySquared << endl;
-//    cout << "Variance: " << energyVar << endl;
-//    cout << "Moves: " << moves << endl;
-//    cout << "Accepted moves: " << acc_moves << endl;
-//    cout << "Ratio: " << (double) acc_moves/(double) moves << endl;
-//    cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
-//    cout << "Average distance between the electrons: " << averageR12 << endl;
-//    cout << "Steplength: " << stepLength << endl;
-
-//    outfile << setw(15) << setprecision(8) << m_energy;
-//    outfile << setw(15) << setprecision(8) << m_energySquared;
-//    outfile << setw(15) << setprecision(8) << m_energyVar;
-//    outfile << setw(15) << setprecision(8) << m_alpha;
-//    outfile << setw(15) << setprecision(8) << m_beta;
-//    outfile << setw(15) << setprecision(8) << m_averageR12;
-//    outfile << setw(15) << setprecision(8) << stepLength;
-//    outfile << setw(15) << nCycles << endl;
 }
 
 void VMCSolver::QuantumForce(const mat &r, mat &QForce)
@@ -299,25 +278,12 @@ void VMCSolver::QuantumForce(const mat &r, mat &QForce)
     mat rPlus = zeros<mat>(nParticles, nDimensions);
     mat rMinus = zeros<mat>(nParticles, nDimensions);
 
-    if(my_rank == 0)
-    {
-//    cout << "Got into QForce" << endl;
-//    cout << r << endl;
-//    cout << rMinus << endl;
-//    cout << r(nParticles - 1, nDimensions -1) << endl;
-    }
 
     rPlus = rMinus = r;
 
     double waveFunctionMinus = 0;
     double waveFunctionPlus = 0;
 
-
-//    double waveFunctionCurrent = trialFunction()->waveFunction(r, this);
-
-    // Kinetic energy
-
-//    double kineticEnergy = 0;
     for(int i = 0; i < nParticles; i++) {
         for(int j = 0; j < nDimensions; j++) {
             rPlus(i,j) += h;

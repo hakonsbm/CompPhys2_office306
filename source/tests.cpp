@@ -125,8 +125,7 @@ TEST(FirstOrderDerivative)
     VMCSolver *solver = new VMCSolver();
 
     solver->setTrialFunction(new Helium(solver));
-    solver->trialFunction()->setAnalytical(false);
-    solver->setBeta(2);
+
 
     double particles = solver->getNParticles();
     double dimensions = solver->getNDimensions();
@@ -145,9 +144,12 @@ TEST(FirstOrderDerivative)
         r(i,j) = ran2(&idum);
      }
     }
-
+    solver->trialFunction()->setAnalytical(false);
     solver->determinant()->updateSlaterMatrices(r,solver);
     solver->derivatives()->numericalGradient(gradientNumerical, r, solver);
+
+    solver->trialFunction()->setAnalytical(true);
+    solver->determinant()->updateSlaterMatrices(r,solver);
     solver->derivatives()->analyticalGradient(gradientAnalytical, r , solver);
 
     if(solver->getRank() == 0)

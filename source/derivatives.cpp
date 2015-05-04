@@ -88,13 +88,12 @@ double Derivatives::numericalDoubleDerivative(const mat &r, VMCSolver *solver)
 void Derivatives::analyticalGradient(mat &gradient, const mat &r, VMCSolver *solver)
 {
 
+    gradient += solver->determinant()->gradientSlaterDeterminant(r, solver);
 
-    solver->determinant()->gradientSlaterDeterminant(r, solver);
+    gradient += solver->derivatives()->analyticalCorrelationGradient( r ,solver);
 
     //Testing
 //    cout << analyticalPsi1SDerivative(1,r,solver) << endl;
-
-
 }
 
 
@@ -127,6 +126,7 @@ vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSol
     vec derivative = zeros (solver->getNDimensions());
 
     derivative = (-alpha*r.row(particleTag)*exp(-alpha*r_i)/r_i).t();
+
 
     return derivative;
 }
@@ -220,14 +220,15 @@ double Derivatives::fDoubleDerivative(int i, int j, const mat &r, VMCSolver *sol
 
 
 
-vec Derivatives::analyticalCorrelationDerivative( const mat &r, VMCSolver *solver)
+mat Derivatives::analyticalCorrelationGradient( const mat &r, VMCSolver *solver)
 {
     //This sums over all the electrons and calculates the total correlation gradient ratio term
 
     int nParticles = solver->getNParticles();
-    vec gradient = zeros (3);
-    vec rik = zeros (3);
-    vec rki = zeros (3);
+    int nDimensions = solver->getNDimensions();
+    mat gradient = zeros(nParticles, nDimensions);
+    vec rik = zeros (nDimensions);
+    vec rki = zeros (nDimensions);
 
     //Calculates the interaction from all the particles earlier
     for(int k = 0; k < nParticles; k++)
@@ -235,14 +236,13 @@ vec Derivatives::analyticalCorrelationDerivative( const mat &r, VMCSolver *solve
            for(int i = 0; i < k; i ++)
            {
                rik = (r.row(i) - r.row(k)).t();
-               gradient = gradient + rik / norm(rik) * fDerivative(i,k,r, solver);
+               gradient.row(k) += (rik / norm(rik) * fDerivative(i,k,r, solver)).t();
 
            }
            for(int i = k +1 ; i < nParticles  ; i ++)
            {
                rki = (r.row(k) - r.row(i)).t();
-               gradient += rki / norm(rki) * fDerivative(k,i,r,solver);
-               //cout << norm(rki) << endl;
+               gradient.row(k) += (rki / norm(rki) * fDerivative(k,i,r,solver)).t();
            }
     }
 

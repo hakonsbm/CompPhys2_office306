@@ -69,9 +69,7 @@ double Helium::localEnergy(const mat &r, VMCSolver *solver)
         {
             kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
 //            cout << solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) << endl;
-            gradientJastrow = solver->derivatives()->analyticalCorrelationDerivative(r,solver);
-            gradientSlater = solver->determinant()->gradientSlaterDeterminant(r,solver);
-            kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
+//            kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
         }
 
             kineticEnergy *= -1./2.;

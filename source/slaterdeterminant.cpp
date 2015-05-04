@@ -178,18 +178,15 @@ mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
     {
         for(int j = 0; j < nHalf; j++)
         {
-            cout << gradientPhi(r, i, j, solver).t() << endl;
-            cout << "gradientPhi(r, i, j, solver)" << endl;
-//            gradient.row(i) += (gradientPhi(r, i, j, solver) * detUpInverseOld(j,i)).t();
-
-//            gradient.row(i + nHalf) += gradientPhi(r, i + nHalf, j, solver) * detDownInverseOld(j,i);
+            gradient.row(i) +=  gradientPhi(r,i,j,solver).t()*detUpInverseOld(j,i);
+            gradient.row(i + nHalf) += gradientPhi(r, i + nHalf, j, solver).t() * detDownInverseOld(j,i);
         }
     }
 
     return gradient;
 
 }
-
+ 
 double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *solver)
 {
     double derivative = 0;
