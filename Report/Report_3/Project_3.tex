@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{a4wide}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[dvips]{epsfig}
+\usepackage[T1]{fontenc}
+\usepackage{cite} % [2,3,4] --> [2--4]
+\usepackage{shadow}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+
+
+
+
+\usetikzlibrary{arrows, shapes}
+
+\setcounter{tocdepth}{2}
+
+\lstset{language=c++}
+\lstset{alsolanguage=[90]Fortran}
+\lstset{basicstyle=\small}
+\lstset{backgroundcolor=\color{white}}
+\lstset{frame=single}
+\lstset{stringstyle=\ttfamily}
+\lstset{keywordstyle=\color{red}\bfseries}
+\lstset{commentstyle=\itshape\color{blue}}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{breaklines}
+
+\title{ FYS-4411: Computational Physics II \\ Project 2 }
+\author{Gullik Vetvik Killie\\
+		Håkon Sebastian Bakke Mørk\\
+		Jose Emilio Ruiz Navarro
+		}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+\section{Theory}
+
+\begin{enumerate}
+
+\item
+	\begin{enumerate}
+		\item brute force Metropolis Sampling/simple wavefunction
+		\item Closed form expression Helium Simple, Cusp conditions
+		\item Introduce importance sampling and blocking
+		\item Onebody density, with and without Jastrow
+		\item Vary energy using conjugate gradient method, or similar method to find best \(\beta\). Replace hydrogen-like single particle wave function with 3-21G basis
+	\end{enumerate}
+
+\item
+	\begin{enumerate}
+		\item Function to calculate Slater Determinant, spin and derivatives of Jastrow factor
+		\item Compute one-body stuff
+	\end{enumerate}
+
+
+\item 
+	\begin{enumerate}
+		\item Compute the expectation value of \( \expval{\hat{H}} \) vary \(R\) and \(\beta\)
+		\item Using optimal \(R\) and \(\beta\) calculate average \(r_{12}\)
+		\item Try the wavefunction with subtraction instead
+		\item Estimate binding energy for \(He_{2}\) and \(Be_{2}\)
+	\end{enumerate}
+
+\end{enumerate}
+
+\section{Results}
+
+\begin{enumerate}
+\item
+	\begin{enumerate}
+		\item brute force Metropolis Sampling/simple wavefunction
+			\begin{enumerate}
+				\item Energy Minimum
+				\item Mean  \(r_{12} \)
+				\item Variance vs cycles
+			\end{enumerate}
+		\item Closed form expression Helium Simple
+			\begin{enumerate}
+				\item Compare CPU time vs non-closed form
+			\end{enumerate}
+		\item Introduce importance sampling and blocking
+			\begin{enumerate}
+				\item Study dependence on \(\delta t\) compare with results without importance sampling
+				\item blocking as statistical analysis
+			\end{enumerate}
+
+		\item Onebody density, with and without Jastrow
+			\begin{enumerate}
+				\item One body density with and without Jastrow, compare with pure hydrogenic wave functions
+			\end{enumerate}
+
+		\item Vary energy using conjugate gradient method, or similar method to find best \(\beta\). Replace hydrogen-like single particle wave function with 3-21G basis
+			\begin{enumerate}
+				\item Study dependence on \(\delta t\) compare with results without importance sampling
+				\item blocking as statistical analysis
+			\end{enumerate}
+	\end{enumerate}
+
+
+\item 
+	\begin{enumerate}
+		\item Compute ground state energy for Neon and Beryllium: Include Parallized code, blocking, importance sampling, energy minimization using gradient conjugate method, 3-12G basis set
+		\item Compute one body densities
+	\end{enumerate}
+
+\item
+	\begin{enumerate}
+		\item Plot \(E_min \) as a function of \(\vb{R}\)
+		\item Compute \( \expval{r_{12}} \)
+		\item Repeat two previous with subtracting the wavefunctions
+	\end{enumerate}
+
+\end{enumerate}
+
+
+\section{Discussion}
+
+\begin{enumerate}
+\item
+
+	\begin{enumerate}
+		\item brute force Metropolis Sampling/simple wavefunction
+			\begin{enumerate}
+				\item Physical interpretation of \(\alpha\)
+			\end{enumerate}
+		\item Closed form expression Helium Simple
+		\item Introduce importance sampling \label{lt:importance}
+			\begin{enumerate}
+				\item Study dependence on \(\delta t\) compare with results without importance sampling
+			\end{enumerate}
+		\item Onebody density, with and without Jastrow \label{lt:onebody}
+			\begin{enumerate}
+				\item Discuss with regards to pure hydrogenic wave functions, importance of correlations introduced by Jastrow factor
+			\end{enumerate}
+		\item Vary energy using conjugate gradient method, or similar method to find best \(\beta\). Replace hydrogen-like single particle wave function with 3-21G basis
+			\begin{enumerate}
+				\item Study dependence on \(\delta t\) compare with results without importance sampling
+				\item blocking as statistical analysis
+			\end{enumerate}
+	\end{enumerate}
+
+\item
+	\begin{enumerate}
+		\item Discuss the same as \ref{lt:importance} for neon and beryllium
+		\item Discuss the same as \ref{lt:onebody} for neon and beryllium
+	\end{enumerate}
+
+
+\item 
+	\begin{enumerate}
+		\item Comment on \(\expval{r_{12}}\)
+		\item Comment on subtracting the wavefunctions
+	\end{enumerate}
+\end{enumerate}
+
+
+\bibliography{bibliography}
+\bibliographystyle{plain}
+
+
+\end{document}
