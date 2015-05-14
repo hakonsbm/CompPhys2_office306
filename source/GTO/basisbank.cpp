@@ -1,5 +1,5 @@
 //This file is maintained by an external python script and should not be edited manually.
-#include <basisbank.h>
+#include <GTO/basisbank.h>
 #include <armadillo>
 #include <basis.h>
 #include <primitive.h>

@@ -10,7 +10,7 @@ using namespace arma;
 
 TrialFunction::TrialFunction()
 {
-
+    m_nucleusDistance = 0;
 }
 
 double TrialFunction::spinFactor(int i, int j)
@@ -22,3 +22,5 @@ double TrialFunction::spinFactor(int i, int j)
         return 1./2.;
 
 }
+
+

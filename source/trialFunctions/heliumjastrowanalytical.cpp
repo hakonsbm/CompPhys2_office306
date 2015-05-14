@@ -45,9 +45,12 @@ double HeliumJastrowAnalytical::waveFunction(const mat &r, VMCSolver *solver)
             r12 = 0;
             for(int k = 0; k < nDimensions; k++) {
                 r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+
             }
+            r12 = sqrt(r12);
         }
     }
+//    cout << exp(r12 / (2.0*(1 + beta * r12))) << endl;
     return exp(-accu(rpos) * alpha) * exp(r12 / (2.0*(1 + beta * r12))) ;
 }
 

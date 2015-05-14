@@ -31,11 +31,13 @@ SOURCES += main.cpp \
     trialFunctions/beryllium.cpp \
     trialFunctions/hydrogen.cpp \
     trialFunctions/neon.cpp \
+#    GTO/basisbank.cpp \
     lib.cpp \
     tests.cpp \
     derivatives.cpp \
     slaterdeterminant.cpp \
-    trialFunctions/helium.cpp
+    trialFunctions/helium.cpp \
+    trialFunctions/hydrogentwo.cpp
 
 HEADERS += \
     vmcsolver.h \
@@ -47,7 +49,9 @@ HEADERS += \
     trialFunctions/beryllium.h \
     trialFunctions/hydrogen.h \
     trialFunctions/neon.h \
+#    GTO/basisbank.h \
     lib.h \
     derivatives.h \
     slaterdeterminant.h \
-    trialFunctions/helium.h
+    trialFunctions/helium.h \
+    trialFunctions/hydrogentwo.h

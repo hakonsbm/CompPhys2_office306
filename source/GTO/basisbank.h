@@ -16,4 +16,5 @@ public:
     void add_3_21G_he(vec3 corePos);
     void add_3_21G_h(vec3 corePos);
 };
+
 #endif // BASISBANK_H

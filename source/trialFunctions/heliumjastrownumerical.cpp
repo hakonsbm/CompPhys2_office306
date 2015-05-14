@@ -45,6 +45,7 @@ double HeliumJastrowNumerical::waveFunction(const mat &r, VMCSolver *solver)
             for(int k = 0; k < nDimensions; k++) {
                 r12 += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
             }
+            r12 = sqrt(r12);
         }
     }
 
@@ -71,8 +72,6 @@ double HeliumJastrowNumerical::localEnergy(const mat &r, VMCSolver *solver)
 
     double waveFunctionCurrent = waveFunction(r, solver);
 
-
-
     // Kinetic energy
 
     double kineticEnergy = 0;
@@ -80,14 +79,19 @@ double HeliumJastrowNumerical::localEnergy(const mat &r, VMCSolver *solver)
         for(int j = 0; j < nDimensions; j++) {
             rPlus(i,j) += h;
             rMinus(i,j) -= h;
+
             waveFunctionMinus = waveFunction(rMinus, solver);
             waveFunctionPlus = waveFunction(rPlus, solver);
             kineticEnergy -= (waveFunctionMinus + waveFunctionPlus - 2 * waveFunctionCurrent);
             rPlus(i,j) = r(i,j);
             rMinus(i,j) = r(i,j);
+
         }
     }
+//    cout << kineticEnergy << endl;
+
     kineticEnergy = 0.5 * h2 * kineticEnergy / waveFunctionCurrent;
+
 
     // Potential energy
     double potentialEnergy = 0;
@@ -110,6 +114,8 @@ double HeliumJastrowNumerical::localEnergy(const mat &r, VMCSolver *solver)
             potentialEnergy += 1 / sqrt(r12);
         }
     }
+
+//    cout << potentialEnergy << endl;
 
     return kineticEnergy + potentialEnergy;
 }
