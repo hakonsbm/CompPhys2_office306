@@ -2,18 +2,17 @@
 #ifndef BASISBANK_H
 #define BASISBANK_H
 #include <armadillo>
-#include <basis.h>
-#include <primitive.h>
+#include <contracted.h>
+
 using namespace std;
 using namespace arma;
  
 class basisbank{
 public:
-    basisbank(basis BS);
-    basisbank();
-    basis bs;
-    string basistype;    void add_3_21G_ne(vec3 corePos);
-    void add_3_21G_he(vec3 corePos);
-    void add_3_21G_h(vec3 corePos);
+    
+    void add_3_21G_ne(const vec corePos);
+    void add_3_21G_he(const vec corePos);
+    void add_3_21G_h(const vec corePos);
+    double get_contracted() {return Contracted->get_contracted();}
 };
 #endif // BASISBANK_H
