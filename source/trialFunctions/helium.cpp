@@ -65,18 +65,23 @@ double Helium::localEnergy(const mat &r, VMCSolver *solver)
     if(m_analytical)
     {
     //Calculates the kinetic energy as the ratios of -1/2* ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
-            kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
+
         if(solver->getElectronInteration())
         {
-            kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
-//            cout << solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) << endl;
-//            kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
+            solver->derivatives()->analyticalDoubleDerivative(kineticEnergy, r, solver);
+        }
+        else
+        {
+            kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
         }
 
             kineticEnergy *= -1./2.;
     }
     else
         kineticEnergy =  solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
+
+
+//    cout << kineticEnergy << endl;
 
 //    cout << kineticEnergy << endl;
 

@@ -17,18 +17,24 @@ HydrogenTwo::HydrogenTwo(VMCSolver *solver)
 
     solver->setCharge(2);
     solver->setNParticles(2);
-    solver->setAlpha(1.843);
-    solver->setBeta(0.34);
+    solver->setAlpha(1.289);
+    solver->setBeta(0.401);
 
     spin << 0 << 1;
-
-
 
 }
 
 HydrogenTwo::~HydrogenTwo()
 {
 
+}
+
+void HydrogenTwo::calculateAlpha(VMCSolver *solver)
+{
+    solver->setAlpha(4.);
+
+
+    return;
 }
 
 double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)

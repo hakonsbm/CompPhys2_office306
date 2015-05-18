@@ -19,6 +19,7 @@ public:
     HydrogenTwo(VMCSolver* solver);
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
     virtual double localEnergy(const mat &r, VMCSolver *solver );
+    virtual void calculateAlpha(VMCSolver *solver);
 
 
 };

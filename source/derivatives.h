@@ -17,6 +17,7 @@ public:
     void numericalGradient(mat &gradient, const mat &r, VMCSolver *solver);
 
     void analyticalGradient(mat &gradient, const mat &r, VMCSolver *solver);
+    void analyticalDoubleDerivative(double &laplacianRatio, const mat &r, VMCSolver *solver);
 
 //    double analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver);
 

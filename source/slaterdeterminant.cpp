@@ -169,6 +169,7 @@ mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
     int nDimensions = solver->getNDimensions();
     mat gradient = zeros (nParticles, nDimensions);
 
+
     int nHalf = nParticles/2;
 
 //    updateSlaterMatrices(r,solver);
@@ -178,8 +179,13 @@ mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
     {
         for(int j = 0; j < nHalf; j++)
         {
-            gradient.row(i) +=  gradientPhi(r,i,j,solver).t()*detUpInverseOld(j,i);
-            gradient.row(i + nHalf) += gradientPhi(r, i + nHalf, j, solver).t() * detDownInverseOld(j,i);
+//            cout << "This" << endl;
+//            cout << gradient.row(i) <<endl;
+//            cout << "Is trying to mate with " << endl;
+//            cout << gradientPhi(r,i,j,solver)*detUpInverseOld(j,i) << endl;
+
+            gradient.row(i) +=  (gradientPhi(r,i,j,solver)*detUpInverseOld(j,i)).t();
+            gradient.row(i + nHalf)  += (gradientPhi(r, i + nHalf, j, solver) * detDownInverseOld(j,i)).t();
         }
     }
 

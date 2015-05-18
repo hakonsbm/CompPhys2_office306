@@ -18,6 +18,7 @@ public:
     double spinFactor(int i, int j);
     double getNucleusDistance() {return m_nucleusDistance;}
     void setNucleusDistance(double R) { m_nucleusDistance = R; }
+    void calculateAlpha(VMCSolver *solver);  //This is only for the cases where alpha is directly calculatable, for example H_2 and Be_2, it calculates and sets alpha
 
     string m_outfileName;
 

@@ -42,7 +42,6 @@ TEST(Hydrogenic) {
 //    CHECK_EQUAL(0., solver->getEnergyVar());
 //    CHECK_EQUAL(-4, solver->getEnergy());
 
-////    exit(0);
 
 
 //    cout << endl << "Running Beryllium test" << endl << endl;
@@ -66,59 +65,61 @@ TEST(Hydrogenic) {
 //    CHECK_EQUAL(0., solver->getEnergyVar());
 //    CHECK_EQUAL(-200., solver->getEnergy());
 
-////    exit(0);
 
 }
 
 TEST(HeliumJastrow)
 {
-//    cout << "Testing The analytical version of the Helium wavefunction" << endl;
+    cout << "Testing The analytical version of the Helium wavefunction" << endl;
 
-//    double oldVersion, newVersion;
-
-
-//    //Testing the machinery for the gradient ratio of Psi_C vs a calcualted ratio
-//    VMCSolver *solver = new VMCSolver();
-
-//    solver->setTrialFunction(new Helium(solver));
-////    solver->switchElectronInteraction(false);
-////    solver->trialFunction()->setAnalytical(true);
-//    solver->setAlpha(solver->getCharge());
-//    solver->setBeta(2);
-////    solver->setCycles(1000);
-
-//    mat r = zeros (2,3);
-//    vec correct = zeros (3);
-//    vec calculated = zeros(3);
-//    double r12 = 0;
-
-//    double particles = 2;
-//    double dimensions = 3;
-//    double beta = solver->getBeta();
-//    long idum = -1;
-
-//    for(int i = 0; i < particles; i ++ )
-//    {
-//        for(int j = 0; j < dimensions; j++)
-//        {
-//           r(i,j) = ran2(&idum);
-//        }
-//    }
-
-//    r12 = norm(r.row(0) - r.row(1));
-//    correct= ((r.row(0) - r.row(1)).t())  / (r12 * pow(1+(beta*r12), 2)) ;
-//    calculated = solver->derivatives()->analyticalCorrelationDerivative(r,solver) ;
-
-//    CHECK_CLOSE( correct(0) , calculated(0), 0.001  );
-//    CHECK_CLOSE( correct(1) , calculated(1), 0.001  );
-//    CHECK_CLOSE( correct(2) , calculated(2), 0.001  );
+    double oldVersion, newVersion;
 
 
-//    //Checking the laplacian ratio of Psi_C vs a calculated one.
-////    cout << solver->derivatives()->analyticalCorrelationDoubleDerivative(r, solver) << endl;
+    //Testing the machinery for the gradient ratio of Psi_C vs a calcualted ratio
+    VMCSolver *solver = new VMCSolver();
+
+    solver->setTrialFunction(new Helium(solver));
+//    solver->switchElectronInteraction(false);
+//    solver->trialFunction()->setAnalytical(true);
+    solver->setAlpha(solver->getCharge());
+    solver->setBeta(2);
+//    solver->setCycles(1000);
+
+    mat r = zeros (2,3);
+    vec correct = zeros (3);
+    vec calculated = zeros(3);
+    double r12 = 0;
+
+    double particles = 2;
+    double dimensions = 3;
+    double beta = solver->getBeta();
+    long idum = -1;
+
+    for(int i = 0; i < particles; i ++ )
+    {
+        for(int j = 0; j < dimensions; j++)
+        {
+           r(i,j) = ran2(&idum);
+        }
+    }
+
+    r12 = norm(r.row(0) - r.row(1));
+    correct = ((r.row(0) - r.row(1)).t())  / (r12 * pow(1+(beta*r12), 2)) ;
+
+    cout << solver->derivatives()->analyticalCorrelationGradient(r,solver)<< endl;
 
 
-////    exit(0);
+
+    CHECK_CLOSE( correct(0) , calculated(0), 0.001  );
+    CHECK_CLOSE( correct(1) , calculated(1), 0.001  );
+    CHECK_CLOSE( correct(2) , calculated(2), 0.001  );
+
+
+    //Checking the laplacian ratio of Psi_C vs a calculated one.
+//    cout << solver->derivatives()->analyticalCorrelationDoubleDerivative(r, solver) << endl;
+    solver->setTrialFunction(new Helium(solver));
+    solver->trialFunction()->setAnalytical(true);
+
 }
 
 TEST(FirstOrderDerivative)
@@ -148,10 +149,16 @@ TEST(FirstOrderDerivative)
 //    solver->trialFunction()->setAnalytical(false);
 //    solver->determinant()->updateSlaterMatrices(r,solver);
 //    solver->derivatives()->numericalGradient(gradientNumerical, r, solver);
+////    //Testing
+////    gradientNumerical = solver->determinant()->gradientSlaterDeterminant(r,solver);
 
 //    solver->trialFunction()->setAnalytical(true);
 //    solver->determinant()->updateSlaterMatrices(r,solver);
 //    solver->derivatives()->analyticalGradient(gradientAnalytical, r , solver);
+////    //Testing
+////    gradientNumerical = solver->determinant()->gradientSlaterDeterminant(r,solver);
+
+////    gradientAnalytical = solver->derivatives()->analyticalCorrelationGradient(r,solver);
 
 //    if(solver->getRank() == 0)
 //    {
@@ -160,19 +167,21 @@ TEST(FirstOrderDerivative)
 //        cout << gradientAnalytical << endl;
 //    }
 
+//    exit(0);
+
 }
 
 TEST(HYDROGENTWO_VS_HELIUM)
 {
     //Make a test with R = 0 for hydrogenTwo where it should be the same as the Helium atom
 
-    cout << endl << "Running He vs H_2 test" << endl << endl;
-    VMCSolver *solver = new VMCSolver;
-    solver->setTrialFunction(new Helium(solver));
-    solver->trialFunction()->setAnalytical(false);
-    solver->switchbBlockSampling(false);
-    solver->setCycles(100000);
-    solver->runMasterIntegration();
+//    cout << endl << "Running He vs H_2 test" << endl << endl;
+//    VMCSolver *solver = new VMCSolver;
+//    solver->setTrialFunction(new Helium(solver));
+//    solver->trialFunction()->setAnalytical(false);
+//    solver->switchbBlockSampling(false);
+//    solver->setCycles(100000);
+//    solver->runMasterIntegration();
 
 //    mat r = zeros (2,3);
 //    vec correct = zeros (3);
@@ -198,13 +207,13 @@ TEST(HYDROGENTWO_VS_HELIUM)
 //    cout << solver->trialFunction()->waveFunction(r,solver) << endl;
 
 
-    solver->setTrialFunction(new HydrogenTwo(solver));
-    solver->trialFunction()->setAnalytical(false);
-    solver->trialFunction()->setNucleusDistance(1.4);
-//    solver->switchElectronInteraction(true);
-    solver->switchbBlockSampling(false);
-    solver->setCycles(100000);
-    solver->runMasterIntegration();
+//    solver->setTrialFunction(new HydrogenTwo(solver));
+//    solver->trialFunction()->setAnalytical(false);
+//    solver->trialFunction()->setNucleusDistance(1.4);
+////    solver->switchElectronInteraction(true);
+//    solver->switchbBlockSampling(false);
+//    solver->setCycles(100000);
+//    solver->runMasterIntegration();
 
 
 
@@ -223,86 +232,65 @@ TEST(HYDROGENTWO_VS_HELIUM)
 TEST(AnalyticalHelium)
 {
 
-////        Testing the machinery for the gradient ratio of Psi_C vs a calculated ratio
-//        VMCSolver *solver = new VMCSolver();
-
-//        solver->setTrialFunction(new Helium(solver));
-//    //    solver->switchElectronInteraction(false);
-//        solver->trialFunction()->setAnalytical(true);
-//        solver->setAlpha(solver->getCharge());
-//        solver->setBeta(2);
-//    //    solver->setCycles(1000);
-
-//        mat r = zeros (2,3);
-//        vec correct = zeros (3);
-//        vec calculated = zeros(3);
-//        double r12 = 0;
-
-//        double particles = 2;
-//        double dimensions = 3;
-//        double beta = solver->getBeta();
-//        long idum = -1;
-
-//        for(int i = 0; i < particles; i ++ )
-//        {
-//            for(int j = 0; j < dimensions; j++)
-//            {
-//               r(i,j) = ran2(&idum);
-//            }
-//        }
-
-
-//        //Testing the double derivative of the gradient ratio as the results should be calculated by the derivatives.py program
-
-//        r12 = norm(r.row(0) - r.row(1));
-//        correct= ((r.row(0) - r.row(1)).t())  / (r12 * pow(1+(beta*r12), 2)) ;
-//        calculated = solver->derivatives()->analyticalCorrelationDerivative(r,solver) ;
-//    if(solver->getRank()==0)
-//    {
-//        CHECK_CLOSE( correct(0) , calculated(0), 0.001  );
-//        CHECK_CLOSE( correct(1) , calculated(1), 0.001  );
-//        CHECK_CLOSE( correct(2) , calculated(2), 0.001  );
-//        cout << solver->derivatives()->analyticalCorrelationDerivative(r, solver) << endl;
-
-//    }
 
     //Testing the laplacian ratio
 
 
-////    cout << "Testing The analytical version of the Helium wavefunction" << endl;
+//    cout << "Testing The analytical version of the Helium wavefunction" << endl;
 
-//    double analytical, numerical, analyticalVar , numericalVar;
-//    VMCSolver *solver = new VMCSolver();
-
-
-////    cout << endl << "Running Helium test" << endl << endl;
-//    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
-//    solver->switchElectronInteraction(true);
-//    solver->trialFunction()->setAnalytical(true);
-//    solver->switchbBlockSampling(false);
-//    solver->setCycles(2);
-//    solver->runMasterIntegration();
-
-//    numerical = solver->getEnergy();
-//    numericalVar = solver->getEnergyVar();
+    double analytical, numerical, analyticalVar , numericalVar;
+    VMCSolver *solver = new VMCSolver();
 
 
-//    solver->setTrialFunction(new Helium(solver));
-//    solver->switchElectronInteraction(true);
-//    solver->trialFunction()->setAnalytical(false);
-//    solver->switchbBlockSampling(false);
-//    solver->setCycles(2);
-//    solver->runMasterIntegration();
+//    cout << endl << "Running Helium test" << endl << endl;
+    solver->setTrialFunction(new Helium(solver));
+    solver->switchElectronInteraction(true);
+    solver->trialFunction()->setAnalytical(false);
+    solver->switchbBlockSampling(false);
+    solver->setCycles(1000000);
+    solver->runMasterIntegration();
 
-//    analytical = solver->getEnergy();
-//    analyticalVar = solver->getEnergyVar();
+////TestStuff
+//    double particles = solver->getNParticles();
+//    double dimensions = solver->getNDimensions();
+//    long idum = -clock();
 
+//    mat r = zeros (particles,dimensions);
 
-//    if(solver->getRank() == 0)
+//    //Random positions to test derivative
+//    for(int i = 0; i < particles; i ++ )
 //    {
-//        cout << "Energy with the old one: " << numerical << " and " << numericalVar << endl;
-//        cout << "Energy with the new one: " << analytical << " and " << analyticalVar << endl;
+//     for(int j = 0; j < dimensions; j++)
+//     {
+//        r(i,j) = ran2(&idum);
+//     }
 //    }
+//    numerical = solver->trialFunction()->localEnergy(r,solver);
+
+
+    numerical = solver->getEnergy();
+    numericalVar = solver->getEnergyVar();
+
+
+    solver->setTrialFunction(new Helium(solver));
+    solver->switchElectronInteraction(true);
+    solver->trialFunction()->setAnalytical(true);
+    solver->switchbBlockSampling(false);
+    solver->setCycles(1000000);
+    solver->runMasterIntegration();
+
+//    analytical = solver->trialFunction()->localEnergy(r,solver);
+
+
+    analytical = solver->getEnergy();
+    analyticalVar = solver->getEnergyVar();
+
+
+    if(solver->getRank() == 0)
+    {
+        cout << "Energy with the old one: " << numerical << " and " << numericalVar << endl;
+        cout << "Energy with the new one: " << analytical << " and " << analyticalVar << endl;
+    }
 
 
 }

@@ -26,7 +26,7 @@ VMCSolver::VMCSolver():
     nParticles(2),
     h(0.001),
     h2(1000000),
-    idum(-1),
+    idum(clock()),
     nCycles(10000),
     D(0.5),
     my_rank(0)

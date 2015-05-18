@@ -97,8 +97,50 @@ void Derivatives::analyticalGradient(mat &gradient, const mat &r, VMCSolver *sol
     gradient += solver->derivatives()->analyticalCorrelationGradient( r ,solver);
 
     //Testing
-//    cout << analyticalPsi1SDerivative(1,r,solver) << endl;
+    //    cout << analyticalPsi1SDerivative(1,r,solver) << endl;
 }
+
+void Derivatives::analyticalDoubleDerivative(double &laplacianRatio, const mat &r, VMCSolver *solver)
+{
+    //This calculates the laplacian ratio of the trialFunction
+    // ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
+
+    double tempTerm = 0;
+    int nParticles = solver->getNParticles();
+    int nDimensions = solver->getNDimensions();
+    mat correlationGradient = zeros (nParticles, nDimensions);
+    mat slaterGradient = zeros(nParticles, nDimensions);
+
+
+
+
+    laplacianRatio += solver->determinant()->laplacianSlaterDeterminant(r, solver);
+    laplacianRatio += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
+
+    correlationGradient = solver->derivatives()->analyticalCorrelationGradient(r, solver);
+    slaterGradient = solver->determinant()->gradientSlaterDeterminant(r, solver);
+
+    //Computes the dot product over all the particles
+    for(int i = 0; i < nParticles;i ++)
+    {
+        tempTerm += dot(slaterGradient.row(i), correlationGradient.row(i) );
+    }
+
+    laplacianRatio -= 2.*tempTerm;
+
+//    cout << "Slater laplacian" << endl;
+//    cout << solver->determinant()->laplacianSlaterDeterminant(r, solver)<< endl;
+
+//    cout << "Correlation laplacian" << endl;
+//    cout << solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) << endl;
+
+//    cout << "Combined term" << endl;
+//    cout << tempTerm << endl;
+
+    return;
+}
+
+
 
 
 
@@ -246,10 +288,9 @@ mat Derivatives::analyticalCorrelationGradient( const mat &r, VMCSolver *solver)
            for(int i = k +1 ; i < nParticles  ; i ++)
            {
                rki = (r.row(k) - r.row(i)).t();
-               gradient.row(k) += (rki / norm(rki) * fDerivative(k,i,r,solver)).t();
+               gradient.row(k) -= (rki / norm(rki) * fDerivative(k,i,r,solver)).t();
            }
     }
-
 
     return gradient;
 }

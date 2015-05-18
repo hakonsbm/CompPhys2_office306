@@ -46,6 +46,8 @@ int main(int nargs, char* args[])
     //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
     //Beryllium:                alpha = 4.0     beta = 0.31
     //Neon:                     alpha = 10.22   beta = 0.091
+    //HydrogenTwo:              alpha = 1.289   beta = 0.401
+    //BerylliumTwo:             alpha = 3.725   beta = 0.246
 
     VMCSolver *solver = new VMCSolver();
 
@@ -90,6 +92,7 @@ int main(int nargs, char* args[])
     else if((string)args[2]=="runFindAlphaBeta") runFindAlphaBeta(solver);
     else if((string)args[2]=="runCompareParallelize") runCompareParallelize(solver);
     else if((string)args[2]=="runTests") runTests(solver);
+    else if((string)args[2]=="runDiffBetaAndR") runDiffBetaAndR(solver);
     else {if(my_rank==0) cout << args[2]  << " is not a valid runtype" << endl; exit(1);}
 
     // End MPI
@@ -104,8 +107,9 @@ void runDiffBetaAndR(VMCSolver *solver)
 
     //Can only be run with HydrogenTwo and BerylliumTwo
 
+    solver->trialFunction()->setNucleusDistance(1.4);
 
-
+    solver->runMasterIntegration();
 
 
 }
@@ -142,7 +146,7 @@ void runFindAlphaBeta(VMCSolver *solver)
 //    solver->setCycles(1000000);
 
     //Temporary for the HydrogenTwo function
-    solver->trialFunction()->setNucleusDistance(1.0);
+    solver->trialFunction()->setNucleusDistance(1.4);
 
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
@@ -256,6 +260,8 @@ void runFindAlphaBeta(VMCSolver *solver)
 //        if(bestBetaEnergy != bestBetaVariance)        //Not canceling the loop because of beta, since beta has a very small influence on the values and could fail because of randomness
 //            break;
 
+
+        //Sets upa new more finegrained mesh
         meshRangeAlpha = meshRangeAlpha/2.;
         alphaMin = bestAlphaEnergy - meshRangeAlpha/2.;
         alphaMax = bestAlphaEnergy + meshRangeAlpha/2.;
