@@ -8,6 +8,7 @@
 #include "trialFunctions/hydrogen.h"
 #include "trialFunctions/beryllium.h"
 #include "trialFunctions/neon.h"
+#include "trialFunctions/hydrogentwo.h"
 #include "slaterdeterminant.h"
 
 #include <iostream>
@@ -29,6 +30,7 @@ void runCompareAnalytical(VMCSolver *solver);
 void runDiffNCycles(VMCSolver *solver);
 void runFindAlphaBeta(VMCSolver *solver);
 void runCompareParallelize(VMCSolver * solver);
+void runDiffBetaAndR(VMCSolver *solver);
 int runTests(VMCSolver *solver);
 
 int main(int nargs, char* args[])
@@ -47,6 +49,7 @@ int main(int nargs, char* args[])
 
     VMCSolver *solver = new VMCSolver();
 
+
     MPI_Init(&nargs, &args);
     solver->mpiArguments(nargs, args);
 
@@ -58,6 +61,8 @@ int main(int nargs, char* args[])
     MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
     nCycles = atoi(args[3])/numprocs;
 
+
+
     if((string)args[1]=="HeliumSimpleAnalytical") solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
     else if((string)args[1]=="HeliumSimpleNumerical") solver->setTrialFunction(new HeliumSimpleNumerical(solver));
     else if((string)args[1]=="HeliumJastrowAnalytical") solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
@@ -65,6 +70,7 @@ int main(int nargs, char* args[])
     else if((string)args[1]=="Beryllium") solver->setTrialFunction(new Beryllium(solver));
     else if((string)args[1]=="Neon") solver->setTrialFunction(new Neon(solver));
     else if((string)args[1]=="Helium") solver->setTrialFunction(new Helium(solver));
+    else if((string)args[1]=="HydrogenTwo") solver->setTrialFunction(new HydrogenTwo(solver));
     else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
     if(my_rank==0)
@@ -91,6 +97,19 @@ int main(int nargs, char* args[])
     return 0;
 }
 
+void runDiffBetaAndR(VMCSolver *solver)
+{
+    //This is for use with the GTO orbitals where alpha is already given, and for two atom cores molecules where we will use the variation of the distance
+    // between the nucleuses as a variational parameter along with beta.
+
+    //Can only be run with HydrogenTwo and BerylliumTwo
+
+
+
+
+
+}
+
 void runFindAlphaBeta(VMCSolver *solver)
 {
     //Now the search for ALpha Beta should be improved by doing a more smart search, so it will first do a coarse mesh over the range
@@ -98,8 +117,7 @@ void runFindAlphaBeta(VMCSolver *solver)
     //It will aslo make a better fit by taking into account both the variance (which should be zero) and the energy (which should be as low as possible),
     //when the lowest energy and variance does not agree anymore the limit for the resulition of the search has been reached, if not specified in some other way.
 
-
-    double alphaMin = 0.7*solver->getCharge();
+    double alphaMin = 0.7* solver->getCharge();
     double alphaMax = 1.2* solver->getCharge();
     double betaMin = 0.3;
     double betaMax = 0.4;
@@ -123,6 +141,9 @@ void runFindAlphaBeta(VMCSolver *solver)
     solver->switchbBlockSampling(false);
 //    solver->setCycles(1000000);
 
+    //Temporary for the HydrogenTwo function
+    solver->trialFunction()->setNucleusDistance(1.0);
+
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
     string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
@@ -142,7 +163,7 @@ void runFindAlphaBeta(VMCSolver *solver)
                 if(ImportanceSampling)
                 {
                     start = clock();
-                        solver->runMonteCarloIntegrationIS();
+                        solver->runMasterIntegration();
                     end = clock();
 
                     double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
@@ -186,7 +207,7 @@ void runFindAlphaBeta(VMCSolver *solver)
                     if(ImportanceSampling)
                     {
                         start = clock();
-                            solver->runMonteCarloIntegrationIS();
+                            solver->runMasterIntegration();
                         end = clock();
 
                         double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;

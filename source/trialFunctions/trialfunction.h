@@ -16,6 +16,8 @@ public:
     virtual double localEnergy(const mat &r, VMCSolver *solver ) = 0;
     void setAnalytical(bool onOff) {m_analytical = onOff; }
     double spinFactor(int i, int j);
+    double getNucleusDistance() {return m_nucleusDistance;}
+    void setNucleusDistance(double R) { m_nucleusDistance = R; }
 
     string m_outfileName;
 
@@ -23,6 +25,9 @@ public:
     bool m_analytical;
 
     ivec spin;
+
+private:
+    double m_nucleusDistance;
 
 
 };

@@ -73,13 +73,17 @@ double Derivatives::numericalDoubleDerivative(const mat &r, VMCSolver *solver)
         for(int j = 0; j < nDimensions; j++) {
             rPlus(i,j) += h;
             rMinus(i,j) -= h;
+            solver->determinant()->updateSlaterMatrices(rMinus,solver);     // This needs to be updated and changed back at the end to make sure that D(x_old) is correct
             waveFunctionMinus = solver->trialFunction()->waveFunction(rMinus, solver);
+            solver->determinant()->updateSlaterMatrices(rPlus,solver);
             waveFunctionPlus = solver->trialFunction()->waveFunction(rPlus, solver);
             doubleDerivative -= (waveFunctionMinus + waveFunctionPlus - 2 * waveFunctionCurrent);
             rPlus(i,j) = r(i,j);
             rMinus(i,j) = r(i,j);
         }
     }
+    solver->determinant()->updateSlaterMatrices(r,solver);   //Returns the slater determinant to the correct position, according to where the particle is now
+//    cout << doubleDerivative << endl;
     doubleDerivative = h2 * doubleDerivative;
 
     return doubleDerivative;

@@ -9,8 +9,8 @@ Helium::Helium(VMCSolver *solver)
 
     solver->setCharge(2);
     solver->setNParticles(2);
-    solver->setAlpha(1.65);
-    solver->setBeta(0);
+    solver->setAlpha(1.843);
+    solver->setBeta(0.34);
 
     spin << 0 << 1;
 }
@@ -40,6 +40,7 @@ double Helium::waveFunction(const mat &r, VMCSolver *solver)
         }
     }
 
+//    cout << product << endl;
 
 //    cout << "Before SD" << endl;
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
@@ -77,12 +78,14 @@ double Helium::localEnergy(const mat &r, VMCSolver *solver)
     else
         kineticEnergy =  solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
 
+//    cout << kineticEnergy << endl;
 
     //Taking away the electron electron interaction, used for some tests with Hydrogenic wavesfunctions
     if(solver->getElectronInteration())
         potentialEnergy = - charge*(1./r1+1./r2) + 1./(r12);
     else
         potentialEnergy = - charge*(1./r1+1./r2);
+
 
 
     return kineticEnergy + potentialEnergy;
