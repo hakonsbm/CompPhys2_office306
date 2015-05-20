@@ -9,8 +9,8 @@ Helium::Helium(VMCSolver *solver)
 
     solver->setCharge(2);
     solver->setNParticles(2);
-    solver->setAlpha(1.65);
-    solver->setBeta(0);
+    solver->setAlpha(1.843);
+    solver->setBeta(0.34);
 
     spin << 0 << 1;
 }
@@ -40,6 +40,7 @@ double Helium::waveFunction(const mat &r, VMCSolver *solver)
         }
     }
 
+//    cout << product << endl;
 
 //    cout << "Before SD" << endl;
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
@@ -50,13 +51,12 @@ double Helium::waveFunction(const mat &r, VMCSolver *solver)
 
 double Helium::localEnergy(const mat &r, VMCSolver *solver)
 {
-    double kineticEnergy, potentialEnergy;
+    double kineticEnergy = 0;
+    double potentialEnergy = 0;
 
     double r1 = norm(r.row(0));
     double r2 = norm(r.row(1));
     double r12 = norm(r.row(0) - r.row(1));
-    vec gradientSlater, gradientJastrow;
-
 
     double charge = solver->getCharge();
 
@@ -64,18 +64,25 @@ double Helium::localEnergy(const mat &r, VMCSolver *solver)
     if(m_analytical)
     {
     //Calculates the kinetic energy as the ratios of -1/2* ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
-            kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
+
+        //If we want to compute without electroninteraction with a simplified version ofthe trialfunction containing only the slater determinant
+        //then only the slater determinant ratio laplacian is used.
         if(solver->getElectronInteration())
         {
-            kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
-//            cout << solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) << endl;
-//            kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
+            solver->derivatives()->analyticalLaplacianRatio(kineticEnergy, r, solver);
+        }
+        else
+        {
+            kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
         }
 
             kineticEnergy *= -1./2.;
+
+//            cout << kineticEnergy << " vs " << endl << solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver)) << endl;
     }
     else
-        kineticEnergy =  solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
+        kineticEnergy =  solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver)); //The minus looks to be baked into the
+                                                                                                                     //doubleDerivative Function
 
 
     //Taking away the electron electron interaction, used for some tests with Hydrogenic wavesfunctions
@@ -84,6 +91,7 @@ double Helium::localEnergy(const mat &r, VMCSolver *solver)
     else
         potentialEnergy = - charge*(1./r1+1./r2);
 
+//    cout << "potential is " << -solver->determinant()->laplacianSlaterDeterminant(r, solver)/2. + potentialEnergy << endl;
 
     return kineticEnergy + potentialEnergy;
 

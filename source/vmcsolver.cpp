@@ -26,7 +26,7 @@ VMCSolver::VMCSolver():
     nParticles(2),
     h(0.001),
     h2(1000000),
-    idum(-1),
+    idum(clock()),
     nCycles(10000),
     D(0.5),
     my_rank(0)
@@ -164,8 +164,13 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         //Store the current value of the wave function
         waveFunctionOld = trialFunction()->waveFunction(rOld, this);
 
-        QuantumForce(rOld, QForceOld);
-        QForceOld = QForceOld*h/waveFunctionOld;
+//        QuantumForce(rOld, QForceOld);
+//        cout << "Old quantumForce "<< endl << QForceOld << endl;
+        derivatives()->numericalGradient(QForceOld,rOld, this);
+//         cout << "New quantumForce "<< endl << QForceOld << endl;
+
+
+        QForceOld = 2.*QForceOld*h/waveFunctionOld;
         //New position to test
         for(int i = 0; i < nParticles; i++) {
             for(int j = 0; j < nDimensions; j++) {

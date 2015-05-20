@@ -8,6 +8,7 @@
 #include "trialFunctions/hydrogen.h"
 #include "trialFunctions/beryllium.h"
 #include "trialFunctions/neon.h"
+#include "trialFunctions/hydrogentwo.h"
 #include "slaterdeterminant.h"
 
 #include <iostream>
@@ -29,6 +30,8 @@ void runCompareAnalytical(VMCSolver *solver);
 void runDiffNCycles(VMCSolver *solver);
 void runFindAlphaBeta(VMCSolver *solver);
 void runCompareParallelize(VMCSolver * solver);
+void runDiffBetaAndR(VMCSolver *solver);
+void runConjugateMethod(VMCSolver *solver);
 int runTests(VMCSolver *solver);
 
 int main(int nargs, char* args[])
@@ -44,8 +47,11 @@ int main(int nargs, char* args[])
     //HeliumJastrowNumerical:   alpha = 1.8     beta = 1.05
     //Beryllium:                alpha = 4.0     beta = 0.31
     //Neon:                     alpha = 10.22   beta = 0.091
+    //HydrogenTwo:              alpha = 1.289   beta = 0.401
+    //BerylliumTwo:             alpha = 3.725   beta = 0.246
 
     VMCSolver *solver = new VMCSolver();
+
 
     MPI_Init(&nargs, &args);
     solver->mpiArguments(nargs, args);
@@ -58,6 +64,8 @@ int main(int nargs, char* args[])
     MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
     nCycles = atoi(args[3])/numprocs;
 
+
+
     if((string)args[1]=="HeliumSimpleAnalytical") solver->setTrialFunction(new HeliumSimpleAnalytical(solver));
     else if((string)args[1]=="HeliumSimpleNumerical") solver->setTrialFunction(new HeliumSimpleNumerical(solver));
     else if((string)args[1]=="HeliumJastrowAnalytical") solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
@@ -65,6 +73,7 @@ int main(int nargs, char* args[])
     else if((string)args[1]=="Beryllium") solver->setTrialFunction(new Beryllium(solver));
     else if((string)args[1]=="Neon") solver->setTrialFunction(new Neon(solver));
     else if((string)args[1]=="Helium") solver->setTrialFunction(new Helium(solver));
+    else if((string)args[1]=="HydrogenTwo") solver->setTrialFunction(new HydrogenTwo(solver));
     else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
     if(my_rank==0)
@@ -84,11 +93,27 @@ int main(int nargs, char* args[])
     else if((string)args[2]=="runFindAlphaBeta") runFindAlphaBeta(solver);
     else if((string)args[2]=="runCompareParallelize") runCompareParallelize(solver);
     else if((string)args[2]=="runTests") runTests(solver);
+    else if((string)args[2]=="runDiffBetaAndR") runDiffBetaAndR(solver);
+    else if((string)args[2]=="runConjugateMethod") runConjugateMethod(solver);
     else {if(my_rank==0) cout << args[2]  << " is not a valid runtype" << endl; exit(1);}
 
     // End MPI
     MPI_Finalize ();
     return 0;
+}
+
+void runDiffBetaAndR(VMCSolver *solver)
+{
+    //This is for use with the GTO orbitals where alpha is already given, and for two atom cores molecules where we will use the variation of the distance
+    // between the nucleuses as a variational parameter along with beta.
+
+    //Can only be run with HydrogenTwo and BerylliumTwo
+
+    solver->trialFunction()->setNucleusDistance(1.4);
+
+    solver->runMasterIntegration();
+
+
 }
 
 void runFindAlphaBeta(VMCSolver *solver)
@@ -98,8 +123,7 @@ void runFindAlphaBeta(VMCSolver *solver)
     //It will aslo make a better fit by taking into account both the variance (which should be zero) and the energy (which should be as low as possible),
     //when the lowest energy and variance does not agree anymore the limit for the resulition of the search has been reached, if not specified in some other way.
 
-
-    double alphaMin = 0.7*solver->getCharge();
+    double alphaMin = 0.7* solver->getCharge();
     double alphaMax = 1.2* solver->getCharge();
     double betaMin = 0.3;
     double betaMax = 0.4;
@@ -123,6 +147,9 @@ void runFindAlphaBeta(VMCSolver *solver)
     solver->switchbBlockSampling(false);
 //    solver->setCycles(1000000);
 
+    //Temporary for the HydrogenTwo function
+    solver->trialFunction()->setNucleusDistance(1.4);
+
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
     string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
@@ -142,7 +169,7 @@ void runFindAlphaBeta(VMCSolver *solver)
                 if(ImportanceSampling)
                 {
                     start = clock();
-                        solver->runMonteCarloIntegrationIS();
+                        solver->runMasterIntegration();
                     end = clock();
 
                     double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
@@ -186,7 +213,7 @@ void runFindAlphaBeta(VMCSolver *solver)
                     if(ImportanceSampling)
                     {
                         start = clock();
-                            solver->runMonteCarloIntegrationIS();
+                            solver->runMasterIntegration();
                         end = clock();
 
                         double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
@@ -235,6 +262,8 @@ void runFindAlphaBeta(VMCSolver *solver)
 //        if(bestBetaEnergy != bestBetaVariance)        //Not canceling the loop because of beta, since beta has a very small influence on the values and could fail because of randomness
 //            break;
 
+
+        //Sets upa new more finegrained mesh
         meshRangeAlpha = meshRangeAlpha/2.;
         alphaMin = bestAlphaEnergy - meshRangeAlpha/2.;
         alphaMax = bestAlphaEnergy + meshRangeAlpha/2.;
@@ -505,6 +534,41 @@ void runCompareParallelize(VMCSolver * solver)
 
 
     return;
+}
+
+void runConjugateMethod(VMCSolver *solver)
+{
+
+    solver->trialFunction()->setAnalytical(true);
+    solver->trialFunction()->setConjugate(true);
+
+    solver->switchbBlockSampling(false);    //This also samples the energies at each cycle to do blocking analysis on the data
+
+    //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
+    //vmcSolver class
+    string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
+
+    char const * outfilePath = (pathString + string("_conjugate")).c_str();
+
+    outfile.open(outfilePath);
+
+    //Assuming that alpha is known, or GTO trial functions beta is what we want to minimize E_L against. So we guess a value and goes from there
+    double beta = 0.20;
+    double stepsize = 0.1;
+
+
+    solver->runMasterIntegration();
+
+
+
+    if(solver->getRank() == 0)
+    {
+        cout << "\nWriting to " << outfilePath << endl;
+    }
+
+    outfile.close();
+
+return;
 }
 
 int runTests(VMCSolver *solver)

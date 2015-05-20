@@ -73,13 +73,20 @@ double Derivatives::numericalDoubleDerivative(const mat &r, VMCSolver *solver)
         for(int j = 0; j < nDimensions; j++) {
             rPlus(i,j) += h;
             rMinus(i,j) -= h;
+
+            solver->determinant()->updateSlaterMatrices(rMinus,solver);     // This needs to be updated and changed back at the end to make sure that D(x_old) is correct
             waveFunctionMinus = solver->trialFunction()->waveFunction(rMinus, solver);
+
+            solver->determinant()->updateSlaterMatrices(rPlus,solver);
             waveFunctionPlus = solver->trialFunction()->waveFunction(rPlus, solver);
+
             doubleDerivative -= (waveFunctionMinus + waveFunctionPlus - 2 * waveFunctionCurrent);
             rPlus(i,j) = r(i,j);
             rMinus(i,j) = r(i,j);
         }
     }
+    solver->determinant()->updateSlaterMatrices(r,solver);   //Returns the slater determinant to the correct position, according to where the particle is now
+//    cout << doubleDerivative << endl;
     doubleDerivative = h2 * doubleDerivative;
 
     return doubleDerivative;
@@ -93,31 +100,49 @@ void Derivatives::analyticalGradient(mat &gradient, const mat &r, VMCSolver *sol
     gradient += solver->derivatives()->analyticalCorrelationGradient( r ,solver);
 
     //Testing
-//    cout << analyticalPsi1SDerivative(1,r,solver) << endl;
+    //    cout << analyticalPsi1SDerivative(1,r,solver) << endl;
 }
 
+void Derivatives::analyticalLaplacianRatio(double &laplacianRatio, const mat &r, VMCSolver *solver)
+{
+    //This calculates the laplacian ratio of the trialFunction
+    // ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
+
+    double tempTerm = 0;
+    int nParticles = solver->getNParticles();
+    int nDimensions = solver->getNDimensions();
+    mat correlationGradient = zeros (nParticles, nDimensions);
+    mat slaterGradient = zeros(nParticles, nDimensions);
 
 
-//double Derivatives::analyticalSimpleDoubleDerivative(const mat &r, VMCSolver *solver)
-//{
-//    //This calculates the simple parts of the trialfunctions that are without interaction between the molecules
-//    //Calculates (nabla Psi_S) /Psi_S
-//    // d²/dx² (sum_i  e^(-alpha r_i ) ) / sum_i  e^(-alpha r_i )
+    laplacianRatio += solver->determinant()->laplacianSlaterDeterminant(r, solver); // d²/dx² Psi_C /Psi_C
+    laplacianRatio += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver); //d²/dx²|D| /|D|
+//    laplacianRatio += analyticalCorrelationLaplacian(r, solver);
 
-//    double alpha = solver->getAlpha();
-//    double ri;
+    correlationGradient = solver->derivatives()->analyticalCorrelationGradient(r, solver);
+    slaterGradient = solver->determinant()->gradientSlaterDeterminant(r, solver);
 
-//    double derivative = 0;
+    //Computes the dot product over all the particles
+    for(int i = 0; i < nParticles;i ++)
+    {
+        tempTerm += dot(slaterGradient.row(i), correlationGradient.row(i) );
+    }
 
-//    for(int i = 0; i < solver->getNParticles(); i++)
-//    {
-//        ri = norm(r.row(i));
-//        derivative += (alpha*alpha - (2.*alpha)/ri);
-////        cout << "Particle " << i << " correct : r: " << ri << " derivative: " << (alpha*alpha - (2.*alpha)/ri) << endl;
-//    }
+    laplacianRatio += 2.*tempTerm; //( d/dx |D|/|D| ) dot d/dx Psi_C/Psi_C
 
-//    return derivative;
-//}
+
+//    cout << "Am in LaplcacianCalculation" << endl;
+
+////    cout << "double slater is " << solver->determinant()->laplacianSlaterDeterminant(r, solver) << endl;
+//    cout << "The correlation d²/dx² is  " << solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) << endl;
+//    cout << "New attempt at correlation part is: " << analyticalCorrelationLaplacian(r, solver) << endl;
+//    cout << "The combined part is  " << 2.*tempTerm << endl;
+
+//    cout << "TotalEnergy2 is " << -(solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) + 2.*tempTerm)/2. << endl;
+//    cout << -laplacianRatio/2. << endl;
+
+    return;
+}
 
 vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
@@ -138,7 +163,6 @@ double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &
 
     double derivative = alpha * (alpha  - (2./ri) )  * exp(-alpha*ri);
 
-//    cout << "Particle " << particleTag << " New : r: " << ri << " derivative: " << alpha * (alpha - (2./ri) )   << endl;
 
 
     return derivative;
@@ -235,17 +259,15 @@ mat Derivatives::analyticalCorrelationGradient( const mat &r, VMCSolver *solver)
     {
            for(int i = 0; i < k; i ++)
            {
-               rik = (r.row(i) - r.row(k)).t();
+               rik = (r.row(k) - r.row(i)).t();
                gradient.row(k) += (rik / norm(rik) * fDerivative(i,k,r, solver)).t();
-
            }
-           for(int i = k +1 ; i < nParticles  ; i ++)
+           for(int i = k + 1 ; i < nParticles  ; i ++)
            {
-               rki = (r.row(k) - r.row(i)).t();
-               gradient.row(k) += (rki / norm(rki) * fDerivative(k,i,r,solver)).t();
+               rki = (r.row(i) - r.row(k)).t();
+               gradient.row(k) -= (rki / norm(rki) * fDerivative(k,i,r,solver)).t();
            }
     }
-
 
     return gradient;
 }
@@ -273,10 +295,9 @@ double Derivatives::analyticalCorrelationDoubleDerivative(const mat &r, VMCSolve
             for(j = i + 1; j < nParticles ; j ++)
             {
 //                cout << "Sum 1" << endl;
-                rkj = (r.row(k) - r.row(j)).t();
-                rki = (r.row(k) - r.row(i)).t();
-                laplacian = laplacian + dot(rkj,rkj) / (norm(rki)*norm(rkj)) * fDerivative(k,j,r,solver) * fDerivative(k,i,r,solver) ;
-
+                rkj = (r.row(j) - r.row(k)).t();
+                rki = (r.row(i) - r.row(k)).t();
+                laplacian = laplacian + dot(rki,rkj) / (norm(rki)*norm(rkj)) * fDerivative(k,j,r,solver) * fDerivative(k,i,r,solver) ;
             }
         }
 
@@ -285,11 +306,8 @@ double Derivatives::analyticalCorrelationDoubleDerivative(const mat &r, VMCSolve
         {
             if(j != k)
             {
-//            cout << "Sum 2" << endl;
-            rkj = (r.row(k) - r.row(j)).t();
-            laplacian = laplacian + fDoubleDerivative(k,j, r, solver) + 2.*fDerivative(k,j,r, solver)/ norm(rkj);
-
-//            cout << "Sum 2 end" << endl;
+            rkj = (r.row(j) - r.row(k)).t();
+            laplacian +=  2.*fDerivative(k,j,r, solver)/ norm(rkj) + fDoubleDerivative(k,j, r, solver);
             }
         }
 
@@ -298,31 +316,37 @@ double Derivatives::analyticalCorrelationDoubleDerivative(const mat &r, VMCSolve
     return laplacian;
 }
 
-//double Derivatives::analyticalCorrelationDoubleDerivative( const mat &r, VMCSolver *solver)
-//{
-//    //This sums over all the electrons and calculates the total correlation gradient ratio term
+double Derivatives::analyticalCorrelationLaplacian( const mat &r, VMCSolver *solver)
+{
+    //This sums over all the electrons and calculates the total correlation gradient ratio term
 
-//    int nParticles = solver->getNParticles();
-//    int nDimensions = solver->getNDimensions();
-//    double gradient = 0;
-//    vec rik = zeros (3);
-//    vec rki = zeros (3);
+    int nParticles = solver->getNParticles();
+    int nDimensions = solver->getNDimensions();
+    double laplacianRatio = 0;
+    vec rik = zeros (3);
+    vec rki = zeros (3);
+    mat gradient = zeros(nParticles, nDimensions);
 
-//    //Calculates the interaction from all the particles earlier
-//    for(int k = 0; k < nParticles; k++)
-//    {
-//        cout << k << endl;
-//           for(int i = 0; i < k-1; i ++)
-//           {
-//               rik = (r.row(i) - r.row(k)).t();
-//               gradient += (nDimensions - 1) / norm(rik) * fDerivative(i,k,r,solver) + fDoubleDerivative(i,k,r,solver);
-//           }
-//           for(int i = k +1 ; i < nParticles - 1 ; i ++)
-//           {
+    //Adding in the square of the gradient-correlation-ratio
+    gradient = analyticalCorrelationGradient(r,solver);
 
-//               rki = (r.row(k) - r.row(i)).t();
-//               gradient -= (nDimensions - 1) / norm(rki) * fDerivative(k,i,r,solver) + fDoubleDerivative(k,i,r,solver);
-//           }
-//    }
-//    return gradient;//DON'T FORGET TO ADD THE SUMMAND OF (∇Ψ_C/Ψ_C)² TO THE VARIABLE GRADIENT HERE WHEN YOU CALL THE FUNCTION TO GET ∇Ψ/Ψ, SEE EQUATION (16.38)
-//}
+
+    //Calculates the interaction from all the particles earlier
+    for(int k = 0; k < nParticles; k++)
+    {
+        laplacianRatio += dot(gradient.row(k),gradient.row(k));
+
+           for(int i = 0; i < k-1; i ++)
+           {
+               rik = (r.row(i) - r.row(k)).t();
+               laplacianRatio += (nDimensions - 1) / norm(rik) * fDerivative(i,k,r,solver) + fDoubleDerivative(i,k,r,solver);
+           }
+           for(int i = k +1 ; i < nParticles - 1 ; i ++)
+           {
+
+               rki = (r.row(k) - r.row(i)).t();
+               laplacianRatio -= (nDimensions - 1) / norm(rki) * fDerivative(k,i,r,solver) + fDoubleDerivative(k,i,r,solver);
+           }
+    }
+    return laplacianRatio;//DON'T FORGET TO ADD THE SUMMAND OF (∇Ψ_C/Ψ_C)² TO THE VARIABLE GRADIENT HERE WHEN YOU CALL THE FUNCTION TO GET ∇Ψ/Ψ, SEE EQUATION (16.38)
+}

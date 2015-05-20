@@ -162,12 +162,13 @@ double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSol
 mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solver)
 {
 
-    //Not functinoining properly, needs to be several vectors since we need a seperate tracking of "force" on each particle,
+    // Not functinoining properly, needs to be several vectors since we need a seperate tracking of "force" on each particle,
     // 3 coordinates per particle
 
     int nParticles= solver->getNParticles();
     int nDimensions = solver->getNDimensions();
     mat gradient = zeros (nParticles, nDimensions);
+
 
     int nHalf = nParticles/2;
 
@@ -178,8 +179,13 @@ mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
     {
         for(int j = 0; j < nHalf; j++)
         {
-            gradient.row(i) +=  gradientPhi(r,i,j,solver).t()*detUpInverseOld(j,i);
-            gradient.row(i + nHalf) += gradientPhi(r, i + nHalf, j, solver).t() * detDownInverseOld(j,i);
+//            cout << "This" << endl;
+//            cout << gradient.row(i) <<endl;
+//            cout << "Is trying to mate with " << endl;
+//            cout << gradientPhi(r,i,j,solver)*detUpInverseOld(j,i) << endl;
+
+            gradient.row(i)         += (gradientPhi(r, i        , j, solver) * detUpInverseOld(j,i)).t();
+            gradient.row(i + nHalf) += (gradientPhi(r, i + nHalf, j, solver) * detDownInverseOld(j,i)).t();
         }
     }
 
@@ -193,14 +199,14 @@ double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *so
     int nParticles= solver->getNParticles();
     int nHalf = nParticles/2;
 
-    updateSlaterMatrices(r,solver);
+
 
     //Calculating the sum of the particles derivatives
     for(int i = 0; i < nHalf; i ++) //Sums over the particles
     {
-        for(int j = 0; j < nHalf; j++)
+        for(int j = 0; j < nHalf; j++)  //Sums over the single particle wavefunctions
         {
-            derivative += laplacianPhi(r, i, j, solver) * detUpInverseOld(j,i);
+            derivative += laplacianPhi(r, i, j, solver)         * detUpInverseOld(j,i);
 
             derivative += laplacianPhi(r, i + nHalf, j, solver) * detDownInverseOld(j,i);
         }

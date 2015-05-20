@@ -25,7 +25,7 @@ def extract_m_basisinfo(filename, printing = False):
             continue #ignore wildcards
         if I[0] == '#':        
             comments.append("//")
-            comments[-1] += i
+            comments[-1] += i[1:]
             #for e in I:
             #    comments[-1] += e + " "
             continue
@@ -181,86 +181,80 @@ def createfunction(fname, comments, orbital_types, N_orbitals, exponents, weight
     cppclass  = []
     cppheader = []
     for i in comments:
-        cppclass.append(i)
+        cppclass.append(i[:-2])
         #cppheader.append(i)        
         
     #cppclass.append(endline)
     #cppheader.append(endline)
     
     #writing to header
-    cppheader.append("    void add_"+fname+"(vec3 corePos);")
+    cppheader.append("    void add_"+fname+"(const vec corePos);")
     
 
-    cppclass.append("void basisbank::add_"+fname+"(vec3 corePos){\n")
+    cppclass.append("void basisbank::add_"+fname+"(const vec corePos){")
     for i in range(N_orbitals):
         if orbital_types[i] == 0:
             #create an s-orbital
-            cppclass.append("    bs.add_state();")
+            cppclass.append("    // s-orbital")
+            #cppclass.append("    bs.add_state();")
             for e in range(len(exponents[i])):
-                cppclass.append("    Primitive S%iA%i = bs.turbomolePrimitive(%.8f,%.8f,0,0,0,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, S%iA%i);" % (e,i))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,0,0,corePos);" % (exponents[i][e], weights[i][e]))
+
         if orbital_types[i] == 1:
             #create an p-orbital
-            cppclass.append("    bs.add_state();")
+            cppclass.append("    // p-orbital")
+            #cppclass.append("    bs.add_state();")
             for e in range(len(exponents[i])):
-                cppclass.append("    Primitive P%iA%i = bs.turbomolePrimitive(%.8f,%.8f,1,0,0,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, P%iA%i);" %( e,i))
-                cppclass.append("    Primitive P%iB%i = bs.turbomolePrimitive(%.8f,%.8f,0,1,0,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, P%iB%i);" % (e,i))
-                cppclass.append("    Primitive P%iC%i = bs.turbomolePrimitive(%.8f,%.8f,0,0,1,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, P%iC%i);" % (e,i))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,0,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,1,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,0,1,corePos);" % (exponents[i][e], weights[i][e]))
                 
         if orbital_types[i] == 2:
             #create an d-orbital
+            cppclass.append("    // d-orbital (2)")
             cppclass.append("    bs.add_state();")
             for e in range(len(exponents[i])):
-                cppclass.append("    Primitive D%iA%i = bs.turbomolePrimitive(%.8f,%.8f,2,0,0,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, D%iA%i);" % (e,i))
-                cppclass.append("    Primitive D%iB%i = bs.turbomolePrimitive(%.8f,%.8f,0,2,0,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, D%iB%i);" %(e,i))
-                cppclass.append("    Primitive D%iC%i = bs.turbomolePrimitive(%.8f,%.8f,0,0,2,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, D%iC%i);" %( e,i))
-                
-                cppclass.append("    Primitive D%iD%i = bs.turbomolePrimitive(%.8f,%.8f,1,1,0,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, D%iD%i);" % (e,i))
-                cppclass.append("    Primitive D%iE%i = bs.turbomolePrimitive(%.8f,%.8f,0,1,1,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, D%iE%i);" % (e,i))
-                cppclass.append("    Primitive D%iF%i = bs.turbomolePrimitive(%.8f,%.8f,1,0,1,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, D%iF%i);" %( e,i))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,2,0,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,2,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,0,2,corePos);" % (exponents[i][e], weights[i][e]))
+
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,1,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,1,1,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,0,1,corePos);" % (exponents[i][e], weights[i][e]))
+
         if orbital_types[i] == 3:
             #create an d-orbital
+            cppclass.append("    // d-orbital (3)")
             cppclass.append("    bs.add_state();")
             for e in range(len(exponents[i])):
-                cppclass.append("    Primitive E%iA%i = bs.turbomolePrimitive(%.8f,%.8f,3,0,0,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iA%i);" % (e,i))
-                cppclass.append("    Primitive E%iB%i = bs.turbomolePrimitive(%.8f,%.8f,0,3,0,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iB%i);" %(e,i))
-                cppclass.append("    Primitive E%iC%i = bs.turbomolePrimitive(%.8f,%.8f,0,0,3,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iC%i);" %( e,i))
-                
-                cppclass.append("    Primitive E%iD%i = bs.turbomolePrimitive(%.8f,%.8f,1,2,0,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iD%i);" % (e,i))
-                cppclass.append("    Primitive E%iE%i = bs.turbomolePrimitive(%.8f,%.8f,0,1,2,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iE%i);" % (e,i))
-                cppclass.append("    Primitive E%iF%i = bs.turbomolePrimitive(%.8f,%.8f,1,0,2,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iF%i);" %( e,i))
-                
-                cppclass.append("    Primitive E%iG%i = bs.turbomolePrimitive(%.8f,%.8f,2,1,0,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iG%i);" % (e,i))
-                cppclass.append("    Primitive E%iH%i = bs.turbomolePrimitive(%.8f,%.8f,0,2,1,corePos);" % (e,i, exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iH%i);" % (e,i))
-                cppclass.append("    Primitive E%iI%i = bs.turbomolePrimitive(%.8f,%.8f,2,0,1,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iI%i);" %( e,i))               
-                
-                cppclass.append("    Primitive E%iJ%i = bs.turbomolePrimitive(%.8f,%.8f,1,1,1,corePos);" % (e, i,exponents[i][e], weights[i][e]))
-                cppclass.append("    bs.add_primitive_to_state(bs.Nstates-1, E%iJ%i);" %( e,i))   
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,3,0,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,3,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,0,3,corePos);" % (exponents[i][e], weights[i][e]))
+
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,2,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,1,2,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,0,2,corePos);" % (exponents[i][e], weights[i][e]))
+
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,2,1,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,2,1,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,2,0,1,corePos);" % (exponents[i][e], weights[i][e]))
+
+                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,1,1,corePos);" % (exponents[i][e], weights[i][e]))
                 
     cppclass.append("}\n")
     
     return cppheader, cppclass
 
 def saveclass(cppclasses, cppheaders):
-    cppfile = "//This file is maintained by an external python script and should not be edited manually.\n#include <basisbank.h>\n#include <armadillo>\n#include <basis.h>\n#include <primitive.h>\nusing namespace std;\nusing namespace arma;\nbasisbank::basisbank(basis BS){\n    bs = BS;} \nbasisbank::basisbank(){} \n \n"
+    cppfile = "//This file is maintained by an external python script and should not be edited manually.\n\
+#include <armadillo>\n\
+#include <basisbank.h>\n\
+#include <contracted.h>\n\n\
+using namespace std;\n\
+using namespace arma;\n\n\
+basisbank::basisbank()\n{\n\
+contracted Contracted = new contracted();\n} \n\
+\n"
     
     for i in cppclasses:
         for e in i:
@@ -269,10 +263,20 @@ def saveclass(cppclasses, cppheaders):
     #print cppfile
     
     
-    cppheader = "//This file is maintained by an external python script and should not be edited manually.\n#ifndef BASISBANK_H\n#define BASISBANK_H\n#include <armadillo>\n#include <basis.h>\n#include <primitive.h>\nusing namespace std;\nusing namespace arma;\n \nclass basisbank{\npublic:\n    basisbank(basis BS);\n    basisbank();\n    basis bs;\n    string basistype;"
+    cppheader = "//This file is maintained by an external python script and should not be edited manually.\n\
+#ifndef BASISBANK_H\n\
+#define BASISBANK_H\n\
+#include <armadillo>\n\
+#include <contracted.h>\n\n\
+using namespace std;\n\
+using namespace arma;\n \n\
+class basisbank{\n\
+public:\n\
+    \n"
     for i in cppheaders:
         for e in i:
             cppheader += e + "\n"
+    cppheader += "    double get_contracted() {return Contracted->get_contracted()}\n"
     cppheader += "};\n"
     cppheader += "#endif // BASISBANK_H"
     #print cppheader
@@ -297,12 +301,10 @@ def convertfolder():
             #try:
             #comments, orbital_types, N_orbitals, exponents, weigths = extract_basisinfo(filename)
             comments, I = extract_m_basisinfo(filename, True)
-            commented = 0
-            #print comments
-            print "I:", I
-            
+            commented = 1
+            print comments
+            #print "I:", I
 
-            
             for i in I:
                 #i = [bT, basisW, basisE, contractedtype, len(contractedtype)]
                 if commented == 0:

@@ -68,15 +68,19 @@ double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
 
     if(m_analytical)
     {   //Calculates the kinetic energy as the ratios of -1/2* ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
-        kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
 
-//        kineticEnergy += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver);
+        //If we want to compute without electroninteraction with a simplified version ofthe trialfunction containing only the slater determinant
+        //then only the slater determinant ratio laplacian is used.
+        if(solver->getElectronInteration())
+        {
+            solver->derivatives()->analyticalLaplacianRatio(kineticEnergy, r, solver);
+        }
+        else
+        {
+            kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
+        }
 
-//        gradientJastrow = solver->derivatives()->analyticalCorrelationDerivative(r,solver);
-//        gradientSlater = solver->determinant()->gradientSlaterDeterminant(r,solver);
-//        kineticEnergy += 2*(dot(gradientSlater, gradientJastrow ));
-
-        kineticEnergy *= -1./2.;
+            kineticEnergy *= -1./2.;
     }
     else
         kineticEnergy = solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
