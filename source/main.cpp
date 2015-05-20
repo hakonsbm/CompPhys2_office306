@@ -31,7 +31,7 @@ void runDiffNCycles(VMCSolver *solver);
 void runFindAlphaBeta(VMCSolver *solver);
 void runCompareParallelize(VMCSolver * solver);
 void runDiffBetaAndR(VMCSolver *solver);
-void runConjugateMethod(VMCSolver *solver);
+void runNewtonsMethod(VMCSolver *solver);
 int runTests(VMCSolver *solver);
 
 int main(int nargs, char* args[])
@@ -94,7 +94,7 @@ int main(int nargs, char* args[])
     else if((string)args[2]=="runCompareParallelize") runCompareParallelize(solver);
     else if((string)args[2]=="runTests") runTests(solver);
     else if((string)args[2]=="runDiffBetaAndR") runDiffBetaAndR(solver);
-    else if((string)args[2]=="runConjugateMethod") runConjugateMethod(solver);
+    else if((string)args[2]=="runNewtonsMethod") runNewtonsMethod(solver);
     else {if(my_rank==0) cout << args[2]  << " is not a valid runtype" << endl; exit(1);}
 
     // End MPI
@@ -536,7 +536,7 @@ void runCompareParallelize(VMCSolver * solver)
     return;
 }
 
-void runConjugateMethod(VMCSolver *solver)
+void runNewtonsMethod(VMCSolver *solver)
 {
 
     solver->trialFunction()->setAnalytical(true);
