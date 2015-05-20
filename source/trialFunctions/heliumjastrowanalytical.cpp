@@ -76,7 +76,9 @@ double HeliumJastrowAnalytical::localEnergy(const mat &r, VMCSolver *solver)
     //The second contribution to the local Energy, I think there is an error here
     localEnergy2 = 0.5*pow((1+beta*r12),-2) * (alpha*(r1+r2)/r12 * (1. - norm_dot(r.row(0),r.row(1))) -
                                                     0.5*pow((1+beta*r12),-2) - 2./r12 + 2.*beta/(1 + beta * r12) );
-
+//    cout <<  endl << "In JastrowAnalytical" << endl;
+//    cout << "LocalEnergy1 is " <<localEnergy1 << endl;
+//    cout << "LocalEnergy2 is " <<localEnergy2 << endl;
 
     return localEnergy1 + localEnergy2;
 }

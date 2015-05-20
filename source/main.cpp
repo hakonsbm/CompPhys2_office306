@@ -31,6 +31,7 @@ void runDiffNCycles(VMCSolver *solver);
 void runFindAlphaBeta(VMCSolver *solver);
 void runCompareParallelize(VMCSolver * solver);
 void runDiffBetaAndR(VMCSolver *solver);
+void runConjugateMethod(VMCSolver *solver);
 int runTests(VMCSolver *solver);
 
 int main(int nargs, char* args[])
@@ -93,6 +94,7 @@ int main(int nargs, char* args[])
     else if((string)args[2]=="runCompareParallelize") runCompareParallelize(solver);
     else if((string)args[2]=="runTests") runTests(solver);
     else if((string)args[2]=="runDiffBetaAndR") runDiffBetaAndR(solver);
+    else if((string)args[2]=="runConjugateMethod") runConjugateMethod(solver);
     else {if(my_rank==0) cout << args[2]  << " is not a valid runtype" << endl; exit(1);}
 
     // End MPI
@@ -532,6 +534,41 @@ void runCompareParallelize(VMCSolver * solver)
 
 
     return;
+}
+
+void runConjugateMethod(VMCSolver *solver)
+{
+
+    solver->trialFunction()->setAnalytical(true);
+    solver->trialFunction()->setConjugate(true);
+
+    solver->switchbBlockSampling(false);    //This also samples the energies at each cycle to do blocking analysis on the data
+
+    //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
+    //vmcSolver class
+    string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
+
+    char const * outfilePath = (pathString + string("_conjugate")).c_str();
+
+    outfile.open(outfilePath);
+
+    //Assuming that alpha is known, or GTO trial functions beta is what we want to minimize E_L against. So we guess a value and goes from there
+    double beta = 0.20;
+    double stepsize = 0.1;
+
+
+    solver->runMasterIntegration();
+
+
+
+    if(solver->getRank() == 0)
+    {
+        cout << "\nWriting to " << outfilePath << endl;
+    }
+
+    outfile.close();
+
+return;
 }
 
 int runTests(VMCSolver *solver)

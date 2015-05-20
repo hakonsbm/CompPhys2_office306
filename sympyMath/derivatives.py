@@ -43,7 +43,7 @@ def printDerivatives(psi):
 	print "#############################################################################3"
 	print
 
-# printDerivatives(psi1S)
+printDerivatives(psi1S)
 # printDerivatives(psi2S)
 # printDerivatives(psi2P)
 
@@ -61,7 +61,7 @@ psi_C = sp.exp(r_ij / (2*(1+ r_ij*beta)))
 
 R_ij = sp.symbols('r_ij')
 
-printCorrelationDerivatives(psi_C)
+# printCorrelationDerivatives(psi_C)
 
 test = 6*beta**2*r_ij**4 - 6*beta**2*r_ij**2*x_ij**2 - 6*beta**2*r_ij**2*y_ij**2 - 6*beta**2*r_ij**2*z_ij**2 + 12*beta*r_ij**3
 

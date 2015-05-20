@@ -21,7 +21,7 @@ using namespace arma;
 TEST(Hydrogenic) {
 
 
-//    VMCSolver *solver = new VMCSolver();
+    VMCSolver *solver = new VMCSolver();
 
 //    cout << endl << "Running Hydrogen test" << endl << endl;
 
@@ -31,16 +31,16 @@ TEST(Hydrogenic) {
 //    CHECK_EQUAL(-1./2, solver->getEnergy());
 
 
-//    cout << endl << "Running Helium test" << endl << endl;
-//    solver->setTrialFunction(new Helium(solver));
-//    solver->switchElectronInteraction(false);
-//    solver->trialFunction()->setAnalytical(true);
-//    solver->setAlpha(solver->getCharge());
-//    solver->switchbBlockSampling(false);
-//    solver->setCycles(10000);
-//    solver->runMasterIntegration();
-//    CHECK_EQUAL(0., solver->getEnergyVar());
-//    CHECK_EQUAL(-4, solver->getEnergy());
+    cout << endl << "Running Helium test" << endl << endl;
+    solver->setTrialFunction(new Helium(solver));
+    solver->switchElectronInteraction(false);
+    solver->trialFunction()->setAnalytical(true);
+    solver->setAlpha(solver->getCharge());
+    solver->switchbBlockSampling(false);
+    solver->setCycles(10000);
+    solver->runMasterIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-4, solver->getEnergy());
 
 
 
@@ -243,47 +243,54 @@ TEST(AnalyticalHelium)
 
 
 //    cout << endl << "Running Helium test" << endl << endl;
-    solver->setTrialFunction(new Helium(solver));
+    solver->setTrialFunction(new HeliumJastrowAnalytical(solver));
     solver->switchElectronInteraction(true);
     solver->trialFunction()->setAnalytical(false);
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
-    solver->runMasterIntegration();
-
-////TestStuff
-//    double particles = solver->getNParticles();
-//    double dimensions = solver->getNDimensions();
-//    long idum = -clock();
-
-//    mat r = zeros (particles,dimensions);
-
-//    //Random positions to test derivative
-//    for(int i = 0; i < particles; i ++ )
-//    {
-//     for(int j = 0; j < dimensions; j++)
-//     {
-//        r(i,j) = ran2(&idum);
-//     }
-//    }
-//    numerical = solver->trialFunction()->localEnergy(r,solver);
+    solver->setCycles(50000);
+//    solver->runMasterIntegration();
 
 
-    numerical = solver->getEnergy();
-    numericalVar = solver->getEnergyVar();
+//    numerical = solver->getEnergy();
+//    numericalVar = solver->getEnergyVar();
+
+//TestStuff
+    double particles = solver->getNParticles();
+    double dimensions = solver->getNDimensions();
+    long idum = -clock();
+
+    mat r = zeros (particles,dimensions);
+
+    //Random positions to test derivative
+    for(int i = 0; i < particles; i ++ )
+    {
+     for(int j = 0; j < dimensions; j++)
+     {
+        r(i,j) = ran2(&idum);
+     }
+    }
+
+    solver->determinant()->updateSlaterMatrices(r,solver);
+    numerical = solver->trialFunction()->localEnergy(r,solver);
+
+
 
 
     solver->setTrialFunction(new Helium(solver));
     solver->switchElectronInteraction(true);
     solver->trialFunction()->setAnalytical(true);
     solver->switchbBlockSampling(false);
-    solver->setCycles(1000000);
-    solver->runMasterIntegration();
+    solver->setCycles(50000);
+//    solver->runMasterIntegration();
 
-//    analytical = solver->trialFunction()->localEnergy(r,solver);
+    solver->determinant()->updateSlaterMatrices(r,solver);
+    analytical = solver->trialFunction()->localEnergy(r,solver);
 
 
-    analytical = solver->getEnergy();
-    analyticalVar = solver->getEnergyVar();
+//    analytical = solver->getEnergy();
+//    analyticalVar = solver->getEnergyVar();
+
+
 
 
     if(solver->getRank() == 0)
