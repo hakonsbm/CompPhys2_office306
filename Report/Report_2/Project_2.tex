@@ -453,7 +453,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				K_i &= - \frac{1}{2} \frac{\nabla^2_i \Psi}{\Psi}
 			\end{align}
 
-				Using the factorization of of the trialfunction from \eqref{eq:factorization} we can calculate the ratio needed for the kinetic energy.
+				Using the factorization of the trialfunction from \eqref{eq:factorization} we can calculate the ratio needed for the kinetic energy.
 			\begin{align}
 				\frac{1}{\Psi_T}\pdv[2]{\Psi_T}{x_k} &= \frac{1}{\Psi_D\Psi_C} \pdv[2]{(\Psi_D\Psi_C)}{x_k} = \frac{1}{\Psi_D\Psi_C} \pdv{}{x_k} \left( \pdv{\Psi_D}{x_k} \Psi_C +\Psi_D \pdv{\Psi_C}{x_k} \right)
 				\\
@@ -568,7 +568,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				\end{tabular}
 			\end{center}
 
-		\subsubsection{ Gradient ratio of  Padé-Jastrow factor }
+		\subsubsection{Gradient ratio of  Padé-Jastrow factor }
 
 			When derivating the Padé-Jastrow factor all the factors not involving the particle we are derivating with respect to will be canceled by the corresponding terms in the denominator.
 
@@ -602,7 +602,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			or in the Padé-Jastrow form
 
 			\begin{align}
-				R_{C}=\frac{\Psi_{C}^{\mathrm{new}}}{\Psi_{C}^{\mathrm{cur}}}=\frac{\exp{\left(U_{new}\right)}}{\exp{\left(U_{cur}\right)}}=\exp{\left(\Delta U\right)}
+				R_{C}=\frac{\Psi_{C}^{\mathrm{new}}}{\Psi_{C}^{\mathrm{cur}}}=\frac{\exp\left(U_{new}\right)}{\exp\left(U_{cur}\right)}=\exp\left(\Delta U\right)
 			\end{align}
 
 			where
@@ -834,8 +834,8 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		As we see in the verification section, without interaction the energies behave like hydrogen like wave functions. Comparing with the energies we obtain when also using interaction in the calculations we see that the Jastrow factor offers a good improvement on the energy, especially for larger systems.
 
 	\subsection{Charge Density}
-		The charge density gives measure of how often the electrons occupies certain area in the Monte Carlo simulation, in figure \ref{fig:charge_density} the square of the norm of the distance is plotted. 
-		On the Neon atom the electrons have a closer distribution to the center that is caused by the more electrically charged core of Neon compared to Beryllium. 
+		The charge density gives measure of how often the electrons occupies certain area in the Monte Carlo simulation, in figure \ref{fig:charge_density} the square of the norm of the distance is plotted.
+		On the Neon atom the electrons have a closer distribution to the center that is caused by the more electrically charged core of Neon compared to Beryllium.
 
 		\begin{figure}
 			\centering \includegraphics[width=0.45\linewidth]{../figures/ChargeDensityNeon}
@@ -847,7 +847,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 \section{Conclusions}
 	Again we see that the Variational Monte Carlo method gives good values, also for larger systems like Neon, as long as we deal with the interaction between the particles using the Jastrow factor. We have implemented the possibility of using MPI as this reduces the time to run simulations considerably. With a larger system we also needed a better way to handle the Slater Determinant. Optimizing the calculations of the Slater Determinant is still ongoing.
 
-	Taking a look at \ref{tab:energyReference} it is apparent that the results are quite precise. In the case of Beryllium, the experimental value is less than $2\%$ higher than the computational one, while for Neon, the difference is even less at barelely $1\%$. These results are very good considering the amount of resources that went into calculating them: a simple standard PC and a handful of hours were enough. Considering that a relatively simple and very well tested method was used to obtain these results it is very easy to see why VMC is so popular for solving quite complicated problems like calculating the ground state energies of non-trivial quantum mechanical systems.
+	Taking a look at \ref{tab:energyReference} it is apparent that the results are quite precise. In the case of Beryllium, the experimental value is less than $2\%$ higher than the computational one, while for Neon, the difference is even less at barely $1\%$. These results are very good considering the amount of resources that went into calculating them: a simple standard PC and a handful of hours were enough. Considering that a relatively simple and very well tested method was used to obtain these results it is very easy to see why VMC is so popular for solving quite complicated problems like calculating the ground state energies of non-trivial quantum mechanical systems.
 
 	\begin{align}
 6 \beta^{2} r_{ij}^{4} - 6 \beta^{2} r_{ij}^{2} x_{ij}^{2} - 6 \beta^{2} r_{ij}^{2} y_{ij}^{2} - 6 \beta^{2} r_{ij}^{2} z_{ij}^{2} + 12 \beta r_{ij}^{3}

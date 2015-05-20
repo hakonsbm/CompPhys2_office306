@@ -66,7 +66,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			E[\hat{H}] = \expval{\hat{H}}{\Psi_T} = \frac{\int{d\vb{R} \Psi_T^*(\vb{R})\hat{H} \Psi_T(\vb{R})  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
 		\end{align}
 
-		Let us introduce a local energy: 
+		Let us introduce a local energy:
 
 		\begin{align}
 			E_L(\hat{H}) &= \frac{1}{ \Psi_T(\vb{R}) } \hat{H} \Psi_T(\vb{R}))
@@ -80,7 +80,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
 		\end{align}
 
-		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral. 
+		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral.
 
 		\begin{enumerate}
 			\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
@@ -121,10 +121,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 		A similar calculation applies for \(r_{12} \rightarrow 0\) and a trialfunction of the form   \[\Psi_T(r_1,r_2,r_{12}) = e^{-\alpha (r_1 + r_2)} e^{\beta r_{12}} \] should fulfill the condition that the wavefunction is finite everywhere.
 
-
-
-
-	\subsection{Beryllium atom}
+		\subsection{Beryllium atom}
 
 		It is fairly simple to extend the calculational machinery of Variational
 		Monte Carlo to other systems than the Helium atom. To show this we
@@ -135,41 +132,34 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 		we can write the trial wave function for beryllium as
 		\begin{equation}
 			\psi_{T}({\bf r_{1}},{\bf r_{2}},{\bf r_{3}},{\bf r_{4}})=Det\left(\phi_{1}({\bf r_{1}}),\phi_{2}({\bf r_{2}}),\phi_{3}({\bf r_{3}}),\phi_{4}({\bf r_{4}})\right)\prod_{i<j}^{4}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)},
+			\label{eq:BerylliumTrialFunction}
 		\end{equation}
 		where $Det$ is a Slater determinant and the single-particle wave
 		functions are the hydrogen wave functions for the 1s and 2s orbitals.
 		With the variational ansatz these are
-		\[
-		\phi_{1s}({\bf r_{i}})=e^{-\alpha r_{i}},
-		\]
-		and 
-		\[
-		\phi_{2s}({\bf r_{i}})=\left(1-\alpha r_{i}/2\right)e^{-\alpha r_{i}/2}.
-		\]
-		The Slater determinant for the ground state of the Beryllium atom
-		can be approximated as
-		\[
-		\psi_{T}({\bf r_{1}},{\bf r_{2}},{\bf r_{3}},{\bf r_{4}})\propto\left(\phi_{1s}({\bf r_{1}})\phi_{2s}({\bf r_{2}})-\phi_{1s}({\bf r_{2}})\phi_{2s}({\bf r_{1}})\right)\left(\phi_{1s}({\bf r_{3}})\phi_{2s}({\bf r_{4}})-\phi_{1s}({\bf r_{4}})\phi_{2s}({\bf r_{3}})\right).
-		\]
+		\begin{align}
+			\phi_{1s}({\bf r_{i}})=e^{-\alpha r_{i}},
+		\end{align}
+		and
+		\begin{align}
+			\phi_{2s}({\bf r_{i}})=\left(1-\alpha r_{i}/2\right)e^{-\alpha r_{i}/2}.
+		\end{align}
+		The Slater determinant is calculated using these ansatzes.
 
-
-		Furthermore, for the Jastrow factor, 
-		\[
-		\Psi_{C}=\prod_{i<j}g(r_{ij})=\exp{\sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}},
-		\]
+		Furthermore, for the Jastrow factor,
+		\begin{align}
+			\Psi_{C}=\prod_{i<j}g(r_{ij})=\exp{\sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}},
+		\end{align}
 		we need to take into account the spins of the electrons. We fix electrons
 		1 and 2 to have spin up, and electron 3 and 4 to have spin down. This
 		means that when the electrons have equal spins we get a factor
-		\[
-		a=\frac{1}{4},
-		\]
+		\begin{align}
+			a=\frac{1}{4},
+		\end{align}
 		and if they have opposite spins we get a factor
-		\[
-		a=\frac{1}{2}.
-		\]
-
-	
-
+		\begin{align}
+			a=\frac{1}{2}.
+		\end{align}
 
 	\subsection{Derivation of local energies}
 		The local energy of is dependant on the Hamiltonian and the wavefunction describing the system, the Hamiltonian incorporates both a kinetic energy part given by \( \frac{\nabla_i^2}{2} \) for each particle
@@ -205,14 +195,14 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 
 		\subsubsection{Helium: Simple trialfunction}
-		The simple version of the trial function is only dependant on one parameter \( \alpha \) and does not take into account interaction between the two electrons, it is of the form 
+		The simple version of the trial function is only dependant on one parameter \( \alpha \) and does not take into account interaction between the two electrons, it is of the form
 		\[ \Psi_T (\vb{r_1}, \vb{r_2}) = \exp{ -\alpha (r_1 + r_2) } \]Let us set this trialfunction into the equation for the local energy \eqref{eq:localEnergy}.
 		\begin{align}
-			E_L &= \sum_{i,i<j}{  -\frac{1}{2\Psi_T} \left( \pdv[2]{e^{-\alpha (r_i + r_j)}}{r_i} + \pdv{e^{-\alpha (r_i + r_j)}}{r_i} \frac{ 2 }{ r_i } \right)  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }} 
+			E_L &= \sum_{i,i<j}{  -\frac{1}{2\Psi_T} \left( \pdv[2]{e^{-\alpha (r_i + r_j)}}{r_i} + \pdv{e^{-\alpha (r_i + r_j)}}{r_i} \frac{ 2 }{ r_i } \right)  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }}
 			\\
 			E_L &= -\frac{1}{2\Psi_T} \sum_{i=1}^2{ \left( \alpha^2 -\alpha \frac{ 2 }{ r_i } \right) \Psi_T  -\frac{Z}{r_i} +  \frac{1}{r_{ij} } }
 			\\
-			E_L &= -\alpha^2 + (\alpha-Z) \left( \frac{1}{r_1} + \frac{1}{r_2} \right) + \frac{1}{r_{12}} 
+			E_L &= -\alpha^2 + (\alpha-Z) \left( \frac{1}{r_1} + \frac{1}{r_2} \right) + \frac{1}{r_{12}}
 		\end{align}
 
 		\subsection{Importance sampling}
@@ -221,7 +211,7 @@ We now want to make the code more efficient, so we replace the brute
 force Metropolis algorithm with a walk in coordinate space biased
 by the trial wave function, an approach based on the Fokker-Planck
 equation and the Langevin equation for generating a trajectory in
-coordinate space. 
+coordinate space.
 
 For one particle or walker, a diffusion process characterized by a
 time-dependent probability density $P\left(x,t\right)$ in one dimension
@@ -229,7 +219,7 @@ we have the Fokker-Planck equation
 \[
 \frac{\partial P}{\partial t}=D\frac{\partial}{\partial x}\left(\frac{\partial}{\partial x}-F\right)P\left(x,t\right),
 \]
-where $F$ is a drift term and $D$ is the diffusion coefficient. 
+where $F$ is a drift term and $D$ is the diffusion coefficient.
 
 The new positions in coordinate space are found using the Langevin
 equation with Euler's method. We go from the Langevin equation
@@ -246,7 +236,7 @@ operator, and is therefore equal to $1/2$ in atomic units.
 
 The process of isotropic diffusion characterized by a time-dependent
 probability density $P\left(\mathbf{x},t\right)$ will, as an approximation,
-obey the Fokker-Planck equation 
+obey the Fokker-Planck equation
 \[
 \frac{\partial P}{\partial t}=\sum_{i}D\frac{\partial}{\partial\mathbf{x_{i}}}\left(\frac{\partial}{\partial\mathbf{x_{i}}}-\mathbf{F_{i}}\right)P(\mathbf{x},t),
 \]
@@ -286,7 +276,7 @@ This means that the Metropolis algorithm
 \[
 A(y,x)=\mathrm{min}(1,q(y,x))),
 \]
-where 
+where
 \[
 q(y,x)=\frac{|\Psi_{T}(y)|^{2}}{|\Psi_{T}(x)|^{2}},
 \]
@@ -294,7 +284,7 @@ is replaced by the Metropolis-Hastings algorithm,
 \[
 q(y,x)=\frac{G(x,y,\Delta t)|\Psi_{T}(y)|^{2}}{G(y,x,\Delta t)|\Psi_{T}(x)|^{2}}
 \]
-		
+
 		\subsection{Verification of the model}
 			The wavefunction for a Hydrogen atom is known, see equation \eqref{eq:hydrogen}, a Monte Carlo calculation for an exact wavefunction will give a exact result.
 
@@ -345,13 +335,13 @@ Where $\Delta t$ is the time between samples, and it's commonly smaller than $\t
 			\begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{../figures/blockingheliumsimpleandalytical}
 \protect\caption{STD vs. blocksize. Here we see the plateuing trend of the STD as the blocksize increases, but the problem is that as the blocksize decreases it should decrease as well and not increase. This problem will be fixed in the future.}
-\label{fig01:alpha_Simple} 
+\label{fig01:alpha_Simple}
 \end{figure}
 
 
 
 \section{Results and discussion}
-	
+
 
 As a first attempt to solve the ground state energy for the helium
 atom we perform Variational Monte Carlo calculation with a brute force
@@ -359,7 +349,7 @@ Metropolis sampling. We do this with two trial wave functions
 \[
 \psi_{T1}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}
 \]
-and 
+and
 \[
 \psi_{T2}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}\exp{\left(\frac{r_{12}}{2(1+\beta r_{12})}\right)},
 \]
@@ -368,16 +358,16 @@ for the simple wave function, $\psi_{T1}$, using only one variational
 parameter $\alpha$, are shown in figure \ref{fig01:alpha_Simple}.
 We run the Variational Monte Carlo calculation with $10^{7}$ cycles.
 As we see in the figures, the energy minimum occurs when we use $\alpha=1.65$.
-Using this value for $\alpha$ we get an energy of $-2.8442934$. 
+Using this value for $\alpha$ we get an energy of $-2.8442934$.
 The parameter $\alpha$ can be interpreted as a parameter for the
-force pulling the electron to the nucleus. 
+force pulling the electron to the nucleus.
 
 \begin{figure}
 \centering \includegraphics[width=0.45\linewidth]{figures/EnergyVsAlphaHeliumSimpleAnalytical}
 \includegraphics[width=0.45\linewidth]{figures/VarianceVsAlphaHeliumSimpleAnalytical}
 
 \includegraphics[width=0.45\linewidth]{figures/VarianceNCyclesHeliumSimpleAnalytical}\protect\protect\caption{Plots for Helium $\psi_{T1}$ for energy versus $\alpha$, variance versus $\alpha$, and variance as function of Monte Carlo cycles.}
-\label{fig01:alpha_Simple} 
+\label{fig01:alpha_Simple}
 \end{figure}
 
 
@@ -385,7 +375,7 @@ force pulling the electron to the nucleus.
 \centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeEnergy}
 \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeVariance}
 \protect\caption{Plots for Helium $\psi_{T2}$ for the energy versus the timestep, and the variance versus the timestep.}
-\label{fig02:timestep} 
+\label{fig02:timestep}
 \end{figure}
 
 We now look at our second trial function, $\psi_{T2}$. Running over
@@ -400,35 +390,35 @@ than without the Jastrow factor.
 \centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
 \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaVariance}
 \protect\caption{Using $\psi_{T2}$, plot of the energy versus alpha and beta, and plot of the variance versus $\alpha$ and $\beta$. }
-\label{fig03:AlphaBeta} 
+\label{fig03:AlphaBeta}
 \end{figure}
 
 Finally we use our Variational Monte Carlo machinery to find the ground
 state energy for a beryllium atom. Since beryllium has 4 electrons,
 compared to the 2 in helium, the computation is much slower and we
 only had time to run it for $10^{6}$ cycles. We then find the lowest
-energy to be $-14.4127$ with $\alpha=3.8$ and $\beta=0.293$. 
+energy to be $-14.4127$ with $\alpha=3.8$ and $\beta=0.293$.
 
 From reseach papers we find the value for energy in the ground state
-of helium to be $-2.9037$ \cite{Kinoshita:1957:PR} and the value 
+of helium to be $-2.9037$ \cite{Kinoshita:1957:PR} and the value
 for energy in the ground state of beryllium to be $-14.667$ \cite{Koput:2011:PCCP}.
 Koput{]}. In table \ref{tab:energyReference} we compare results
 obtained with our Variational Monte Carlo method with results from
-various research papers. 
+various research papers.
 
 \begin{table}
 	\centering %
 	\begin{tabular}{|c|c|c|}
-		\hline 
+		\hline
 		Atom & VMC & References\tabularnewline
-		\hline 
-		\hline 
+		\hline
+		\hline
 		Helium $\psi_{T1}$ & $-2.8442$ & $-2.9037$ \tabularnewline
-		\hline 
+		\hline
 		Helium $\psi_{T2}$ & $-2.8979$ & $-2.9037$ \tabularnewline
-		\hline 
+		\hline
 		Beryllium & $-14.4127$ & $-14.667$\tabularnewline
-		\hline 
+		\hline
 	\end{tabular}
 
 	\protect
@@ -446,9 +436,9 @@ various research papers.
 		   	\textbf{Trialfunction} & \(\mathbf{\alpha}\) & \(\mathbf{\beta}\)
 		    \\ \hline
 		    Helium $\psi_{T1}$ & 1.65 & -
-		    \\ \hline 
+		    \\ \hline
 		    Helium $\psi_{T2}$ & 1.8 & 0.94
-		    \\	\hline 
+		    \\	\hline
 		    Beryllium $\psi_{T2}$	& 3.8	&	 0.293
 		    \\ \hline
 	  \end{tabular}
@@ -460,7 +450,7 @@ various research papers.
 
 
 	\subsection{Computational speed gain by using an analytical local energy}
-	By using an analytical expression for the local energy instead of using a numerical derivation in the calculation a speed up of approximately factor \(4\) was achieved, see table \ref{tab:analyticVSNumeric}. 
+	By using an analytical expression for the local energy instead of using a numerical derivation in the calculation a speed up of approximately factor \(4\) was achieved, see table \ref{tab:analyticVSNumeric}.
 
 
 	\begin{table}
@@ -470,9 +460,9 @@ various research papers.
 		   	\textbf{Trialfunction} & Numerical (s) & Analytical (s) & Ratio
 		    \\ \hline
 		    Helium $\psi_{T1}$ & 61.75 & 14.34 & 4.307
-		    \\ \hline 
+		    \\ \hline
 		    Helium $\psi_{T2}$ & 86.76 & 19.98	& 4.342
-		    \\	\hline 
+		    \\	\hline
 		    Beryllium $\psi_{T2}$ & 1918.34  &	 &
  		    \\ \hline
 	  \end{tabular}
@@ -492,7 +482,7 @@ We see that the Jastrow factor, which is not included in $\psi_{T1}$,
 is important to give values close to the theoretically right values.
 This is especially true for beryllium. It see also that it is favorable
 to use importance sampling over the less efficient brute force Metropolis
-algorithm. 
+algorithm.
 
 There is a big difference in computation time between the helium and
 the beryllium runs as beryllium has twice the number of electrons.
@@ -506,7 +496,7 @@ to speed up the computations.
 
 \newpage
 \appendix
-	
+
 	\section{Testing the VMC}
 		\subsection{Hydrogen Atom}
 			The wavefunction for the Helium atom can be found exactly and can be used to test our Variational Monte Carlo Calculation since an exact wavefunction should return the exact energy, \( 0.5 \) atomic units with \(0\) variance.
