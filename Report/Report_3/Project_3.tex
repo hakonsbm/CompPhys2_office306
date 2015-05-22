@@ -39,7 +39,7 @@
 \lstset{showtabs=false}
 \lstset{breaklines}
 
-\title{ FYS-4411: Computational Physics II \\ Project 2 }
+\title{ FYS-4411: Computational Physics II \\ Project 3 }
 \author{Gullik Vetvik Killie\\
 		Håkon Sebastian Bakke Mørk\\
 		Jose Emilio Ruiz Navarro
@@ -49,46 +49,49 @@
 
 \maketitle
 
+\abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: Beryllium and Neon. The program uses importance sampling to improve efficiency and make the results more precise. To further improve the efficiency, MPI has been implemented as well. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor and provide insight into the electronic structure of the atoms.}
+
 \tableofcontents
 
 \section{Introduction}
+VMC methods pose a very attractive alternative to other more complex ways of finding the ground state energies of simple atoms and molecules, like configuration-interaction calculations. The price to be paid in exchange for this simplicity is the sensitivity to the trial wave functions that are used, a VMC algorithm is very sensitive to how these are constructed, so they are one of the most important aspects to be considered (in this work, given the simple nature of the atoms which we will be working with, it's not so important to worry about the quality of the trial wave functions because very simple and basic ones are more than enough to reproduce the actual results). It shouldn't be forgotten that it is a variational method, and this implies that finding the optimal set of variational parameters is going to be the most important part of the calculation itself because it would create a lot of problems if the search range for the parameters was illy defined and not close enough to the variational minimum, namely, the results would have a poor quality in this case. This means that the parameters need to be chosen very carefully, or a recursive search with decreasingly coarse spacing in the space of variational parameters is required if there is no deep knowledge about the system in question.
 
+Instead of evaluating a very complex multidimensional integral to compute the expectation value of an operator, like the hamiltonian in this case, a VMC calculation exploits the fact that the majority of the configuration space where the wave function belongs can be regarded as much less important than other parts, the values of the wave function are too small there and can be mostly ignored during the integration of the algorithm. To capitalize this, the Metropolis algorithm is added to the VMC method, as well as importance sampling.
 
 
 \section{Theory}
+	\subsection{Monte Carlo method with simple Metropolis sampling}
+		In a quantum mechanical system the energy is given by the expectation value of the Hamiltonian, let \(\Psi_T\) be a proposal for a wavefunction that can describe the system.
 
-\subsection{Monte Carlo method with simple Metropolis sampling}
-	In a quantum mechanical system the energy is given by the expectation value of the Hamiltonian, let \(\Psi_T\) be a proposal for a wavefunction that can describe the system.
+		\begin{align}
+			E[\hat{H}] = \expval{\hat{H}}{\Psi_T} = \frac{\int{d\vb{R} \Psi_T^*(\vb{R})\hat{H} \Psi_T(\vb{R})  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
+		\end{align}
 
-	\begin{align}
-		E[\hat{H}] = \expval{\hat{H}}{\Psi_T} = \frac{\int{d\vb{R} \Psi_T^*(\vb{R})\hat{H} \Psi_T(\vb{R})  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
-	\end{align}
+		Let us introduce a local energy:
 
-	Let us introduce a local energy:
+		\begin{align}
+			E_L(\hat{H}) &= \frac{1}{ \Psi_T(\vb{R}) } \hat{H} \Psi_T(\vb{R}))
+		\end{align}
 
-	\begin{align}
-		E_L(\hat{H}) &= \frac{1}{ \Psi_T(\vb{R}) } \hat{H} \Psi_T(\vb{R}))
-	\end{align}
+		\begin{align}
+			E[\hat{H}] &= \frac{\int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) E_L(\vb{R}))  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
+			\intertext{Since the denumerator is a scalar constant after integrating it we can put it inside the integral in the numerator}
+			E[\hat{H}] &= \int{d\vb{R} \frac{\Psi_T^*(\vb{R}) \Psi_T(\vb{R})  }{\int{d\vb{R'} \Psi_T^*(\vb{R'}) \Psi_T(\vb{R'})}}  E_L(\vb{R})  }
+			\\
+			E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
+		\end{align}
 
-	\begin{align}
-		E[\hat{H}] &= \frac{\int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) E_L(\vb{R}))  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
-		\intertext{Since the denumerator is a scalar constant after integrating it we can put it inside the integral in the numerator}
-		E[\hat{H}] &= \int{d\vb{R} \frac{\Psi_T^*(\vb{R}) \Psi_T(\vb{R})  }{\int{d\vb{R'} \Psi_T^*(\vb{R'}) \Psi_T(\vb{R'})}}  E_L(\vb{R})  }
-		\\
-		E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
-	\end{align}
+		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral.
 
-	This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral.
-
-	\begin{enumerate}
-		\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
-		\item Start Monte Carlo Calculations
-			\begin{enumerate}
-				\item Propose a move of the particles according to an algorithm, for example \newline \( \vb{R_{new}} = \vb{R_{old}} + \delta * r \), where \(r\) is a random number in \([0,1]\)
-				\item Accept or reject move according to \( P(\vb{R_{new}})/ P(\vb{R_{old}}) \ge r \), where r is a new number. Update position values if accepted.
-				\item Calculate energy for this cycle.
-			\end{enumerate}
-	\end{enumerate}
+		\begin{enumerate}
+			\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
+			\item Start Monte Carlo Calculations
+				\begin{enumerate}
+					\item Propose a move of the particles according to an algorithm, for example \newline \( \vb{R_{new}} = \vb{R_{old}} + \delta * r \), where \(r\) is a random number in \([0,1]\)
+					\item Accept or reject move according to \( P(\vb{R_{new}})/ P(\vb{R_{old}}) \ge r \), where r is a new number. Update position values if accepted.
+					\item Calculate energy for this cycle.
+				\end{enumerate}
+		\end{enumerate}
 
 	\subsection{Helium atom}
 
@@ -222,7 +225,6 @@
 		\end{align}
 
 	\subsection{Calculating the Slater determinant}
-
 		\subsubsection{Setting up the Slater determinant}
 			To describe the wavefunction of multiple fermions we use a Slater
 			determinant. The Slater determinant has the form
@@ -273,7 +275,6 @@
 			We thus avoid summing over spin variables.
 
 		\subsubsection{Calculation of the Slater determinant}
-
 			Now we have the Slater determinant written as a product of a determinant
 			for spin up and a determinant for spin down. The next step is to invert
 			the matrices using LU decomposition. We can thus rewrite a matrix
@@ -525,7 +526,6 @@
 			\end{center}
 
 		\subsubsection{Gradient ratio of  Padé-Jastrow factor }
-
 			When derivating the Padé-Jastrow factor all the factors not involving the particle we are derivating with respect to will be canceled by the corresponding terms in the denominator.
 
 			\begin{align}
@@ -533,7 +533,6 @@
 			\end{align}
 
 		\subsubsection{Correlation-to-correlation ratio}
-
 			We have $N\left(N-1\right)/2$ relative distances $r_{ij}$. We can
 			write these in a matrix storage format, where they form a strictly
 			upper triangular matrix
@@ -749,7 +748,6 @@
 		\end{figure}
 
 	\subsection{Verification of the model}
-
 		\subsubsection{Verification of the general Monte Carlo method}
 			The wavefunction for a Hydrogen atom is known, see equation \eqref{eq:hydrogen}, a Monte Carlo calculation for an exact wavefunction will give a exact result.
 
@@ -799,229 +797,229 @@
 			Testing that the program reproduces this for the helium atom indicates the \(\frac{\nabla \Psi_C}{\Psi_C}\) is being calculated correctly.
 
 \section{Results}
+	\subsection{Variational Monte Carlo calculations of the helium
+atom}
+		As a first attempt to solve the ground state energy for the helium
+		atom we perform Variational Monte Carlo calculation with a brute force
+		Metropolis sampling. We do this with two trial wave functions
+		\[
+		\psi_{T1}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}
+		\]
+		and
+		\[
+		\psi_{T2}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}\exp{\left(\frac{r_{12}}{2(1+\beta r_{12})}\right)},
+		\]
+		using $\alpha$ and $\beta$ as variational parameters. Energy values
+		for the simple wave function, $\psi_{T1}$, using only one variational
+		parameter $\alpha$, are shown in figure \ref{fig01:alpha_Simple}.
+		We run the Variational Monte Carlo calculation with $10^{7}$ cycles.
+		As we see in the figures, the energy minimum occurs when we use $\alpha=1.65$.
+		Using this value for $\alpha$ we get an energy of $-2.8442934$.
+		The parameter $\alpha$ can be interpreted as a parameter for the
+		force pulling the electron to the nucleus.
 
-\subsection{First part}
+		\begin{figure}
+		\centering \includegraphics[width=0.45\linewidth]{../figures/EnergyVsAlphaHeliumSimpleAnalytical}
+		\includegraphics[width=0.45\linewidth]{../figures/VarianceVsAlphaHeliumSimpleAnalytical}
 
-	As a first attempt to solve the ground state energy for the helium
-	atom we perform Variational Monte Carlo calculation with a brute force
-	Metropolis sampling. We do this with two trial wave functions
-	\[
-	\psi_{T1}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}
-	\]
-	and
-	\[
-	\psi_{T2}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}\exp{\left(\frac{r_{12}}{2(1+\beta r_{12})}\right)},
-	\]
-	using $\alpha$ and $\beta$ as variational parameters. Energy values
-	for the simple wave function, $\psi_{T1}$, using only one variational
-	parameter $\alpha$, are shown in figure \ref{fig01:alpha_Simple}.
-	We run the Variational Monte Carlo calculation with $10^{7}$ cycles.
-	As we see in the figures, the energy minimum occurs when we use $\alpha=1.65$.
-	Using this value for $\alpha$ we get an energy of $-2.8442934$.
-	The parameter $\alpha$ can be interpreted as a parameter for the
-	force pulling the electron to the nucleus.
-
-	\begin{figure}
-	\centering \includegraphics[width=0.45\linewidth]{figures/EnergyVsAlphaHeliumSimpleAnalytical}
-	\includegraphics[width=0.45\linewidth]{figures/VarianceVsAlphaHeliumSimpleAnalytical}
-
-	\includegraphics[width=0.45\linewidth]{figures/VarianceNCyclesHeliumSimpleAnalytical}\protect\protect\caption{Plots for Helium $\psi_{T1}$ for energy versus $\alpha$, variance versus $\alpha$, and variance as function of Monte Carlo cycles.}
-	\label{fig01:alpha_Simple}
-	\end{figure}
+		\includegraphics[width=0.45\linewidth]{../figures/VarianceNCyclesHeliumSimpleAnalytical}\protect\protect\caption{Plots for Helium $\psi_{T1}$ for energy versus $\alpha$, variance versus $\alpha$, and variance as function of Monte Carlo cycles.}
+		\label{fig01:alpha_Simple}
+		\end{figure}
 
 
-	\begin{figure}
-	\centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeEnergy}
-	\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeVariance}
-	\protect\caption{Plots for Helium $\psi_{T2}$ for the energy versus the timestep, and the variance versus the timestep.}
-	\label{fig02:timestep}
-	\end{figure}
+		\begin{figure}
+		\centering \includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalTimeEnergy}
+		\includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalTimeVariance}
+		\protect\caption{Plots for Helium $\psi_{T2}$ for the energy versus the timestep, and the variance versus the timestep.}
+		\label{fig02:timestep}
+		\end{figure}
 
-	We now look at our second trial function, $\psi_{T2}$. Running over
-	different values for the two variables $\alpha$ and $\beta$, again
-	with $10^{7}$ cycles in the Monte Carlo simulation, we get the results
-	presented in figure \ref{fig03:AlphaBeta}. From this run we find
-	that the optimal values are $\alpha=1.8$ and $\beta=0.94$, and we
-	get a minimum energy of $-2.8979105$, which is considerably better
-	than without the Jastrow factor.
+		We now look at our second trial function, $\psi_{T2}$. Running over
+		different values for the two variables $\alpha$ and $\beta$, again
+		with $10^{7}$ cycles in the Monte Carlo simulation, we get the results
+		presented in figure \ref{fig03:AlphaBeta}. From this run we find
+		that the optimal values are $\alpha=1.8$ and $\beta=0.94$, and we
+		get a minimum energy of $-2.8979105$, which is considerably better
+		than without the Jastrow factor.
 
-	\begin{figure}
-	\centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
-	\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaVariance}
-	\protect\caption{Using $\psi_{T2}$, plot of the energy versus alpha and beta, and plot of the variance versus $\alpha$ and $\beta$. }
-	\label{fig03:AlphaBeta}
-	\end{figure}
+		\begin{figure}
+		\centering \includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
+		\includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalAlphaBetaVariance}
+		\protect\caption{Using $\psi_{T2}$, plot of the energy versus alpha and beta, and plot of the variance versus $\alpha$ and $\beta$. }
+		\label{fig03:AlphaBeta}
+		\end{figure}
 
-	Finally we use our Variational Monte Carlo machinery to find the ground
-	state energy for a beryllium atom. Since beryllium has 4 electrons,
-	compared to the 2 in helium, the computation is much slower and we
-	only had time to run it for $10^{6}$ cycles. We then find the lowest
-	energy to be $-14.4127$ with $\alpha=3.8$ and $\beta=0.293$.
+		Finally we use our Variational Monte Carlo machinery to find the ground
+		state energy for a beryllium atom. Since beryllium has 4 electrons,
+		compared to the 2 in helium, the computation is much slower and we
+		only had time to run it for $10^{6}$ cycles. We then find the lowest
+		energy to be $-14.4127$ with $\alpha=3.8$ and $\beta=0.293$.
 
-	From reseach papers we find the value for energy in the ground state
-	of helium to be $-2.9037$ \cite{Kinoshita:1957:PR} and the value
-	for energy in the ground state of beryllium to be $-14.667$ \cite{Koput:2011:PCCP}.
-	Koput{]}. In table \ref{tab:energyReference} we compare results
-	obtained with our Variational Monte Carlo method with results from
-	various research papers.
-
-	\begin{table}
-		\centering
-		\begin{tabular}{|c|c|c|}
-			\hline
-			Atom & VMC & References\tabularnewline
-			\hline
-			\hline
-			Helium $\psi_{T1}$ & $-2.8442$ & $-2.9037$ \tabularnewline
-			\hline
-			Helium $\psi_{T2}$ & $-2.8979$ & $-2.9037$ \tabularnewline
-			\hline
-			Beryllium & $-14.4127$ & $-14.667$\tabularnewline
-			\hline
-		\end{tabular}
-
-		\protect
-		\caption{Comparison of energies found with Variational Monte Carlo method and
-		energies found in research papers.}
-		\label{tab:energyReference}
-	\end{table}
-
-	\subsubsection{Alpha and Beta Values}
+		From reseach papers we find the value for energy in the ground state
+		of helium to be $-2.9037$ \cite{Kinoshita:1957:PR} and the value
+		for energy in the ground state of beryllium to be $-14.667$ \cite{Koput:2011:PCCP}.
+		Koput{]}. In table \ref{tab:energyReference} we compare results
+		obtained with our Variational Monte Carlo method with results from
+		various research papers.
 
 		\begin{table}
-			\center
-			\begin{tabular}{| c | c| c |}
-			    \hline
-			   	\textbf{Trialfunction} & \(\mathbf{\alpha}\) & \(\mathbf{\beta}\)
-			    \\ \hline
-			    Helium $\psi_{T1}$ & 1.65 & -
-			    \\ \hline
-			    Helium $\psi_{T2}$ & 1.8 & 0.94
-			    \\	\hline
-			    Beryllium $\psi_{T2}$	& 3.8	&	 0.293
-			    \\ \hline
-	  		\end{tabular}
-	  		\caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values, with stepssize \(0.02\). Each Monte Carlo run went over \(10 000 	000\), using importance sampling. Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
-		  	\label{tab:alpha_beta}
+			\centering
+			\begin{tabular}{|c|c|c|}
+				\hline
+				Atom & VMC & References\tabularnewline
+				\hline
+				\hline
+				Helium $\psi_{T1}$ & $-2.8442$ & $-2.9037$ \tabularnewline
+				\hline
+				Helium $\psi_{T2}$ & $-2.8979$ & $-2.9037$ \tabularnewline
+				\hline
+				Beryllium & $-14.4127$ & $-14.667$\tabularnewline
+				\hline
+			\end{tabular}
+
+			\protect
+			\caption{Comparison of energies found with Variational Monte Carlo method and
+			energies found in research papers.}
+			\label{tab:energyReference}
 		\end{table}
 
-		Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. The variance was more smooth as a function of the parameters, see fig \ref{fig03:AlphaBeta} and should have been used.
-
-
-		\subsubsection{Computational speed gain by using an analytical local energy}
-			By using an analytical expression for the local energy instead of using a numerical derivation in the calculation a speed up of approximately factor \(4\) was achieved, see table \ref{tab:analyticVSNumeric}.
-
+		\subsubsection{Alpha and Beta Values}
 
 			\begin{table}
 				\center
-				\begin{tabular}{| c | c | c | c |}
-				    \hline
-				   	\textbf{Trialfunction} & Numerical (s) & Analytical (s) & Ratio
-				    \\ \hline
-				    Helium $\psi_{T1}$ & 61.75 & 14.34 & 4.307
-				    \\ \hline
-				    Helium $\psi_{T2}$ & 86.76 & 19.98	& 4.342
-				    \\	\hline
-				    Beryllium $\psi_{T2}$ & 1918.34  &	 &
- 				    \\ \hline
-				\end{tabular}
-				\caption{The time to run a Monte Carlo run with \(10^7\) cycles. The closed expression for the local energy increased the computation time by a significant degree for each trialfunction. }
-				\label{tab:analyticVSNumeric}
-			\end{table}
-
-\subsection{Second part}
-
-	\begin{table}
-		\center
-			\begin{tabular}{|c|c|c|}
-			    \hline
-			   	Atom & VMC & References
-			    \\ \hline
-			    Beryllium & $-14.3795$ & $-14.667$
-			    \\ \hline
-			    Neon & $-127.936$ &  \(-128.928\)
-			    \\	\hline
-		  \end{tabular}
-		  \caption{Comparison of energies found with Variational Monte Carlo method and
-		energies found in research papers \cite{Koput:2011:PCCP} \cite{QUA:QUA560090204} }
-		\label{tab:energyReference}
-	\end{table}
-
-	We attempt to solve the ground state energy for the Beryllium atom and Neon atom using a Variational Monte Carlo calculation with importance sampling. We have used the trial functions \eqref{eq:BerylliumTrialFunction} for Beryllium and \eqref{eq:NeonTrialFunction} for Neon which uses $\alpha$ and $\beta$ as variational parameters.
-
-	For Beryllium we have the Alpha and Beta values $\alpha=4.0$ and $\beta=0.31$. We use $10^{6}$ cycles and find the energy to be $-14.3795$, with a variance of $0.0020$.
-	For Neon, with $5 \times 10^{5}$ cycles we get an energy of $-127.936$ with a variance of $0.0548$.
-
-	From reseach papers we find the value for energy in the ground state
-	of Beryllium to be $-14.667$ \cite{Koput:2011:PCCP} and the value
-	for energy in the ground state of Neon to be \(-128.928\) \cite{QUA:QUA560090204}.
-	In table \ref{tab:energyReference} we compare results
-	obtained with our Variational Monte Carlo method with results from
-	various research papers.
-
-
-	\subsubsection{Alpha and Beta Values}
-		\begin{table}
-		\center
 				\begin{tabular}{| c | c| c |}
 				    \hline
 				   	\textbf{Trialfunction} & \(\mathbf{\alpha}\) & \(\mathbf{\beta}\)
 				    \\ \hline
+				    Helium $\psi_{T1}$ & 1.65 & -
+				    \\ \hline
+				    Helium $\psi_{T2}$ & 1.8 & 0.94
+				    \\	\hline
 				    Beryllium $\psi_{T2}$	& 3.8	&	 0.293
 				    \\ \hline
-				    Neon $\psi_{T2}$	&	10.22	&	0.091
-				    \\	\hline
-			  \end{tabular}
-			  \caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values. For Beryllium each Monte Carlo run went over \(10 000 000\), using importance sampling. For Neon each run went over \(5 000\), also with importance sampling. Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
-			  \label{tab:alpha_beta}
-		\end{table}
+		  		\end{tabular}
+		  		\caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values, with stepssize \(0.02\). Each Monte Carlo run went over \(10 000 	000\), using importance sampling. Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
+			  	\label{tab:alpha_beta}
+			\end{table}
 
-		\begin{figure}
-			\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_alpha_beta}
-			\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_alpha_beta_var}
-			\protect\caption{Energy (left) and variance (right) for different Alpha and Beta values for Neon.}
-			\label{fig:alpha_beta_comparison}
-		\end{figure}
+			Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. The variance was more smooth as a function of the parameters, see fig \ref{fig03:AlphaBeta} and should have been used.
 
-		We use Alpha and Beta values for Beryllium found in project 1, so the only Alpha and Beta values we have to find are for Neon. Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. A plot of different energies and variance given by different Alpha and Beta values are shown in figure \ref{fig:alpha_beta_comparison}.
 
-	\subsubsection{Speedup with MPI}
+			\subsubsection{Computational speed gain by using an analytical local energy}
+				By using an analytical expression for the local energy instead of using a numerical derivation in the calculation a speed up of approximately factor \(4\) was achieved, see table \ref{tab:analyticVSNumeric}.
+
+
+				\begin{table}
+					\center
+					\begin{tabular}{| c | c | c | c |}
+					    \hline
+					   	\textbf{Trialfunction} & Numerical (s) & Analytical (s) & Ratio
+					    \\ \hline
+					    Helium $\psi_{T1}$ & 61.75 & 14.34 & 4.307
+					    \\ \hline
+					    Helium $\psi_{T2}$ & 86.76 & 19.98	& 4.342
+					    \\	\hline
+					    Beryllium $\psi_{T2}$ & 1918.34  &	 &
+	 				    \\ \hline
+					\end{tabular}
+					\caption{The time to run a Monte Carlo run with \(10^7\) cycles. The closed expression for the local energy increased the computation time by a significant degree for each trialfunction. }
+					\label{tab:analyticVSNumeric}
+				\end{table}
+
+	\subsection{Variational Monte Carlo calculations of the Beryllium and Neon atoms}
+
 		\begin{table}
-		\center
-				\begin{tabular}{| c | c| c| c| c|}
+			\center
+				\begin{tabular}{|c|c|c|}
 				    \hline
-				   	\textbf{Num. of processes} &	1	&	2	&	3	&	4
+				   	Atom & VMC & References
 				    \\ \hline
-				    \textbf{Speedup}	&	1.0	&	1.97	&	2.90	&	3.35
+				    Beryllium & $-14.3795$ & $-14.667$
+				    \\ \hline
+				    Neon & $-127.936$ &  \(-128.928\)
 				    \\	\hline
 			  \end{tabular}
-			  \caption{MPI speedup}
-			  \label{tab:MPI_speedup}
+			  \caption{Comparison of energies found with Variational Monte Carlo method and
+			energies found in research papers \cite{Koput:2011:PCCP} \cite{QUA:QUA560090204} }
+			\label{tab:energyReference}
 		\end{table}
 
-		\begin{figure}
-		\centering \includegraphics[width=0.45\linewidth]{../figures/processor_number_time_comparison}
-		\protect\caption{MPI speedup}
-		\label{fig:MPI_speedup}
-		\end{figure}
+		We attempt to solve the ground state energy for the Beryllium atom and Neon atom using a Variational Monte Carlo calculation with importance sampling. We have used the trial functions \eqref{eq:BerylliumTrialFunction} for Beryllium and \eqref{eq:NeonTrialFunction} for Neon which uses $\alpha$ and $\beta$ as variational parameters.
 
-		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs.
+		For Beryllium we have the Alpha and Beta values $\alpha=4.0$ and $\beta=0.31$. We use $10^{6}$ cycles and find the energy to be $-14.3795$, with a variance of $0.0020$.
+		For Neon, with $5 \times 10^{5}$ cycles we get an energy of $-127.936$ with a variance of $0.0548$.
 
-	\subsubsection{Onebody densities / Comparisons / Without Jastrow}
-		As we see in the verification section, without interaction the energies behave like hydrogen like wave functions. Comparing with the energies we obtain when also using interaction in the calculations we see that the Jastrow factor offers a good improvement on the energy, especially for larger systems.
+		From reseach papers we find the value for energy in the ground state
+		of Beryllium to be $-14.667$ \cite{Koput:2011:PCCP} and the value
+		for energy in the ground state of Neon to be \(-128.928\) \cite{QUA:QUA560090204}.
+		In table \ref{tab:energyReference} we compare results
+		obtained with our Variational Monte Carlo method with results from
+		various research papers.
 
-	\subsubsection{Charge Density}
-		The charge density gives measure of how often the electrons occupies certain area in the Monte Carlo simulation, in figure \ref{fig:charge_density} the square of the norm of the distance is plotted.
-		On the Neon atom the electrons have a closer distribution to the center that is caused by the more electrically charged core of Neon compared to Beryllium.
 
-		\begin{figure}
-			\centering \includegraphics[width=0.45\linewidth]{../figures/ChargeDensityNeon}
-			\centering \includegraphics[width=0.45\linewidth]{../figures/ChargeDensityBeryllium}
-			\protect\caption{Charge densities for Neon and Beryllium with the x-axis representing how far away from the atomcenter the electrons are. }
-			\label{fig:charge_density}
-		\end{figure}
+		\subsubsection{Alpha and Beta Values}
+			\begin{table}
+			\center
+					\begin{tabular}{| c | c| c |}
+					    \hline
+					   	\textbf{Trialfunction} & \(\mathbf{\alpha}\) & \(\mathbf{\beta}\)
+					    \\ \hline
+					    Beryllium $\psi_{T2}$	& 3.8	&	 0.293
+					    \\ \hline
+					    Neon $\psi_{T2}$	&	10.22	&	0.091
+					    \\	\hline
+				  \end{tabular}
+				  \caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values. For Beryllium each Monte Carlo run went over \(10 000 000\), using importance sampling. For Neon each run went over \(5 000\), also with importance sampling. Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
+				  \label{tab:alpha_beta}
+			\end{table}
 
-\section{Discussion}
+			\begin{figure}
+				\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_alpha_beta}
+				\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_alpha_beta_var}
+				\protect\caption{Energy (left) and variance (right) for different Alpha and Beta values for Neon.}
+				\label{fig:alpha_beta_comparison}
+			\end{figure}
+
+			We use Alpha and Beta values for Beryllium found in project 1, so the only Alpha and Beta values we have to find are for Neon. Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. A plot of different energies and variance given by different Alpha and Beta values are shown in figure \ref{fig:alpha_beta_comparison}.
+
+		\subsubsection{Speedup with MPI}
+			\begin{table}
+			\center
+					\begin{tabular}{| c | c| c| c| c|}
+					    \hline
+					   	\textbf{Num. of processes} &	1	&	2	&	3	&	4
+					    \\ \hline
+					    \textbf{Speedup}	&	1.0	&	1.97	&	2.90	&	3.35
+					    \\	\hline
+				  \end{tabular}
+				  \caption{MPI speedup}
+				  \label{tab:MPI_speedup}
+			\end{table}
+
+			\begin{figure}
+			\centering \includegraphics[width=0.45\linewidth]{../figures/processor_number_time_comparison}
+			\protect\caption{MPI speedup}
+			\label{fig:MPI_speedup}
+			\end{figure}
+
+			It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs.
+
+		\subsubsection{Onebody densities / Comparisons / Without Jastrow}
+			As we see in the verification section, without interaction the energies behave like hydrogen like wave functions. Comparing with the energies we obtain when also using interaction in the calculations we see that the Jastrow factor offers a good improvement on the energy, especially for larger systems.
+
+		\subsubsection{Charge Density}
+			The charge density gives measure of how often the electrons occupies certain area in the Monte Carlo simulation, in figure \ref{fig:charge_density} the square of the norm of the distance is plotted.
+			On the Neon atom the electrons have a closer distribution to the center that is caused by the more electrically charged core of Neon compared to Beryllium.
+
+			\begin{figure}
+				\centering \includegraphics[width=0.45\linewidth]{../figures/ChargeDensityNeon}
+				\centering \includegraphics[width=0.45\linewidth]{../figures/ChargeDensityBeryllium}
+				\protect\caption{Charge densities for Neon and Beryllium with the x-axis representing how far away from the atomcenter the electrons are. }
+				\label{fig:charge_density}
+			\end{figure}
+
+\section{Conclusions and discussion}
+	\subsection{Critique on the exercise}
 
 
 

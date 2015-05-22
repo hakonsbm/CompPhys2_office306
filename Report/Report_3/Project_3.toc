@@ -1,4 +1,39 @@
-\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
-\contentsline {section}{\numberline {2}Theory}{1}{section.2}
-\contentsline {section}{\numberline {3}Results}{2}{section.3}
-\contentsline {section}{\numberline {4}Discussion}{2}{section.4}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Theory}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Monte Carlo method with simple Metropolis sampling}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Helium atom}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Beryllium atom}{4}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Neon atom}{4}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Derivation of local energies}{5}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}Helium: Simple trialfunction}{6}{subsubsection.2.5.1}
+\contentsline {subsection}{\numberline {2.6}Calculating the Slater determinant}{6}{subsection.2.6}
+\contentsline {subsubsection}{\numberline {2.6.1}Setting up the Slater determinant}{6}{subsubsection.2.6.1}
+\contentsline {subsubsection}{\numberline {2.6.2}Calculation of the Slater determinant}{7}{subsubsection.2.6.2}
+\contentsline {subsection}{\numberline {2.7}Importance sampling}{7}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.8}Efficient calculation of derivatives}{8}{subsection.2.8}
+\contentsline {subsubsection}{\numberline {2.8.1}Gradient ratio}{8}{subsubsection.2.8.1}
+\contentsline {subsubsection}{\numberline {2.8.2}Kinetic Energy}{9}{subsubsection.2.8.2}
+\contentsline {subsubsection}{\numberline {2.8.3}Determinant ratios}{9}{subsubsection.2.8.3}
+\contentsline {subsubsection}{\numberline {2.8.4}Gradient determinant Ratio}{10}{subsubsection.2.8.4}
+\contentsline {subsubsection}{\numberline {2.8.5}Derivatives of single particle wavefunctions}{10}{subsubsection.2.8.5}
+\contentsline {subsubsection}{\numberline {2.8.6}Gradient ratio of Pad\IeC {\'e}-Jastrow factor }{10}{subsubsection.2.8.6}
+\contentsline {subsubsection}{\numberline {2.8.7}Correlation-to-correlation ratio}{10}{subsubsection.2.8.7}
+\contentsline {subsubsection}{\numberline {2.8.8}The $\nabla \Psi _{C}/\Psi _{C}$ ratio}{11}{subsubsection.2.8.8}
+\contentsline {subsubsection}{\numberline {2.8.9}The $\nabla ^{2} \Psi _{C}/\Psi _{C}$ ratio}{12}{subsubsection.2.8.9}
+\contentsline {subsection}{\numberline {2.9}Implementation of MPI}{13}{subsection.2.9}
+\contentsline {subsection}{\numberline {2.10}Blocking}{13}{subsection.2.10}
+\contentsline {subsection}{\numberline {2.11}Verification of the model}{14}{subsection.2.11}
+\contentsline {subsubsection}{\numberline {2.11.1}Verification of the general Monte Carlo method}{14}{subsubsection.2.11.1}
+\contentsline {subsubsection}{\numberline {2.11.2}Verification of the Slater determinant and the laplacian Slater determinan ratio}{15}{subsubsection.2.11.2}
+\contentsline {subsubsection}{\numberline {2.11.3}Verification of the Pad\IeC {\`e}-Jastrow part.}{15}{subsubsection.2.11.3}
+\contentsline {section}{\numberline {3}Results}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}Variational Monte Carlo calculations of the helium atom}{16}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Alpha and Beta Values}{16}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Computational speed gain by using an analytical local energy}{18}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Variational Monte Carlo calculations of the Beryllium and Neon atoms}{18}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Alpha and Beta Values}{19}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Speedup with MPI}{20}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Onebody densities / Comparisons / Without Jastrow}{20}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.4}Charge Density}{20}{subsubsection.3.2.4}
+\contentsline {section}{\numberline {4}Conclusions and discussion}{20}{section.4}
+\contentsline {subsection}{\numberline {4.1}Critique on the exercise}{20}{subsection.4.1}
