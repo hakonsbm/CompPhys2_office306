@@ -29,8 +29,8 @@ def printDerivatives(psi):
 	print 
 	print "Now in latex format "
 	print "psi : ", sp.printing.latex(psi.subs(r_i,R_i))
-	print "d/dx : ", sp.printing.latex((sp.diff(psi,x_i)  )#+ sp.diff(psi,y_i) + sp.diff(psi, z_i))
-		.subs(r_i,R_i).factor())
+	print "d/dx : ", sp.printing.latex((sp.diff(psi,x_i)  ).subs(r_i,R_i).factor()  + (sp.diff(psi,y_i)  ).subs(r_i,R_i).factor()  + (sp.diff(psi,z_i)  ).subs(r_i,R_i).factor())
+					
 	print "d2/dx2 : " , sp.printing.latex((sp.diff(psi,x_i,2) + sp.diff(psi,y_i,2) + sp.diff(psi,z_i,2))
 		.factor().subs(r_i,R_i).collect(alpha**2).subs(r_i**2,R_i**2))
 	print 
@@ -43,9 +43,9 @@ def printDerivatives(psi):
 	print "#############################################################################3"
 	print
 
-printDerivatives(psi1S)
+# printDerivatives(psi1S)
 # printDerivatives(psi2S)
-# printDerivatives(psi2P)
+printDerivatives(psi2P)
 
 #Calculating some derivatives for the correlated part of the wavefunction
 

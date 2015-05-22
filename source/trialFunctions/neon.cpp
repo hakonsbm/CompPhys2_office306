@@ -16,6 +16,7 @@ Neon::Neon(VMCSolver *solver)
     solver->setNParticles(10);
     solver->setAlpha(10.22);
     solver->setBeta(0.091);
+    spin << 0 << 0 << 0 << 0 << 0 << 1 << 1 << 1 << 1 << 1;
 }
 
 double Neon::waveFunction(const mat &r, VMCSolver *solver)
@@ -44,8 +45,9 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
                 rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
             }
             rij = sqrt(rij);
-            if(spins(i)==spins(j)) a = 1./4.;
-            else a = 1./2.;
+//            if(spins(i)==spins(j)) a = 1./4.;
+//            else a = 1./2.;
+            a = spinFactor(i,j);
             //cout << i << " & " << j  << ": " << a << endl;
             product = product * exp(a*rij/(1+beta*rij));
             spin_count++;
@@ -54,7 +56,7 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
     }
 
 
-    SD = SlaterDeterminant(r, alpha, solver);
+    SD = solver->determinant()->calculateDeterminant(r,alpha,solver);
 
     return SD*product;
 }
@@ -65,20 +67,6 @@ double Neon::localEnergy(const mat &r, VMCSolver *solver)
     double nParticles = solver->getNParticles();
     double nDimensions = solver->getNDimensions();
     double charge = solver->getCharge();
-    double h = solver->getH();
-    double h2 = solver->getH2();
-
-
-    mat rPlus = zeros<mat>(nParticles, nDimensions);
-    mat rMinus = zeros<mat>(nParticles, nDimensions);
-
-    rPlus = rMinus = r;
-
-    double waveFunctionMinus = 0;
-    double waveFunctionPlus = 0;
-
-    double waveFunctionCurrent = waveFunction(r, solver);
-
 
 
     // Kinetic energy
@@ -86,16 +74,24 @@ double Neon::localEnergy(const mat &r, VMCSolver *solver)
     double kineticEnergy = 0;
     if(m_analytical)
     {
-        kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r, solver);
-        kineticEnergy *= -1./2.;
+    //Calculates the kinetic energy as the ratios of -1/2* ( d²/dx²|D| /|D| + 2 * (d/dx |D|/|D|)*d/dx Psi_C/Psi_C + d²/dx² Psi_C /Psi_C )
+
+        //If we want to compute without electroninteraction with a simplified version ofthe trialfunction containing only the slater determinant
+        //then only the slater determinant ratio laplacian is used.
+        if(solver->getElectronInteration())
+        {
+            solver->derivatives()->analyticalLaplacianRatio(kineticEnergy, r, solver);
+        }
+        else
+        {
+            kineticEnergy += solver->determinant()->laplacianSlaterDeterminant(r, solver);
+        }
+
+            kineticEnergy *= -1./2.;
     } else
     {
         kineticEnergy = solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver));
-
     }
-//        cout << endl<< "KineticEnergy by the numerical: " << solver->derivatives()->numericalDoubleDerivative(r, solver) / (2.*waveFunction(r, solver)) << endl;
-
-//        cout << " KineticEnergy by the analytical: " << solver->determinant()->laplacianSlaterDeterminant(r, solver)/(-2.) << endl << endl;
 
 
     // Potential energy
@@ -127,81 +123,81 @@ double Neon::localEnergy(const mat &r, VMCSolver *solver)
     return kineticEnergy + potentialEnergy;
 }
 
-double Neon::psi1s(double ri, double alpha)
-{
-    return exp(-alpha*ri);
-}
+//double Neon::psi1s(double ri, double alpha)
+//{
+//    return exp(-alpha*ri);
+//}
 
 
-double Neon::psi2s(double ri, double alpha)
-{
-    return (1-alpha*ri/2.0)*exp(-alpha*ri/2.0);
-}
+//double Neon::psi2s(double ri, double alpha)
+//{
+//    return (1-alpha*ri/2.0)*exp(-alpha*ri/2.0);
+//}
 
-double Neon::phi(const mat &r, double alpha, int i, int j, VMCSolver *solver)
-{
-    // returns an ansatz based on matrix row, M, in the SD
-    int nDimensions = solver->getNDimensions();
-    double ri = 0;
-    for (int k = 0; k < nDimensions; ++k) ri += r(i,k)*r(i,k);
-    ri = sqrt(ri);
+//double Neon::phi(const mat &r, double alpha, int i, int j, VMCSolver *solver)
+//{
+//    // returns an ansatz based on matrix row, M, in the SD
+//    int nDimensions = solver->getNDimensions();
+//    double ri = 0;
+//    for (int k = 0; k < nDimensions; ++k) ri += r(i,k)*r(i,k);
+//    ri = sqrt(ri);
 
-    if (j == 0)
-    {
-        return exp(-alpha*ri); // 1s
-    }
-    else if (j == 1)
-    {
-        return (1-alpha*ri/2.0)*exp(-alpha*ri/2.0); // 2s
-    }
-    else if (j>=2 && j<=4)
-    {
-        int dimension = j-2;
-        return alpha*r(i,dimension)*exp(-alpha*ri/2.0); // 2p
-    }
-}
+//    if (j == 0)
+//    {
+//        return exp(-alpha*ri); // 1s
+//    }
+//    else if (j == 1)
+//    {
+//        return (1-alpha*ri/2.0)*exp(-alpha*ri/2.0); // 2s
+//    }
+//    else if (j>=2 && j<=4)
+//    {
+//        int dimension = j-2;
+//        return alpha*r(i,dimension)*exp(-alpha*ri/2.0); // 2p
+//    }
+//}
 
-double Neon::SlaterDeterminant(const mat &r,double alpha, VMCSolver *solver)
-{
-    int i, j, Nhalf, *indx;
-    double d1, d2, SD;
-    int nParticles= solver->getNParticles();
-    Nhalf = nParticles/2;
-    indx = new int [Nhalf];
-    detUp = zeros<mat>(Nhalf, Nhalf);
-    detDown = zeros<mat>(Nhalf, Nhalf);
-    // fill matrix detUp and detDown
+//double Neon::SlaterDeterminant(const mat &r,double alpha, VMCSolver *solver)
+//{
+//    int i, j, Nhalf, *indx;
+//    double d1, d2, SD;
+//    int nParticles= solver->getNParticles();
+//    Nhalf = nParticles/2;
+//    indx = new int [Nhalf];
+//    detUp = zeros<mat>(Nhalf, Nhalf);
+//    detDown = zeros<mat>(Nhalf, Nhalf);
+//    // fill matrix detUp and detDown
 
-    for (int k = 0; k <  Nhalf; ++k)
-    {
-        for (i = 0; i < Nhalf; ++i)
-        {
-            // for detUp
+//    for (int k = 0; k <  Nhalf; ++k)
+//    {
+//        for (i = 0; i < Nhalf; ++i)
+//        {
+//            // for detUp
 
-            detUp(i,k) =  phi(r, alpha, i, k, solver);
+//            detUp(i,k) =  phi(r, alpha, i, k, solver);
 
-            // for detDown
-            detDown(i,k) =  phi(r, alpha, i+Nhalf, k, solver);
-        }
-    }
-    // decompose A (phi matrix) to B & C
-    /*
-     * End up with
-     *     (c00 c01 c02 c03)
-     * A = (b10 c11 c12 c13)
-     *     (b20 b21 c22 c23)
-     *     (b30 b31 b32 c33)
-     */
+//            // for detDown
+//            detDown(i,k) =  phi(r, alpha, i+Nhalf, k, solver);
+//        }
+//    }
+//    // decompose A (phi matrix) to B & C
+//    /*
+//     * End up with
+//     *     (c00 c01 c02 c03)
+//     * A = (b10 c11 c12 c13)
+//     *     (b20 b21 c22 c23)
+//     *     (b30 b31 b32 c33)
+//     */
 
-    ludcmp(detUp, Nhalf, indx, &d1);
-    ludcmp(detDown, Nhalf, indx, &d2);
+//    ludcmp(detUp, Nhalf, indx, &d1);
+//    ludcmp(detDown, Nhalf, indx, &d2);
 
-    // compute SD as c00*c11*..*cnn
-    SD = 1;
-    for (i = 0; i < Nhalf; ++i)
-    {
-        SD *= detUp(i, i)*detDown(i, i);
-    }
-    // return SD
-    return d1*d2*SD;
-}
+//    // compute SD as c00*c11*..*cnn
+//    SD = 1;
+//    for (i = 0; i < Nhalf; ++i)
+//    {
+//        SD *= detUp(i, i)*detDown(i, i);
+//    }
+//    // return SD
+//    return d1*d2*SD;
+//}

@@ -31,7 +31,7 @@ double SlaterDeterminant::phi(const mat &r, double alpha, int i, int j, VMCSolve
     else if (j>=2 && j<=4)
     {
         int dimension = j-2;
-        return alpha*r(i,dimension)*exp(-alpha*ri/2.0); // 2p
+        return /*alpha**/r(i,dimension)*exp(-0.5*alpha*ri); // 2p
     }
 }
 
@@ -59,6 +59,7 @@ vec SlaterDeterminant::gradientPhi(const mat &r, int i, int j, VMCSolver *solver
 
         return derivative; // d²/dx²  2p
     }
+    else {  cout << "No single particle wave function for this electron" << endl; exit(0);    }
 }
 
 double SlaterDeterminant::laplacianPhi(const mat &r, int i, int j, VMCSolver *solver)
@@ -179,15 +180,12 @@ mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
     {
         for(int j = 0; j < nHalf; j++)
         {
-//            cout << "This" << endl;
-//            cout << gradient.row(i) <<endl;
-//            cout << "Is trying to mate with " << endl;
-//            cout << gradientPhi(r,i,j,solver)*detUpInverseOld(j,i) << endl;
-
             gradient.row(i)         += (gradientPhi(r, i        , j, solver) * detUpInverseOld(j,i)).t();
             gradient.row(i + nHalf) += (gradientPhi(r, i + nHalf, j, solver) * detDownInverseOld(j,i)).t();
+
         }
     }
+
 
     return gradient;
 
