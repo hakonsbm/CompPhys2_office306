@@ -71,8 +71,8 @@ def extract_m_basisinfo(filename, printing = False):
             #print I
         else:
             try:
-                w = float(I[0].replace("D", "E"))
-                e = float(I[1].replace("D", "E"))
+                e = float(I[0].replace("D", "E"))
+                w = float(I[1].replace("D", "E"))
                 basisE[activecontracted].append(e)
                 basisW[activecontracted].append(w)
                 #basisE[activecontracted].append(float(I[1]))
@@ -189,58 +189,83 @@ def createfunction(fname, comments, orbital_types, N_orbitals, exponents, weight
     
     #writing to header
     cppheader.append("    void add_"+fname+"(const vec corePos);")
+
     
 
     cppclass.append("void basisbank::add_"+fname+"(const vec corePos){")
+    orb_count = 0
     for i in range(N_orbitals):
         if orbital_types[i] == 0:
             #create an s-orbital
             cppclass.append("    // s-orbital")
             #cppclass.append("    bs.add_state();")
+            
             for e in range(len(exponents[i])):
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,0,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,0,0,corePos);" % (exponents[i][e], weights[i][e]))
+                orb_count += 1
+            if len(exponents[i]) == 3:
+                cppclass.append("    contracted()->contract_orb_2s();")
+                orb_count = 0
+            elif len(exponents[i]) == 2:
+                cppclass.append("    contracted()->contract_orbK();")
+            else:
+                cppclass.append("    contracted()->contract_orb_1s();")
+                
+
+            
 
         if orbital_types[i] == 1:
             #create an p-orbital
-            cppclass.append("    // p-orbital")
-            #cppclass.append("    bs.add_state();")
-            for e in range(len(exponents[i])):
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,0,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,1,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,0,1,corePos);" % (exponents[i][e], weights[i][e]))
-                
+            for coor in [["X", "1,0,0"],["Y", "0,1,0"],["Z", "0,0,1"]]:
+                cppclass.append("    // p-orbital")
+                for e in range(len(exponents[i])):
+                    cppclass.append("    contracted()->add_primitive(%.8f,%.8f,%s,corePos);" % (exponents[i][e], weights[i][e],coor[1]))
+                cppclass.append("    contracted()->contract_orb_p%s();" %(coor[0]))
+
+            
+        """
+                if len(exponents[i]) == 1:
+                    cppclass.append("    contracted()->contract_orb();")
+                else:
+                    cppclass.append("    contracted()->contract_orbK();")
+            """
+        
+
+        ######## NOT IMPLEMENTED ########
+        """
         if orbital_types[i] == 2:
             #create an d-orbital
             cppclass.append("    // d-orbital (2)")
             cppclass.append("    bs.add_state();")
             for e in range(len(exponents[i])):
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,2,0,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,2,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,0,2,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,2,0,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,2,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,0,2,corePos);" % (exponents[i][e], weights[i][e]))
 
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,1,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,1,1,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,0,1,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,1,1,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,1,1,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,1,0,1,corePos);" % (exponents[i][e], weights[i][e]))
 
         if orbital_types[i] == 3:
             #create an d-orbital
             cppclass.append("    // d-orbital (3)")
             cppclass.append("    bs.add_state();")
             for e in range(len(exponents[i])):
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,3,0,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,3,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,0,3,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,3,0,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,3,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,0,3,corePos);" % (exponents[i][e], weights[i][e]))
 
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,2,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,1,2,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,0,2,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,1,2,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,1,2,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,1,0,2,corePos);" % (exponents[i][e], weights[i][e]))
 
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,2,1,0,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,0,2,1,corePos);" % (exponents[i][e], weights[i][e]))
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,2,0,1,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,2,1,0,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,2,1,corePos);" % (exponents[i][e], weights[i][e]))
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,2,0,1,corePos);" % (exponents[i][e], weights[i][e]))
 
-                cppclass.append("    Contracted add_primitive(%.8f,%.8f,1,1,1,corePos);" % (exponents[i][e], weights[i][e]))
-                
+                cppclass.append("    contracted()->add_primitive(%.8f,%.8f,1,1,1,corePos);" % (exponents[i][e], weights[i][e]))
+        """
+
     cppclass.append("}\n")
     
     return cppheader, cppclass
@@ -248,18 +273,25 @@ def createfunction(fname, comments, orbital_types, N_orbitals, exponents, weight
 def saveclass(cppclasses, cppheaders):
     cppfile = "//This file is maintained by an external python script and should not be edited manually.\n\
 #include <armadillo>\n\
-#include <basisbank.h>\n\
-#include <contracted.h>\n\n\
+#include \"basisbank.h\"\n\
+#include \"contracted.h\"\n\n\
 using namespace std;\n\
 using namespace arma;\n\n\
-basisbank::basisbank()\n{\n\
-contracted Contracted = new contracted();\n} \n\
+basisbank::basisbank()\n{\n    \
+initContracted(new Contracted);\n\
+}\n\
+\n\
 \n"
     
     for i in cppclasses:
         for e in i:
             cppfile += e+ "\n"
         cppfile += "\n"
+    cppfile += "double basisbank::get_orb_1s() {return contracted()->get_orb_1s();}\n"
+    cppfile += "double basisbank::get_orb_2s() {return contracted()->get_orb_2s();}\n"
+    cppfile += "double basisbank::get_orb_pX() {return contracted()->get_orb_pX();}\n"
+    cppfile += "double basisbank::get_orb_pY() {return contracted()->get_orb_pY();}\n"
+    cppfile += "double basisbank::get_orb_pZ() {return contracted()->get_orb_pZ();}\n"
     #print cppfile
     
     
@@ -267,16 +299,26 @@ contracted Contracted = new contracted();\n} \n\
 #ifndef BASISBANK_H\n\
 #define BASISBANK_H\n\
 #include <armadillo>\n\
-#include <contracted.h>\n\n\
+#include \"contracted.h\"\n\n\
 using namespace std;\n\
 using namespace arma;\n \n\
 class basisbank{\n\
-public:\n\
-    \n"
+public:\n"
+    cppheader += "    basisbank();\n"
     for i in cppheaders:
         for e in i:
             cppheader += e + "\n"
-    cppheader += "    double get_contracted() {return Contracted->get_contracted()}\n"
+    cppheader += "    void initContracted(Contracted *contracted) {m_contracted = contracted;}\n"
+    cppheader += "    Contracted *contracted() {return m_contracted;}\n"
+    cppheader += "    double get_orb_1s();\n"
+    cppheader += "    double get_orb_2s();\n"
+    cppheader += "    double get_orb_pX();\n"
+    cppheader += "    double get_orb_pY();\n"
+    cppheader += "    double get_orb_pZ();\n"
+
+    cppheader += "private:\n"
+    cppheader += "    Contracted *m_contracted;\n"
+
     cppheader += "};\n"
     cppheader += "#endif // BASISBANK_H"
     #print cppheader
@@ -300,9 +342,9 @@ def convertfolder():
         if filename.endswith(".txt"):
             #try:
             #comments, orbital_types, N_orbitals, exponents, weigths = extract_basisinfo(filename)
-            comments, I = extract_m_basisinfo(filename, True)
+            comments, I = extract_m_basisinfo(filename, False)
             commented = 1
-            print comments
+            #print comments
             #print "I:", I
 
             for i in I:
