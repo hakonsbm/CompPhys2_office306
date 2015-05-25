@@ -34,6 +34,6 @@
 \contentsline {subsubsection}{\numberline {3.2.1}Alpha and Beta Values}{19}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}Speedup with MPI}{20}{subsubsection.3.2.2}
 \contentsline {subsubsection}{\numberline {3.2.3}Onebody densities / Comparisons / Without Jastrow}{20}{subsubsection.3.2.3}
-\contentsline {subsubsection}{\numberline {3.2.4}Charge Density}{20}{subsubsection.3.2.4}
-\contentsline {section}{\numberline {4}Conclusions and discussion}{20}{section.4}
-\contentsline {subsection}{\numberline {4.1}Critique on the exercise}{20}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {3.2.4}Charge Density}{21}{subsubsection.3.2.4}
+\contentsline {section}{\numberline {4}Conclusions and discussion}{21}{section.4}
+\contentsline {subsection}{\numberline {4.1}Critique on the exercise}{21}{subsection.4.1}

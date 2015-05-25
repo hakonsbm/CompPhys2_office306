@@ -973,14 +973,23 @@ atom}
 				  \label{tab:alpha_beta}
 			\end{table}
 
+
 			\begin{figure}
-				\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_alpha_beta}
-				\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_alpha_beta_var}
-				\protect\caption{Energy (left) and variance (right) for different Alpha and Beta values for Neon.}
-				\label{fig:alpha_beta_comparison}
+				\centering \includegraphics[width=0.45\linewidth]{../figures/Beryllium_alpha_beta_energy}
+				\centering \includegraphics[width=0.45\linewidth]{../figures/Beryllium_alpha_beta_variance}
+				\protect\caption{Energy (left) and variance (right) for different Alpha and Beta values for Beryllium, using $10^{6}$ cycles.}
+				\label{fig:alpha_beta_comparison_beryllium}
 			\end{figure}
 
-			We use Alpha and Beta values for Beryllium found in project 1, so the only Alpha and Beta values we have to find are for Neon. Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. A plot of different energies and variance given by different Alpha and Beta values are shown in figure \ref{fig:alpha_beta_comparison}.
+			\begin{figure}
+				\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_alpha_beta_energy}
+				\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_alpha_beta_variance}
+				\protect\caption{Energy (left) and variance (right) for different Alpha and Beta values for Neon, using $10^{5}$ cycles.}
+				\label{fig:alpha_beta_comparison_neon}
+			\end{figure}
+
+			To find optimal Alpha and Beta values for the atoms we run VMC with ranges of different values for \(\alpha\) and \(\beta\). The resulting plots of variance and energy for different combinations are given in figure \ref{fig:alpha_beta_comparison_beryllium} for Beryllium and figure \ref{fig:alpha_beta_comparison_neon} for Neon. The optimal values are shown in table \ref{tab:alpha_beta}. As VMC runs slowly for Neon, because it has 10 electrons, we were only able to run over the range of Alpha and Beta values with $10^{5}$ cycles. This is reflected in the higher variance, and the spikes in the variance plot.
+
 
 		\subsubsection{Speedup with MPI}
 			\begin{table}
