@@ -1,20 +1,19 @@
 # Fdb version 3
-["bibtex Project_3"] 1432552396 "Project_3.aux" "Project_3.bbl" "Project_3" 1432552398
+["bibtex Project_3"] 1432552499 "Project_3.aux" "Project_3.bbl" "Project_3" 1432552501
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "Project_3.aux" 1432552398 22949 44bd79fb176944420be21d37067e8e48 ""
+  "Project_3.aux" 1432552501 18362 7ef5e00ec16e9a3aa745e2fdda6e7ca0 ""
   "Project_3.bcf" 0 -1 0 ""
   "bibliography.bib" 1431946521 2751 0de3f69b2447b87ffc3a1035275c62f6 ""
   (generated)
   "Project_3.bbl"
   "Project_3.blg"
-["pdflatex"] 1432552396 "Project_3.tex" "Project_3.pdf" "Project_3" 1432552398
+["pdflatex"] 1432552499 "Project_3.tex" "Project_3.pdf" "Project_3" 1432552501
   "../figures/Beryllium_blocking.png" 1432552220 34662 da4c12d27421ed2d666a6f1c2571a2ee ""
   "../figures/ChargeDensityBeryllium.png" 1430239619 18266 452a2cff5e30e17b1666b4e9a16e27a5 ""
   "../figures/ChargeDensityNeon.png" 1430239238 16827 67a9dccfc37006155572b8dac620ea02 ""
   "../figures/EnergyVsAlphaHeliumSimpleAnalytical.png" 1425900946 29411 bcb3f33e3b43699eb0e17aea34b75fb3 ""
   "../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png" 1425328520 188878 2bfbb860ee8cc4600bea261fdbff0c38 ""
   "../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png" 1425328520 177001 4f17a04353660a93714f7b51c8058548 ""
-  "../figures/HeliumJastrowAnalyticalTimeEnergy.png" 1425328520 59929 46884fb7bcac232e6827f1849128d65b ""
   "../figures/HeliumJastrowAnalyticalTimeVariance.png" 1425328520 54924 4764824ca106a394f7eaab0089fd33e4 ""
   "../figures/Neon_alpha_beta.png" 1430217635 111891 99d26fae5bfac644fedf688ddeeb5c0a ""
   "../figures/Neon_alpha_beta_var.png" 1430217635 118231 c0172d5cfd242bdc9bfda326d446c97b ""
@@ -184,14 +183,14 @@
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1304191498 325 2bcd023400636339210573e2b3ee298b ""
   "/usr/share/texmf/tex/latex/xcolor/x11nam.def" 1339578534 9040 c0c860499be99a076792194b1d6525a1 ""
   "/usr/share/texmf/tex/latex/xcolor/xcolor.sty" 1339578534 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "Project_3.aux" 1432552398 22949 44bd79fb176944420be21d37067e8e48 ""
-  "Project_3.bbl" 1432552396 720 74b5f3d2eddf694692732f1891fecaa4 "bibtex Project_3"
-  "Project_3.out" 1432552398 1403 2fc2eb5fa62d52d730d3c2acd54aa837 ""
-  "Project_3.tex" 1432552392 66613 6c98634f5838cae6325f9d08c78f757a ""
-  "Project_3.toc" 1432552398 4161 c60401ad238ad7cb4886f69a388517e1 ""
+  "Project_3.aux" 1432552501 18362 7ef5e00ec16e9a3aa745e2fdda6e7ca0 ""
+  "Project_3.bbl" 1432552499 720 74b5f3d2eddf694692732f1891fecaa4 "bibtex Project_3"
+  "Project_3.out" 1432552501 1403 2fc2eb5fa62d52d730d3c2acd54aa837 ""
+  "Project_3.tex" 1432552497 62223 cf5d368e2aaa57f8248fa0a46b7c4176 ""
+  "Project_3.toc" 1432552501 4064 9d7f784e0600ac9d96819a52822b6741 ""
   (generated)
-  "Project_3.toc"
   "Project_3.aux"
-  "Project_3.pdf"
   "Project_3.log"
   "Project_3.out"
+  "Project_3.pdf"
+  "Project_3.toc"
