@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[x11names]{article}
 \usepackage{verbatim}
 \usepackage{listings}
 \usepackage{graphicx}
@@ -20,9 +20,29 @@
 
 
 
+%Tikz settings
+\usetikzlibrary{shapes,arrows,chains}
+% =================================================
+% Set up a few colours
+\colorlet{lcfree}{Green3}
+\colorlet{lcnorm}{Blue3}
+\colorlet{lccong}{Red3}
+% -------------------------------------------------
+% Set up a new layer for the debugging marks, and make sure it is on
+% top
+\pgfdeclarelayer{marx}
+\pgfsetlayers{main,marx}
+% A macro for marking coordinates (specific to the coordinate naming
+% scheme used here). Swap the following 2 definitions to deactivate
+% marks.
+\providecommand{\cmark}[2][]{%
+  \begin{pgfonlayer}{marx}
+    \node [nmark] at (c#2#1) {#2};
+  \end{pgfonlayer}{marx}
+  } 
+\providecommand{\cmark}[2][]{\relax} 
 
 
-\usetikzlibrary{arrows, shapes}
 
 \setcounter{tocdepth}{2}
 
@@ -39,13 +59,17 @@
 \lstset{showtabs=false}
 \lstset{breaklines}
 
-\title{ FYS-4411: Computational Physics II \\ Project 2 }
+
+
+\title{ FYS-4411: Computational Physics II \\ Project 3 }
 \author{Gullik Vetvik Killie\\
 		Håkon Sebastian Bakke Mørk\\
 		Jose Emilio Ruiz Navarro
 		}
 
 \begin{document}
+
+
 
 \maketitle
 
@@ -822,17 +846,17 @@
 	force pulling the electron to the nucleus.
 
 	\begin{figure}
-	\centering \includegraphics[width=0.45\linewidth]{figures/EnergyVsAlphaHeliumSimpleAnalytical}
-	\includegraphics[width=0.45\linewidth]{figures/VarianceVsAlphaHeliumSimpleAnalytical}
+	\centering \includegraphics[width=0.45\linewidth]{../figures/EnergyVsAlphaHeliumSimpleAnalytical}
+	\includegraphics[width=0.45\linewidth]{../figures/VarianceVsAlphaHeliumSimpleAnalytical}
 
-	\includegraphics[width=0.45\linewidth]{figures/VarianceNCyclesHeliumSimpleAnalytical}\protect\protect\caption{Plots for Helium $\psi_{T1}$ for energy versus $\alpha$, variance versus $\alpha$, and variance as function of Monte Carlo cycles.}
+	\includegraphics[width=0.45\linewidth]{../figures/VarianceNCyclesHeliumSimpleAnalytical}\protect\protect\caption{Plots for Helium $\psi_{T1}$ for energy versus $\alpha$, variance versus $\alpha$, and variance as function of Monte Carlo cycles.}
 	\label{fig01:alpha_Simple}
 	\end{figure}
 
 
 	\begin{figure}
-	\centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeEnergy}
-	\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalTimeVariance}
+	\centering \includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalTimeEnergy}
+	\includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalTimeVariance}
 	\protect\caption{Plots for Helium $\psi_{T2}$ for the energy versus the timestep, and the variance versus the timestep.}
 	\label{fig02:timestep}
 	\end{figure}
@@ -846,8 +870,8 @@
 	than without the Jastrow factor.
 
 	\begin{figure}
-	\centering \includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
-	\includegraphics[width=0.45\linewidth]{figures/HeliumJastrowAnalyticalAlphaBetaVariance}
+	\centering \includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalAlphaBetaEnergy}
+	\includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalAlphaBetaVariance}
 	\protect\caption{Using $\psi_{T2}$, plot of the energy versus alpha and beta, and plot of the variance versus $\alpha$ and $\beta$. }
 	\label{fig03:AlphaBeta}
 	\end{figure}
@@ -861,7 +885,7 @@
 	From reseach papers we find the value for energy in the ground state
 	of helium to be $-2.9037$ \cite{Kinoshita:1957:PR} and the value
 	for energy in the ground state of beryllium to be $-14.667$ \cite{Koput:2011:PCCP}.
-	Koput{]}. In table \ref{tab:energyReference} we compare results
+	Koput{]}. In table (\ref{tab:energyReference1}) we compare results
 	obtained with our Variational Monte Carlo method with results from
 	various research papers.
 
@@ -883,7 +907,7 @@
 		\protect
 		\caption{Comparison of energies found with Variational Monte Carlo method and
 		energies found in research papers.}
-		\label{tab:energyReference}
+		\label{tab:energyReference1}
 	\end{table}
 
 	\subsubsection{Alpha and Beta Values}
@@ -902,10 +926,10 @@
 			    \\ \hline
 	  		\end{tabular}
 	  		\caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values, with stepssize \(0.02\). Each Monte Carlo run went over \(10 000 	000\), using importance sampling. Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
-		  	\label{tab:alpha_beta}
+		  	\label{tab:alpha_beta1}
 		\end{table}
 
-		Table \ref{tab:alpha_beta} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. The variance was more smooth as a function of the parameters, see fig \ref{fig03:AlphaBeta} and should have been used.
+		Table \ref{tab:alpha_beta1} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. The variance was more smooth as a function of the parameters, see fig \ref{fig03:AlphaBeta} and should have been used.
 
 
 		\subsubsection{Computational speed gain by using an analytical local energy}
@@ -1024,7 +1048,143 @@
 \section{Discussion}
 
 
+\appendix
 
+\section{Program overview}
+
+	\begin{figure}
+		\begin{tikzpicture}[%
+		    >=triangle 60,              % Nice arrows; your taste may be different
+		    start chain=going below,    % General flow is top-to-bottom
+		    node distance=6mm and 45mm, % Global setup of box spacing
+		    every join/.style={norm},   % Default linetype for connecting boxes
+		    ]
+		% ------------------------------------------------- 
+		% A few box styles 
+		% <on chain> *and* <on grid> reduce the need for manual relative
+		% positioning of nodes
+		\tikzset{
+		  base/.style={draw, on chain, on grid, align=center, minimum height=4ex},
+		  proc/.style={base, rectangle, text width=10em},
+		  test/.style={base, diamond, aspect=2, text width=5em},
+		  term/.style={proc, rounded corners},
+		  % coord node style is used for placing corners of connecting lines
+		  coord/.style={coordinate, on chain, on grid, node distance=6mm and 45mm},
+		  % nmark node style is used for coordinate debugging marks
+		  nmark/.style={draw, cyan, circle, font={\sffamily\bfseries}},
+		  % -------------------------------------------------
+		  % Connector line styles for different parts of the diagram
+		  norm/.style={->, draw, lcnorm},
+		  free/.style={->, draw, lcfree},
+		  cong/.style={->, draw, lccong},
+		  it/.style={font={\small\itshape}}
+		}
+		% -------------------------------------------------
+		% Start by placing the nodes
+		\node[proc, densely dotted, it] (init) {Initialize solver};
+		\node[term, join] (split)      {Split into several threads for multi core};
+		\node[term, join] (position)      {Suggest move};
+		\node[term, join] (SD) { Compute/update \( |D| \) };
+		\node[term, join ] (metro) {Compute Metropolis Ratio};
+		\node[test, densely dotted , join ]	(test)	{\(R \ge r\)};
+		\node[term]	(new_pos)	{\(\vb{r}^{old} = \vb{r}^{new}\)};
+		\node[term, join ]	(energy)	{ Store \(E_L\) };
+		\node[test, densely dotted ,join ]	(last)	{Last cycle?};
+		\node[term]	(end)	{Collect samples};
+
+
+		%Setting up the nodes on the side
+		\node [term, right=of SD] (trialfunction) {Compute \( \psi_T(\vb{r}) \)};
+		\node [term, left=of SD] (quantum) { Compute  Quantumforce};
+		\node[term, left=of test] (old_pos) {Keep \(  \vb{r}^{old} \)};
+		\node [coord, left=of new_pos] (c1)  {};    
+		\node[coord, right=of last]	(around1){};
+		\node[coord, right=of around1] (around2) {};
+		\node[coord, right=of position]	(around3){};
+		\node[coord, right=of around3]	(around4){};
+
+
+		%Draw new links between boxes
+		% \path (SD.south) to node [near start, xshift=1em] {$y$} (quantum);
+		\draw [->,lcnorm] (SD.west) -- (quantum);
+		\draw [->,lcnorm] (SD.east) -- (trialfunction);
+		\draw [->, lcnorm] (quantum.south) -- (metro);
+		\draw [->, lcnorm] (trialfunction.south) -- (metro);
+		\draw [*->, lccong, , dotted] (test.west) -- (old_pos);
+			\path (test.west) to node [ yshift = -1em] {no} (old_pos);
+		\draw [*->, lcfree, dotted] (test.south) -- (new_pos);
+			\path (test.south) to node [xshift = -1em]{yes} (new_pos);
+
+		\draw [-, lcnorm] (old_pos.south) -- (c1);
+		\draw [->, lcnorm] (c1.south) -- (energy);
+
+		\draw[*-, lccong, dotted] (last.east) -- (around2);
+			\path (last.east) to node [yshift = -1em] {no} (last);
+			\draw[-, lccong, dotted] (around2.east) -- (around4);
+			\draw[->, lccong, dotted] (around4) -- (position);
+
+		\draw [*->, lcfree, dotted] (last.south) -- (end);
+			\path (last.south) to node [xshift = -1em]{yes} (new_pos);
+
+
+		\end{tikzpicture}
+		\caption{Schematic overview over the workflow of the VMC solver}
+		\label{fig:schematic}
+	\end{figure}
+
+	\begin{figure}
+		\begin{tikzpicture}[%
+			    >=triangle 60,              % Nice arrows; your taste may be different
+			    start chain=going below,    % General flow is top-to-bottom
+			    node distance=6mm and 45mm, % Global setup of box spacing
+			    every join/.style={norm},   % Default linetype for connecting boxes
+			    ]
+			% ------------------------------------------------- 
+			% A few box styles 
+			% <on chain> *and* <on grid> reduce the need for manual relative
+			% positioning of nodes
+			\tikzset{
+			  base/.style={draw, on chain, on grid, align=center, minimum height=4ex},
+			  proc/.style={base, rectangle, text width=10em},
+			  test/.style={base, diamond, aspect=2, text width=5em},
+			  term/.style={proc, rounded corners},
+			  % coord node style is used for placing corners of connecting lines
+			  coord/.style={coordinate, on chain, on grid, node distance=6mm and 45mm},
+			  % nmark node style is used for coordinate debugging marks
+			  nmark/.style={draw, cyan, circle, font={\sffamily\bfseries}},
+			  % -------------------------------------------------
+			  % Connector line styles for different parts of the diagram
+			  norm/.style={->, draw, lcnorm},
+			  free/.style={->, draw, lcfree},
+			  cong/.style={->, draw, lccong},
+			  it/.style={font={\small\itshape}}
+			}
+
+			%Center column
+			\node[term, fill=lcfree!25,  align=center] (solver) {VMCSolver};
+			\node[coord]	(blank)	{};
+			\node[term] (trialfunction)	{Trialfunction};
+				\draw[->, lcnorm]	(solver.south) -- (trialfunction);
+			\node[term, join]	(diff)	{He, Be, Ne, H\(_2\) or Be\(_2\)};
+
+
+			%Sides with lines drawn
+			\node[term, right=of blank] (derivatives) {Derivatives};
+				\draw[->, lcnorm] (solver.east) -- (derivatives.west);
+
+			\node[term, left=of blank] 	(slater)	{SlaterDeterminant};
+				\draw[->, lcnorm] (solver.west) -- (slater.east);
+
+			%Dotted lines between the connected classes
+			\draw[-, lcfree, densely dotted] (slater.east) -- (derivatives.west);
+			\draw[-, lcfree, densely dotted] (slater.east) -- (trialfunction.west);
+			\draw[-, lcfree, densely dotted] (trialfunction.east) -- (derivatives.west);
+
+		\end{tikzpicture}
+
+		\caption{Class and subclass structure used by the program}
+		\label{fig:classes}
+	\end{figure}
 
 
 
