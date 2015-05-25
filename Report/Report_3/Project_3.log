@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.12.10)  25 MAY 2015 13:37
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.12.10)  25 MAY 2015 13:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 6 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
-File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -1454,7 +1454,10 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
-)
+
+(/usr/share/texmf/tex/latex/xcolor/x11nam.def
+File: x11nam.def 2007/01/21 v2.11 Predefined colors according to Unix/X11 (UK)
+))
 (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcore.code.tex
 Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
 
@@ -1878,14 +1881,6 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@lastruleclass=\count173
 \@thisrulewidth=\dimen277
 )
-(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrow
-s.code.tex
-File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
-
-(/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
-File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
-\arrowsize=\dimen278
-))
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
 s.code.tex
 File: tikzlibraryshapes.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
@@ -1953,7 +1948,27 @@ File: pgflibraryshapes.multipart.code.tex 2010/01/07 v2.10 (rcs-revision 1.2)
 \pgfnodepartsevenbox=\box72
 \pgfnodepartsixbox=\box73
 \pgfnodepartfivebox=\box74
-))) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+)))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrow
+s.code.tex
+File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
+\arrowsize=\dimen278
+))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarychain
+s.code.tex
+File: tikzlibrarychains.code.tex 2008/02/27 v2.10 (rcs-revision 1.5)
+
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryposit
+ioning.code.tex
+File: tikzlibrarypositioning.code.tex 2008/10/06 v2.10 (rcs-revision 1.7)
+))
+\pgf@layerbox@marx=\box75
+\pgf@layerboxsaved@marx=\box76
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2013/08/26 1.5b listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -1971,36 +1986,29 @@ File: lstlang1.sty 2013/08/26 1.5b listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2013/08/26 1.5b listings language file
 )
-(./Project_3.aux
-
-LaTeX Warning: Label `tab:energyReference' multiply defined.
-
-
-LaTeX Warning: Label `tab:alpha_beta' multiply defined.
-
-)
+(./Project_3.aux)
 \openout1 = `Project_3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
 \c@lstlisting=\count174
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count175
 \scratchdimen=\dimen279
-\scratchbox=\box75
+\scratchbox=\box77
 \nofMPsegments=\count176
 \nofMParguments=\count177
 \everyMPshowfont=\toks34
@@ -2024,8 +2032,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box76
-Package hyperref Info: Link coloring OFF on input line 48.
+\AtBeginShipoutBox=\box78
+Package hyperref Info: Link coloring OFF on input line 69.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -2035,9 +2043,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count181
 )
-LaTeX Info: Redefining \ref on input line 48.
-LaTeX Info: Redefining \pageref on input line 48.
-LaTeX Info: Redefining \nameref on input line 48.
+LaTeX Info: Redefining \ref on input line 69.
+LaTeX Info: Redefining \pageref on input line 69.
+LaTeX Info: Redefining \nameref on input line 69.
 
 (./Project_3.out) (./Project_3.out)
 \@outlinefile=\write4
@@ -2046,12 +2054,12 @@ LaTeX Info: Redefining \nameref on input line 48.
  ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 51.
+LaTeX Font Info:    Try loading font information for U+msa on input line 74.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 51.
+LaTeX Font Info:    Try loading font information for U+msb on input line 74.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -2063,229 +2071,243 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
-[7] [8] [9]
-Overfull \hbox (63.61452pt too wide) in paragraph at lines 481--526
+[7] [8]
+Overfull \hbox (51.94704pt too wide) in paragraph at lines 504--549
  [] 
  []
 
-[10] [11] [12] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 716--717
+[9] [10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 739--740
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 722--723
+Underfull \hbox (badness 10000) in paragraph at lines 745--746
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--729
+Underfull \hbox (badness 10000) in paragraph at lines 751--752
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 757--758
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 734--735
+Underfull \hbox (badness 10000) in paragraph at lines 763--764
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 740--741
+Underfull \hbox (badness 10000) in paragraph at lines 765--766
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 742--743
-
- []
-
-<../figures/Beryllium_blocking.png, id=287, 578.16pt x 433.62pt>
+<../figures/Beryllium_blocking.png, id=298, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_blocking.png Graphic file (type png)
 
 <use ../figures/Beryllium_blocking.png>
 Package pdftex.def Info: ../figures/Beryllium_blocking.png used on input line 7
-45.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+68.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_blocking.png, id=289, 578.16pt x 433.62pt>
+<../figures/Neon_blocking.png, id=300, 578.16pt x 433.62pt>
 File: ../figures/Neon_blocking.png Graphic file (type png)
 
 <use ../figures/Neon_blocking.png>
-Package pdftex.def Info: ../figures/Neon_blocking.png used on input line 746.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
- [14] [15 <../figures/Beryllium_blocking.png> <../figures/Neon_blocking.png>]
-<../figures/EnergyVsAlphaHeliumSimpleAnalytical.png, id=317, 578.16pt x 433.62p
+Package pdftex.def Info: ../figures/Neon_blocking.png used on input line 769.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+ [13 <../figures/Beryllium_blocking.png> <../figures/Neon_blocking.png>] [14]
+<../figures/EnergyVsAlphaHeliumSimpleAnalytical.png, id=331, 578.16pt x 433.62p
 t>
 File: ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png Graphic file (type png
 )
  <use ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png>
 Package pdftex.def Info: ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png use
-d on input line 822.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+d on input line 866.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/VarianceVsAlphaHeliumSimpleAnalytical.png, id=318, 578.16pt x 433.6
+<../figures/VarianceVsAlphaHeliumSimpleAnalytical.png, id=332, 578.16pt x 433.6
 2pt>
 File: ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png Graphic file (type p
 ng)
  <use ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png>
 Package pdftex.def Info: ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png u
-sed on input line 823.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+sed on input line 867.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/VarianceNCyclesHeliumSimpleAnalytical.png, id=319, 578.16pt x 433.6
+<../figures/VarianceNCyclesHeliumSimpleAnalytical.png, id=333, 578.16pt x 433.6
 2pt>
 File: ../figures/VarianceNCyclesHeliumSimpleAnalytical.png Graphic file (type p
 ng)
  <use ../figures/VarianceNCyclesHeliumSimpleAnalytical.png>
 Package pdftex.def Info: ../figures/VarianceNCyclesHeliumSimpleAnalytical.png u
-sed on input line 825.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+sed on input line 869.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalyticalTimeEnergy.png, id=320, 578.16pt x 433.62pt>
+<../figures/HeliumJastrowAnalyticalTimeEnergy.png, id=334, 578.16pt x 433.62pt>
 File: ../figures/HeliumJastrowAnalyticalTimeEnergy.png Graphic file (type png)
 <use ../figures/HeliumJastrowAnalyticalTimeEnergy.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalTimeEnergy.png used 
-on input line 831.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+on input line 875.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalyticalTimeVariance.png, id=321, 578.16pt x 433.62p
+<../figures/HeliumJastrowAnalyticalTimeVariance.png, id=335, 578.16pt x 433.62p
 t>
 File: ../figures/HeliumJastrowAnalyticalTimeVariance.png Graphic file (type png
 )
  <use ../figures/HeliumJastrowAnalyticalTimeVariance.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalTimeVariance.png use
-d on input line 832.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+d on input line 876.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png, id=323, 578.16pt x 433.
+<../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png, id=337, 578.16pt x 433.
 62pt>
 File: ../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png Graphic file (type 
 png)
  <use ../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png 
-used on input line 846.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+used on input line 890.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png, id=324, 578.16pt x 43
+<../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png, id=338, 578.16pt x 43
 3.62pt>
 File: ../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png Graphic file (typ
 e png)
  <use ../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalAlphaBetaVariance.pn
-g used on input line 847.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
- [16]
-[17 <../figures/EnergyVsAlphaHeliumSimpleAnalytical.png> <../figures/VarianceVs
-AlphaHeliumSimpleAnalytical.png> <../figures/VarianceNCyclesHeliumSimpleAnalyti
-cal.png> <../figures/HeliumJastrowAnalyticalTimeEnergy.png> <../figures/HeliumJ
-astrowAnalyticalTimeVariance.png>] [18 <../figures/HeliumJastrowAnalyticalAlpha
-BetaEnergy.png> <../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png>]
+g used on input line 891.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+ [15 <../figures/EnergyVsAlphaHeliumSimpleAnalytical.png> <../figures/VarianceV
+sAlphaHeliumSimpleAnalytical.png> <../figures/VarianceNCyclesHeliumSimpleAnalyt
+ical.png>] [16 <../figures/HeliumJastrowAnalyticalTimeEnergy.png> <../figures/H
+eliumJastrowAnalyticalTimeVariance.png> <../figures/HeliumJastrowAnalyticalAlph
+aBetaEnergy.png> <../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png>]
 <../figures/Beryllium_alpha_beta_energy.png, id=374, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_alpha_beta_energy.png Graphic file (type png)
 
 <use ../figures/Beryllium_alpha_beta_energy.png>
 Package pdftex.def Info: ../figures/Beryllium_alpha_beta_energy.png used on inp
-ut line 978.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+ut line 1024.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
 <../figures/Beryllium_alpha_beta_variance.png, id=375, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_alpha_beta_variance.png Graphic file (type png)
 
 <use ../figures/Beryllium_alpha_beta_variance.png>
 Package pdftex.def Info: ../figures/Beryllium_alpha_beta_variance.png used on i
-nput line 979.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+nput line 1025.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
 <../figures/Neon_alpha_beta_energy.png, id=376, 578.16pt x 433.62pt>
 File: ../figures/Neon_alpha_beta_energy.png Graphic file (type png)
 
 <use ../figures/Neon_alpha_beta_energy.png>
 Package pdftex.def Info: ../figures/Neon_alpha_beta_energy.png used on input li
-ne 985.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+ne 1031.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
 <../figures/Neon_alpha_beta_variance.png, id=377, 578.16pt x 433.62pt>
 File: ../figures/Neon_alpha_beta_variance.png Graphic file (type png)
 
 <use ../figures/Neon_alpha_beta_variance.png>
 Package pdftex.def Info: ../figures/Neon_alpha_beta_variance.png used on input 
-line 986.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
- [19 <../figures/Beryllium_alpha_beta_energy.png> <../figures/Beryllium_alpha_b
-eta_variance.png>]
-<../figures/processor_number_time_comparison.png, id=392, 578.16pt x 433.62pt>
+line 1032.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+ [17] [18 <../figures/Beryllium_alpha_beta_energy.png> <../figures/Beryllium_al
+pha_beta_variance.png> <../figures/Neon_alpha_beta_energy.png> <../figures/Neon
+_alpha_beta_variance.png>]
+<../figures/processor_number_time_comparison.png, id=402, 578.16pt x 433.62pt>
 File: ../figures/processor_number_time_comparison.png Graphic file (type png)
 
 <use ../figures/processor_number_time_comparison.png>
 Package pdftex.def Info: ../figures/processor_number_time_comparison.png used o
-n input line 1009.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
- [20 <../figures/Neon_alpha_beta_energy.png> <../figures/Neon_alpha_beta_varian
-ce.png> <../figures/processor_number_time_comparison.png>]
-<../figures/ChargeDensityNeon.png, id=407, 578.16pt x 433.62pt>
+n input line 1055.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+
+<../figures/ChargeDensityNeon.png, id=406, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityNeon.png Graphic file (type png)
 
 <use ../figures/ChargeDensityNeon.png>
 Package pdftex.def Info: ../figures/ChargeDensityNeon.png used on input line 10
-24.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
+70.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/ChargeDensityBeryllium.png, id=408, 578.16pt x 433.62pt>
+<../figures/ChargeDensityBeryllium.png, id=407, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityBeryllium.png Graphic file (type png)
 
 <use ../figures/ChargeDensityBeryllium.png>
 Package pdftex.def Info: ../figures/ChargeDensityBeryllium.png used on input li
-ne 1025.
-(pdftex.def)             Requested size: 199.19283pt x 149.39395pt.
- (./Project_3.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1044.
- [21 <../figures/ChargeDensityNeon.png> <../figures/ChargeDensityBeryllium.png>
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1044.
+ne 1071.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+
+Overfull \hbox (13.2459pt too wide) in paragraph at lines 1159--1160
+[][] 
+ []
+
+
+Overfull \hbox (45.56833pt too wide) in paragraph at lines 1212--1213
+[][] 
+ []
+
+(./Project_3.bbl [19 <../figures/processor_number_time_comparison.png>]
+[20 <../figures/ChargeDensityNeon.png> <../figures/ChargeDensityBeryllium.png>]
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1226.
+ [21]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1226.
  (./Project_3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1044.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1044.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1226.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1226.
 
 Package rerunfilecheck Info: File `Project_3.out' has not changed.
-(rerunfilecheck)             Checksum: 31BCB0CDDCD54F54F967F4D70385E9FB;1290.
+(rerunfilecheck)             Checksum: 2FC2EB5FA62D52D730D3C2ACD54AA837;1403.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1044.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1226.
  ) 
 Here is how much of TeX's memory you used:
- 25311 strings out of 494952
- 476180 string characters out of 6179834
- 590986 words of memory out of 5000000
- 27853 multiletter control sequences out of 15000+600000
- 22550 words of font info for 64 fonts, out of 8000000 for 9000
+ 26064 strings out of 494952
+ 490277 string characters out of 6179834
+ 615246 words of memory out of 5000000
+ 28589 multiletter control sequences out of 15000+600000
+ 22225 words of font info for 63 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 56i,14n,58p,10426b,418s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/hakon/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/h
-akon/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/hakon/.texmf
+ 56i,14n,68p,10426b,806s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/hakon/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.600pk> </home/h
+akon/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/hakon/.texmf
 -var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/hakon/.texmf-var/fonts/
-pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/hakon/.texmf-var/fonts/pk/ljfour/j
+pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/hakon/.texmf-var/fonts/pk/ljfour/j
 knappen/ec/ecbx1440.600pk> </home/hakon/.texmf-var/fonts/pk/ljfour/jknappen/ec/
-ecrm1000.600pk> </home/hakon/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.60
+ecrm0900.600pk> </home/hakon/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.60
 0pk> </home/hakon/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home
 /hakon/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Project_3.pdf (21 pages, 1435983 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy9.pfb>
+Output written on Project_3.pdf (21 pages, 1479855 bytes).
 PDF statistics:
- 910 PDF objects out of 1000 (max. 8388607)
- 456 compressed objects within 5 object streams
- 183 named destinations out of 1000 (max. 500000)
- 237 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 960 PDF objects out of 1000 (max. 8388607)
+ 482 compressed objects within 5 object streams
+ 187 named destinations out of 1000 (max. 500000)
+ 253 words of extra memory for PDF output out of 10000 (max. 10000000)
 

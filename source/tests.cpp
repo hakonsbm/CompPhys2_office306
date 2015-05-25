@@ -169,8 +169,8 @@ TEST(HYDROGENTWO_VS_HELIUM)
 {
 //    //Make a test with R = 0 for hydrogenTwo where it should be the same as the Helium atom
 
-//    cout << endl << "Running He vs H_2 test" << endl << endl;
-//    VMCSolver *solver = new VMCSolver;
+    cout << endl << "Running He vs H_2 test" << endl << endl;
+    VMCSolver *solver = new VMCSolver;
 //    solver->setTrialFunction(new Helium(solver));
 //    solver->trialFunction()->setAnalytical(false);
 //    solver->switchbBlockSampling(false);
@@ -201,13 +201,13 @@ TEST(HYDROGENTWO_VS_HELIUM)
 //    cout << solver->trialFunction()->waveFunction(r,solver) << endl;
 
 
-//    solver->setTrialFunction(new HydrogenTwo(solver));
-//    solver->trialFunction()->setAnalytical(false);
-//    solver->trialFunction()->setNucleusDistance(1.4);
-////    solver->switchElectronInteraction(true);
-//    solver->switchbBlockSampling(false);
-//    solver->setCycles(100000);
-//    solver->runMasterIntegration();
+    solver->setTrialFunction(new HydrogenTwo(solver));
+    solver->trialFunction()->setAnalytical(false);
+    solver->trialFunction()->setNucleusDistance(1.4);
+//    solver->switchElectronInteraction(true);
+    solver->switchbBlockSampling(false);
+    solver->setCycles(100000);
+    solver->runMasterIntegration();
 
 
 
@@ -249,65 +249,65 @@ TEST(ANALYTICAL_VS_NUMERICAL)
 
 //    CHECK_CLOSE(numerical, analytical, 0.01 );
 //    for(int i = 0; i < 100500; i++)
-    {
-        cout << "Running Neon numerical" << endl;
-        solver->setTrialFunction(new Neon(solver));
-        solver->switchElectronInteraction(true);
-        solver->trialFunction()->setAnalytical(false);
-        solver->setCycles(10000);
+//    {
+//        cout << "Running Neon numerical" << endl;
+//        solver->setTrialFunction(new Neon(solver));
+//        solver->switchElectronInteraction(true);
+//        solver->trialFunction()->setAnalytical(false);
+//        solver->setCycles(10000);
+////        solver->runMasterIntegration();
+
+//        numerical = solver->getEnergy();
+
+////    //TestStuff
+////        double particles = solver->getNParticles();
+////        double dimensions = solver->getNDimensions();
+////        long idum = -clock();
+
+////        mat r = zeros (particles,dimensions);
+
+////        //Random positions to test derivative
+////        for(int i = 0; i < particles; i ++ )
+////        {
+////         for(int j = 0; j < dimensions; j++)
+////         {
+////            r(i,j) = ran2(&idum);
+
+////         }
+////        }
+
+////        solver->determinant()->updateSlaterMatrices(r,solver);
+////        numerical = solver->trialFunction()->localEnergy(r,solver);
+
+
+//        cout << "Running Neon analytical" << endl;
+
+//        solver->setTrialFunction(new Beryllium(solver));
+//        solver->switchElectronInteraction(true);
+//        solver->trialFunction()->setAnalytical(true);
+//        solver->setCycles(100000);
 //        solver->runMasterIntegration();
 
-        numerical = solver->getEnergy();
+//        analytical = solver->getEnergy();
 
-//    //TestStuff
-//        double particles = solver->getNParticles();
-//        double dimensions = solver->getNDimensions();
-//        long idum = -clock();
+////        solver->determinant()->updateSlaterMatrices(r,solver);
+////        analytical = solver->trialFunction()->localEnergy(r,solver);
 
-//        mat r = zeros (particles,dimensions);
 
-//        //Random positions to test derivative
-//        for(int i = 0; i < particles; i ++ )
+//        if(solver->getRank() == 0)
 //        {
-//         for(int j = 0; j < dimensions; j++)
-//         {
-//            r(i,j) = ran2(&idum);
-
-//         }
+//            cout << "Energy with the correct E_L one: " << numerical << endl;
+//            cout << "Energy with the E_L machinery : " << analytical << endl;
 //        }
 
-//        solver->determinant()->updateSlaterMatrices(r,solver);
-//        numerical = solver->trialFunction()->localEnergy(r,solver);
+////        cout << solver->determinant()->detUpInverseOld <<endl;
+
+////        if(fabs(numerical - analytical) > 10000)
+////            break;
+//    }
 
 
-        cout << "Running Neon analytical" << endl;
-
-        solver->setTrialFunction(new Beryllium(solver));
-        solver->switchElectronInteraction(true);
-        solver->trialFunction()->setAnalytical(true);
-        solver->setCycles(100000);
-        solver->runMasterIntegration();
-
-        analytical = solver->getEnergy();
-
-//        solver->determinant()->updateSlaterMatrices(r,solver);
-//        analytical = solver->trialFunction()->localEnergy(r,solver);
-
-
-        if(solver->getRank() == 0)
-        {
-            cout << "Energy with the correct E_L one: " << numerical << endl;
-            cout << "Energy with the E_L machinery : " << analytical << endl;
-        }
-
-//        cout << solver->determinant()->detUpInverseOld <<endl;
-
-//        if(fabs(numerical - analytical) > 10000)
-//            break;
-    }
-
-
-    CHECK_CLOSE(numerical, analytical, 0.01 );
+//    CHECK_CLOSE(numerical, analytical, 0.01 );
 }
 
 
