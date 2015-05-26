@@ -4,7 +4,8 @@
 /build-*/
 .*~
 *.pro.user.*
-Report/Report_3/*.aux
-Report/Report_3/*.log
-Report/Report_3/*.out
-Report/Report_3/*.toc
+*.aux
+*.log
+*.out
+*.toc
+*.gz
