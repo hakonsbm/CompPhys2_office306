@@ -21,6 +21,8 @@ public:
     virtual double localEnergy(const mat &r, VMCSolver *solver );
     virtual void calculateAlpha(VMCSolver *solver);
 
+private:
+
 
 };
 

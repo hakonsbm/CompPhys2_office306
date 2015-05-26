@@ -78,7 +78,7 @@ private:
     double localEnergy(const mat &r);
 
     bool importanceSampling;    //When this flag is true it uses importance sampling instead of regular sampling
-    bool m_blockSampling;
+    bool m_blockSampling = false;
 
     bool m_electronInteraction;
     bool m_Jastrow;

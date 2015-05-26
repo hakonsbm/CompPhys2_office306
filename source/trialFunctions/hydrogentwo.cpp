@@ -31,7 +31,7 @@ HydrogenTwo::~HydrogenTwo()
 
 void HydrogenTwo::calculateAlpha(VMCSolver *solver)
 {
-    solver->setAlpha(4.);
+//    solver->setAlpha(4.);
 
 
     return;
@@ -130,9 +130,13 @@ double HydrogenTwo::localEnergy(const mat &r, VMCSolver *solver)
 
     //Taking away the electron electron interaction, used for some tests with Hydrogenic wavesfunctions
     if(solver->getElectronInteration())
-        potentialEnergy = - (1./r1p1+1./r1p2 + 1./r2p1 + 1./r2p2) + 1./(r12) + 1./norm(2*nucleusHalfDistance);
+        potentialEnergy = - (1./r1p1+1./r1p2 + 1./r2p1 + 1./r2p2) + 1./(r12) /*+ 1./norm(2*nucleusHalfDistance)*/;
     else
         potentialEnergy = - (1./r1p1+1./r1p2 + 1./r2p1+1./r2p2);
+
+    if(!m_zeroDistance)
+        potentialEnergy += 1./norm(2*nucleusHalfDistance);
+
 
 
 

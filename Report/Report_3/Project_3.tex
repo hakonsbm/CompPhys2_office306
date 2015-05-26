@@ -244,7 +244,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			\\
 			E_L &= -\frac{1}{2\Psi_T} \sum_{i=1}^2{ \left( \alpha^2 -\alpha \frac{ 2 }{ r_i } \right) \Psi_T  -\frac{Z}{r_i} +  \frac{1}{r_{ij} } }
 			\\
-			E_L &= -\alpha^2 + (\alpha-Z) \left( \frac{1}{r_1} + \frac{1}{r_2} \right) + \frac{1}{r_{12}}
+			E_L &= -\alpha^2 + (\alpha-Z) \left( \frac{1}{r_1} + \frac{1}{r_2} \right) + \frac{1}{r_{12}} \label{eq:heliumLocalEnergy}
 		\end{align}
 
 	\subsection{Calculating the Slater determinant}
@@ -456,7 +456,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			Inserting equations \eqref{eq:gradianSlaterRatio} and \eqref{eq:lapplacianSlaterRatio} into \eqref{eq:laplacianIntermediate} we get
 
 			\begin{align}
-				\frac{\nabla^2 \Psi_T}{\Psi_T} &= \frac{\nabla^2 |D_\uparrow|}{|D_\uparrow|} + \frac{\nabla^2 |D_\downarrow|}{|D_\downarrow|} + 2 \left( \frac{\nabla |D_\uparrow|}{|D_\uparrow|} + \frac{\nabla |D_\downarrow|}{|D_\downarrow|} \right) \cdot \frac{\nabla\Psi_C}{\Psi_C} +  \frac{\nabla^2\Psi_C}{\Psi_C}
+				\frac{\nabla^2 \Psi_T}{\Psi_T} &= \frac{\nabla^2 |D_\uparrow|}{|D_\uparrow|} + \frac{\nabla^2 |D_\downarrow|}{|D_\downarrow|} + 2 \left( \frac{\nabla |D_\uparrow|}{|D_\uparrow|} + \frac{\nabla |D_\downarrow|}{|D_\downarrow|} \right) \cdot \frac{\nabla\Psi_C}{\Psi_C} +  \frac{\nabla^2\Psi_C}{\Psi_C}  \label{eq:kineticRatio}
 			\end{align}
 
 			Now we have \(4\) different types of ratios we need to find an expression for \( \frac{\nabla^2 |D|}{|D|} \) , \(\frac{\nabla |D|}{|D|} \), \( \frac{\nabla^2\Psi_C}{\Psi_C} \) and \( \frac{\nabla\Psi_C}{\Psi_C} \) to calculate both the gradient and Laplacian ratios of the wavefunction.
@@ -770,54 +770,6 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			\protect\caption{STD vs. blocksize with $10^{6}$ MC cycles.  The STD should have a plateauing trend as the blocksize increases.} \label{fig01:std_Stuff}
 		\end{figure}
 
-	\subsection{Verification of the model}
-		\subsubsection{Verification of the general Monte Carlo method}
-			The wavefunction for a Hydrogen atom is known, see equation \eqref{eq:hydrogen}, a Monte Carlo calculation for an exact wavefunction will give a exact result.
-
-			\begin{align}
-				 \Psi(\rho ) = \alpha \rho e^{-\alpha\rho} \qquad \text{ With  local energy: } \qquad E_{L} (\rho) = - \frac{1}{\rho} - \frac{\alpha}{2} \left( \alpha - \frac{2}{\rho} \right) \label{eq:hydrogen}
-			\end{align}
-
-			If the VMC calculation is run with a Hydrogen atom with \(\alpha = 1\) it should produce an energy of exactly \( -0.5\) with \(0\) variance. A check for this is implemented as a unit test in the program.
-
-			The closed expressions of the local energy has also been verified by comparing them to numerical versions and checked that they produced similar values.
-
-		%Need to check up some stuff when including this.
-		\subsubsection{Verification of the Slater determinant and the laplacian Slater determinan ratio}
-			To verify that the Slater determinant part of the trialfunctions is working correctly we use the fact that the states for a hydrogen atom can be calculated analytically, see for example Griffiths textbook  \cite{griffiths2005introduction}, and is given by
-			\begin{align}
-				E_n = -\frac{E_1}{n^2}  \qquad \text{; where } n  \text{ is the main state number}
-			\end{align}
-
-			By considering the other atoms without interaction between the electrons we can achieve an analytical solution by the same method.
-			\begin{center}
-				\begin{tabular}{| c | c |}
-				\bottomrule
-				Atom & Energy
-				\\ \hline
-				Hydrogen 	& \( E_1 = -\frac{1}{2} \)
-				\\ \hline
-				Helium 		& \( E_1 = -4\)
-				\\ \hline Beryllium		& \( E_1 = -20 \)
-				\\ \hline Neon		& \( E_1 = -200 \)
-				\\ \toprule
-				\end{tabular}
-			\end{center}
-
-		\subsubsection{Verification of the Padè-Jastrow part.}
-			To verify that the part of the code that treats the correlation part of the kinetic energy we calculate, we check that it reproduces the correct results in the total energy and variation, but we also perform some tests on various parts by considering the Helium atom, where we calculate certain parts of the sums by hand and then compare the results with the ones given by the ratio machinery.
-
-			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\frac{\nabla\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} on Helium we get
-
-			\begin{align}
-				\frac{\nabla\Psi_C}{\Psi_C} &= \frac{1}{\Psi_c} \pdv{\Psi_C}{x_k} = \frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right) - \frac{\vb{r_{21}}}{r_{21}}\pdv{}{r_{21}}\left( \frac{r_{21}}{2(1+\beta r_{21})} \right)
-				\\
-				&= 2\frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right)
-				\\
-				&= \frac{\vb{r_{12}}}{r_{12}} \frac{1}{(1+\beta r_{12})^2}
-			\end{align}
-
-			Testing that the program reproduces this for the helium atom indicates the \(\frac{\nabla \Psi_C}{\Psi_C}\) is being calculated correctly.
 
 \section{Results}
 	\subsection{Variational Monte Carlo calculations of the helium
@@ -1002,7 +954,6 @@ atom}
 		obtained with our Variational Monte Carlo method with results from
 		various research papers.
 
-
 		\subsubsection{Alpha and Beta Values}
 			\begin{table}
 			\center
@@ -1151,7 +1102,7 @@ atom}
 		\caption{Schematic overview over the workflow of the VMC solver}
 		\label{fig:schematic}
 	\end{figure}
-
+\section{Class structure}
 	\begin{figure}
 		\begin{tikzpicture}[%
 			    >=triangle 60,              % Nice arrows; your taste may be different
@@ -1206,7 +1157,7 @@ atom}
 		\label{fig:classes}
 	\end{figure}
 
-
+	\include{verification}
 
 
 

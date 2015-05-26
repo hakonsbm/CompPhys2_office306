@@ -1,13 +1,14 @@
 # Fdb version 3
-["bibtex Project_3"] 1432552499 "Project_3.aux" "Project_3.bbl" "Project_3" 1432552501
+["bibtex Project_3"] 1432565683 "Project_3.aux" "Project_3.bbl" "Project_3" 1432565685
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "Project_3.aux" 1432552501 18362 7ef5e00ec16e9a3aa745e2fdda6e7ca0 ""
+  "Project_3.aux" 1432565684 17929 cd64da4056053e2320fed35be8e746bd ""
   "Project_3.bcf" 0 -1 0 ""
   "bibliography.bib" 1431946521 2751 0de3f69b2447b87ffc3a1035275c62f6 ""
+  "verification.aux" 1432565684 2312 1c0e72697fd8487308c1d3e4c427f783 ""
   (generated)
-  "Project_3.bbl"
   "Project_3.blg"
-["pdflatex"] 1432552499 "Project_3.tex" "Project_3.pdf" "Project_3" 1432552501
+  "Project_3.bbl"
+["pdflatex"] 1432565683 "Project_3.tex" "Project_3.pdf" "Project_3" 1432565685
   "../figures/Beryllium_blocking.png" 1432552220 34662 da4c12d27421ed2d666a6f1c2571a2ee ""
   "../figures/ChargeDensityBeryllium.png" 1430239619 18266 452a2cff5e30e17b1666b4e9a16e27a5 ""
   "../figures/ChargeDensityNeon.png" 1430239238 16827 67a9dccfc37006155572b8dac620ea02 ""
@@ -183,14 +184,18 @@
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1304191498 325 2bcd023400636339210573e2b3ee298b ""
   "/usr/share/texmf/tex/latex/xcolor/x11nam.def" 1339578534 9040 c0c860499be99a076792194b1d6525a1 ""
   "/usr/share/texmf/tex/latex/xcolor/xcolor.sty" 1339578534 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "Project_3.aux" 1432552501 18362 7ef5e00ec16e9a3aa745e2fdda6e7ca0 ""
-  "Project_3.bbl" 1432552499 720 74b5f3d2eddf694692732f1891fecaa4 "bibtex Project_3"
-  "Project_3.out" 1432552501 1403 2fc2eb5fa62d52d730d3c2acd54aa837 ""
-  "Project_3.tex" 1432552497 62223 cf5d368e2aaa57f8248fa0a46b7c4176 ""
-  "Project_3.toc" 1432552501 4064 9d7f784e0600ac9d96819a52822b6741 ""
+  "Project_3.aux" 1432565684 17929 cd64da4056053e2320fed35be8e746bd ""
+  "Project_3.bbl" 1432565683 720 74b5f3d2eddf694692732f1891fecaa4 "bibtex Project_3"
+  "Project_3.out" 1432565684 2026 95d91e241cc685c8eb07ad3bb7693bc0 ""
+  "Project_3.tex" 1432565377 59138 2c5b960b46ef50b4d2c76ed7c7524c06 ""
+  "Project_3.toc" 1432565684 4416 882daaafb691c09f24ff377c1fa7b00d ""
+  "verification.aux" 1432565684 2312 1c0e72697fd8487308c1d3e4c427f783 ""
+  "verification.tex" 1432565677 5322 db490be8b8ec98e76ac68a909ee9c7b1 ""
   (generated)
-  "Project_3.aux"
   "Project_3.log"
+  "verfication.aux"
+  "Project_3.aux"
+  "verification.aux"
   "Project_3.out"
-  "Project_3.pdf"
   "Project_3.toc"
+  "Project_3.pdf"
