@@ -793,26 +793,6 @@ atom}
 		The parameter $\alpha$ can be interpreted as a parameter for the
 		force pulling the electron to the nucleus.
 
-\subsection{First part}
-
-	As a first attempt to solve the ground state energy for the helium
-	atom we perform Variational Monte Carlo calculation with a brute force
-	Metropolis sampling. We do this with two trial wave functions
-	\[
-	\psi_{T1}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}
-	\]
-	and
-	\[
-	\psi_{T2}({\bf r_{1}},{\bf r_{2}},{\bf r_{12}})=\exp{\left(-\alpha(r_{1}+r_{2})\right)}\exp{\left(\frac{r_{12}}{2(1+\beta r_{12})}\right)},
-	\]
-	using $\alpha$ and $\beta$ as variational parameters. Energy values
-	for the simple wave function, $\psi_{T1}$, using only one variational
-	parameter $\alpha$, are shown in figure \ref{fig01:alpha_Simple}.
-	We run the Variational Monte Carlo calculation with $10^{7}$ cycles.
-	As we see in the figures, the energy minimum occurs when we use $\alpha=1.65$.
-	Using this value for $\alpha$ we get an energy of $-2.8442934$.
-	The parameter $\alpha$ can be interpreted as a parameter for the
-	force pulling the electron to the nucleus.
 
 	\begin{figure}
 	\centering \includegraphics[width=0.45\linewidth]{../figures/EnergyVsAlphaHeliumSimpleAnalytical}

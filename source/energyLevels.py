@@ -247,18 +247,18 @@ name = "Beryllium"
 
 
 
-# data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
+ data = np.genfromtxt("outfiles/" + name + "_alpha_beta")
 # datatime = np.genfromtxt("outfiles/" + name +"_timeStep")
-dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples")
+#dataSample = np.genfromtxt("outfiles/" + name +"_blockingSamples")
 # dataCycles = np.genfromtxt("outfiles/" + name +"_nCycles")
 
 
-# findLowestEnergy(data, name)
+ findLowestEnergy(data, name)
 # plotResultsVSTimestep(datatime , name)
 # plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
 # plotResultsVSTimestep(datatime , name)
-plotChargeDensity(dataSample, name)
+#plotChargeDensity(dataSample, name)
 # plotVarVSnCycles(dataCycles[1:,:], name)
 
 
