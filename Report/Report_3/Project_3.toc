@@ -28,19 +28,19 @@
 \contentsline {subsubsection}{\numberline {3.2.1}Alpha and Beta Values}{16}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}Computational speed gain by using an analytical local energy}{16}{subsubsection.3.2.2}
 \contentsline {subsection}{\numberline {3.3}Variational Monte Carlo calculations of the Beryllium and Neon atoms}{16}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Alpha and Beta Values}{17}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Speedup with MPI}{17}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}Onebody densities / Comparisons / Without Jastrow}{17}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Alpha and Beta Values}{18}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Speedup with MPI}{18}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Onebody densities / Comparisons / Without Jastrow}{18}{subsubsection.3.3.3}
 \contentsline {subsubsection}{\numberline {3.3.4}Charge Density}{18}{subsubsection.3.3.4}
-\contentsline {section}{\numberline {4}Conclusions and discussion}{18}{section.4}
-\contentsline {subsection}{\numberline {4.1}Critique on the exercise}{18}{subsection.4.1}
-\contentsline {section}{\numberline {A}Program overview}{18}{appendix.A}
-\contentsline {section}{\numberline {B}Class structure}{18}{appendix.B}
-\contentsline {section}{\numberline {C}Verification of the model}{20}{appendix.C}
-\contentsline {subsection}{\numberline {C.1}Verification of the general Monte Carlo method}{20}{subsection.C.1}
-\contentsline {subsection}{\numberline {C.2}Verification of the Slater determinant and the laplacian Slaterdeterminant ratio}{20}{subsection.C.2}
-\contentsline {subsection}{\numberline {C.3}The gradient}{20}{subsection.C.3}
-\contentsline {subsection}{\numberline {C.4}The correlation laplacian}{20}{subsection.C.4}
-\contentsline {subsection}{\numberline {C.5}Local Energy in Helium}{21}{subsection.C.5}
-\contentsline {subsection}{\numberline {C.6}Verification of the Pad\IeC {\`e}-Jastrow part.}{21}{subsection.C.6}
-\contentsline {subsection}{\numberline {C.7}H_2}{21}{subsection.C.7}
+\contentsline {section}{\numberline {4}Conclusions and discussion}{20}{section.4}
+\contentsline {subsection}{\numberline {4.1}Critique on the exercise}{20}{subsection.4.1}
+\contentsline {section}{\numberline {A}Program overview}{20}{appendix.A}
+\contentsline {section}{\numberline {B}Class structure}{20}{appendix.B}
+\contentsline {section}{\numberline {C}Verification of the model}{21}{appendix.C}
+\contentsline {subsection}{\numberline {C.1}Verification of the general Monte Carlo method}{21}{subsection.C.1}
+\contentsline {subsection}{\numberline {C.2}Verification of the Slater determinant and the laplacian Slaterdeterminant ratio}{21}{subsection.C.2}
+\contentsline {subsection}{\numberline {C.3}The gradient}{21}{subsection.C.3}
+\contentsline {subsection}{\numberline {C.4}The correlation laplacian}{21}{subsection.C.4}
+\contentsline {subsection}{\numberline {C.5}Local Energy in Helium}{22}{subsection.C.5}
+\contentsline {subsection}{\numberline {C.6}Verification of the Pad\IeC {\`e}-Jastrow part.}{22}{subsection.C.6}
+\contentsline {subsection}{\numberline {C.7}Hydrogen Molecule}{22}{subsection.C.7}

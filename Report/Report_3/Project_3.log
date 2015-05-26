@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  25 MAY 2015 16:54
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  26 MAY 2015 10:40
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -2067,53 +2067,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (./Project_3.toc
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.46 ...{\numberline {C.7}H_2}{21}{subsection.C.7}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Extra }, or forgotten $.
-<argument> ...@tocdestname }{\numberline {C.7}H_2}
-                                                  \hyper@linkend 
-l.46 ...{\numberline {C.7}H_2}{21}{subsection.C.7}
-                                                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.46 ...{\numberline {C.7}H_2}{21}{subsection.C.7}
-                                                  
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.46 ...{\numberline {C.7}H_2}{21}{subsection.C.7}
-                                                  
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write5
 \openout5 = `Project_3.toc'.
 
- [2] [3] [4] [5] [6] [7] [8]
+ [2] [3] [4] [5]
+[6] [7] [8]
 Overfull \hbox (51.94704pt too wide) in paragraph at lines 504--549
  [] 
  []
@@ -2228,36 +2187,54 @@ g used on input line 843.
  [15 <../figures/HeliumJastrowAnalyticalTimeEnergy.png> <../figures/HeliumJastr
 owAnalyticalTimeVariance.png> <../figures/HeliumJastrowAnalyticalAlphaBetaEnerg
 y.png> <../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png>]
-<../figures/Neon_alpha_beta.png, id=398, 578.16pt x 433.62pt>
-File: ../figures/Neon_alpha_beta.png Graphic file (type png)
+<../figures/Beryllium_alpha_beta_energy.png, id=398, 578.16pt x 433.62pt>
+File: ../figures/Beryllium_alpha_beta_energy.png Graphic file (type png)
 
-<use ../figures/Neon_alpha_beta.png>
-Package pdftex.def Info: ../figures/Neon_alpha_beta.png used on input line 974.
-
+<use ../figures/Beryllium_alpha_beta_energy.png>
+Package pdftex.def Info: ../figures/Beryllium_alpha_beta_energy.png used on inp
+ut line 975.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_alpha_beta_var.png, id=399, 578.16pt x 433.62pt>
-File: ../figures/Neon_alpha_beta_var.png Graphic file (type png)
+<../figures/Beryllium_alpha_beta_variance.png, id=399, 578.16pt x 433.62pt>
+File: ../figures/Beryllium_alpha_beta_variance.png Graphic file (type png)
 
-<use ../figures/Neon_alpha_beta_var.png>
-Package pdftex.def Info: ../figures/Neon_alpha_beta_var.png used on input line 
-975.
+<use ../figures/Beryllium_alpha_beta_variance.png>
+Package pdftex.def Info: ../figures/Beryllium_alpha_beta_variance.png used on i
+nput line 976.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [16]
-<../figures/processor_number_time_comparison.png, id=412, 578.16pt x 433.62pt>
+
+<../figures/Neon_alpha_beta_energy.png, id=400, 578.16pt x 433.62pt>
+File: ../figures/Neon_alpha_beta_energy.png Graphic file (type png)
+
+<use ../figures/Neon_alpha_beta_energy.png>
+Package pdftex.def Info: ../figures/Neon_alpha_beta_energy.png used on input li
+ne 982.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+
+<../figures/Neon_alpha_beta_variance.png, id=401, 578.16pt x 433.62pt>
+File: ../figures/Neon_alpha_beta_variance.png Graphic file (type png)
+
+<use ../figures/Neon_alpha_beta_variance.png>
+Package pdftex.def Info: ../figures/Neon_alpha_beta_variance.png used on input 
+line 983.
+(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+ [16] [17 <../figures/Beryllium_alpha_beta_energy.png> <../figures/Beryllium_al
+pha_beta_variance.png> <../figures/Neon_alpha_beta_energy.png> <../figures/Neon
+_alpha_beta_variance.png>]
+<../figures/processor_number_time_comparison.png, id=426, 578.16pt x 433.62pt>
 File: ../figures/processor_number_time_comparison.png Graphic file (type png)
 
 <use ../figures/processor_number_time_comparison.png>
 Package pdftex.def Info: ../figures/processor_number_time_comparison.png used o
-n input line 997.
+n input line 1006.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [17 <../figures/Neon_alpha_beta.png> <../figures/Neon_alpha_beta_var.png>]
+
 <../figures/ChargeDensityNeon.png, id=430, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityNeon.png Graphic file (type png)
 
 <use ../figures/ChargeDensityNeon.png>
 Package pdftex.def Info: ../figures/ChargeDensityNeon.png used on input line 10
-12.
+21.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
 <../figures/ChargeDensityBeryllium.png, id=431, 578.16pt x 433.62pt>
@@ -2265,66 +2242,50 @@ File: ../figures/ChargeDensityBeryllium.png Graphic file (type png)
 
 <use ../figures/ChargeDensityBeryllium.png>
 Package pdftex.def Info: ../figures/ChargeDensityBeryllium.png used on input li
-ne 1013.
+ne 1022.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-Overfull \hbox (13.2459pt too wide) in paragraph at lines 1101--1102
+Overfull \hbox (13.2459pt too wide) in paragraph at lines 1110--1111
 [][] 
  []
 
 
-Overfull \hbox (45.56833pt too wide) in paragraph at lines 1154--1155
+Overfull \hbox (45.56833pt too wide) in paragraph at lines 1163--1164
 [][] 
  []
 
-[18 <../figures/processor_number_time_comparison.png> <../figures/ChargeDensity
-Neon.png> <../figures/ChargeDensityBeryllium.png>] [19]
+[18 <../figures/processor_number_time_comparison.png>] [19 <../figures/ChargeDe
+nsityNeon.png> <../figures/ChargeDensityBeryllium.png>] [20]
 \openout2 = `verification.aux'.
 
- (./verification.tex
-[20
+
+(./verification.tex [21
+
+])
+Underfull \hbox (badness 10000) in paragraph at lines 76--1169
+
+ []
+
+[22] (./Project_3.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1177.
+ [23
 
 ]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.75 		\subsection{H_2}
-                       
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.75 		\subsection{H_2}
-                       
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 75.
-
-) [21] (./Project_3.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1168.
- [22
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1168.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1177.
  (./Project_3.aux (./verification.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1168.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1168.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1177.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1177.
 
 Package rerunfilecheck Info: File `Project_3.out' has not changed.
-(rerunfilecheck)             Checksum: 95D91E241CC685C8EB07AD3BB7693BC0;2026.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1168.
+(rerunfilecheck)             Checksum: 1B11A362242B7126156132A2E212CD87;2041.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1177.
  ) 
 Here is how much of TeX's memory you used:
- 26083 strings out of 493304
- 490180 string characters out of 6139871
+ 26092 strings out of 493304
+ 490712 string characters out of 6139871
  620288 words of memory out of 5000000
- 28836 multiletter control sequences out of 15000+600000
- 22841 words of font info for 65 fonts, out of 8000000 for 9000
+ 28843 multiletter control sequences out of 15000+600000
+ 22225 words of font info for 63 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  56i,14n,68p,10436b,806s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
@@ -2340,22 +2301,21 @@ m/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy9.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/shar
-e/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/
-public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx
-1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share
-/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/p
-ublic/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1
-728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0900.pfb>
-Output written on Project_3.pdf (22 pages, 1207237 bytes).
+dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy9.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></
+usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/font
+s/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-su
+per/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></u
+sr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts
+/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-sup
+er/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0900.pfb>
+Output written on Project_3.pdf (23 pages, 1564570 bytes).
 PDF statistics:
- 609 PDF objects out of 1000 (max. 8388607)
- 521 compressed objects within 6 object streams
- 192 named destinations out of 1000 (max. 500000)
- 307 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 616 PDF objects out of 1000 (max. 8388607)
+ 524 compressed objects within 6 object streams
+ 194 named destinations out of 1000 (max. 500000)
+ 317 words of extra memory for PDF output out of 10000 (max. 10000000)
 
