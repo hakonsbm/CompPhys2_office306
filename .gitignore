@@ -4,3 +4,8 @@
 /build-*/
 .*~
 *.pro.user.*
+*.aux
+*.log
+*.out
+*.toc
+*.gz
