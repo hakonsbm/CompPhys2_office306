@@ -1,0 +1,96 @@
+\subsection{Atoms and Molecules}
+	%General atoms stuff that applies to all the different atoms
+	The dimensionless hamiltonian for the case of electrons around a nucleus is given by 
+
+	\begin{align}
+		\hat{H} &= \sum_{i = 1}^N - \frac{\nabla^2_i}{2} - \frac{Z}{r_i} + \sum_{i < j}\frac{1}{r_{ij}} \label{eq:hamiltonian}
+	\end{align}
+
+	where \(r_i\) is the distance from electron \(i\) to the nucleus, \(Z\) is the nucleus charge, and \(r_{ij} = |\vb{r}_i - \vb{r}_j|\).
+	The kinetic energy for electron \(i\) is represented by \( - \frac{\nabla^2_i}{2} \), \(- \frac{Z}{r_i}\) the potential energy with respect to the nucleus and \( \frac{1}{r_{ij}} \) the repulsive energy between the electrons \(i\) and \( j\).
+
+	In the VMC calculation the local energy, \(E_L\) is a useful quantity and needs to be finite at all points to be normalizable. So by looking at the limits where the \(E_L\) diverges we can quess the form the wavefunctions should follow.
+
+	\begin{align}
+		E_L(r_i,r_{ij}) &= \frac{1}{\Psi_T} \hat{H} \Psi_T
+	\end{align}
+
+	In the cases where \(r_i \rightarrow 0\) or \( r_{ij} \rightarrow 0\) we need to make sure that the local energy does not diverge.
+
+
+		\begin{align}
+			\lim_{r_i\rightarrow 0} {E_L(r_i,r_{ij}) } &= \frac{1}{R_i(r_i)} \left( - \frac{1}{2}\pdv[2]{}{x_k} - \frac{Z}{r_i} \right) R_i(r_i) + G(r_i, r_{ij})
+			\\
+			\lim_{r_i\rightarrow 0} {E_L(r_i,r_{ij}) } &= \frac{1}{R_i(r_i)} \left( - \frac{1}{2}\pdv[2]{}{r_k} - \frac{1}{r_i}\pdv{}{r_i}	 -	 \frac{Z}{r_i} \right) R_i(r_i) + G(r_i, r_{ij})
+			\intertext{Given a well behaved wavefunction \( \frac{1}{2}\pdv[2]{}{r_k} \) is finite.}
+			\lim_{r_i\rightarrow 0} {E_L(r_i,r_{ij}) } &= 
+			\frac{1}{R_i(r_i)} \left( - \frac{1}{r_i}\pdv{}{r_i}	 -	 \frac{Z}{r_i} \right) R_i(r_i)
+		\end{align}
+
+		This is finite given when the following differential equation is fulfilled.
+
+		\begin{align}
+			\frac{1}{R_i(r_i)} \pdv{}{r_i} R_i(r_i)	=  -Z  \qquad{ \text{ With solution }}  \qquad R_i(r_i) = A e^{-Z}
+		\end{align}
+
+		A similar calculation applies for \(r_{12} \rightarrow 0\) and a trialfunction of the form   \[\Psi_T(r_i,r_j,r_{ij}) = e^{ -\alpha \sum_{N}  r_i} \prod^N_{i < j}e^{\beta r_{ij}} = e^{ -\alpha \sum_{N}  r_i} \prod^N_{i < j}e^{\frac{a r_ij}{1 + \beta r_{ij}}} \] should fulfill the condition that the local energy is finite.
+
+
+	\subsubsection{Helium atom}
+		The hamiltonian for the helium atom is given by equation \eqref{eq:hamiltonian}
+
+	\subsubsection{Beryllium atom}
+
+		It is fairly simple to extend the calculational machinery of Variational
+		Monte Carlo to other systems than the Helium atom. To show this we
+		want to perform calculations on the beryllium atom. As beryllium has
+		four electrons compared to the 2 of helium, we need to calculate a
+		Slater determinant. However the computation of the Slater determinant
+		can be simplified for beryllium. Sticking to hydrogen-like wave functions,
+		we can write the trial wave function for beryllium as
+		\begin{equation}
+			\psi_{T}({\bf r_{1}},{\bf r_{2}},{\bf r_{3}},{\bf r_{4}})=Det\left(\phi_{1}({\bf r_{1}}),\phi_{2}({\bf r_{2}}),\phi_{3}({\bf r_{3}}),\phi_{4}({\bf r_{4}})\right)\prod_{i<j}^{4}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)},
+			\label{eq:BerylliumTrialFunction}
+		\end{equation}
+		where $Det$ is a Slater determinant and the single-particle wave
+		functions are the hydrogen wave functions for the 1s and 2s orbitals.
+		With the variational ansatz these are
+		\begin{align}
+			\phi_{1s}({\bf r_{i}})=e^{-\alpha r_{i}},
+		\end{align}
+		and
+		\begin{align}
+			\phi_{2s}({\bf r_{i}})=\left(1-\alpha r_{i}/2\right)e^{-\alpha r_{i}/2}.
+		\end{align}
+		The Slater determinant is calculated using these ansatzes.
+
+		Furthermore, for the Jastrow factor,
+		\begin{align}
+			\Psi_{C}=\prod_{i<j}g(r_{ij})=\exp{\sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}},
+		\end{align}
+		we need to take into account the spins of the electrons. We fix electrons
+		1 and 2 to have spin up, and electron 3 and 4 to have spin down. This
+		means that when the electrons have equal spins we get a factor
+		\begin{align}
+			a=\frac{1}{4},
+		\end{align}
+		and if they have opposite spins we get a factor
+		\begin{align}
+			a=\frac{1}{2}.
+		\end{align}
+
+	\subsubsection{Neon atom}
+
+		Wishing to extend our variational Monte Carlo machinery further we implement Neon. Neon has ten electrons, so it is a big jump from Helium and Beryllium. Therefore we also have to implement a better way to handle the Slater determinant than we did in the previous project. The trial wave function for Neon can be written as
+		\begin{equation}
+		   \psi_{T}({\bf r_1},{\bf r_2}, \dots,{\bf r_{10}}) =
+		   Det\left(\phi_{1}({\bf r_1}),\phi_{2}({\bf r_2}),
+		   \dots,\phi_{10}({\bf r_{10}})\right)
+		   \prod_{i<j}^{10}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)},
+		   \label{eq:NeonTrialFunction}
+		\end{equation}
+		Now we need to include the $2p$ wave function as well. It is given as
+		\begin{equation}
+			\phi_{2p}({\bf r_i}) = \alpha {\bf r_i}e^{-\alpha r_i/2}.
+		\end{equation}
+		where $ {\bf r_i} = \sqrt{r_{i_x}^2+r_{i_y}^2+r_{i_z}^2}$.

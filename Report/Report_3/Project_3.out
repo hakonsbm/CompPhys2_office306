@@ -1,28 +1,26 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Theory}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Monte Carlo method with simple Metropolis sampling}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Helium atom}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{Beryllium atom}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.4}{Neon atom}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.5}{Derivation of local energies}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.6}{Calculating the Slater determinant}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.7}{Importance sampling}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.1}{Atoms and Molecules}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Monte Carlo method with simple Metropolis sampling}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Importance sampling}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Implementation of MPI}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Blocking}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Derivation of local energies}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.7}{Calculating the Slater determinant}{section.2}% 9
 \BOOKMARK [2][-]{subsection.2.8}{Efficient calculation of derivatives}{section.2}% 10
-\BOOKMARK [2][-]{subsection.2.9}{Implementation of MPI}{section.2}% 11
-\BOOKMARK [2][-]{subsection.2.10}{Blocking}{section.2}% 12
-\BOOKMARK [1][-]{section.3}{Results}{}% 13
-\BOOKMARK [2][-]{subsection.3.1}{Variational Monte Carlo calculations of the helium atom}{section.3}% 14
-\BOOKMARK [2][-]{subsection.3.2}{First part}{section.3}% 15
-\BOOKMARK [2][-]{subsection.3.3}{Variational Monte Carlo calculations of the Beryllium and Neon atoms}{section.3}% 16
-\BOOKMARK [1][-]{section.4}{Conclusions and discussion}{}% 17
-\BOOKMARK [2][-]{subsection.4.1}{Critique on the exercise}{section.4}% 18
-\BOOKMARK [1][-]{appendix.A}{Program overview}{}% 19
-\BOOKMARK [1][-]{appendix.B}{Class structure}{}% 20
-\BOOKMARK [1][-]{appendix.C}{Verification of the model}{}% 21
-\BOOKMARK [2][-]{subsection.C.1}{Verification of the general Monte Carlo method}{appendix.C}% 22
-\BOOKMARK [2][-]{subsection.C.2}{Verification of the Slater determinant and the laplacian Slaterdeterminant ratio}{appendix.C}% 23
-\BOOKMARK [2][-]{subsection.C.3}{The gradient}{appendix.C}% 24
-\BOOKMARK [2][-]{subsection.C.4}{The correlation laplacian}{appendix.C}% 25
-\BOOKMARK [2][-]{subsection.C.5}{Local Energy in Helium}{appendix.C}% 26
-\BOOKMARK [2][-]{subsection.C.6}{Verification of the Pad\350-Jastrow part.}{appendix.C}% 27
-\BOOKMARK [2][-]{subsection.C.7}{Hydrogen Molecule}{appendix.C}% 28
+\BOOKMARK [1][-]{section.3}{Results}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{Variational Monte Carlo calculations of the helium atom}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.2}{First part}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.3}{Variational Monte Carlo calculations of the Beryllium and Neon atoms}{section.3}% 14
+\BOOKMARK [1][-]{section.4}{Conclusions and discussion}{}% 15
+\BOOKMARK [2][-]{subsection.4.1}{Critique on the exercise}{section.4}% 16
+\BOOKMARK [1][-]{appendix.A}{Program overview}{}% 17
+\BOOKMARK [1][-]{appendix.B}{Class structure}{}% 18
+\BOOKMARK [1][-]{appendix.C}{Verification of the model}{}% 19
+\BOOKMARK [2][-]{subsection.C.1}{Verification of the general Monte Carlo method}{appendix.C}% 20
+\BOOKMARK [2][-]{subsection.C.2}{Verification of the Slater determinant and the laplacian Slaterdeterminant ratio}{appendix.C}% 21
+\BOOKMARK [2][-]{subsection.C.3}{The gradient}{appendix.C}% 22
+\BOOKMARK [2][-]{subsection.C.4}{The correlation laplacian}{appendix.C}% 23
+\BOOKMARK [2][-]{subsection.C.5}{Local Energy in Helium}{appendix.C}% 24
+\BOOKMARK [2][-]{subsection.C.6}{Verification of correlation gradient}{appendix.C}% 25
+\BOOKMARK [2][-]{subsection.C.7}{Hydrogen Molecule}{appendix.C}% 26

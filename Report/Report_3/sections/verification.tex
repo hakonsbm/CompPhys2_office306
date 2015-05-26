@@ -52,18 +52,16 @@
 			Due to the earlier two tests, \ref{sec:slaterVerification} and \ref{sec:gradientVerification}, we can be fairly certain that all the terms except the laplacian-correlation-ratio, \(\frac{\nabla^2\Psi_C}{\Psi_C}\) in the local energy equation \eqref{eq:kineticRatio} is correct. So by then comparing the analytical version of the local energy to the numerical version we can verify that the last term is also correct.
 
 		\subsection{Local Energy in Helium}
-			For Helium we have a complete closed expression for the local energy, \(E_l\) \eqref{eq:heliumLocalEnergy}, we use this to check that the local energy calculation using used on the more complicated atoms  also replicates the local energy for the simpler atom which it does. 
+			For Helium we have a complete closed expression for the local energy, \(E_l\) \eqref{eq:heliumLocalEnergy}, we use this to check that the local energy calculation, see "Efficient calculation of stuff chapters"!!!!!!!!!, used on the more complicated atoms  also replicates the local energy for the simpler atom which it does. 
 
 
+		\subsection{Verification of correlation gradient}
+			The correlation gradient ratio is checked by calculating what calculating it directly for Helium, and then comparing this value against value produced by the program.
 
-		\subsection{Verification of the Padè-Jastrow part.}
-			\textbf{NB!!!!!!!!!!!!!! Digg this up from github and check if it is still usable}\\
-			To verify that the part of the code that treats the correlation part of the kinetic energy we calculate, we check that it reproduces the correct results in the total energy and variation, but we also perform some tests on various parts by considering the Helium atom, where we calculate certain parts of the sums by hand and then compare the results with the ones given by the ratio machinery.
-
-			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\frac{\nabla\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} on Helium we get
+			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\frac{\nabla\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} on Helium for the first electron we get
 
 			\begin{align}
-				\frac{\nabla\Psi_C}{\Psi_C} &= \frac{1}{\Psi_c} \pdv{\Psi_C}{x_k} = \frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right) - \frac{\vb{r_{21}}}{r_{21}}\pdv{}{r_{21}}\left( \frac{r_{21}}{2(1+\beta r_{21})} \right)
+				\left[\frac{\nabla\Psi_C}{\Psi_C} \right]_1 &= \frac{1}{\Psi_c} \pdv{\Psi_C}{x_k} = \frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right) - \frac{\vb{r_{21}}}{r_{21}}\pdv{}{r_{21}}\left( \frac{r_{21}}{2(1+\beta r_{21})} \right)
 				\\
 				&= 2\frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right)
 				\\
