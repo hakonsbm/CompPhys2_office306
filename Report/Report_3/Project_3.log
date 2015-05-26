@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  26 MAY 2015 13:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  26 MAY 2015 16:21
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1986,8 +1986,9 @@ File: lstlang1.sty 2013/08/26 1.5b listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2013/08/26 1.5b listings language file
 )
-(./Project_3.aux (./sections/atoms.aux) (./sections/monte_carlo.aux)
-(./sections/extras.aux) (./sections/verification.aux))
+(./Project_3.aux (./sections/monte_carlo.aux) (./sections/atoms.aux)
+(./sections/optimisation.aux) (./sections/extras.aux)
+(./sections/verification.aux))
 \openout1 = `Project_3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
@@ -2073,22 +2074,28 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-\openout2 = `sections/atoms.aux'.
-
-
-(./sections/atoms.tex [3
-
-]) [4]
 \openout2 = `sections/monte_carlo.aux'.
 
- (./sections/monte_carlo.tex) [5
+
+(./sections/monte_carlo.tex) [3
+
+]
+\openout2 = `sections/atoms.aux'.
+
+ (./sections/atoms.tex [4
+
+
+] [5] [6]) [7]
+\openout2 = `sections/optimisation.aux'.
+
+
+(./sections/optimisation.tex) [8
 
 
 ]
 \openout2 = `sections/extras.aux'.
 
-
-(./sections/extras.tex [6
+ (./sections/extras.tex [9
 
 
 ]
@@ -2121,7 +2128,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 120--121
 
  []
 
-<../figures/Beryllium_blocking.png, id=223, 578.16pt x 433.62pt>
+<../figures/Beryllium_blocking.png, id=266, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_blocking.png Graphic file (type png)
 
 <use ../figures/Beryllium_blocking.png>
@@ -2129,216 +2136,216 @@ Package pdftex.def Info: ../figures/Beryllium_blocking.png used on input line 1
 25.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_blocking.png, id=225, 578.16pt x 433.62pt>
+<../figures/Neon_blocking.png, id=268, 578.16pt x 433.62pt>
 File: ../figures/Neon_blocking.png Graphic file (type png)
 
 <use ../figures/Neon_blocking.png>
 Package pdftex.def Info: ../figures/Neon_blocking.png used on input line 126.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [7]) [8 <../figures/Beryllium_blocking.png> <../figures/Neon_blocking.png>] [9
+ [10]) [11 <../figures/Beryllium_blocking.png> <../figures/Neon_blocking.png>] 
+[12
 
-] [10] [11]
-Overfull \hbox (51.94704pt too wide) in paragraph at lines 318--363
- [] 
- []
-
-[12] [13] [14] [15]
-<../figures/EnergyVsAlphaHeliumSimpleAnalytical.png, id=358, 578.16pt x 433.62p
+] [13] [14] [15] [16]
+<../figures/EnergyVsAlphaHeliumSimpleAnalytical.png, id=371, 578.16pt x 433.62p
 t>
 File: ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png Graphic file (type png
 )
  <use ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png>
 Package pdftex.def Info: ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png use
-d on input line 588.
+d on input line 461.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/VarianceVsAlphaHeliumSimpleAnalytical.png, id=359, 578.16pt x 433.6
+<../figures/VarianceVsAlphaHeliumSimpleAnalytical.png, id=372, 578.16pt x 433.6
 2pt>
 File: ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png Graphic file (type p
 ng)
  <use ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png>
 Package pdftex.def Info: ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png u
-sed on input line 589.
+sed on input line 462.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/VarianceNCyclesHeliumSimpleAnalytical.png, id=360, 578.16pt x 433.6
+<../figures/VarianceNCyclesHeliumSimpleAnalytical.png, id=373, 578.16pt x 433.6
 2pt>
 File: ../figures/VarianceNCyclesHeliumSimpleAnalytical.png Graphic file (type p
 ng)
  <use ../figures/VarianceNCyclesHeliumSimpleAnalytical.png>
 Package pdftex.def Info: ../figures/VarianceNCyclesHeliumSimpleAnalytical.png u
-sed on input line 591.
+sed on input line 464.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
-
-<../figures/HeliumJastrowAnalyticalTimeEnergy.png, id=361, 578.16pt x 433.62pt>
+ [17]
+<../figures/HeliumJastrowAnalyticalTimeEnergy.png, id=385, 578.16pt x 433.62pt>
 File: ../figures/HeliumJastrowAnalyticalTimeEnergy.png Graphic file (type png)
 <use ../figures/HeliumJastrowAnalyticalTimeEnergy.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalTimeEnergy.png used 
-on input line 597.
+on input line 470.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalyticalTimeVariance.png, id=362, 578.16pt x 433.62p
+<../figures/HeliumJastrowAnalyticalTimeVariance.png, id=386, 578.16pt x 433.62p
 t>
 File: ../figures/HeliumJastrowAnalyticalTimeVariance.png Graphic file (type png
 )
  <use ../figures/HeliumJastrowAnalyticalTimeVariance.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalTimeVariance.png use
-d on input line 598.
+d on input line 471.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png, id=364, 578.16pt x 433.
-62pt>
-File: ../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png Graphic file (type 
-png)
- <use ../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png>
-Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalAlphaBetaEnergy.png 
-used on input line 612.
+<../figures/HeliumJastrowAnalytical_alpha_beta_energy.png, id=388, 578.16pt x 4
+33.62pt>
+File: ../figures/HeliumJastrowAnalytical_alpha_beta_energy.png Graphic file (ty
+pe png)
+ <use ../figures/HeliumJastrowAnalytical_alpha_beta_energy.png>
+Package pdftex.def Info: ../figures/HeliumJastrowAnalytical_alpha_beta_energy.p
+ng used on input line 485.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png, id=365, 578.16pt x 43
-3.62pt>
-File: ../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png Graphic file (typ
-e png)
- <use ../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png>
-Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalAlphaBetaVariance.pn
-g used on input line 613.
+<../figures/HeliumJastrowAnalytical_alpha_beta_variance.png, id=389, 578.16pt x
+ 433.62pt>
+File: ../figures/HeliumJastrowAnalytical_alpha_beta_variance.png Graphic file (
+type png)
+ <use ../figures/HeliumJastrowAnalytical_alpha_beta_variance.png>
+Package pdftex.def Info: ../figures/HeliumJastrowAnalytical_alpha_beta_variance
+.png used on input line 486.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [16 <../figures/EnergyVsAlphaHeliumSimpleAnalytical.png> <../figures/VarianceV
-sAlphaHeliumSimpleAnalytical.png> <../figures/VarianceNCyclesHeliumSimpleAnalyt
-ical.png>] [17 <../figures/HeliumJastrowAnalyticalTimeEnergy.png> <../figures/H
-eliumJastrowAnalyticalTimeVariance.png> <../figures/HeliumJastrowAnalyticalAlph
-aBetaEnergy.png> <../figures/HeliumJastrowAnalyticalAlphaBetaVariance.png>]
-<../figures/Beryllium_alpha_beta_energy.png, id=401, 578.16pt x 433.62pt>
+
+[18 <../figures/EnergyVsAlphaHeliumSimpleAnalytical.png> <../figures/VarianceVs
+AlphaHeliumSimpleAnalytical.png> <../figures/VarianceNCyclesHeliumSimpleAnalyti
+cal.png>] [19 <../figures/HeliumJastrowAnalyticalTimeEnergy.png> <../figures/He
+liumJastrowAnalyticalTimeVariance.png> <../figures/HeliumJastrowAnalytical_alph
+a_beta_energy.png> <../figures/HeliumJastrowAnalytical_alpha_beta_variance.png>
+] <../figures/Beryllium_alpha_beta_energy.png, id=426, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_alpha_beta_energy.png Graphic file (type png)
 
 <use ../figures/Beryllium_alpha_beta_energy.png>
 Package pdftex.def Info: ../figures/Beryllium_alpha_beta_energy.png used on inp
-ut line 745.
+ut line 618.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Beryllium_alpha_beta_variance.png, id=402, 578.16pt x 433.62pt>
+<../figures/Beryllium_alpha_beta_variance.png, id=427, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_alpha_beta_variance.png Graphic file (type png)
 
 <use ../figures/Beryllium_alpha_beta_variance.png>
 Package pdftex.def Info: ../figures/Beryllium_alpha_beta_variance.png used on i
-nput line 746.
+nput line 619.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_alpha_beta_energy.png, id=403, 578.16pt x 433.62pt>
+<../figures/Neon_alpha_beta_energy.png, id=428, 578.16pt x 433.62pt>
 File: ../figures/Neon_alpha_beta_energy.png Graphic file (type png)
 
 <use ../figures/Neon_alpha_beta_energy.png>
 Package pdftex.def Info: ../figures/Neon_alpha_beta_energy.png used on input li
-ne 752.
+ne 625.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_alpha_beta_variance.png, id=404, 578.16pt x 433.62pt>
+<../figures/Neon_alpha_beta_variance.png, id=429, 578.16pt x 433.62pt>
 File: ../figures/Neon_alpha_beta_variance.png Graphic file (type png)
 
 <use ../figures/Neon_alpha_beta_variance.png>
 Package pdftex.def Info: ../figures/Neon_alpha_beta_variance.png used on input 
-line 753.
+line 626.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [18] [19 <../figures/Beryllium_alpha_beta_energy.png> <../figures/Beryllium_al
+ [20] [21 <../figures/Beryllium_alpha_beta_energy.png> <../figures/Beryllium_al
 pha_beta_variance.png> <../figures/Neon_alpha_beta_energy.png> <../figures/Neon
 _alpha_beta_variance.png>]
-<../figures/processor_number_time_comparison.png, id=431, 578.16pt x 433.62pt>
+<../figures/processor_number_time_comparison.png, id=455, 578.16pt x 433.62pt>
 File: ../figures/processor_number_time_comparison.png Graphic file (type png)
 
 <use ../figures/processor_number_time_comparison.png>
 Package pdftex.def Info: ../figures/processor_number_time_comparison.png used o
-n input line 776.
+n input line 649.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/ChargeDensityNeon.png, id=435, 578.16pt x 433.62pt>
+<../figures/ChargeDensityNeon.png, id=459, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityNeon.png Graphic file (type png)
 
 <use ../figures/ChargeDensityNeon.png>
-Package pdftex.def Info: ../figures/ChargeDensityNeon.png used on input line 79
-1.
+Package pdftex.def Info: ../figures/ChargeDensityNeon.png used on input line 66
+4.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/ChargeDensityBeryllium.png, id=436, 578.16pt x 433.62pt>
+<../figures/ChargeDensityBeryllium.png, id=460, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityBeryllium.png Graphic file (type png)
 
 <use ../figures/ChargeDensityBeryllium.png>
 Package pdftex.def Info: ../figures/ChargeDensityBeryllium.png used on input li
-ne 792.
+ne 665.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-Overfull \hbox (13.2459pt too wide) in paragraph at lines 880--881
+Overfull \hbox (13.2459pt too wide) in paragraph at lines 753--754
 [][] 
  []
 
 
-Overfull \hbox (45.56833pt too wide) in paragraph at lines 933--934
+Overfull \hbox (45.56833pt too wide) in paragraph at lines 806--807
 [][] 
  []
 
-[20 <../figures/processor_number_time_comparison.png>] [21 <../figures/ChargeDe
-nsityNeon.png> <../figures/ChargeDensityBeryllium.png>] [22]
+[22 <../figures/processor_number_time_comparison.png>] [23 <../figures/ChargeDe
+nsityNeon.png> <../figures/ChargeDensityBeryllium.png>] [24]
 \openout2 = `sections/verification.aux'.
 
 
-(./sections/verification.tex [23
+(./sections/verification.tex [25
 
 ])
-Underfull \hbox (badness 10000) in paragraph at lines 74--939
+Underfull \hbox (badness 10000) in paragraph at lines 74--812
 
  []
 
-[24] (./Project_3.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 947.
- [25
+[26] (./Project_3.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 820.
+ [27
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 947.
- (./Project_3.aux (./sections/atoms.aux)
-(./sections/monte_carlo.aux) (./sections/extras.aux)
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 820.
+ (./Project_3.aux (./sections/monte_carlo.aux)
+(./sections/atoms.aux) (./sections/optimisation.aux) (./sections/extras.aux)
 (./sections/verification.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 947.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 947.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 820.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 820.
 Package rerunfilecheck Info: File `Project_3.out' has not changed.
-(rerunfilecheck)             Checksum: B4263F056A36A14377886A4407859986;1920.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 947.
+(rerunfilecheck)             Checksum: C7EF727D9049F17057B58412C22D6D2F;1913.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 820.
  ) 
 Here is how much of TeX's memory you used:
- 26119 strings out of 493304
- 491273 string characters out of 6139871
+ 26145 strings out of 493304
+ 491778 string characters out of 6139871
  620288 words of memory out of 5000000
- 28845 multiletter control sequences out of 15000+600000
+ 28849 multiletter control sequences out of 15000+600000
  22225 words of font info for 63 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  56i,14n,68p,10436b,806s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmsy9.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></us
-r/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/
-type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-supe
-r/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr
-/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/t
-ype1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super
-/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0900.pfb>
-Output written on Project_3.pdf (25 pages, 1470326 bytes).
+fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></us
+r/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/
+type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-supe
+r/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr
+/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/t
+ype1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super
+/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/
+share/texmf/fonts/type1/public/cm-super/sfti0900.pfb>
+Output written on Project_3.pdf (27 pages, 1645420 bytes).
 PDF statistics:
- 623 PDF objects out of 1000 (max. 8388607)
- 528 compressed objects within 6 object streams
- 197 named destinations out of 1000 (max. 500000)
+ 659 PDF objects out of 1000 (max. 8388607)
+ 559 compressed objects within 6 object streams
+ 212 named destinations out of 1000 (max. 500000)
  301 words of extra memory for PDF output out of 10000 (max. 10000000)
 

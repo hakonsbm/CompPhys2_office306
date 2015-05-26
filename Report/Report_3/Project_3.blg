@@ -1,8 +1,9 @@
 This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Project_3.aux
-A level-1 auxiliary file: sections/atoms.aux
 A level-1 auxiliary file: sections/monte_carlo.aux
+A level-1 auxiliary file: sections/atoms.aux
+A level-1 auxiliary file: sections/optimisation.aux
 A level-1 auxiliary file: sections/extras.aux
 A level-1 auxiliary file: sections/verification.aux
 The style file: plain.bst
@@ -11,7 +12,7 @@ Warning--empty publisher in Kinoshita:1957:PR
 Warning--empty publisher in Koput:2011:PCCP
 You've used 4 entries,
             2118 wiz_defined-function locations,
-            525 strings with 4632 characters,
+            526 strings with 4657 characters,
 and the built_in function-call counts, 1006 in all, are:
 = -- 90
 > -- 34

@@ -1,0 +1,4 @@
+\subsection{Optimization}
+	Since the raw computational cost of the VMC computation scales up very fast with the increase of particles considered we have implemented several different methods to achieve a faster speed allowing us to compute longer and with more precision. The optimization is done along three paths importance sampling, multithreaded computation and improvements to computing the ratios and local energy. Importance sampling improves the convergence speed of the algorithm, multithreaded computation while allowing several processors to compute at the same time and the algorithmic improvements to reduce computing saving time in computing the Slater determinants and removing the need for slow numerical derivations. Here we will go through the algorithmic optimizations first.
+
+	\subsubsection{emptypals}

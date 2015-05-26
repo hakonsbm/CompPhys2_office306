@@ -17,53 +17,54 @@
 
 using namespace arma;
 
+//The tests are described in the report appendix
 
 TEST(Hydrogenic) {
-
+    //C1 and C2
 
     VMCSolver *solver = new VMCSolver();
 
-//    cout << endl << "Running Hydrogen test" << endl << endl;
+    cout << endl << "Running Hydrogen test" << endl << endl;
 
-//    solver->setTrialFunction(new Hydrogen(solver));
-//    solver->runMonteCarloIntegration();
-//    CHECK_EQUAL(0., solver->getEnergyVar());
-//    CHECK_EQUAL(-1./2, solver->getEnergy());
-
-
-//    cout << endl << "Running Helium test" << endl << endl;
-//    solver->setTrialFunction(new Helium(solver));
-//    solver->switchElectronInteraction(false);
-//    solver->trialFunction()->setAnalytical(true);
-//    solver->setAlpha(solver->getCharge());
-//    solver->switchbBlockSampling(false);
-//    solver->setCycles(10000);
-//    solver->runMasterIntegration();
-//    CHECK_EQUAL(0., solver->getEnergyVar());
-//    CHECK_EQUAL(-4, solver->getEnergy());
+    solver->setTrialFunction(new Hydrogen(solver));
+    solver->runMonteCarloIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-1./2, solver->getEnergy());
 
 
+    cout << endl << "Running Helium test" << endl << endl;
+    solver->setTrialFunction(new Helium(solver));
+    solver->switchElectronInteraction(false);
+    solver->trialFunction()->setAnalytical(true);
+    solver->setAlpha(solver->getCharge());
+    solver->switchbBlockSampling(false);
+    solver->setCycles(10000);
+    solver->runMasterIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-4, solver->getEnergy());
 
-//    cout << endl << "Running Beryllium test" << endl << endl;
-//    solver->setTrialFunction(new Beryllium(solver));
-//    solver->switchElectronInteraction(false);
-//    solver->trialFunction()->setAnalytical(true);
-//    solver->setAlpha(solver->getCharge());
-//    solver->setCycles(10000);
-//    solver->runMasterIntegration();
-//    CHECK_EQUAL(0., solver->getEnergyVar());
-//    CHECK_EQUAL(-20, solver->getEnergy());
 
 
-//    cout << endl << "Running Neon test" << endl << endl;
-//    solver->setTrialFunction(new Neon(solver));
-//    solver->switchElectronInteraction(false);
-//    solver->trialFunction()->setAnalytical(true);
-//    solver->setCycles(1000);
-//    solver->setAlpha(solver->getCharge());
-//    solver->runMasterIntegration();
-//    CHECK_EQUAL(0., solver->getEnergyVar());
-//    CHECK_EQUAL(-200., solver->getEnergy());
+    cout << endl << "Running Beryllium test" << endl << endl;
+    solver->setTrialFunction(new Beryllium(solver));
+    solver->switchElectronInteraction(false);
+    solver->trialFunction()->setAnalytical(true);
+    solver->setAlpha(solver->getCharge());
+    solver->setCycles(10000);
+    solver->runMasterIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-20, solver->getEnergy());
+
+
+    cout << endl << "Running Neon test" << endl << endl;
+    solver->setTrialFunction(new Neon(solver));
+    solver->switchElectronInteraction(false);
+    solver->trialFunction()->setAnalytical(true);
+    solver->setCycles(1000);
+    solver->setAlpha(solver->getCharge());
+    solver->runMasterIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-200., solver->getEnergy());
 
 
 }
@@ -71,225 +72,243 @@ TEST(Hydrogenic) {
 
 TEST(Gradients)
 {
-//    VMCSolver *solver = new VMCSolver();
+    ////////////////////////7
+    /// C3
+    /// ///////////////////////
 
 
-//    double particles = solver->getNParticles();
-//    double dimensions = solver->getNDimensions();
-//    long idum = clock();
-
-//    mat r = zeros (particles,dimensions);
-//    mat gradientNumerical = zeros(particles, dimensions);
-//    mat gradientAnalytical = zeros(particles, dimensions);
-
-//    for(int n = 0; n < 3; n ++)
-//    {
-//        if(n==0)
-//            solver->setTrialFunction(new Helium(solver));
-//        if(n==1)
-//            solver->setTrialFunction(new Beryllium(solver));
-//        if(n==2)
-//            solver->setTrialFunction(new Neon(solver));
+    VMCSolver *solver = new VMCSolver();
 
 
-//        particles = solver->getNParticles();
-//        dimensions = solver->getNDimensions();
-//        idum = clock();
+    double particles = solver->getNParticles();
+    double dimensions = solver->getNDimensions();
+    long idum = clock();
 
-//        r = zeros (particles,dimensions);
-//        gradientNumerical = zeros(particles, dimensions);
-//        gradientAnalytical = zeros(particles, dimensions);
+    mat r = zeros (particles,dimensions);
+    mat gradientNumerical = zeros(particles, dimensions);
+    mat gradientAnalytical = zeros(particles, dimensions);
 
-//        //Random positions to test gradient
-//        for(int i = 0; i < particles; i ++ )
-//        {
-//         for(int j = 0; j < dimensions; j++)
-//         {
-//            r(i,j) = ran2(&idum);
-//         }
-//        }
-//        solver->trialFunction()->setAnalytical(false);
-//        solver->determinant()->updateSlaterMatrices(r,solver);
-//        solver->derivatives()->numericalGradient(gradientNumerical, r, solver);
+    for(int n = 0; n < 3; n ++)
+    {
+        if(n==0)
+            solver->setTrialFunction(new Helium(solver));
+        if(n==1)
+            solver->setTrialFunction(new Beryllium(solver));
+        if(n==2)
+            solver->setTrialFunction(new Neon(solver));
 
 
-//        solver->trialFunction()->setAnalytical(true);
-//        solver->determinant()->updateSlaterMatrices(r,solver);
-//        solver->derivatives()->analyticalGradient(gradientAnalytical, r , solver);
+        particles = solver->getNParticles();
+        dimensions = solver->getNDimensions();
+        idum = clock();
+
+        r = zeros (particles,dimensions);
+        gradientNumerical = zeros(particles, dimensions);
+        gradientAnalytical = zeros(particles, dimensions);
+
+        //Random positions to test gradient
+        for(int i = 0; i < particles; i ++ )
+        {
+         for(int j = 0; j < dimensions; j++)
+         {
+            r(i,j) = ran2(&idum);
+         }
+        }
+        solver->trialFunction()->setAnalytical(false);
+        solver->determinant()->updateSlaterMatrices(r,solver);
+        solver->derivatives()->numericalGradient(gradientNumerical, r, solver);
 
 
-//        if(solver->getRank() == 0)
-//        {
-//            cout << "End results" << endl;
-//            cout << gradientNumerical << endl;
-//            cout << gradientAnalytical << endl;
-//        }
-//        for(int i = 0; i < particles; i++)
-//        {
-//            for(int j = 0; j < dimensions; j ++)
-//            {
-//                CHECK_CLOSE(gradientNumerical(i,j),gradientAnalytical(i,j),0.0001);
-//            }
-//        }
-//    }
+        solver->trialFunction()->setAnalytical(true);
+        solver->determinant()->updateSlaterMatrices(r,solver);
+        solver->derivatives()->analyticalGradient(gradientAnalytical, r , solver);
+
+
+        if(solver->getRank() == 0)
+        {
+            cout << "End results" << endl;
+            cout << gradientNumerical << endl;
+            cout << gradientAnalytical << endl;
+        }
+        for(int i = 0; i < particles; i++)
+        {
+            for(int j = 0; j < dimensions; j ++)
+            {
+                CHECK_CLOSE(gradientNumerical(i,j),gradientAnalytical(i,j),0.0001);
+            }
+        }
+    }
 }
 
 TEST(ANALYTICAL_VS_NUMERICAL_E_L)
 {
-//    double analytical, numerical;
-//    VMCSolver *solver = new VMCSolver();
+    ////////////////////////7
+    /// C4
+    /// ///////////////////////
 
-//    //TestStuff
-//        double particles;
-//        double dimensions;
-//        long idum = -clock();
+    double analytical, numerical;
+    VMCSolver *solver = new VMCSolver();
 
-
-//    for(int n = 0; n < 3; n++)
-//    {
-//        if(n==0)
-//        {
-//            solver->setTrialFunction(new Helium(solver));
-//            cout << "Helium" << endl;
-//        }
-//        if(n==1)
-//        {
-//            solver->setTrialFunction(new Beryllium(solver));
-//            cout << "Beryllium" << endl;
-//        }
-//        if(n==2)
-//        {
-//            solver->setTrialFunction(new Neon(solver));
-//            cout << "Neon" << endl;
-//        }
+    //TestStuff
+        double particles;
+        double dimensions;
+        long idum = -clock();
 
 
-//        particles = solver->getNParticles();
-//       dimensions = solver->getNDimensions();
-
-//        mat r = zeros (particles,dimensions);
-
-//        //Random positions to test E_L
-//        for(int i = 0; i < particles; i ++ )
-//        {
-//         for(int j = 0; j < dimensions; j++)
-//         {
-//            r(i,j) = ran2(&idum);
-
-//         }
-//        }
-
-//        solver->switchElectronInteraction(true);
-//        solver->trialFunction()->setAnalytical(false);
-
-//        //Getting the local energy values
-//        solver->determinant()->updateSlaterMatrices(r,solver);
-//        numerical = solver->trialFunction()->localEnergy(r,solver);
-
-//        solver->trialFunction()->setAnalytical(true);
-
-//        //Getting the local energy values
-//        solver->determinant()->updateSlaterMatrices(r,solver);
-//        analytical = solver->trialFunction()->localEnergy(r,solver);
+    for(int n = 0; n < 3; n++)
+    {
+        if(n==0)
+        {
+            solver->setTrialFunction(new Helium(solver));
+            cout << "Helium" << endl;
+        }
+        if(n==1)
+        {
+            solver->setTrialFunction(new Beryllium(solver));
+            cout << "Beryllium" << endl;
+        }
+        if(n==2)
+        {
+            solver->setTrialFunction(new Neon(solver));
+            cout << "Neon" << endl;
+        }
 
 
-//        if(solver->getRank() == 0)
-//        {
-//            cout << "Energy with the numerical E_L: " << numerical << endl;
-//            cout << "Energy with the E_L machinery : " << analytical << endl;
-//        }
+        particles = solver->getNParticles();
+       dimensions = solver->getNDimensions();
 
-//        CHECK_CLOSE(numerical, analytical, 0.1 );
+        mat r = zeros (particles,dimensions);
+
+        //Random positions to test E_L
+        for(int i = 0; i < particles; i ++ )
+        {
+         for(int j = 0; j < dimensions; j++)
+         {
+            r(i,j) = ran2(&idum);
+
+         }
+        }
+
+        solver->switchElectronInteraction(true);
+        solver->trialFunction()->setAnalytical(false);
+        solver->setCycles(50000);
+
+        //Getting the local energy values
+        solver->determinant()->updateSlaterMatrices(r,solver);
+        numerical = solver->trialFunction()->localEnergy(r,solver);
+
+        solver->trialFunction()->setAnalytical(true);
+
+        //Getting the local energy values
+        solver->determinant()->updateSlaterMatrices(r,solver);
+        analytical = solver->trialFunction()->localEnergy(r,solver);
 
 
-//    }
+        if(solver->getRank() == 0)
+        {
+            cout << "Energy with the numerical E_L: " << numerical << endl;
+            cout << "Energy with the E_L machinery : " << analytical << endl;
+        }
+
+        CHECK_CLOSE(numerical, analytical, 0.1 );
+
+
+    }
 }
 
 TEST(ANALYTICAL_VS_NUMERICAL_ALL)
 {
-//    double analytical, numerical;
-//    VMCSolver *solver = new VMCSolver();
+    ////////////////////////7
+    /// Extra
+    /// ///////////////////////
 
-//    for(int n = 0; n < 3; n++)
-//    {
-//        if(n==0)
-//            solver->setTrialFunction(new Helium(solver));
-//        if(n==1)
-//            solver->setTrialFunction(new Beryllium(solver));
-//        if(n==2)
-//            solver->setTrialFunction(new Neon(solver));
+    double analytical, numerical;
+    VMCSolver *solver = new VMCSolver();
 
-//        solver->switchElectronInteraction(true);
-//        solver->trialFunction()->setAnalytical(false);
-//        solver->setCycles(50000);
-//        solver->runMasterIntegration();
+    for(int n = 0; n < 3; n++)
+    {
+        if(n==0)
+            solver->setTrialFunction(new Helium(solver));
+        if(n==1)
+            solver->setTrialFunction(new Beryllium(solver));
+        if(n==2)
+            solver->setTrialFunction(new Neon(solver));
 
-//        numerical = solver->getEnergy();
+        solver->switchElectronInteraction(true);
+        solver->trialFunction()->setAnalytical(false);
+        solver->setCycles(50000);
+        solver->runMasterIntegration();
 
-//        solver->switchElectronInteraction(true);
-//        solver->trialFunction()->setAnalytical(true);
-//        solver->setCycles(50000);
-//        solver->runMasterIntegration();
+        numerical = solver->getEnergy();
 
-//        analytical = solver->getEnergy();
+        solver->switchElectronInteraction(true);
+        solver->trialFunction()->setAnalytical(true);
+        solver->setCycles(50000);
+        solver->runMasterIntegration();
 
-//        if(solver->getRank() == 0)
-//        {
-//            cout << "Energy with the numerical E_L: " << numerical << endl;
-//            cout << "Energy with the E_L machinery : " << analytical << endl;
-//        }
+        analytical = solver->getEnergy();
 
-//        CHECK_CLOSE(numerical, analytical, 0.1 );
-//    }
+        if(solver->getRank() == 0)
+        {
+            cout << "Energy with the numerical E_L: " << numerical << endl;
+            cout << "Energy with the E_L machinery : " << analytical << endl;
+        }
+
+        CHECK_CLOSE(numerical, analytical, 0.1 );
+    }
 
 }
 
 TEST(AnalyticalHelium)
 {
-//    //This tests the analytical machinery calculating the local energy by testing it against
-//    // Helium for which we have a easy closed solution. This tests that Helium using the machinery gets the same E_L value with a random
-//    // electron position
-//    double analytical, old;
-//    VMCSolver *solver = new VMCSolver();
+    ////////////////////////
+    /// C6
+    //////////////////////////
+
+    //This tests the analytical machinery calculating the local energy by testing it against
+    // Helium for which we have a easy closed solution. This tests that Helium using the machinery gets the same E_L value with a random
+    // electron position
+    double analytical, old;
+    VMCSolver *solver = new VMCSolver();
 
 
-//    solver->setTrialFunction(new HeliumJastrowAnalytical(solver)); //
-//    solver->switchElectronInteraction(true);
-//    solver->trialFunction()->setAnalytical(true);
+    solver->setTrialFunction(new HeliumJastrowAnalytical(solver)); //
+    solver->switchElectronInteraction(true);
+    solver->trialFunction()->setAnalytical(true);
 
 
-////TestStuff
-//    double particles = solver->getNParticles();
-//    double dimensions = solver->getNDimensions();
-//    long idum = -clock();
+//TestStuff
+    double particles = solver->getNParticles();
+    double dimensions = solver->getNDimensions();
+    long idum = -clock();
 
-//    mat r = zeros (particles,dimensions);
+    mat r = zeros (particles,dimensions);
 
-//    //Random positions to test derivative
-//    for(int i = 0; i < particles; i ++ )
-//    {
-//     for(int j = 0; j < dimensions; j++)
-//     {
-//        r(i,j) = ran2(&idum);
-//     }
-//    }
+    //Random positions to test derivative
+    for(int i = 0; i < particles; i ++ )
+    {
+     for(int j = 0; j < dimensions; j++)
+     {
+        r(i,j) = ran2(&idum);
+     }
+    }
 
-//    solver->determinant()->updateSlaterMatrices(r,solver);
-//    old = solver->trialFunction()->localEnergy(r,solver);
+    solver->determinant()->updateSlaterMatrices(r,solver);
+    old = solver->trialFunction()->localEnergy(r,solver);
 
 
-//    solver->setTrialFunction(new Helium(solver));
+    solver->setTrialFunction(new Helium(solver));
 
-//    solver->determinant()->updateSlaterMatrices(r,solver);
-//    analytical = solver->trialFunction()->localEnergy(r,solver);
+    solver->determinant()->updateSlaterMatrices(r,solver);
+    analytical = solver->trialFunction()->localEnergy(r,solver);
 
-//    if(solver->getRank() == 0)
-//    {
-//        cout << "Energy with the correct E_L one: " << old << endl;
-//        cout << "Energy with the E_L machinery : " << analytical << endl;
-//    }
+    if(solver->getRank() == 0)
+    {
+        cout << "Energy with the correct E_L one: " << old << endl;
+        cout << "Energy with the E_L machinery : " << analytical << endl;
+    }
 
-//    CHECK_CLOSE(old, analytical, 0.00001 );
+    CHECK_CLOSE(old, analytical, 0.00001 );
 }
 
 
@@ -297,45 +316,45 @@ TEST(HYDROGENTWO_VS_HELIUM)
 {
     //Make a test with R = 0 for hydrogenTwo where it should be the same as the Helium atom
 
-//    cout << endl << "Running He vs H_2 test" << endl << endl;
-//    VMCSolver *solver = new VMCSolver;
-//    solver->setTrialFunction(new Helium(solver));
-//    solver->trialFunction()->setAnalytical(false);
-//    solver->switchbBlockSampling(false);
-//    solver->setCycles(100000);
-//    solver->runMasterIntegration();
+    cout << endl << "Running He vs H_2 test" << endl << endl;
+    VMCSolver *solver = new VMCSolver;
+    solver->setTrialFunction(new Helium(solver));
+    solver->trialFunction()->setAnalytical(false);
+    solver->switchbBlockSampling(false);
+    solver->setCycles(100000);
+    solver->runMasterIntegration();
 
-//    mat r = zeros (2,3);
-//    vec correct = zeros (3);
-//    vec calculated = zeros(3);
-//    double r12 = 0;
+    mat r = zeros (2,3);
+    vec correct = zeros (3);
+    vec calculated = zeros(3);
+    double r12 = 0;
 
-//    double particles = 2;
-//    double dimensions = 3;
-//    double beta = solver->getBeta();
-//    long idum = -10000;
+    double particles = 2;
+    double dimensions = 3;
+    double beta = solver->getBeta();
+    long idum = -10000;
 
-//    for(int i = 0; i < particles; i ++ )
-//    {
-//        for(int j = 0; j < dimensions; j++)
-//        {
-//           r(i,j) = ran2(&idum);
-//        }
-//    }
+    for(int i = 0; i < particles; i ++ )
+    {
+        for(int j = 0; j < dimensions; j++)
+        {
+           r(i,j) = ran2(&idum);
+        }
+    }
 
-////    solver->trialFunction()->waveFunction(r, solver);
-////    solver->trialFunction()->localEnergy(r,solver);
-//    solver->determinant()->updateSlaterMatrices(r, solver);
-//    cout << solver->trialFunction()->waveFunction(r,solver) << endl;
+//    solver->trialFunction()->waveFunction(r, solver);
+//    solver->trialFunction()->localEnergy(r,solver);
+    solver->determinant()->updateSlaterMatrices(r, solver);
+    cout << solver->trialFunction()->waveFunction(r,solver) << endl;
 
 
-//    solver->setTrialFunction(new HydrogenTwo(solver));
-//    solver->trialFunction()->setAnalytical(false);
-//    solver->trialFunction()->setNucleusDistance(0.);
-//    solver->switchElectronInteraction(true);
-//    solver->switchbBlockSampling(false);
-//    solver->setCycles(100000);
-//    solver->runMasterIntegration();
+    solver->setTrialFunction(new HydrogenTwo(solver));
+    solver->trialFunction()->setAnalytical(false);
+    solver->trialFunction()->setNucleusDistance(0.);
+    solver->switchElectronInteraction(true);
+    solver->switchbBlockSampling(false);
+    solver->setCycles(100000);
+    solver->runMasterIntegration();
 
 }
 
