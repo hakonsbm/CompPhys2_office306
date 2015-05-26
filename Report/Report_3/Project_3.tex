@@ -83,124 +83,15 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 
 \section{Theory}
-	\subsection{Monte Carlo method with simple Metropolis sampling}
-		In a quantum mechanical system the energy is given by the expectation value of the Hamiltonian, let \(\Psi_T\) be a proposal for a wavefunction that can describe the system.
 
-		\begin{align}
-			E[\hat{H}] = \expval{\hat{H}}{\Psi_T} = \frac{\int{d\vb{R} \Psi_T^*(\vb{R})\hat{H} \Psi_T(\vb{R})  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
-		\end{align}
 
-		Let us introduce a local energy:
+	\include{sections/atoms}
 
-		\begin{align}
-			E_L(\hat{H}) &= \frac{1}{ \Psi_T(\vb{R}) } \hat{H} \Psi_T(\vb{R}))
-		\end{align}
+	\include{sections/monte_carlo}
 
-		\begin{align}
-			E[\hat{H}] &= \frac{\int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) E_L(\vb{R}))  }}{ \int{d\vb{R} \Psi_T^*(\vb{R}) \Psi_T(\vb{R}) }}
-			\intertext{Since the denumerator is a scalar constant after integrating it we can put it inside the integral in the numerator}
-			E[\hat{H}] &= \int{d\vb{R} \frac{\Psi_T^*(\vb{R}) \Psi_T(\vb{R})  }{\int{d\vb{R'} \Psi_T^*(\vb{R'}) \Psi_T(\vb{R'})}}  E_L(\vb{R})  }
-			\\
-			E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
-		\end{align}
+	\include{sections/extras}
 
-		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral.
-
-		\begin{enumerate}
-			\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
-			\item Start Monte Carlo Calculations
-				\begin{enumerate}
-					\item Propose a move of the particles according to an algorithm, for example \newline \( \vb{R_{new}} = \vb{R_{old}} + \delta * r \), where \(r\) is a random number in \([0,1]\)
-					\item Accept or reject move according to \( P(\vb{R_{new}})/ P(\vb{R_{old}}) \ge r \), where r is a new number. Update position values if accepted.
-					\item Calculate energy for this cycle.
-				\end{enumerate}
-		\end{enumerate}
-
-	\subsection{Helium atom}
-
-		The dimensionless hamiltonian for the Helium atom consists of a kinetic energy part and a potential energy part and is given by
-
-		\begin{align}
-			\hat{H} &= -\frac{\nabla^2_1}{2} - \frac{\nabla^2_2}{2} - \frac{Z}{r_1} - \frac{Z}{r_2} + \frac{1}{r_{12}}
-		\end{align}
-
-		For the energy to be finite the wavefunction must be constructed so the local energy is finite at all points.
-
-		\begin{align}
-			E_L(r_i,r_{12}) &= \frac{1}{\Psi_T} \hat{H} \Psi_T
-		\end{align}
-
-		If we consider the case where \(r_i \rightarrow 0\) then the \(- \frac{\nabla^2_i}{2} - \frac{Z}{r_i} \) terms of the hamiltonian could cause the energy to blow up, so we need to make sure that those terms stay finite in the limit.
-
-		\begin{align}
-			\lim_{r_i\rightarrow 0} {E_L(r_1,r_{12}) } &= \frac{1}{R_i(r_i)} \left( - \frac{1}{2}\pdv[2]{}{x_k} - \frac{Z}{r_i} \right) R_i(r_i) + G(r_i, r_{ij})
-			\\
-			\lim_{r_i\rightarrow 0} {E_L(r_1,r_{12}) } &= \frac{1}{R_i(r_i)} \left( - \frac{1}{2}\pdv[2]{}{r_k} - \frac{1}{r_i}\pdv{}{r_i}	 -	 \frac{Z}{r_i} \right) R_i(r_i) + G(r_i, r_{ij})
-			\intertext{ Derivatives of the wavefunction does not diverge since the wavefunction is finite at all points. so the following terms dominate when the particles approach the center. }
-			\lim_{r_i\rightarrow 0} {E_L(r_1,r_{12}) } &= \frac{1}{R_i(r_i)} \left( - \frac{1}{r_i}\pdv{}{r_i}	 -	 \frac{Z}{r_i} \right) R_i(r_i)
-			\end{align}
-
-		\begin{align}
-			 \frac{1}{R_i(r_i)} \pdv{}{r_i} R_i(r_i)	=  -Z  \qquad{ \text{ With solution }}  \qquad R_i(r_i) = A e^{-Z}
-		\end{align}
-
-		A similar calculation applies for \(r_{12} \rightarrow 0\) and a trialfunction of the form   \[\Psi_T(r_1,r_2,r_{12}) = e^{-\alpha (r_1 + r_2)} e^{\beta r_{12}} \] should fulfill the condition that the wavefunction is finite everywhere.
-
-	\subsection{Beryllium atom}
-
-		It is fairly simple to extend the calculational machinery of Variational
-		Monte Carlo to other systems than the Helium atom. To show this we
-		want to perform calculations on the beryllium atom. As beryllium has
-		four electrons compared to the 2 of helium, we need to calculate a
-		Slater determinant. However the computation of the Slater determinant
-		can be simplified for beryllium. Sticking to hydrogen-like wave functions,
-		we can write the trial wave function for beryllium as
-		\begin{equation}
-			\psi_{T}({\bf r_{1}},{\bf r_{2}},{\bf r_{3}},{\bf r_{4}})=Det\left(\phi_{1}({\bf r_{1}}),\phi_{2}({\bf r_{2}}),\phi_{3}({\bf r_{3}}),\phi_{4}({\bf r_{4}})\right)\prod_{i<j}^{4}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)},
-			\label{eq:BerylliumTrialFunction}
-		\end{equation}
-		where $Det$ is a Slater determinant and the single-particle wave
-		functions are the hydrogen wave functions for the 1s and 2s orbitals.
-		With the variational ansatz these are
-		\begin{align}
-			\phi_{1s}({\bf r_{i}})=e^{-\alpha r_{i}},
-		\end{align}
-		and
-		\begin{align}
-			\phi_{2s}({\bf r_{i}})=\left(1-\alpha r_{i}/2\right)e^{-\alpha r_{i}/2}.
-		\end{align}
-		The Slater determinant is calculated using these ansatzes.
-
-		Furthermore, for the Jastrow factor,
-		\begin{align}
-			\Psi_{C}=\prod_{i<j}g(r_{ij})=\exp{\sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}},
-		\end{align}
-		we need to take into account the spins of the electrons. We fix electrons
-		1 and 2 to have spin up, and electron 3 and 4 to have spin down. This
-		means that when the electrons have equal spins we get a factor
-		\begin{align}
-			a=\frac{1}{4},
-		\end{align}
-		and if they have opposite spins we get a factor
-		\begin{align}
-			a=\frac{1}{2}.
-		\end{align}
-
-	\subsection{Neon atom}
-
-		Wishing to extend our variational Monte Carlo machinery further we implement Neon. Neon has ten electrons, so it is a big jump from Helium and Beryllium. Therefore we also have to implement a better way to handle the Slater determinant than we did in the previous project. The trial wave function for Neon can be written as
-		\begin{equation}
-		   \psi_{T}({\bf r_1},{\bf r_2}, \dots,{\bf r_{10}}) =
-		   Det\left(\phi_{1}({\bf r_1}),\phi_{2}({\bf r_2}),
-		   \dots,\phi_{10}({\bf r_{10}})\right)
-		   \prod_{i<j}^{10}\exp{\left(\frac{r_{ij}}{2(1+\beta r_{ij})}\right)},
-		   \label{eq:NeonTrialFunction}
-		\end{equation}
-		Now we need to include the $2p$ wave function as well. It is given as
-		\begin{equation}
-			\phi_{2p}({\bf r_i}) = \alpha {\bf r_i}e^{-\alpha r_i/2}.
-		\end{equation}
-		where $ {\bf r_i} = \sqrt{r_{i_x}^2+r_{i_y}^2+r_{i_z}^2}$.
+	
 
 	\subsection{Derivation of local energies}
 		The local energy of is dependant on the Hamiltonian and the wavefunction describing the system, the Hamiltonian incorporates both a kinetic energy part given by \( \frac{\nabla_i^2}{2} \) for each particle
@@ -329,84 +220,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 			Using this we can calculate the spin up determinant, the spin down
 			determinant, and by putting them together, the Slater determinant.
 
-	\subsection{Importance sampling}
-		We now want to make the code more efficient, so we replace the brute
-		force Metropolis algorithm with a walk in coordinate space biased
-		by the trial wave function, an approach based on the Fokker-Planck
-		equation and the Langevin equation for generating a trajectory in
-		coordinate space.
-
-		For one particle or walker, a diffusion process characterized by a
-		time-dependent probability density $P\left(x,t\right)$ in one dimension
-		we have the Fokker-Planck equation
-		\begin{align}
-			\frac{\partial P}{\partial t}=D\frac{\partial}{\partial x}\left(\frac{\partial}{\partial x}-F\right)P\left(x,t\right),
-		\end{align}
-		where $F$ is a drift term and $D$ is the diffusion coefficient.
-
-		The new positions in coordinate space are found using the Langevin
-		equation with Euler's method. We go from the Langevin equation
-		\begin{align}
-			\frac{\partial x(t)}{\partial t}=DF(x(t))+\eta
-		\end{align}
-		where $\eta$ is a random variable. This gives us a new position
-		\begin{align}
-			y=x+DF(x)\Delta t+\xi\sqrt{\Delta t}.
-		\end{align}
-		Here $\xi$ is gaussian random variable and $\Delta t$ is a chosen
-		time step. $D$ comes from the factor $1/2$ in the kinetic energy
-		operator, and is therefore equal to $1/2$ in atomic units.
-
-		The process of isotropic diffusion characterized by a time-dependent
-		probability density $P\left(\mathbf{x},t\right)$ will, as an approximation,
-		obey the Fokker-Planck equation
-		\begin{align}
-			\frac{\partial P}{\partial t}=\sum_{i}D\frac{\partial}{\partial\mathbf{x_{i}}}\left(\frac{\partial}{\partial\mathbf{x_{i}}}-\mathbf{F_{i}}\right)P(\mathbf{x},t),
-		\end{align}
-		where $\mathbf{F}_{i}$ is component number $i$ of the drift term
-		caused by an external potential, and $D$ is the diffusion coefficient.
-		We set the left hand side equal to zero and obtain the convergence
-		to a stationary probability density
-		\begin{align}
-			\frac{\partial^{2}P}{\partial{\mathbf{x_{i}}^{2}}}=P\frac{\partial}{\partial{\mathbf{x_{i}}}}\mathbf{F_{i}}+\mathbf{F_{i}}\frac{\partial}{\partial{\mathbf{x_{i}}}}P.
-		\end{align}
-
-
-		Inserting the drift vector, $\mathbf{F}=g(\mathbf{x})\frac{\partial P}{\partial\mathbf{x}}$,
-		we get
-		\begin{align}
-			\frac{\partial^{2}P}{\partial{\mathbf{x_{i}}^{2}}}=P\frac{\partial g}{\partial P}\left(\frac{\partial P}{\partial{\mathbf{x}_{i}}}\right)^{2}+Pg\frac{\partial^{2}P}{\partial{\mathbf{x}_{i}^{2}}}+g\left(\frac{\partial P}{\partial{\mathbf{x}_{i}}}\right)^{2}
-		\end{align}
-		To meet the condition of stationary density the left hand side has
-		to be zero. This means that the terms containing first and second
-		order derivatives has to cancel each other, which is only possible
-		if $g=\frac{1}{P}$. This yields
-		\begin{align}
-			\mathbf{F}=2\frac{1}{\Psi_{T}}\nabla\Psi_{T},
-		\end{align}
-		known as the quantum force. This so-called force pushes the walker
-		towards regions of configuration space where the trial wave function
-		is large, thus increasing the efficiency of the simulation. This is
-		a great improvement on the Metropolis algorithm where the walker has
-		the same probability to move in every direction.
-
-		From the Fokker-Planck equation we get a transition probability given
-		by Green's function
-		\begin{align}
-			G(y,x,\Delta t)=\frac{1}{(4\pi D\Delta t)^{3N/2}}\exp\left(-\frac{(y-x-D\Delta tF(x))^{2}}{4D\Delta t}\right)
-		\end{align}
-		This means that the Metropolis algorithm
-		\begin{align}
-			A(y,x)=\mathrm{min}(1,q(y,x))),
-		\end{align}
-		where
-		\begin{align}
-			q(y,x)=\frac{|\Psi_{T}(y)|^{2}}{|\Psi_{T}(x)|^{2}},
-		\end{align}
-		is replaced by the Metropolis-Hastings algorithm,
-		\begin{align}
-			q(y,x)=\frac{G(x,y,\Delta t)|\Psi_{T}(y)|^{2}}{G(y,x,\Delta t)|\Psi_{T}(x)|^{2}}
-		\end{align}
+	
 
 		\subsection{Efficient calculation of derivatives}
 		Calculating the derivatives involved in the VMC calculation numerically is slow in that they entail several calls to the wavefunctions in addition to introducing an extra numerical error. Here we will show how we have divided up the derivatives and found analytic expressions for all the parts.
@@ -724,51 +538,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 				\frac{\partial^{2}f_{ij}}{\partial r_{ij}^{2}}=-\frac{2a_{ij}\beta_{ij}}{\left(1+\beta_{ij}r_{ij}\right)^{3}}
 			\end{align}
 
-	\subsection{Implementation of MPI}
-		As the calculations now become increasingly complex and heavy we implement MPI to make use of multiple processors. Personal computers today usually have two, four or sometimes eight processors, which will give a fairly good speedup to our calculations. With bigger atoms or systems it is crucial to implement a way to distribute calculation to multiple processors.
-
-		Implementing MPI in the Monte Carlo method is very easy. As we deal with statistical values we can easily split up the problem. Each process will run its own set of samples. The number of samples used by each process is simply $n/p$, where $n$ is the total number of samples we want to do, and $p$ is the number of processes. In the end all processors send their results to the master process, which sums up the values and takes the average over all processes.
-
-	\subsection{Blocking}
-		Blocking refers to a method to more accurately estimate the error of the values obtained by the VMC algorithm. It's actually a completely separate and independent process. The basic idea lies on the correlations between all the measurements. If these are important enough, they will produce an increase in the error that needs to be taken into account. The reason behind this is related to the effective amount of measurements, if there are correlations there will be measurements that will contain less information, so these won't be as valuable as the rest and it will be as if there are \textit{less} measurementes than we actually have. Obviously this is a problem, the usual identification of the error with $\sqrt{\frac{\sigma}{n}}$ will be overly optimistic and a correction is needed.
-
-		\begin{align}
-			f_d=\frac{1}{n-d}\sum_{k=1}^{n-d}{\left(x_k-\bar{x}_n\right)\left(x_{k+d}-\bar{x}_n\right)}
-		\end{align}
-
-		Where $f_d$ is the correlation between measurements separated by a distance of $d$. This can be used to give an actual form to the correction factor:\\
-
-		\begin{align}
-			\tau=1+2\sum_{d=1}^{n-1}{\frac{f_d}{var\left(x\right)}}
-		\end{align}
-
-		This is the autocorrelation time and it relates the error with the variance:\\
-
-		\begin{align}
-			err^2=\frac{\tau}{n}var\left(x\right)
-		\end{align}
-
-		And the inverse of the first factor is actually the number of effective measurements (that are actually useful since they contain information):\\
-
-		\begin{align}
-			n_{eff}=\frac{n}{\tau}
-		\end{align}
-
-		The expression that relates the standard deviation with this correlation time is thus:\\
-
-		\begin{align}
-			\sigma=\sqrt{\left(\frac{1+2\tau/\Delta t}{n}\left(\bar{x^2}-\bar{x}^2\right)\right)}
-		\end{align}
-
-		Where $\Delta t$ is the time between samples, and it's commonly smaller than $\tau$. The main problem is that to compute $\tau$ a lot of time is needed, and this is not feasible in most cases.\\
-
-		The solution is to use blocking, and the algorithm to do this is actually quite simple. The total amount of measurements is divided into blocks (hence the name) of a certain size, and for each block the standard deviation is obtained. When the standard deviation stops increasing as the block size does, the correlations are irrelevant and the value for it is ready.\\
-
-		\begin{figure}
-			\centering \includegraphics[width=0.45\linewidth]{../figures/Beryllium_blocking}
-			\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_blocking}
-			\protect\caption{STD vs. blocksize with $10^{6}$ MC cycles.  The STD should have a plateauing trend as the blocksize increases.} \label{fig01:std_Stuff}
-		\end{figure}
+	
 
 
 \section{Results}
@@ -1166,7 +936,7 @@ atom}
 		\label{fig:classes}
 	\end{figure}
 
-	\include{verification}
+	\include{sections/verification}
 
 
 
