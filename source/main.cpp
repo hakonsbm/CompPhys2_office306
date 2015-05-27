@@ -472,7 +472,7 @@ void runBlockingSampledRun(VMCSolver *solver)
 
     char const * outfilePath = (pathString + string("_blockingSamples")).c_str();
 
-//    solver->setCycles(1000000);
+
 
     samplefile.open(outfilePath);
 
