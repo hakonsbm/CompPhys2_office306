@@ -8,7 +8,8 @@ from matplotlib import cm
 
 
 
-atom = "Beryllium"
+atom = "HeliumJastrowAnalytical"
+#atom = "Neon"
 
 for quant in ["energy", "variance"]:
 
@@ -36,8 +37,33 @@ for quant in ["energy", "variance"]:
 	np.array(beta)
 	np.array(dt)
 
-	def test(x, y):
-		return x*x + y
+	min_energy = 1000
+	min_energy_alpha = 0;
+	min_energy_beta = 0;
+	
+	min_var = 1000
+	min_var_alpha = 0;
+	min_var_beta = 0;
+
+	for i in range(len(energy)):
+		if energy[i] < min_energy:
+			min_energy = energy[i]
+			min_energy_alpha = alpha[i]
+			min_energy_beta = beta[i]
+		if var[i] < min_var:
+			min_var = var[i]
+			min_var_alpha = alpha[i]
+			min_var_beta = beta[i]
+
+	print "Min var = ", min_var
+	print "Min var alpha = ", min_var_alpha
+	print "Min var beta = ", min_var_beta
+	print 
+	print "Min energy = ", min_energy
+	print "Min energy alpha = ", min_energy_alpha
+	print "Min energy beta = ", min_energy_beta
+			
+
 
 
 	fig = plt.figure()
