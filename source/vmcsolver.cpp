@@ -245,7 +245,8 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         averageR12 += sqrt(r12);
 
 
-
+        if(cycle > nCycles - 10)
+            cout << rNew << endl;
 
         if (m_blockSampling){// &&  cycle % 10 == 0) {
             samplefile << setw(15) << setprecision(8) << deltaE;

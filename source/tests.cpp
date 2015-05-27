@@ -22,6 +22,8 @@ using namespace arma;
 TEST(Hydrogenic) {
     //C1 and C2
 
+
+
     VMCSolver *solver = new VMCSolver();
 
     cout << endl << "Running Hydrogen test" << endl << endl;
