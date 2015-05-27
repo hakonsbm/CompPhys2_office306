@@ -1,0 +1,184 @@
+\appendix
+
+\section{Program overview}
+
+	\begin{figure}
+		\begin{tikzpicture}[%
+		    >=triangle 60,              % Nice arrows; your taste may be different
+		    start chain=going below,    % General flow is top-to-bottom
+		    node distance=6mm and 45mm, % Global setup of box spacing
+		    every join/.style={norm},   % Default linetype for connecting boxes
+		    ]
+		% ------------------------------------------------- 
+		% A few box styles 
+		% <on chain> *and* <on grid> reduce the need for manual relative
+		% positioning of nodes
+		\tikzset{
+		  base/.style={draw, on chain, on grid, align=center, minimum height=4ex},
+		  proc/.style={base, rectangle, text width=10em},
+		  test/.style={base, diamond, aspect=2, text width=5em},
+		  term/.style={proc, rounded corners},
+		  % coord node style is used for placing corners of connecting lines
+		  coord/.style={coordinate, on chain, on grid, node distance=6mm and 45mm},
+		  % nmark node style is used for coordinate debugging marks
+		  nmark/.style={draw, cyan, circle, font={\sffamily\bfseries}},
+		  % -------------------------------------------------
+		  % Connector line styles for different parts of the diagram
+		  norm/.style={->, draw, lcnorm},
+		  free/.style={->, draw, lcfree},
+		  cong/.style={->, draw, lccong},
+		  it/.style={font={\small\itshape}}
+		}
+		% -------------------------------------------------
+		% Start by placing the nodes
+		\node[proc, densely dotted, it] (init) {Initialize solver};
+		\node[term, join] (split)      {Split into several threads for multi core};
+		\node[term, join] (position)      {Suggest move};
+		\node[term, join] (SD) { Compute/update \( |D| \) };
+		\node[term, join ] (metro) {Compute Metropolis Ratio};
+		\node[test, densely dotted , join ]	(test)	{\(R \ge r\)};
+		\node[term]	(new_pos)	{\(\vb{r}^{old} = \vb{r}^{new}\)};
+		\node[term, join ]	(energy)	{ Store \(E_L\) };
+		\node[test, densely dotted ,join ]	(last)	{Last cycle?};
+		\node[term]	(end)	{Collect samples};
+
+
+		%Setting up the nodes on the side
+		\node [term, right=of SD] (trialfunction) {Compute \( \psi_T(\vb{r}) \)};
+		\node [term, left=of SD] (quantum) { Compute  Quantumforce};
+		\node[term, left=of test] (old_pos) {Keep \(  \vb{r}^{old} \)};
+		\node [coord, left=of new_pos] (c1)  {};    
+		\node[coord, right=of last]	(around1){};
+		\node[coord, right=of around1] (around2) {};
+		\node[coord, right=of position]	(around3){};
+		\node[coord, right=of around3]	(around4){};
+
+
+		%Draw new links between boxes
+		% \path (SD.south) to node [near start, xshift=1em] {$y$} (quantum);
+		\draw [->,lcnorm] (SD.west) -- (quantum);
+		\draw [->,lcnorm] (SD.east) -- (trialfunction);
+		\draw [->, lcnorm] (quantum.south) -- (metro);
+		\draw [->, lcnorm] (trialfunction.south) -- (metro);
+		\draw [*->, lccong, , dotted] (test.west) -- (old_pos);
+			\path (test.west) to node [ yshift = -1em] {no} (old_pos);
+		\draw [*->, lcfree, dotted] (test.south) -- (new_pos);
+			\path (test.south) to node [xshift = -1em]{yes} (new_pos);
+
+		\draw [-, lcnorm] (old_pos.south) -- (c1);
+		\draw [->, lcnorm] (c1.south) -- (energy);
+
+		\draw[*-, lccong, dotted] (last.east) -- (around2);
+			\path (last.east) to node [yshift = -1em] {no} (last);
+			\draw[-, lccong, dotted] (around2.east) -- (around4);
+			\draw[->, lccong, dotted] (around4) -- (position);
+
+		\draw [*->, lcfree, dotted] (last.south) -- (end);
+			\path (last.south) to node [xshift = -1em]{yes} (new_pos);
+
+
+		\end{tikzpicture}
+		\caption{Schematic overview over the workflow of the VMC solver}
+		\label{fig:schematic}
+	\end{figure}
+\section{Class structure}
+	\begin{figure}
+		\begin{tikzpicture}[%
+			    >=triangle 60,              % Nice arrows; your taste may be different
+			    start chain=going below,    % General flow is top-to-bottom
+			    node distance=6mm and 45mm, % Global setup of box spacing
+			    every join/.style={norm},   % Default linetype for connecting boxes
+			    ]
+			% ------------------------------------------------- 
+			% A few box styles 
+			% <on chain> *and* <on grid> reduce the need for manual relative
+			% positioning of nodes
+			\tikzset{
+			  base/.style={draw, on chain, on grid, align=center, minimum height=4ex},
+			  proc/.style={base, rectangle, text width=10em},
+			  test/.style={base, diamond, aspect=2, text width=5em},
+			  term/.style={proc, rounded corners},
+			  % coord node style is used for placing corners of connecting lines
+			  coord/.style={coordinate, on chain, on grid, node distance=6mm and 45mm},
+			  % nmark node style is used for coordinate debugging marks
+			  nmark/.style={draw, cyan, circle, font={\sffamily\bfseries}},
+			  % -------------------------------------------------
+			  % Connector line styles for different parts of the diagram
+			  norm/.style={->, draw, lcnorm},
+			  free/.style={->, draw, lcfree},
+			  cong/.style={->, draw, lccong},
+			  it/.style={font={\small\itshape}}
+			}
+
+			%Center column
+			\node[term, fill=lcfree!25,  align=center] (solver) {VMCSolver};
+			\node[coord]	(blank)	{};
+			\node[term] (trialfunction)	{Trialfunction};
+				\draw[->, lcnorm]	(solver.south) -- (trialfunction);
+			\node[term, join]	(diff)	{He, Be, Ne, H\(_2\) or Be\(_2\)};
+
+
+			%Sides with lines drawn
+			\node[term, right=of blank] (derivatives) {Derivatives};
+				\draw[->, lcnorm] (solver.east) -- (derivatives.west);
+
+			\node[term, left=of blank] 	(slater)	{SlaterDeterminant};
+				\draw[->, lcnorm] (solver.west) -- (slater.east);
+
+			%Dotted lines between the connected classes
+			\draw[-, lcfree, densely dotted] (slater.east) -- (derivatives.west);
+			\draw[-, lcfree, densely dotted] (slater.east) -- (trialfunction.west);
+			\draw[-, lcfree, densely dotted] (trialfunction.east) -- (derivatives.west);
+
+		\end{tikzpicture}
+
+		\caption{Class and subclass structure used by the program}
+		\label{fig:classes}
+	\end{figure}
+
+\section{Closed expression for noncorrelation Helium trialfunction}
+
+	\subsection{Derivation of local energies, using radial coordinates}
+		The local energy of is dependant on the Hamiltonian and the wavefunction describing the system, the Hamiltonian incorporates both a kinetic energy part given by \( \frac{\nabla_i^2}{2} \) for each particle
+		and a potential energy part given by \(\frac{Z}{r_i}\) and \(\frac{1}{r_{ij}}\), where \(Z\) is the charge of the center, \(r_i\) is the distance for electron \(i\) to the atom center and \(r_{ij}\) is the distance between electron \(l\) and \(m\). Then the local energy is given by the following:
+
+		\begin{align}
+			E_L &= \sum_{i,i<j}{\frac{1}{ \Psi_T(\vb{r_i} , \vb{r_{ij}}) } \hat{H} \Psi_T(\vb{r_i} , \vb{r_{ij}})}
+			\\
+			&=	\sum_{i,i<j}\frac{1}{ \Psi_T(\vb{r_i} , \vb{r_{ij}}) } \left( - \frac{\nabla_i^2}{2} -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }  \right) \Psi_T(\vb{r_i} , \vb{r_{ij}})
+			\\
+			&= \sum_{i,i<j}{-\frac{1}{2\Psi_T} \left(\nabla_i^2 \Psi_T  \right)  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }}
+		\end{align}
+
+		Let us change derivation variables:
+
+		\begin{align}
+			-\frac{1}{2\Psi_T} \left(\nabla_i^2 \Psi_T  \right) &= \sum_{m=1}^{3}{-\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{x_m} \right)_i}
+			\\
+			&= \sum_{m=1}^{3}{-\frac{1}{2\Psi_T} \left( \pdv{}{x_m} \left( \pdv{\Psi_T}{r_i}\pdv{r_i}{x_m} \right) \right)_i}
+			\intertext{Since \(r_i = \left( x_1^2 + x_2^2 + x_3^2 \right)^{1/2}\) then \( \pdv{r_i}{x_m} = \pdv{\left( x_1^2 + x_2^2 + x_3^2 \right)^{1/2}}{x_m} =\frac{x_m}{r_i} \)}
+			&= \sum_{m=1}^{3}{-\frac{1}{2\Psi_T} \left( \pdv{}{x_m} \left( \pdv{\Psi_T}{r_i}\frac{x_m}{r_i} \right) \right)_i}
+			\\
+			&= \sum_{m=1}^{3}{-\frac{1}{2\Psi_T} \left( \pdv{\Psi_T}{x_m}{r_i}\frac{x_m}{r_i} + \pdv{\Psi_T}{r_i} \pdv{}{x_m} \left(\frac{x_m}{r_i} \right) \right)_i}
+			\intertext{ The term \( \pdv{}{x_m} \left(\frac{x_m}{r_i} \right) \) becomes for the different values for \(m\),  \(\pdv{}{x_1}  \left( \frac{x_1}{\left( x_1^2 + x_2^2 + x_3^2 \right)^{1/2}} \right) = \frac{x_2^2 + x_3^2}{r_i^3}\) so all the values for \(m\) term it should sum up to \( \frac{ 2 (x_1^2 + x_2^2 + x_3^2) }{ r_i^3 } \) }
+			&= -\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{r_i}\frac{x_1^2 + x_2^2 + x_3^2}{r^2_i} + \pdv{\Psi_T}{r_i} \frac{ 2 (x_1^2 + x_2^2 + x_3^2) }{ r_i^3 } \right)_i
+			\\
+			&= -\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{r_i} + \pdv{\Psi_T}{r_i} \frac{ 2 }{ r_i } \right)
+		\end{align}
+		Then the local energy becomes:
+		\begin{align}
+			E_L = \sum_{i,i<j}{  -\frac{1}{2\Psi_T} \left( \pdv[2]{\Psi_T}{r_i} + \pdv{\Psi_T}{r_i} \frac{ 2 }{ r_i } \right)  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }} \label{eq:localEnergy}
+		\end{align}
+
+		We can apply this to the simple helium trialfunction with no electronic interaction to obtain the local energy.
+
+		\subsubsection{Helium: Simple trialfunction}
+		The simple version of the trial function is only dependant on one parameter \( \alpha \) and does not take into account interaction between the two electrons, it is of the form
+		\[ \Psi_T (\vb{r_1}, \vb{r_2}) = \exp{ -\alpha (r_1 + r_2) } \]Let us set this trialfunction into the equation for the local energy \eqref{eq:localEnergy}.
+		\begin{align}
+			E_L &= \sum_{i,i<j}{  -\frac{1}{2\Psi_T} \left( \pdv[2]{e^{-\alpha (r_i + r_j)}}{r_i} + \pdv{e^{-\alpha (r_i + r_j)}}{r_i} \frac{ 2 }{ r_i } \right)  -\frac{Z}{r_i}  -  \frac{Z}{r_j} +  \frac{1}{r_{ij} }}
+			\\
+			E_L &= -\frac{1}{2\Psi_T} \sum_{i=1}^2{ \left( \alpha^2 -\alpha \frac{ 2 }{ r_i } \right) \Psi_T  -\frac{Z}{r_i} +  \frac{1}{r_{ij} } }
+			\\
+			E_L &= -\alpha^2 + (\alpha-Z) \left( \frac{1}{r_1} + \frac{1}{r_2} \right) + \frac{1}{r_{12}} \label{eq:heliumLocalEnergy}
+		\end{align}

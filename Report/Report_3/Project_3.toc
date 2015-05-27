@@ -1,4 +1,4 @@
-\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
 \contentsline {section}{\numberline {2}Theory}{2}{section.2}
 \contentsline {subsection}{\numberline {2.1}Monte Carlo method with simple Metropolis sampling}{3}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Atoms and Molecules}{4}{subsection.2.2}
@@ -8,43 +8,18 @@
 \contentsline {subsubsection}{\numberline {2.2.4}Neon atom}{6}{subsubsection.2.2.4}
 \contentsline {subsubsection}{\numberline {2.2.5}Hydrogen molecule}{6}{subsubsection.2.2.5}
 \contentsline {subsection}{\numberline {2.3}Calculating the Slater determinant}{7}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}Setting up the Slater determinant}{7}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}Calculation of the Slater determinant}{7}{subsubsection.2.3.2}
 \contentsline {subsection}{\numberline {2.4}Optimization}{8}{subsection.2.4}
-\contentsline {subsubsection}{\numberline {2.4.1}emptypals}{8}{subsubsection.2.4.1}
-\contentsline {subsubsection}{\numberline {2.4.2}Importance sampling}{9}{subsubsection.2.4.2}
-\contentsline {subsection}{\numberline {2.5}Implementation of MPI}{10}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}Blocking}{10}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}Derivation of local energies}{12}{subsection.2.7}
-\contentsline {subsubsection}{\numberline {2.7.1}Helium: Simple trialfunction}{12}{subsubsection.2.7.1}
-\contentsline {subsection}{\numberline {2.8}Efficient calculation of derivatives}{13}{subsection.2.8}
-\contentsline {subsubsection}{\numberline {2.8.1}Gradient ratio}{13}{subsubsection.2.8.1}
-\contentsline {subsubsection}{\numberline {2.8.2}Kinetic Energy}{13}{subsubsection.2.8.2}
-\contentsline {subsubsection}{\numberline {2.8.3}Determinant ratios}{14}{subsubsection.2.8.3}
-\contentsline {subsubsection}{\numberline {2.8.4}Gradient determinant Ratio}{14}{subsubsection.2.8.4}
-\contentsline {subsubsection}{\numberline {2.8.5}Gradient ratio of Pad\IeC {\'e}-Jastrow factor }{14}{subsubsection.2.8.5}
-\contentsline {subsubsection}{\numberline {2.8.6}Correlation-to-correlation ratio}{15}{subsubsection.2.8.6}
-\contentsline {subsubsection}{\numberline {2.8.7}The $\nabla \Psi _{C}/\Psi _{C}$ ratio}{15}{subsubsection.2.8.7}
-\contentsline {subsubsection}{\numberline {2.8.8}The $\nabla ^{2} \Psi _{C}/\Psi _{C}$ ratio}{16}{subsubsection.2.8.8}
-\contentsline {section}{\numberline {3}Results}{17}{section.3}
-\contentsline {subsection}{\numberline {3.1}Variational Monte Carlo calculations of the helium atom}{17}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}First part}{17}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Alpha and Beta Values}{20}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Computational speed gain by using an analytical local energy}{20}{subsubsection.3.2.2}
-\contentsline {subsection}{\numberline {3.3}Variational Monte Carlo calculations of the Beryllium and Neon atoms}{20}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Alpha and Beta Values}{22}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Speedup with MPI}{22}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}Onebody densities / Comparisons / Without Jastrow}{22}{subsubsection.3.3.3}
-\contentsline {subsubsection}{\numberline {3.3.4}Charge Density}{22}{subsubsection.3.3.4}
-\contentsline {section}{\numberline {4}Conclusions and discussion}{24}{section.4}
-\contentsline {subsection}{\numberline {4.1}Critique on the exercise}{24}{subsection.4.1}
-\contentsline {section}{\numberline {A}Program overview}{24}{appendix.A}
-\contentsline {section}{\numberline {B}Class structure}{24}{appendix.B}
-\contentsline {section}{\numberline {C}Verification of the model}{25}{appendix.C}
-\contentsline {subsection}{\numberline {C.1}Verification of the general Monte Carlo method}{25}{subsection.C.1}
-\contentsline {subsection}{\numberline {C.2}Verification of the Slater determinant and the laplacian Slaterdeterminant ratio}{25}{subsection.C.2}
-\contentsline {subsection}{\numberline {C.3}The gradient}{25}{subsection.C.3}
-\contentsline {subsection}{\numberline {C.4}The correlation laplacian}{25}{subsection.C.4}
-\contentsline {subsection}{\numberline {C.5}Local Energy in Helium}{26}{subsection.C.5}
-\contentsline {subsection}{\numberline {C.6}Verification of correlation gradient}{26}{subsection.C.6}
-\contentsline {subsection}{\numberline {C.7}Hydrogen Molecule}{26}{subsection.C.7}
+\contentsline {subsubsection}{\numberline {2.4.1}Metropolis-Hastings-Ratio}{8}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}Slater-Determinant-Ratio}{8}{subsubsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.3}Correlation-to-correlation ratio}{9}{subsubsection.2.4.3}
+\contentsline {subsubsection}{\numberline {2.4.4}Efficient calculation of derivatives}{9}{subsubsection.2.4.4}
+\contentsline {subsubsection}{\numberline {2.4.5}Gradient-Ratio}{9}{subsubsection.2.4.5}
+\contentsline {subsubsection}{\numberline {2.4.6}Laplacian-Ratio}{10}{subsubsection.2.4.6}
+\contentsline {subsubsection}{\numberline {2.4.7}The $\nabla |D|/|D|$ ratio}{10}{subsubsection.2.4.7}
+\contentsline {subsubsection}{\numberline {2.4.8}The $\nabla ^2 |D|/|D|$ ratio}{10}{subsubsection.2.4.8}
+\contentsline {subsubsection}{\numberline {2.4.9}The $\nabla \Psi _{C}/\Psi _{C}$ ratio}{10}{subsubsection.2.4.9}
+\contentsline {subsubsection}{\numberline {2.4.10}The $\nabla ^{2} \Psi _{C}/\Psi _{C}$ ratio}{12}{subsubsection.2.4.10}
+\contentsline {subsubsection}{\numberline {2.4.11}Importance sampling}{13}{subsubsection.2.4.11}
+\contentsline {subsection}{\numberline {2.5}Implementation of MPI}{14}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Blocking}{14}{subsection.2.6}
+\contentsline {section}{\numberline {3}Results}{16}{section.3}

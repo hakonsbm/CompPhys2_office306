@@ -160,7 +160,7 @@
 
 	\subsubsection{Neon atom}
 
-		Wishing to extend our variational Monte Carlo machinery further we implement Neon. Neon has ten electrons, so it is a big jump from Helium and Beryllium. Now we need better methods to handle the Slater determinant. The trial wave function for Neon can be written as
+		Wishing to extend our variational Monte Carlo machinery further we implement Neon. Neon has ten electrons, so it is a big jump from Helium and Beryllium. Now we need better methods to handle the Slater determinant and is described in subsection \ref{sec:slaterdeterminant}. The trial wave function for Neon can be written as
 		\begin{equation}
 		   \psi_{T}({\bf r_1},{\bf r_2}, \dots,{\bf r_{10}}) =
 		   Det\left(\phi_{1}({\bf r_1}),\phi_{2}({\bf r_2}),
@@ -173,6 +173,7 @@
 			\phi_{2p}({\bf r_i}) = \alpha {\bf r_i}e^{-\alpha r_i/2}.
 		\end{equation}
 		where $ {r_i} = \sqrt{r_{i_x}^2+r_{i_y}^2+r_{i_z}^2}$.
+
 
 
 	\subsubsection{Hydrogen molecule}
@@ -197,7 +198,7 @@
 		\end{align}
 
 	\subsection{Calculating the Slater determinant}
-		\subsubsection{Setting up the Slater determinant}
+		\label{sec:slaterdeterminant}
 			To describe the wavefunction of multiple fermions we use a Slater
 			determinant. The Slater determinant has the form
 			\begin{align}
@@ -246,7 +247,6 @@
 			full Slater determinant as long as the Hamiltonian is spin independent.
 			We thus avoid summing over spin variables.
 
-		\subsubsection{Calculation of the Slater determinant}
 			Now we have the Slater determinant written as a product of a determinant
 			for spin up and a determinant for spin down. The next step is to invert
 			the matrices using LU decomposition. We can thus rewrite a matrix

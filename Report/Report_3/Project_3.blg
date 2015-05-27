@@ -5,50 +5,53 @@ A level-1 auxiliary file: sections/monte_carlo.aux
 A level-1 auxiliary file: sections/atoms.aux
 A level-1 auxiliary file: sections/optimisation.aux
 A level-1 auxiliary file: sections/extras.aux
+A level-1 auxiliary file: sections/helium_atom.aux
+A level-1 auxiliary file: sections/beryllium_neon.aux
+A level-1 auxiliary file: sections/conclusions.aux
+A level-1 auxiliary file: sections/appendix.aux
 A level-1 auxiliary file: sections/verification.aux
 The style file: plain.bst
 Database file #1: bibliography.bib
-Warning--empty publisher in Kinoshita:1957:PR
 Warning--empty publisher in Koput:2011:PCCP
-You've used 4 entries,
+You've used 3 entries,
             2118 wiz_defined-function locations,
-            526 strings with 4657 characters,
-and the built_in function-call counts, 1006 in all, are:
-= -- 90
-> -- 34
+            525 strings with 4666 characters,
+and the built_in function-call counts, 788 in all, are:
+= -- 72
+> -- 27
 < -- 0
-+ -- 15
-- -- 10
-* -- 60
-:= -- 176
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 14
++ -- 12
+- -- 8
+* -- 48
+:= -- 139
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 11
 chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 47
-empty$ -- 94
-format.name$ -- 10
-if$ -- 205
+cite$ -- 4
+duplicate$ -- 35
+empty$ -- 72
+format.name$ -- 8
+if$ -- 160
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 7
-newline$ -- 23
-num.names$ -- 8
-pop$ -- 29
+int.to.str$ -- 3
+missing$ -- 5
+newline$ -- 18
+num.names$ -- 6
+pop$ -- 20
 preamble$ -- 1
-purify$ -- 13
+purify$ -- 10
 quote$ -- 0
-skip$ -- 26
+skip$ -- 20
 stack$ -- 0
-substring$ -- 46
-swap$ -- 4
+substring$ -- 41
+swap$ -- 3
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 10
-warning$ -- 2
-while$ -- 10
-width$ -- 5
-write$ -- 41
-(There were 2 warnings)
+type$ -- 8
+warning$ -- 1
+while$ -- 8
+width$ -- 4
+write$ -- 32
+(There was 1 warning)

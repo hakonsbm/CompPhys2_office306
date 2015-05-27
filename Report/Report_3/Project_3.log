@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  26 MAY 2015 16:21
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  27 MAY 2015 12:07
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1988,6 +1988,8 @@ File: lstlang1.sty 2013/08/26 1.5b listings language file
 )
 (./Project_3.aux (./sections/monte_carlo.aux) (./sections/atoms.aux)
 (./sections/optimisation.aux) (./sections/extras.aux)
+(./sections/helium_atom.aux) (./sections/beryllium_neon.aux)
+(./sections/conclusions.aux) (./sections/appendix.aux)
 (./sections/verification.aux))
 \openout1 = `Project_3.aux'.
 
@@ -2089,13 +2091,14 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout2 = `sections/optimisation.aux'.
 
 
-(./sections/optimisation.tex) [8
+(./sections/optimisation.tex [8
 
 
-]
+] [9] [10] [11]) [12]
 \openout2 = `sections/extras.aux'.
 
- (./sections/extras.tex [9
+ (./sections/extras.tex
+[13
 
 
 ]
@@ -2128,7 +2131,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 120--121
 
  []
 
-<../figures/Beryllium_blocking.png, id=266, 578.16pt x 433.62pt>
+<../figures/Beryllium_blocking.png, id=258, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_blocking.png Graphic file (type png)
 
 <use ../figures/Beryllium_blocking.png>
@@ -2136,216 +2139,401 @@ Package pdftex.def Info: ../figures/Beryllium_blocking.png used on input line 1
 25.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_blocking.png, id=268, 578.16pt x 433.62pt>
+<../figures/Neon_blocking.png, id=260, 578.16pt x 433.62pt>
 File: ../figures/Neon_blocking.png Graphic file (type png)
 
 <use ../figures/Neon_blocking.png>
 Package pdftex.def Info: ../figures/Neon_blocking.png used on input line 126.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [10]) [11 <../figures/Beryllium_blocking.png> <../figures/Neon_blocking.png>] 
-[12
+ [14]) [15 <../figures/Beryllium_blocking.png> <../figures/Neon_blocking.png>] 
+[16
 
-] [13] [14] [15] [16]
-<../figures/EnergyVsAlphaHeliumSimpleAnalytical.png, id=371, 578.16pt x 433.62p
-t>
-File: ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png Graphic file (type png
-)
- <use ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png>
-Package pdftex.def Info: ../figures/EnergyVsAlphaHeliumSimpleAnalytical.png use
-d on input line 461.
-(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+]
+\openout2 = `sections/helium_atom.aux'.
 
-<../figures/VarianceVsAlphaHeliumSimpleAnalytical.png, id=372, 578.16pt x 433.6
-2pt>
-File: ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png Graphic file (type p
-ng)
- <use ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png>
-Package pdftex.def Info: ../figures/VarianceVsAlphaHeliumSimpleAnalytical.png u
-sed on input line 462.
-(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+ (./sections/helium_atom.tex
 
-<../figures/VarianceNCyclesHeliumSimpleAnalytical.png, id=373, 578.16pt x 433.6
-2pt>
-File: ../figures/VarianceNCyclesHeliumSimpleAnalytical.png Graphic file (type p
-ng)
- <use ../figures/VarianceNCyclesHeliumSimpleAnalytical.png>
-Package pdftex.def Info: ../figures/VarianceNCyclesHeliumSimpleAnalytical.png u
-sed on input line 464.
-(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [17]
-<../figures/HeliumJastrowAnalyticalTimeEnergy.png, id=385, 578.16pt x 433.62pt>
-File: ../figures/HeliumJastrowAnalyticalTimeEnergy.png Graphic file (type png)
-<use ../figures/HeliumJastrowAnalyticalTimeEnergy.png>
-Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalTimeEnergy.png used 
-on input line 470.
-(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+LaTeX Warning: Reference `fig:HeliumAlphaBeta' on page 17 undefined on input li
+ne 13.
 
-<../figures/HeliumJastrowAnalyticalTimeVariance.png, id=386, 578.16pt x 433.62p
-t>
-File: ../figures/HeliumJastrowAnalyticalTimeVariance.png Graphic file (type png
-)
- <use ../figures/HeliumJastrowAnalyticalTimeVariance.png>
-Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalTimeVariance.png use
-d on input line 471.
-(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalytical_alpha_beta_energy.png, id=388, 578.16pt x 4
+<../figures/HeliumJastrowAnalytical_alpha_beta_energy.png, id=283, 578.16pt x 4
 33.62pt>
 File: ../figures/HeliumJastrowAnalytical_alpha_beta_energy.png Graphic file (ty
 pe png)
  <use ../figures/HeliumJastrowAnalytical_alpha_beta_energy.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalytical_alpha_beta_energy.p
-ng used on input line 485.
-(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+ng used on input line 24.
+(pdftex.def)             Requested size: 208.04959pt x 156.03691pt.
 
-<../figures/HeliumJastrowAnalytical_alpha_beta_variance.png, id=389, 578.16pt x
+<../figures/HeliumJastrowAnalytical_alpha_beta_variance.png, id=284, 578.16pt x
  433.62pt>
 File: ../figures/HeliumJastrowAnalytical_alpha_beta_variance.png Graphic file (
 type png)
  <use ../figures/HeliumJastrowAnalytical_alpha_beta_variance.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalytical_alpha_beta_variance
-.png used on input line 486.
-(pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+.png used on input line 25.
+(pdftex.def)             Requested size: 208.04959pt x 156.03691pt.
 
-[18 <../figures/EnergyVsAlphaHeliumSimpleAnalytical.png> <../figures/VarianceVs
-AlphaHeliumSimpleAnalytical.png> <../figures/VarianceNCyclesHeliumSimpleAnalyti
-cal.png>] [19 <../figures/HeliumJastrowAnalyticalTimeEnergy.png> <../figures/He
-liumJastrowAnalyticalTimeVariance.png> <../figures/HeliumJastrowAnalytical_alph
-a_beta_energy.png> <../figures/HeliumJastrowAnalytical_alpha_beta_variance.png>
-] <../figures/Beryllium_alpha_beta_energy.png, id=426, 578.16pt x 433.62pt>
+
+! Package inputenc Error: Unicode char \u8:− not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.42 				Neon & $ - $ & $ −
+                             128.928 $\tabularnewline
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+)
+Runaway argument?
+{Comparison of energies found with Variational Monte Carlo method and\ETC.
+! File ended while scanning use of \caption@xdblarg.
+<inserted text> 
+                \par 
+l.103 	\include{sections/helium_atom}
+                                     
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+\openout2 = `sections/beryllium_neon.aux'.
+
+(./sections/beryllium_neon.tex
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 		\center
+             
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Reference `tab:energyReference' on page 17 undefined on input li
+ne 29.
+
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 			\center
+               
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 			\centering
+                   \includegraphics[width=0.45\linewidth]{../figures/Berylli...
+
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+<../figures/Beryllium_alpha_beta_energy.png, id=293, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_alpha_beta_energy.png Graphic file (type png)
 
 <use ../figures/Beryllium_alpha_beta_energy.png>
 Package pdftex.def Info: ../figures/Beryllium_alpha_beta_energy.png used on inp
-ut line 618.
+ut line 51.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Beryllium_alpha_beta_variance.png, id=427, 578.16pt x 433.62pt>
+<../figures/Beryllium_alpha_beta_variance.png, id=294, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_alpha_beta_variance.png Graphic file (type png)
 
 <use ../figures/Beryllium_alpha_beta_variance.png>
 Package pdftex.def Info: ../figures/Beryllium_alpha_beta_variance.png used on i
-nput line 619.
+nput line 52.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_alpha_beta_energy.png, id=428, 578.16pt x 433.62pt>
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.58 			\centering
+                   \includegraphics[width=0.45\linewidth]{../figures/Neon_al...
+
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+<../figures/Neon_alpha_beta_energy.png, id=295, 578.16pt x 433.62pt>
 File: ../figures/Neon_alpha_beta_energy.png Graphic file (type png)
 
 <use ../figures/Neon_alpha_beta_energy.png>
 Package pdftex.def Info: ../figures/Neon_alpha_beta_energy.png used on input li
-ne 625.
+ne 58.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_alpha_beta_variance.png, id=429, 578.16pt x 433.62pt>
+<../figures/Neon_alpha_beta_variance.png, id=296, 578.16pt x 433.62pt>
 File: ../figures/Neon_alpha_beta_variance.png Graphic file (type png)
 
 <use ../figures/Neon_alpha_beta_variance.png>
 Package pdftex.def Info: ../figures/Neon_alpha_beta_variance.png used on input 
-line 626.
+line 59.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [20] [21 <../figures/Beryllium_alpha_beta_energy.png> <../figures/Beryllium_al
-pha_beta_variance.png> <../figures/Neon_alpha_beta_energy.png> <../figures/Neon
-_alpha_beta_variance.png>]
-<../figures/processor_number_time_comparison.png, id=455, 578.16pt x 433.62pt>
+
+
+LaTeX Warning: Reference `fig:alpha_beta_comparison_beryllium' on page 17 undef
+ined on input line 64.
+
+
+LaTeX Warning: Reference `fig:alpha_beta_comparison_neon' on page 17 undefined 
+on input line 64.
+
+
+LaTeX Warning: Reference `tab:alpha_beta' on page 17 undefined on input line 64
+.
+
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.69 			\center
+               
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.82 			\centering
+                   \includegraphics[width=0.45\linewidth]{../figures/process...
+
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+<../figures/processor_number_time_comparison.png, id=297, 578.16pt x 433.62pt>
 File: ../figures/processor_number_time_comparison.png Graphic file (type png)
 
 <use ../figures/processor_number_time_comparison.png>
 Package pdftex.def Info: ../figures/processor_number_time_comparison.png used o
-n input line 649.
+n input line 82.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/ChargeDensityNeon.png, id=459, 578.16pt x 433.62pt>
+
+LaTeX Warning: Reference `tab:MPI_speedup' on page 17 undefined on input line 8
+7.
+
+
+LaTeX Warning: Reference `fig:MPI_speedup' on page 17 undefined on input line 8
+7.
+
+
+LaTeX Warning: Reference `fig:charge_density' on page 17 undefined on input lin
+e 94.
+
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.98 			\centering
+                   \includegraphics[width=0.45\linewidth]{../figures/ChargeD...
+
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+<../figures/ChargeDensityNeon.png, id=298, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityNeon.png Graphic file (type png)
 
 <use ../figures/ChargeDensityNeon.png>
-Package pdftex.def Info: ../figures/ChargeDensityNeon.png used on input line 66
-4.
+Package pdftex.def Info: ../figures/ChargeDensityNeon.png used on input line 98
+.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/ChargeDensityBeryllium.png, id=460, 578.16pt x 433.62pt>
+<../figures/ChargeDensityBeryllium.png, id=299, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityBeryllium.png Graphic file (type png)
 
 <use ../figures/ChargeDensityBeryllium.png>
 Package pdftex.def Info: ../figures/ChargeDensityBeryllium.png used on input li
-ne 665.
+ne 99.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
+)
+\openout2 = `sections/conclusions.aux'.
 
-Overfull \hbox (13.2459pt too wide) in paragraph at lines 753--754
+ (./sections/conclusions.tex)
+\openout2 = `sections/appendix.aux'.
+
+
+(./sections/appendix.tex
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.6 		\begin
+            {tikzpicture}[%
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (13.2459pt too wide) in paragraph at lines 80--81
 [][] 
  []
 
 
-Overfull \hbox (45.56833pt too wide) in paragraph at lines 806--807
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.86 		\begin
+             {tikzpicture}[%
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (45.56833pt too wide) in paragraph at lines 133--134
 [][] 
  []
 
-[22 <../figures/processor_number_time_comparison.png>] [23 <../figures/ChargeDe
-nsityNeon.png> <../figures/ChargeDensityBeryllium.png>] [24]
+
+LaTeX Warning: Reference `eq:localEnergy' on page 17 undefined on input line 17
+7.
+
+)
 \openout2 = `sections/verification.aux'.
 
+ (./sections/verification.tex
 
-(./sections/verification.tex [25
+LaTeX Warning: Reference `eq:hydrogen' on page 17 undefined on input line 4.
 
-])
-Underfull \hbox (badness 10000) in paragraph at lines 74--812
 
- []
+! LaTeX Error: Not in outer par mode.
 
-[26] (./Project_3.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 820.
- [27
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.18 			\begin
+              {center}
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 820.
- (./Project_3.aux (./sections/monte_carlo.aux)
-(./sections/atoms.aux) (./sections/optimisation.aux) (./sections/extras.aux)
+
+LaTeX Warning: Reference `sec:slaterVerification' on page 17 undefined on input
+ line 44.
+
+
+LaTeX Warning: Reference `sec:slaterVerification' on page 17 undefined on input
+ line 52.
+
+
+LaTeX Warning: Reference `sec:gradientVerification' on page 17 undefined on inp
+ut line 52.
+
+
+LaTeX Warning: Reference `eq:heliumLocalEnergy' on page 17 undefined on input l
+ine 55.
+
+) (./Project_3.bbl)
+
+! LaTeX Error: \begin{table} on input line 31 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.122 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 122.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 122.
+(./Project_3.aux (./sections/monte_carlo.aux) (./sections/atoms.aux)
+(./sections/optimisation.aux) (./sections/extras.aux)
+(./sections/helium_atom.aux) (./sections/beryllium_neon.aux)
+(./sections/conclusions.aux) (./sections/appendix.aux)
 (./sections/verification.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 820.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 820.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 122.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 122.
 Package rerunfilecheck Info: File `Project_3.out' has not changed.
-(rerunfilecheck)             Checksum: C7EF727D9049F17057B58412C22D6D2F;1913.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 820.
- ) 
-Here is how much of TeX's memory you used:
- 26145 strings out of 493304
- 491778 string characters out of 6139871
- 620288 words of memory out of 5000000
- 28849 multiletter control sequences out of 15000+600000
- 22225 words of font info for 63 fonts, out of 8000000 for 9000
- 957 hyphenation exceptions out of 8191
- 56i,14n,68p,10436b,806s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></us
-r/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/
-type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-supe
-r/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr
-/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/t
-ype1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super
-/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/
-share/texmf/fonts/type1/public/cm-super/sfti0900.pfb>
-Output written on Project_3.pdf (27 pages, 1645420 bytes).
-PDF statistics:
- 659 PDF objects out of 1000 (max. 8388607)
- 559 compressed objects within 6 object streams
- 212 named destinations out of 1000 (max. 500000)
- 301 words of extra memory for PDF output out of 10000 (max. 10000000)
+(rerunfilecheck)             Checksum: 9334918DBF01C96E2780BBAB981DB9E7;568.
 
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 122.
+! You can't use `\end' in internal vertical mode.
+\enddocument ...es \z@ \Call@AtVeryVeryEnd \@@end 
+                                                  
+l.122 \end{document}
+                    
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+! LaTeX Error: \begin{table} on input line 31 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.122 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.122 \end{document}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+)
+! Emergency stop.
+<*> Project_3.tex -recorder
+                           
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 26062 strings out of 493304
+ 489882 string characters out of 6139871
+ 642288 words of memory out of 5000000
+ 28812 multiletter control sequences out of 15000+600000
+ 23679 words of font info for 65 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 56i,14n,70p,10436b,959s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
