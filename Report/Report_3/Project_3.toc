@@ -1,4 +1,4 @@
-\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
 \contentsline {section}{\numberline {2}Theory}{2}{section.2}
 \contentsline {subsection}{\numberline {2.1}Monte Carlo method with simple Metropolis sampling}{3}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Atoms and Molecules}{4}{subsection.2.2}
@@ -23,3 +23,29 @@
 \contentsline {subsection}{\numberline {2.5}Implementation of MPI}{14}{subsection.2.5}
 \contentsline {subsection}{\numberline {2.6}Blocking}{14}{subsection.2.6}
 \contentsline {section}{\numberline {3}Results}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}Variational Monte Carlo calculations of the helium atom}{17}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Alpha and Beta Values}{17}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Computational speed gain by using an analytical local energy}{18}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Calculations using importance sampling}{18}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}Onebody density}{18}{subsubsection.3.1.4}
+\contentsline {subsubsection}{\numberline {3.1.5}Conjugate gradient with GTOs}{18}{subsubsection.3.1.5}
+\contentsline {subsection}{\numberline {3.2}Variational Monte Carlo calculations of the Beryllium and Neon atoms}{19}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Alpha and Beta Values}{19}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Speedup with MPI}{20}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Onebody densities / Comparisons / Without Jastrow}{20}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.4}Charge Density}{20}{subsubsection.3.2.4}
+\contentsline {section}{\numberline {4}Conclusions and discussion}{22}{section.4}
+\contentsline {subsection}{\numberline {4.1}Critique on the exercise}{23}{subsection.4.1}
+\contentsline {section}{\numberline {A}Program overview}{24}{appendix.A}
+\contentsline {section}{\numberline {B}Class structure}{24}{appendix.B}
+\contentsline {section}{\numberline {C}Closed expression for noncorrelation Helium trialfunction}{24}{appendix.C}
+\contentsline {subsection}{\numberline {C.1}Derivation of local energies, using radial coordinates}{24}{subsection.C.1}
+\contentsline {subsubsection}{\numberline {C.1.1}Helium: Simple trialfunction}{26}{subsubsection.C.1.1}
+\contentsline {section}{\numberline {D}Verification of the model}{27}{appendix.D}
+\contentsline {subsection}{\numberline {D.1}Verification of the general Monte Carlo method}{27}{subsection.D.1}
+\contentsline {subsection}{\numberline {D.2}Verification of the Slater determinant and the laplacian Slaterdeterminant ratio}{27}{subsection.D.2}
+\contentsline {subsection}{\numberline {D.3}The gradient}{27}{subsection.D.3}
+\contentsline {subsection}{\numberline {D.4}The correlation laplacian}{27}{subsection.D.4}
+\contentsline {subsection}{\numberline {D.5}Local Energy in Helium}{28}{subsection.D.5}
+\contentsline {subsection}{\numberline {D.6}Verification of correlation gradient}{28}{subsection.D.6}
+\contentsline {subsection}{\numberline {D.7}Hydrogen Molecule}{28}{subsection.D.7}

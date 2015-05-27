@@ -7,3 +7,19 @@
 \BOOKMARK [2][-]{subsection.2.5}{Implementation of MPI}{section.2}% 7
 \BOOKMARK [2][-]{subsection.2.6}{Blocking}{section.2}% 8
 \BOOKMARK [1][-]{section.3}{Results}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Variational Monte Carlo calculations of the helium atom}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Variational Monte Carlo calculations of the Beryllium and Neon atoms}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Conclusions and discussion}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Critique on the exercise}{section.4}% 13
+\BOOKMARK [1][-]{appendix.A}{Program overview}{}% 14
+\BOOKMARK [1][-]{appendix.B}{Class structure}{}% 15
+\BOOKMARK [1][-]{appendix.C}{Closed expression for noncorrelation Helium trialfunction}{}% 16
+\BOOKMARK [2][-]{subsection.C.1}{Derivation of local energies, using radial coordinates}{appendix.C}% 17
+\BOOKMARK [1][-]{appendix.D}{Verification of the model}{}% 18
+\BOOKMARK [2][-]{subsection.D.1}{Verification of the general Monte Carlo method}{appendix.D}% 19
+\BOOKMARK [2][-]{subsection.D.2}{Verification of the Slater determinant and the laplacian Slaterdeterminant ratio}{appendix.D}% 20
+\BOOKMARK [2][-]{subsection.D.3}{The gradient}{appendix.D}% 21
+\BOOKMARK [2][-]{subsection.D.4}{The correlation laplacian}{appendix.D}% 22
+\BOOKMARK [2][-]{subsection.D.5}{Local Energy in Helium}{appendix.D}% 23
+\BOOKMARK [2][-]{subsection.D.6}{Verification of correlation gradient}{appendix.D}% 24
+\BOOKMARK [2][-]{subsection.D.7}{Hydrogen Molecule}{appendix.D}% 25

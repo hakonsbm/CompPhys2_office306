@@ -435,13 +435,13 @@ void runBlockingSampledRun(VMCSolver *solver)
 {
     solver->switchbBlockSampling(true);
     solver->switchElectronInteraction(true);
-    solver->trialFunction()->setAnalytical(false);
+    solver->trialFunction()->setAnalytical(true);
 
     string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
 
     char const * outfilePath = (pathString + string("_blockingSamples")).c_str();
 
-//    solver->setCycles(1000000);
+
 
     samplefile.open(outfilePath);
 
