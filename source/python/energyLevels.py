@@ -131,7 +131,7 @@ def plotChargeDensity(data, name):
 
 	datapoints = data.shape[0]
 	ylimit = (0, 3)
-	xlimit = (0, 15)
+	xlimit = (0, 4)
 
 	for i in range(0 , nElectrons):
 		lower = 4 + 3*i

@@ -7,6 +7,7 @@ A level-1 auxiliary file: sections/optimisation.aux
 A level-1 auxiliary file: sections/extras.aux
 A level-1 auxiliary file: sections/helium_atom.aux
 A level-1 auxiliary file: sections/beryllium_neon.aux
+A level-1 auxiliary file: sections/density_plots.aux
 A level-1 auxiliary file: sections/conclusions.aux
 A level-1 auxiliary file: sections/appendix.aux
 A level-1 auxiliary file: sections/verification.aux
@@ -15,7 +16,7 @@ Database file #1: bibliography.bib
 Warning--empty publisher in Koput:2011:PCCP
 You've used 3 entries,
             2118 wiz_defined-function locations,
-            525 strings with 4666 characters,
+            526 strings with 4692 characters,
 and the built_in function-call counts, 788 in all, are:
 = -- 72
 > -- 27

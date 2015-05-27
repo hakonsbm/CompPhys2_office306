@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  27 MAY 2015 12:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.25)  27 MAY 2015 12:51
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1989,8 +1989,8 @@ File: lstlang1.sty 2013/08/26 1.5b listings language file
 (./Project_3.aux (./sections/monte_carlo.aux) (./sections/atoms.aux)
 (./sections/optimisation.aux) (./sections/extras.aux)
 (./sections/helium_atom.aux) (./sections/beryllium_neon.aux)
-(./sections/conclusions.aux) (./sections/appendix.aux)
-(./sections/verification.aux))
+(./sections/density_plots.aux) (./sections/conclusions.aux)
+(./sections/appendix.aux) (./sections/verification.aux))
 \openout1 = `Project_3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
@@ -2059,6 +2059,10 @@ LaTeX Info: Redefining \nameref on input line 69.
  ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Try loading font information for U+msa on input line 74.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -2073,32 +2077,29 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout5 = `Project_3.toc'.
 
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+[2] [3]
 \openout2 = `sections/monte_carlo.aux'.
 
-
-(./sections/monte_carlo.tex) [3
+ (./sections/monte_carlo.tex) [4
 
 ]
 \openout2 = `sections/atoms.aux'.
 
- (./sections/atoms.tex [4
+ (./sections/atoms.tex [5
 
 
-] [5] [6]) [7]
+] [6] [7])
+[8]
 \openout2 = `sections/optimisation.aux'.
 
+ (./sections/optimisation.tex [9
 
-(./sections/optimisation.tex [8
 
-
-] [9] [10] [11]) [12]
+] [10] [11] [12]) [13]
 \openout2 = `sections/extras.aux'.
 
- (./sections/extras.tex
-[13
+
+(./sections/extras.tex [14
 
 
 ]
@@ -2131,7 +2132,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 120--121
 
  []
 
-<../figures/Beryllium_blocking.png, id=337, 578.16pt x 433.62pt>
+<../figures/Beryllium_blocking.png, id=341, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_blocking.png Graphic file (type png)
 
 <use ../figures/Beryllium_blocking.png>
@@ -2139,20 +2140,20 @@ Package pdftex.def Info: ../figures/Beryllium_blocking.png used on input line 1
 25.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_blocking.png, id=339, 578.16pt x 433.62pt>
+<../figures/Neon_blocking.png, id=343, 578.16pt x 433.62pt>
 File: ../figures/Neon_blocking.png Graphic file (type png)
 
 <use ../figures/Neon_blocking.png>
 Package pdftex.def Info: ../figures/Neon_blocking.png used on input line 126.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [14]) [15 <../figures/Beryllium_blocking.png> <../figures/Neon_blocking.png>] 
-[16
+ [15]) [16 <../figures/Beryllium_blocking.png> <../figures/Neon_blocking.png>] 
+[17
 
 ]
 \openout2 = `sections/helium_atom.aux'.
 
  (./sections/helium_atom.tex
-<../figures/HeliumJastrowAnalytical_alpha_beta_energy.png, id=362, 578.16pt x 4
+<../figures/HeliumJastrowAnalytical_alpha_beta_energy.png, id=366, 578.16pt x 4
 33.62pt>
 File: ../figures/HeliumJastrowAnalytical_alpha_beta_energy.png Graphic file (ty
 pe png)
@@ -2161,7 +2162,7 @@ Package pdftex.def Info: ../figures/HeliumJastrowAnalytical_alpha_beta_energy.p
 ng used on input line 24.
 (pdftex.def)             Requested size: 208.04959pt x 156.03691pt.
 
-<../figures/HeliumJastrowAnalytical_alpha_beta_variance.png, id=363, 578.16pt x
+<../figures/HeliumJastrowAnalytical_alpha_beta_variance.png, id=367, 578.16pt x
  433.62pt>
 File: ../figures/HeliumJastrowAnalytical_alpha_beta_variance.png Graphic file (
 type png)
@@ -2170,18 +2171,18 @@ Package pdftex.def Info: ../figures/HeliumJastrowAnalytical_alpha_beta_variance
 .png used on input line 25.
 (pdftex.def)             Requested size: 208.04959pt x 156.03691pt.
 
-[17
+[18
 
  <../figures/HeliumJastrowAnalytical_alpha_beta_energy.png> <../figures/HeliumJ
 astrowAnalytical_alpha_beta_variance.png>]
-<../figures/HeliumJastrowAnalyticalTimeEnergy.png, id=384, 578.16pt x 433.62pt>
+<../figures/HeliumJastrowAnalyticalTimeEnergy.png, id=388, 578.16pt x 433.62pt>
 File: ../figures/HeliumJastrowAnalyticalTimeEnergy.png Graphic file (type png)
 <use ../figures/HeliumJastrowAnalyticalTimeEnergy.png>
 Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalTimeEnergy.png used 
 on input line 96.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/HeliumJastrowAnalyticalTimeVariance.png, id=385, 578.16pt x 433.62p
+<../figures/HeliumJastrowAnalyticalTimeVariance.png, id=389, 578.16pt x 433.62p
 t>
 File: ../figures/HeliumJastrowAnalyticalTimeVariance.png Graphic file (type png
 )
@@ -2189,12 +2190,12 @@ File: ../figures/HeliumJastrowAnalyticalTimeVariance.png Graphic file (type png
 Package pdftex.def Info: ../figures/HeliumJastrowAnalyticalTimeVariance.png use
 d on input line 97.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
-) [18 <../figures/HeliumJastrowAnalyticalTimeEnergy.png> <../figures/HeliumJast
+) [19 <../figures/HeliumJastrowAnalyticalTimeEnergy.png> <../figures/HeliumJast
 rowAnalyticalTimeVariance.png>]
 \openout2 = `sections/beryllium_neon.aux'.
 
  (./sections/beryllium_neon.tex
-<../figures/Beryllium_alpha_beta_energy.png, id=407, 578.16pt x 433.62pt>
+<../figures/Beryllium_alpha_beta_energy.png, id=412, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_alpha_beta_energy.png Graphic file (type png)
 
 <use ../figures/Beryllium_alpha_beta_energy.png>
@@ -2202,7 +2203,7 @@ Package pdftex.def Info: ../figures/Beryllium_alpha_beta_energy.png used on inp
 ut line 51.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Beryllium_alpha_beta_variance.png, id=408, 578.16pt x 433.62pt>
+<../figures/Beryllium_alpha_beta_variance.png, id=413, 578.16pt x 433.62pt>
 File: ../figures/Beryllium_alpha_beta_variance.png Graphic file (type png)
 
 <use ../figures/Beryllium_alpha_beta_variance.png>
@@ -2210,7 +2211,7 @@ Package pdftex.def Info: ../figures/Beryllium_alpha_beta_variance.png used on i
 nput line 52.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_alpha_beta_energy.png, id=409, 578.16pt x 433.62pt>
+<../figures/Neon_alpha_beta_energy.png, id=414, 578.16pt x 433.62pt>
 File: ../figures/Neon_alpha_beta_energy.png Graphic file (type png)
 
 <use ../figures/Neon_alpha_beta_energy.png>
@@ -2218,19 +2219,19 @@ Package pdftex.def Info: ../figures/Neon_alpha_beta_energy.png used on input li
 ne 58.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/Neon_alpha_beta_variance.png, id=410, 578.16pt x 433.62pt>
+<../figures/Neon_alpha_beta_variance.png, id=415, 578.16pt x 433.62pt>
 File: ../figures/Neon_alpha_beta_variance.png Graphic file (type png)
 
 <use ../figures/Neon_alpha_beta_variance.png>
 Package pdftex.def Info: ../figures/Neon_alpha_beta_variance.png used on input 
 line 59.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [19
+ [20
 
 
  <../figures/Beryllium_alpha_beta_energy.png> <../figures/Beryllium_alpha_beta_
 variance.png>]
-<../figures/processor_number_time_comparison.png, id=427, 578.16pt x 433.62pt>
+<../figures/processor_number_time_comparison.png, id=431, 578.16pt x 433.62pt>
 File: ../figures/processor_number_time_comparison.png Graphic file (type png)
 
 <use ../figures/processor_number_time_comparison.png>
@@ -2238,7 +2239,7 @@ Package pdftex.def Info: ../figures/processor_number_time_comparison.png used o
 n input line 82.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/ChargeDensityNeon.png, id=431, 578.16pt x 433.62pt>
+<../figures/ChargeDensityNeon.png, id=435, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityNeon.png Graphic file (type png)
 
 <use ../figures/ChargeDensityNeon.png>
@@ -2246,27 +2247,33 @@ Package pdftex.def Info: ../figures/ChargeDensityNeon.png used on input line 98
 .
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
 
-<../figures/ChargeDensityBeryllium.png, id=432, 578.16pt x 433.62pt>
+<../figures/ChargeDensityBeryllium.png, id=436, 578.16pt x 433.62pt>
 File: ../figures/ChargeDensityBeryllium.png Graphic file (type png)
 
 <use ../figures/ChargeDensityBeryllium.png>
 Package pdftex.def Info: ../figures/ChargeDensityBeryllium.png used on input li
 ne 99.
 (pdftex.def)             Requested size: 191.0625pt x 143.29353pt.
- [20 <../figures/Neon_alpha_beta_energy.png> <../figures/Neon_alpha_beta_varian
-ce.png> <../figures/processor_number_time_comparison.png>]) [21 <../figures/Cha
-rgeDensityNeon.png> <../figures/ChargeDensityBeryllium.png>] [22
+ [21 <../figures/Neon_alpha_beta_energy.png> <../figures/Neon_alpha_beta_varian
+ce.png> <../figures/processor_number_time_comparison.png>]) [22 <../figures/Cha
+rgeDensityNeon.png> <../figures/ChargeDensityBeryllium.png>]
+\openout2 = `sections/density_plots.aux'.
+
+
+No file sections/density_plots.tex.
+[23
+
+
 
 ]
 \openout2 = `sections/conclusions.aux'.
 
- (./sections/conclusions.tex) [23
+ (./sections/conclusions.tex) [24
 
 ]
 \openout2 = `sections/appendix.aux'.
 
-
-(./sections/appendix.tex
+ (./sections/appendix.tex
 Overfull \hbox (13.2459pt too wide) in paragraph at lines 80--81
 [][] 
  []
@@ -2276,42 +2283,42 @@ Overfull \hbox (45.56833pt too wide) in paragraph at lines 133--134
 [][] 
  []
 
-[24
+[25
 
 
-] [25]) [26]
+] [26]) [27]
 \openout2 = `sections/verification.aux'.
 
- (./sections/verification.tex [27
+ (./sections/verification.tex [28
 
 
 ])
-Underfull \hbox (badness 10000) in paragraph at lines 74--111
+Underfull \hbox (badness 10000) in paragraph at lines 74--112
 
  []
 
-[28] (./Project_3.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 119.
- [29
+[29] (./Project_3.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 120.
+ [30
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 119.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 120.
  (./Project_3.aux (./sections/monte_carlo.aux)
 (./sections/atoms.aux) (./sections/optimisation.aux) (./sections/extras.aux)
 (./sections/helium_atom.aux) (./sections/beryllium_neon.aux)
-(./sections/conclusions.aux) (./sections/appendix.aux)
-(./sections/verification.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 119.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 119.
+(./sections/density_plots.aux) (./sections/conclusions.aux)
+(./sections/appendix.aux) (./sections/verification.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 120.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 120.
 Package rerunfilecheck Info: File `Project_3.out' has not changed.
 (rerunfilecheck)             Checksum: AB9722408CC2570486B62852F90C111E;1888.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 119.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 120.
  ) 
 Here is how much of TeX's memory you used:
- 26164 strings out of 493304
- 491741 string characters out of 6139871
+ 26171 strings out of 493304
+ 491894 string characters out of 6139871
  619288 words of memory out of 5000000
- 28840 multiletter control sequences out of 15000+600000
+ 28841 multiletter control sequences out of 15000+600000
  22225 words of font info for 63 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  56i,14n,70p,10436b,806s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2343,10 +2350,10 @@ r/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr
 ype1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super
 /sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/
 share/texmf/fonts/type1/public/cm-super/sfti0900.pfb>
-Output written on Project_3.pdf (29 pages, 1571305 bytes).
+Output written on Project_3.pdf (30 pages, 1571914 bytes).
 PDF statistics:
- 663 PDF objects out of 1000 (max. 8388607)
- 565 compressed objects within 6 object streams
- 216 named destinations out of 1000 (max. 500000)
+ 671 PDF objects out of 1000 (max. 8388607)
+ 572 compressed objects within 6 object streams
+ 217 named destinations out of 1000 (max. 500000)
  278 words of extra memory for PDF output out of 10000 (max. 10000000)
 
