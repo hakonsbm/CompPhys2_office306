@@ -2,6 +2,7 @@
 *.user
 *.o
 /build-*/
+/outfiles/
 .*~
 *.pro.user.*
 *.aux
