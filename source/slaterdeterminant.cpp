@@ -94,17 +94,11 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
     int nHalf= solver->getNParticles()/2;
     double alpha = solver->getAlpha();
     //double GTO_element;
-    string TF = solver->getTF();
+//    string TF = solver->getTF();
     detUpOld = zeros<mat>(nHalf, nHalf);
     detDownOld = zeros<mat>(nHalf, nHalf);
 
-<<<<<<< HEAD
-=======
 
-    //cout << TF << endl;
-
-
->>>>>>> 77a607a1bea4f19636364947d9e726b698c6671d
     for (int k = 0; k <  nHalf; ++k)
     {
         for (i = 0; i < nHalf; ++i)

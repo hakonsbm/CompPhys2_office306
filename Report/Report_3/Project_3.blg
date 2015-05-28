@@ -1,58 +1,14 @@
-This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: Project_3.aux
-A level-1 auxiliary file: sections/monte_carlo.aux
-A level-1 auxiliary file: sections/atoms.aux
-A level-1 auxiliary file: sections/optimisation.aux
-A level-1 auxiliary file: sections/extras.aux
-A level-1 auxiliary file: sections/helium_atom.aux
-A level-1 auxiliary file: sections/beryllium_neon.aux
-A level-1 auxiliary file: sections/density_plots.aux
-A level-1 auxiliary file: sections/conclusions.aux
-A level-1 auxiliary file: sections/appendix.aux
-A level-1 auxiliary file: sections/verification.aux
-The style file: plain.bst
-Database file #1: bibliography.bib
-Warning--empty publisher in Koput:2011:PCCP
-You've used 3 entries,
-            2118 wiz_defined-function locations,
-            526 strings with 4692 characters,
-and the built_in function-call counts, 788 in all, are:
-= -- 72
-> -- 27
-< -- 0
-+ -- 12
-- -- 8
-* -- 48
-:= -- 139
-add.period$ -- 9
-call.type$ -- 3
-change.case$ -- 11
-chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 35
-empty$ -- 72
-format.name$ -- 8
-if$ -- 160
-int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 5
-newline$ -- 18
-num.names$ -- 6
-pop$ -- 20
-preamble$ -- 1
-purify$ -- 10
-quote$ -- 0
-skip$ -- 20
-stack$ -- 0
-substring$ -- 41
-swap$ -- 3
-text.length$ -- 0
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 8
-warning$ -- 1
-while$ -- 8
-width$ -- 4
-write$ -- 32
-(There was 1 warning)
+[0] Config.pm:318> INFO - This is Biber 1.8
+[0] Config.pm:321> INFO - Logfile is 'Project_3.blg'
+[37] biber:275> INFO - === to. mai 28, 2015, 22:27:06
+[37] Biber.pm:333> INFO - Reading 'Project_3.bcf'
+[84] Biber.pm:630> INFO - Found 3 citekeys in bib section 0
+[98] Biber.pm:3053> INFO - Processing section 0
+[112] Biber.pm:3190> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
+[116] bibtex.pm:933> INFO - Decoding LaTeX character macros into UTF-8
+[119] bibtex.pm:808> INFO - Found BibTeX data source 'bibliography.bib'
+[165] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'variable = shifted' with 'variable = non-ignorable'
+[166] Biber.pm:2945> INFO - Sorting 'entry' list 'nyt' keys
+[166] Biber.pm:2949> INFO - No sort tailoring available for locale 'en_US.UTF-8'
+[170] bbl.pm:482> INFO - Writing 'Project_3.bbl' with encoding 'UTF-8'
+[171] bbl.pm:555> INFO - Output to Project_3.bbl

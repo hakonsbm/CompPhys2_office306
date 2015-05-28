@@ -34,25 +34,29 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
     beta = solver -> getBeta();
     //vec argument(solver->getNParticles());
     if(solver->getElectronInteration())
-    {
-    for(int i = 0; i < solver->getNParticles(); i++) {
-        //argument[i] = 0.0;
-        rSingleParticle = 0;
+        if(!simpleFlag)
+        {
+            {
+            for(int i = 0; i < solver->getNParticles(); i++) {
+                //argument[i] = 0.0;
+                rSingleParticle = 0;
 
-        for(int j = i + 1; j < solver->getNParticles(); j++) {
-            rij = 0;
-            for(int k = 0; k < solver->getNDimensions(); k++) {
-                rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+                for(int j = i + 1; j < solver->getNParticles(); j++) {
+                    rij = 0;
+                    for(int k = 0; k < solver->getNDimensions(); k++) {
+                        rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+                    }
+                    rij = sqrt(rij);
+        //            if(spins(i)==spins(j)) a = 1./4.;
+        //            else a = 1./2.;
+                    a = spinFactor(i,j);
+                    //cout << i << " & " << j  << ": " << a << endl;
+                    product = product * exp(a*rij/(1+beta*rij));
+                    spin_count++;
+                }
             }
-            rij = sqrt(rij);
-//            if(spins(i)==spins(j)) a = 1./4.;
-//            else a = 1./2.;
-            a = spinFactor(i,j);
-            //cout << i << " & " << j  << ": " << a << endl;
-            product = product * exp(a*rij/(1+beta*rij));
-            spin_count++;
         }
-    }
+
     }
 
 
@@ -105,7 +109,7 @@ double Neon::localEnergy(const mat &r, VMCSolver *solver)
         potentialEnergy -= charge / sqrt(rSingleParticle);
     }
     // Contribution from electron-electron potential
-//    if(solver->getElectronInteration())
+    if(solver->getElectronInteration())
     {
         double r12 = 0;
         for(int i = 0; i < nParticles; i++) {

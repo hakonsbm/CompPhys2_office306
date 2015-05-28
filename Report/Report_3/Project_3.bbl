@@ -1,20 +1,100 @@
-\begin{thebibliography}{1}
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem{QUA:QUA560090204}
-J.~S. Binkley and J.~A. Pople.
-\newblock Møller–plesset theory for atomic ground state energies.
-\newblock {\em International Journal of Quantum Chemistry}, 9(2):229--236,
-  1975.
 
-\bibitem{griffiths2005introduction}
-David~J Griffiths.
-\newblock {\em Introduction to Quantum Mechanics}.
-\newblock Pearson, 2005.
+\refsection{0}
+  \sortlist{entry}{nyt}
+    \entry{QUA:QUA560090204}{article}{}
+      \name{labelname}{2}{}{%
+        {{uniquename=0,hash=3e97f632b7f11afff899fd981ba26f5b}{Binkley}{B\bibinitperiod}{J.\bibnamedelimi S.}{J\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=d68aeda4431afea4b73e5e065078cfd7}{Pople}{P\bibinitperiod}{J.\bibnamedelimi A.}{J\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=3e97f632b7f11afff899fd981ba26f5b}{Binkley}{B\bibinitperiod}{J.\bibnamedelimi S.}{J\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=d68aeda4431afea4b73e5e065078cfd7}{Pople}{P\bibinitperiod}{J.\bibnamedelimi A.}{J\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley & Sons, Inc.}%
+      }
+      \strng{namehash}{5883efeef8d7907c6dc4eeb88412bb81}
+      \strng{fullhash}{5883efeef8d7907c6dc4eeb88412bb81}
+      \field{sortinit}{B}
+      \field{labelyear}{1975}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Møller–Plesset theory for atomic ground state energies}
+      \field{issn}{1097-461X}
+      \field{journaltitle}{International Journal of Quantum Chemistry}
+      \field{number}{2}
+      \field{title}{Møller–Plesset theory for atomic ground state energies}
+      \field{volume}{9}
+      \field{year}{1975}
+      \field{pages}{229\bibrangedash 236}
+      \verb{doi}
+      \verb 10.1002/qua.560090204
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1002/qua.560090204
+      \endverb
+    \endentry
+    \entry{griffiths2005introduction}{book}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=3f7a9e85c3ff6da61d1cfc99fb826cc2}{Griffiths}{G\bibinitperiod}{David\bibnamedelima J}{D\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=3f7a9e85c3ff6da61d1cfc99fb826cc2}{Griffiths}{G\bibinitperiod}{David\bibnamedelima J}{D\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Pearson}%
+      }
+      \strng{namehash}{3f7a9e85c3ff6da61d1cfc99fb826cc2}
+      \strng{fullhash}{3f7a9e85c3ff6da61d1cfc99fb826cc2}
+      \field{sortinit}{G}
+      \field{labelyear}{2005}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Introduction to Quantum Mechanics}
+      \field{title}{Introduction to Quantum Mechanics}
+      \field{year}{2005}
+    \endentry
+    \entry{Koput:2011:PCCP}{book}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=0e9e6485a37c40e187bd008f8326c6c8}{Koput}{K\bibinitperiod}{Jacek}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=0e9e6485a37c40e187bd008f8326c6c8}{Koput}{K\bibinitperiod}{Jacek}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{location}{1}{%
+        {online}%
+      }
+      \strng{namehash}{0e9e6485a37c40e187bd008f8326c6c8}
+      \strng{fullhash}{0e9e6485a37c40e187bd008f8326c6c8}
+      \field{sortinit}{K}
+      \field{labelyear}{2011}
+      \field{labelmonth}{07}
+      \field{datelabelsource}{}
+      \field{labeltitle}{The ground-state potential energy function of a beryllium dimer determined using the single-reference coupled-cluster approach}
+      \field{month}{07}
+      \field{title}{The ground-state potential energy function of a beryllium dimer determined using the single-reference coupled-cluster approach}
+      \field{year}{2011}
+      \verb{url}
+      \verb http://www.researchgate.net/profile/Marco_Nascimento/publication/229696100_Ground_state_of_the_beryllium_atom_Reinvestigation_based_on_a_proper_independent_particle_model/links/0c96051d5d671b5eef000000.pdf
+      \endverb
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
 
-\bibitem{Koput:2011:PCCP}
-Jacek Koput.
-\newblock {\em The ground-state potential energy function of a beryllium dimer
-  determined using the single-reference coupled-cluster approach}.
-\newblock July 2011.
-
-\end{thebibliography}
