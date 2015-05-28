@@ -123,8 +123,9 @@ def plotChargeDensity(data, name):
 		if (name == "Neon"):
 			nElectrons = 10
 		else:
-			if (name == "HeliumJastrowAnalytical"):
+			if (name == "HeliumJastrowAnalytical" or "HydrogenTwo"):
 				nElectrons = 2
+
 
 
 	norm = np.ndarray(shape=(0), dtype=float, order='F')
@@ -133,6 +134,8 @@ def plotChargeDensity(data, name):
 	ylimit = (0, 3)
 	xlimit = (0, 4)
 
+
+	#This sorts out the coordinates of th eelectrons and stores them as r values
 	for i in range(0 , nElectrons):
 		lower = 4 + 3*i
 		upper = 7 + 3*i
@@ -140,45 +143,6 @@ def plotChargeDensity(data, name):
 		normTemp = r[:, 0]**2 + r[:,1]**2 + r[:,2]**2
 		norm = np.append(norm,normTemp)
 		normTemp = sorted(normTemp)
-		# wavefunction = "\Psi_1S"
-		if (i == 0 ):
-			wavefunction = "\Psi_1S"
-			fig = pl.figure()
-	
-			pl.title("One - body density of " + name + "  " + wavefunction)
-			pl.xlabel("r^2")
-			pl.ylim(ylimit)
-			pl.xlim(xlimit)
-
-			pl.hist(norm, normed=True, bins=200)
-			fig.savefig("../../Report/figures/ChargeDensity_" + name + "_" + wavefunction )
-		if (i == 1):
-			wavefunction = "\Psi_2S"
-			fig = pl.figure()
-			pl.title("One - body density of " + name + "  " + wavefunction)
-			pl.xlabel("r^2")
-			pl.ylim(ylimit)
-			pl.xlim(xlimit)
-
-			pl.hist(norm, normed=True, bins=200)
-			fig.savefig("../../Report/figures/ChargeDensity_" + name + "_" + wavefunction )
-		if (i == 2 ):
-			wavefunction = "\Psi_2P"
-			fig = pl.figure()
-			pl.title("One - body density of " + name + "  " + wavefunction)
-			pl.xlabel("r^2")
-			pl.ylim(ylimit)
-			pl.xlim(xlimit)
-
-			pl.hist(norm, normed=True, bins=200)
-			fig.savefig("../../Report/figures/ChargeDensity_" + name + "_" + wavefunction )
-
-		
-
-
-
-		
-
 
 
 ####################################################
@@ -190,18 +154,17 @@ def plotChargeDensity(data, name):
 	# r = data[: , lower : upper ]
 ####################################################
 
-	
 
-	# norm = x1**2 + y1**2 + z1**2
 
 	norm = sorted(norm)
+	norm = np.sqrt(norm)
 # 
 	# print norm
 
 	fig = pl.figure()
 	# ax = p3.Axes3D(fig)
 	pl.title("Charge Density of " + name)
-	pl.xlabel("r^2")
+	pl.xlabel("r")
 
 	pl.hist(norm, normed=True, bins=100)
 
@@ -212,6 +175,59 @@ def plotChargeDensity(data, name):
 	# ax.set_zlabel('z')
 
 	fig.savefig("../../Report/figures/ChargeDensity" + name)
+
+	xySlice = np.ndarray(shape=(3), dtype=float, order='F')
+	xySlice[2] = 0
+
+	planeIgnore = 0
+
+	#Now we want to do a plot of a slice around the x-y axis
+	for i in range(0, r.shape[0] ):
+		if np.abs(r[i,planeIgnore]) < 0.01: 
+			xySlice = np.vstack((xySlice, r[i]))
+	
+	# print xySlice
+
+	fig = pl.figure()
+	pl.plot(xySlice[:,np.abs(planeIgnore - 1)], xySlice[:,np.abs(planeIgnore - 2)], ".")
+	pl.title("Charge Density of " + name)
+	pl.xlabel("x")
+	pl.ylabel("z")
+	# pl.ylim([-1,1])
+	# pl.xlim([-1,1])
+
+	fig.savefig("../../Report/figures/ChargeDensityXYSlice" + name)
+
+
+	###################################################
+	#And at the last we want to create a 3D plot of it
+	###################################################
+
+	# print r.shape
+	# print xySlice.shape
+
+	# xySlice = xySlice[1:xySlice.shape[0]:50,:]
+	# print xySlice.shape
+
+
+	# return
+	r = xySlice
+	fig=pl.figure()
+	ax = p3.Axes3D(fig)
+	pl.title("Charge Density, " + name)
+	ax.scatter(r[:,0],r[:,1],r[:,2])
+	ax.set_xlabel('x')
+	ax.set_ylabel('y')
+	ax.set_zlabel('z')
+	ax.set_xlim([-3,3])
+	ax.set_ylim([-3,3])
+	ax.set_zlim([-3,3])
+
+
+
+	fig.savefig("../../Report/figures/ChargeDensity3D" + name)
+
+
 	return
 
 def plotVarVSnCycles(data, name):
@@ -241,9 +257,10 @@ def plotVarVSnCycles(data, name):
 #Decide what we want to plot this time
 
 # name = "HeliumSimpleAnalytical"
-name = "HeliumJastrowAnalytical"
+# name = "HeliumJastrowAnalytical"
 # name = "Beryllium"
 # name = "Neon"
+name = "HydrogenTwo"
 
 
 

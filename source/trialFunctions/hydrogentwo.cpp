@@ -19,6 +19,7 @@ HydrogenTwo::HydrogenTwo(VMCSolver *solver)
     solver->setNParticles(2);
     solver->setAlpha(1.289);
     solver->setBeta(0.401);
+//    solver->trialFunction()->setNucleusDistance(1.4);
 
     spin << 0 << 1;
 

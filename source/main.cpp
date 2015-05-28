@@ -85,6 +85,13 @@ int main(int nargs, char* args[])
 
     solver->setCycles(nCycles);
 
+    //Couldn't set this in the subclass of trialfunction, so putting it here for the time being
+    if((string)args[1]=="HydrogenTwo") solver->trialFunction()->setNucleusDistance(1.4);
+
+
+
+
+
     if((string)args[2]=="runWithDiffConstants") runWithDiffConstants(solver);
     else if((string)args[2]=="runSIWithDiffTimesteps") runSIWithDiffTimesteps(solver);
     else if((string)args[2]=="runBlockingSampledRun") runBlockingSampledRun(solver);
@@ -468,7 +475,9 @@ void runBlockingSampledRun(VMCSolver *solver)
 {
     solver->switchbBlockSampling(true);
     solver->switchElectronInteraction(true);
-    solver->trialFunction()->setAnalytical(true);
+    solver->trialFunction()->setAnalytical(false);
+
+
 
     string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
 
