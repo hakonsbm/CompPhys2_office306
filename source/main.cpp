@@ -123,13 +123,13 @@ void runFindAlphaBeta(VMCSolver *solver)
     //It will aslo make a better fit by taking into account both the variance (which should be zero) and the energy (which should be as low as possible),
     //when the lowest energy and variance does not agree anymore the limit for the resulition of the search has been reached, if not specified in some other way.
 
-    double alphaMin = 1.8;// * solver->getCharge();
-    double alphaMax = 2.0;// * solver->getCharge();
-    double betaMin = 0.3;
-    double betaMax = 0.5;
+    double alphaMin = 0.7 * solver->getCharge();
+    double alphaMax = 1.2 * solver->getCharge();
+    double betaMin = 0.04;
+    double betaMax = 0.4;
 
-    int nSteps = 12;    //Coarseness of mesh
-    int nMeshes = 8;    //Number of times it should decrease the mesh
+    int nSteps = 2;    //Coarseness of mesh
+    int nMeshes = 15;    //Number of times it should decrease the mesh
     double meshRangeAlpha = alphaMax - alphaMin;   //Used to recalculate the mesh
     double meshRangeBeta = betaMax - betaMin;
 
@@ -265,8 +265,8 @@ void runFindAlphaBeta(VMCSolver *solver)
         }
 
 
-        if(bestAlphaVariance != bestAlphaEnergy)
-            break;
+        //if(bestAlphaVariance != bestAlphaEnergy)
+         //   break;
 
 //        if(bestBetaEnergy != bestBetaVariance)        //Not canceling the loop because of beta, since beta has a very small influence on the values and could fail because of randomness
 //            break;
@@ -291,7 +291,9 @@ void runFindAlphaBeta(VMCSolver *solver)
     {
         cout << "The lowest variance, " << lowestVariance << ", is found with alpha  " << bestAlphaVariance  << " and beta " << bestBetaVariance << endl;
         cout << "The lowest energy, " << lowestEnergy << ", is found with alpha  " << bestAlphaEnergy  << " and beta " << bestBetaEnergy << endl;
-        MPI_Abort(MPI_COMM_WORLD, 1);
+
+        //MPI_Abort(MPI_COMM_WORLD, 1);
+
     }
 
 }
