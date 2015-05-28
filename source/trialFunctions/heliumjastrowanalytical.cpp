@@ -4,6 +4,7 @@
 HeliumJastrowAnalytical::HeliumJastrowAnalytical(VMCSolver *solver)
 {
     simpleFlag = false;
+    m_analytical = true;
     m_outfileName = "HeliumJastrowAnalytical";
 
     solver->setCharge(2);

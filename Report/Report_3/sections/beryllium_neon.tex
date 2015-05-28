@@ -86,17 +86,3 @@
 
 		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs.
 
-	\subsubsection{Onebody densities / Comparisons / Without Jastrow}
-		As we see in the verification section, without interaction the energies behave like hydrogen like wave functions. Comparing with the energies we obtain when also using interaction in the calculations we see that the Jastrow factor offers a good improvement on the energy, especially for larger systems.
-
-
-	\subsubsection{Charge Density}
-		The charge density gives measure of how often the electrons occupies certain area in the Monte Carlo simulation, in figure \ref{fig:charge_density} the square of the norm of the distance is plotted.
-		On the Neon atom the electrons have a closer distribution to the center that is caused by the more electrically charged core of Neon compared to Beryllium.
-
-		\begin{figure}
-			\centering \includegraphics[width=0.45\linewidth]{../figures/ChargeDensityNeon}
-			\centering \includegraphics[width=0.45\linewidth]{../figures/ChargeDensityBeryllium}
-			\protect\caption{Charge densities for Neon and Beryllium with the x-axis representing how far away from the atomcenter the electrons are. }
-			\label{fig:charge_density}
-		\end{figure}

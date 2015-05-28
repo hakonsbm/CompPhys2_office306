@@ -105,7 +105,7 @@ double Neon::localEnergy(const mat &r, VMCSolver *solver)
         potentialEnergy -= charge / sqrt(rSingleParticle);
     }
     // Contribution from electron-electron potential
-    if(solver->getElectronInteration())
+//    if(solver->getElectronInteration())
     {
         double r12 = 0;
         for(int i = 0; i < nParticles; i++) {

@@ -95,7 +95,6 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
     detUpOld = zeros<mat>(nHalf, nHalf);
     detDownOld = zeros<mat>(nHalf, nHalf);
 
-
     for (int k = 0; k <  nHalf; ++k)
     {
         for (i = 0; i < nHalf; ++i)
@@ -108,14 +107,18 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
         }
     }
 
+
     //If we are solving it analytically we also need the inverse of the slater matrix
     if(solver->trialFunction()->m_analytical)
     {
+
         detUpInverseOld = zeros<mat>(nHalf, nHalf);
         detDownInverseOld = zeros<mat>(nHalf, nHalf);
 
         detUpInverseOld = detUpOld.i();
         detDownInverseOld = detDownOld.i();
+
+
     }
 
 }
@@ -196,8 +199,6 @@ double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *so
     double derivative = 0;
     int nParticles= solver->getNParticles();
     int nHalf = nParticles/2;
-
-
 
     //Calculating the sum of the particles derivatives
     for(int i = 0; i < nHalf; i ++) //Sums over the particles
