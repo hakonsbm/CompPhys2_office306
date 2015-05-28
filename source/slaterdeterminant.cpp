@@ -1,6 +1,7 @@
 #include "slaterdeterminant.h"
 #include "vmcsolver.h"
 #include "lib.h"
+#include "GTO/gto.h"
 
 SlaterDeterminant::SlaterDeterminant()
 {
@@ -92,18 +93,47 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
     int i;
     int nHalf= solver->getNParticles()/2;
     double alpha = solver->getAlpha();
+    //double GTO_element;
+    string TF = solver->getTF();
     detUpOld = zeros<mat>(nHalf, nHalf);
     detDownOld = zeros<mat>(nHalf, nHalf);
 
+<<<<<<< HEAD
+=======
+
+    //cout << TF << endl;
+
+
+>>>>>>> 77a607a1bea4f19636364947d9e726b698c6671d
     for (int k = 0; k <  nHalf; ++k)
     {
         for (i = 0; i < nHalf; ++i)
         {
             // for detUp
             detUpOld(i,k) =  phi(r, alpha, i, k, solver);
+            //cout<<endl << k << endl;
+            /*
+            GTO *gto = new GTO();
+            GTO_element = gto->GTO_phi("be", r, i, k);
+            detUpOld(i,k) = GTO_element;
+        
+            //cout << detUpOld(i,k) << " " << GTO_element << endl;
+            //exit(1);
+            delete gto;
+            */
 
+
+            //cout << endl;
             // for detDownOld
             detDownOld(i,k) =  phi(r, alpha, i + nHalf, k, solver);
+            /*
+            gto = new GTO();
+            GTO_element = gto->GTO_phi("be", r, i, k);
+            detDownOld(i,k) = GTO_element;
+            //cout << detDownOld(i,k) << " " << GTO_element << endl;
+            delete gto;
+            */
+
         }
     }
 
@@ -158,6 +188,7 @@ double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSol
     {
         SD *= tempDetUp(i, i)*tempdetDownOld(i, i);
     }
+    delete indx;
     // return SD
     return d1*d2*SD;
 }
