@@ -41,7 +41,7 @@
   >
 ]>
 <requests version="1.0">
-  <internal package="biblatex" priority="9" active="1">
+  <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
       <file>Project_3.bcf</file>
@@ -81,7 +81,6 @@
     </requires>
     <requires type="editable">
       <file>bibliography.bib</file>
-      <file>top.bib</file>
     </requires>
   </external>
 </requests>

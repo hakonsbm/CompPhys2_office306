@@ -19,7 +19,7 @@
 
 \refsection{0}
   \sortlist{entry}{nyt}
-    \entry{QUA:QUA560090204}{article}{}
+    \entry{Binkley_1975}{article}{}
       \name{labelname}{2}{}{%
         {{uniquename=0,hash=3e97f632b7f11afff899fd981ba26f5b}{Binkley}{B\bibinitperiod}{J.\bibnamedelimi S.}{J\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
         {{uniquename=0,hash=d68aeda4431afea4b73e5e065078cfd7}{Pople}{P\bibinitperiod}{J.\bibnamedelimi A.}{J\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
@@ -70,7 +70,7 @@
       \field{title}{Introduction to Quantum Mechanics}
       \field{year}{2005}
     \endentry
-    \entry{Koput:2011:PCCP}{book}{}
+    \entry{Koput_2011_PCCP}{book}{}
       \name{labelname}{1}{}{%
         {{uniquename=0,hash=0e9e6485a37c40e187bd008f8326c6c8}{Koput}{K\bibinitperiod}{Jacek}{J\bibinitperiod}{}{}{}{}}%
       }
