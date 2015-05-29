@@ -82,6 +82,8 @@ void VMCSolver::runMasterIntegration()
         totalAverageR12 /= numprocs;
         totalRatio /= numprocs;
 
+
+
         if(my_rank == 0)
         {
             cout << "Energy: " << totalEnergy << " Energy (squared sum): " << totalEnergySquared << endl;
@@ -243,8 +245,6 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             r12 += (rNew(0,k) - rNew(1,k)) * (rNew(0,k) - rNew(1,k));
         }
         averageR12 += sqrt(r12);
-
-
 
         if (m_blockSampling){// &&  cycle % 10 == 0) {
             samplefile << setw(15) << setprecision(8) << deltaE;

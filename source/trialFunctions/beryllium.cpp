@@ -48,7 +48,11 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
 
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 
-    return SD*product;
+    //If we want to use hydrogenic functions we don't want to have the product, still calculating it due to laziness
+    if(simpleFlag)
+        return SD;
+    else
+        return SD*product;
 }
 
 double Beryllium::localEnergy(const mat &r, VMCSolver *solver)

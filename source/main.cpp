@@ -40,6 +40,7 @@ int main(int nargs, char* args[])
 
 
 
+
     // Choices for the alpha and beta values that is set in the creation of the trialFunctions are:
     //
     //HeliumSimpleAnalytical:   alpha = 1.62    beta = 0
@@ -476,6 +477,8 @@ void runBlockingSampledRun(VMCSolver *solver)
 {
     solver->switchbBlockSampling(true);
     solver->switchElectronInteraction(true);
+    solver->trialFunction()->simpleFlag = false;
+//    solver->setAlpha(solver->getCharge());
     solver->trialFunction()->setAnalytical(false);
 
 

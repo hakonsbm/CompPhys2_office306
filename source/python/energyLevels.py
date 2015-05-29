@@ -165,6 +165,8 @@ def plotChargeDensity(data, name):
 	# ax = p3.Axes3D(fig)
 	pl.title("Charge Density of " + name)
 	pl.xlabel("r")
+	pl.xlim([0,3])
+	pl.ylim([0,1.6])
 
 	pl.hist(norm, normed=True, bins=100)
 
@@ -211,7 +213,10 @@ def plotChargeDensity(data, name):
 
 
 	# return
-	r = xySlice
+	# r = xySlice
+	print r.shape
+	r = r[10000::10,:]
+	print r.shape
 	fig=pl.figure()
 	ax = p3.Axes3D(fig)
 	pl.title("Charge Density, " + name)
@@ -259,8 +264,10 @@ def plotVarVSnCycles(data, name):
 # name = "HeliumSimpleAnalytical"
 # name = "HeliumJastrowAnalytical"
 # name = "Beryllium"
-# name = "Neon"
-name = "HydrogenTwo"
+name = "Neon"
+# name = "HydrogenTwo"
+# name = "Helium"
+
 
 
 
@@ -280,5 +287,5 @@ plotChargeDensity(dataSample, name)
 # plotVarVSnCycles(dataCycles[1:,:], name)
 
 
-pl.show()
+# pl.show()
 

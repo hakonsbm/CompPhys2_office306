@@ -8,7 +8,7 @@
 \usepackage{amssymb}
 \usepackage[dvips]{epsfig}
 \usepackage[T1]{fontenc}
-\usepackage{cite} % [2,3,4] --> [2--4]
+% \usepackage{cite} % [2,3,4] --> [2--4]
 \usepackage{shadow}
 \usepackage{hyperref}
 \usepackage{physics}
@@ -17,6 +17,28 @@
 \usepackage{subcaption}
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%% references
+\usepackage[style=authoryear,
+            bibstyle=authoryear,
+            backend=biber,
+            % refsection=chapter,
+            maxbibnames=99,
+            maxnames=2,
+            firstinits=true,
+            uniquename=init,
+            natbib=true,
+            dashed=false]{biblatex}
+
+\addbibresource{bibliography.bib}
+% \addbibresource{top.bib}
+
+% \bibliography{bibliography}
+% \bibliography{top}
+
+
+\usepackage[capitalize]{cleveref}
+
 
 
 
@@ -68,9 +90,7 @@
 
 \begin{document}
 
-
 \maketitle
-
 \abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: Beryllium and Neon. The program uses importance sampling to improve efficiency and make the results more precise. To further improve the efficiency, MPI has been implemented as well. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor and provide insight into the electronic structure of the atoms.}
 
 \tableofcontents
@@ -82,6 +102,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 
 \section{Theory}
+	
 
 
 	\include{sections/monte_carlo}
@@ -112,8 +133,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 
 
-\bibliography{bibliography}
-\bibliographystyle{plain}
+% \bibliography{bibliography}
+% \bibliographystyle{apalike}
+\printbibliography
 
 
 \end{document}
