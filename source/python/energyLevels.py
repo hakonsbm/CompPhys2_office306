@@ -2,6 +2,12 @@ import numpy as np
 import pylab as pl
 import scipy.stats as stats
 import mpl_toolkits.mplot3d.axes3d as p3
+from matplotlib.colors import LogNorm
+
+
+
+
+
 
 
 def findLowestEnergy(data, name):
@@ -129,6 +135,7 @@ def plotChargeDensity(data, name):
 
 
 	norm = np.ndarray(shape=(0), dtype=float, order='F')
+	positions = np.ndarray(shape=(3), dtype = float)
 
 	datapoints = data.shape[0]
 	ylimit = (0, 3)
@@ -140,9 +147,17 @@ def plotChargeDensity(data, name):
 		lower = 4 + 3*i
 		upper = 7 + 3*i
 		r = data[: , lower : upper ]
+		positions = np.vstack((positions, r))
 		normTemp = r[:, 0]**2 + r[:,1]**2 + r[:,2]**2
 		norm = np.append(norm,normTemp)
 		normTemp = sorted(normTemp)
+
+	slice2D = np.ndarray(shape=(3), dtype = float)
+
+	for i in range(0,r.shape[0]):
+		if np.abs(r[i,0]) < 0.1:
+			slice2D = np.vstack((slice2D,r[i,:]))
+
 
 
 ####################################################
@@ -153,9 +168,7 @@ def plotChargeDensity(data, name):
 	# upper = 7 + 3*electron
 	# r = data[: , lower : upper ]
 ####################################################
-
-
-
+	
 	norm = sorted(norm)
 	norm = np.sqrt(norm)
 # 
@@ -168,69 +181,91 @@ def plotChargeDensity(data, name):
 	pl.xlim([0,3])
 	pl.ylim([0,1.6])
 
-	pl.hist(norm, normed=True, bins=100)
+	pl.hist(norm, normed=True, bins=200)
 
-
-	# ax.scatter(x1,y1,z1)
-	# ax.set_xlabel('x')
-	# ax.set_ylabel('y')
-	# ax.set_zlabel('z')
 
 	fig.savefig("../../Report/figures/ChargeDensity" + name)
 
-	xySlice = np.ndarray(shape=(3), dtype=float, order='F')
-	xySlice[2] = 0
 
-	planeIgnore = 0
-
-	#Now we want to do a plot of a slice around the x-y axis
-	for i in range(0, r.shape[0] ):
-		if np.abs(r[i,planeIgnore]) < 0.01: 
-			xySlice = np.vstack((xySlice, r[i]))
-	
-	# print xySlice
-
+		#Creating a better slicething
 	fig = pl.figure()
-	pl.plot(xySlice[:,np.abs(planeIgnore - 1)], xySlice[:,np.abs(planeIgnore - 2)], ".")
-	pl.title("Charge Density of " + name)
-	pl.xlabel("x")
-	pl.ylabel("z")
-	# pl.ylim([-1,1])
-	# pl.xlim([-1,1])
-
-	fig.savefig("../../Report/figures/ChargeDensityXYSlice" + name)
-
-
-	###################################################
-	#And at the last we want to create a 3D plot of it
-	###################################################
-
-	# print r.shape
-	# print xySlice.shape
-
-	# xySlice = xySlice[1:xySlice.shape[0]:50,:]
-	# print xySlice.shape
-
-
-	# return
-	# r = xySlice
-	print r.shape
-	r = r[10000::10,:]
-	print r.shape
-	fig=pl.figure()
-	ax = p3.Axes3D(fig)
-	pl.title("Charge Density, " + name)
-	ax.scatter(r[:,0],r[:,1],r[:,2])
-	ax.set_xlabel('x')
-	ax.set_ylabel('y')
-	ax.set_zlabel('z')
-	ax.set_xlim([-3,3])
-	ax.set_ylim([-3,3])
-	ax.set_zlim([-3,3])
+	pl.hist2d(slice2D[:,1], slice2D[:,2], bins=100, norm=LogNorm())
+	pl.colorbar()
+	pl.show()
 
 
 
-	fig.savefig("../../Report/figures/ChargeDensity3D" + name)
+	# xySlice = np.ndarray(shape=(3), dtype=float, order='F')
+	# xySlice[2] = 0
+
+	# planeIgnore = 0
+
+	# #Now we want to do a plot of a slice around the x-y axis
+	# for i in range(0, r.shape[0] ):
+	# 	if np.abs(r[i,planeIgnore]) < 0.05: 
+	# 		xySlice = np.vstack((xySlice, r[i]))
+	
+
+	# norm = r[:, 0]**2 + r[:,1]**2
+	# norm = sorted(norm)
+	# norm = np.sqrt(norm)
+
+	# fig = pl.figure()
+	# # ax = p3.Axes3D(fig)
+	# pl.title("Charge Density of " + name)
+	# pl.xlabel("r")
+	# pl.xlim([0,3])
+	# pl.ylim([0,1.6])
+
+	# pl.hist(norm, normed=True, bins=200)
+	# # # print xySlice
+
+	# # fig = pl.figure()
+	# # pl.plot(xySlice[:,np.abs(planeIgnore - 1)], xySlice[:,np.abs(planeIgnore - 2)], ".")
+	# # pl.title("Charge Density of " + name)
+	# # pl.xlabel("x")
+	# # pl.ylabel("z")
+	# # # pl.ylim([-1,1])
+	# # # pl.xlim([-1,1])
+
+	# # fig.savefig("../../Report/figures/ChargeDensityXYSlice" + name)
+
+	# #Creating a better slicething
+	# fig = pl.figure()
+	# pl.hist2d(xySlice[:,np.abs(planeIgnore - 1)], xySlice[:,np.abs(planeIgnore - 2)], bins=100, norm=LogNorm())
+	# pl.colorbar()
+	# pl.show()
+
+
+	# ###################################################
+	# #And at the last we want to create a 3D plot of it
+	# ###################################################
+
+	# # print r.shape
+	# # print xySlice.shape
+
+	# # xySlice = xySlice[1:xySlice.shape[0]:50,:]
+	# # print xySlice.shape
+
+
+	# # return
+	# # r = xySlice
+
+	# # # r = r[10000::10,:]
+	# # fig=pl.figure()
+	# # ax = p3.Axes3D(fig)
+	# # pl.title("Charge Density, " + name)
+	# # ax.scatter(r[:,0],r[:,1],r[:,2])
+	# # ax.set_xlabel('x')
+	# # ax.set_ylabel('y')
+	# # ax.set_zlabel('z')
+	# # ax.set_xlim([-3,3])
+	# # ax.set_ylim([-3,3])
+	# # ax.set_zlim([-3,3])
+
+
+
+	# # fig.savefig("../../Report/figures/ChargeDensity3D" + name)
 
 
 	return
@@ -287,5 +322,5 @@ plotChargeDensity(dataSample, name)
 # plotVarVSnCycles(dataCycles[1:,:], name)
 
 
-# pl.show()
+pl.show()
 

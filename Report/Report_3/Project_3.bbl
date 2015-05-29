@@ -70,7 +70,16 @@
       \field{title}{Introduction to Quantum Mechanics}
       \field{year}{2005}
     \endentry
-    \entry{Koput_2011_PCCP}{book}{}
+    \entry{Introduction_Quantum_Pauling}{book}{}
+      \field{sortinit}{I}
+      \field{labelyear}{1935}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Introduction to {Quantum} {Mechanics} by {Pauling}, {Linus}; {Wilson}, {E}.{Bright}}
+      \field{shorttitle}{Introduction to {Quantum} {Mechanics} by {Pauling}, {Linus}; {Wilson}, {E}.{Bright}}
+      \field{title}{Introduction to {Quantum} {Mechanics}: {McGraw}-{Hill} {Inc}.,{US} 9780070489608}
+      \field{year}{1935}
+    \endentry
+    \entry{Koput_2011_PCCP}{article}{}
       \name{labelname}{1}{}{%
         {{uniquename=0,hash=0e9e6485a37c40e187bd008f8326c6c8}{Koput}{K\bibinitperiod}{Jacek}{J\bibinitperiod}{}{}{}{}}%
       }

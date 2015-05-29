@@ -1964,17 +1964,19 @@
     <bcf:datasource type="file" datatype="bibtex">bibliography.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">Binkley_1975</bcf:citekey>
-    <bcf:citekey order="2">Koput_2011_PCCP</bcf:citekey>
+    <bcf:citekey order="1">Introduction_Quantum_Pauling</bcf:citekey>
+    <bcf:citekey order="2">Introduction_Quantum_Pauling</bcf:citekey>
     <bcf:citekey order="3">Binkley_1975</bcf:citekey>
     <bcf:citekey order="4">Koput_2011_PCCP</bcf:citekey>
-    <bcf:citekey order="5">Koput_2011_PCCP</bcf:citekey>
-    <bcf:citekey order="6">Binkley_1975</bcf:citekey>
+    <bcf:citekey order="5">Binkley_1975</bcf:citekey>
+    <bcf:citekey order="6">Koput_2011_PCCP</bcf:citekey>
     <bcf:citekey order="7">Koput_2011_PCCP</bcf:citekey>
     <bcf:citekey order="8">Binkley_1975</bcf:citekey>
     <bcf:citekey order="9">Koput_2011_PCCP</bcf:citekey>
     <bcf:citekey order="10">Binkley_1975</bcf:citekey>
-    <bcf:citekey order="11">griffiths2005introduction</bcf:citekey>
+    <bcf:citekey order="11">Koput_2011_PCCP</bcf:citekey>
+    <bcf:citekey order="12">Binkley_1975</bcf:citekey>
+    <bcf:citekey order="13">griffiths2005introduction</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nyt">
   <bcf:sorting>

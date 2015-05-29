@@ -35,7 +35,7 @@
 
 		A similar calculation applies for \(r_{12} \rightarrow 0\) and a trialfunction of the form   \[\Psi_T(r_i,r_j,r_{ij}) = e^{ -\alpha \sum_{N}  r_i} \prod^N_{i < j}e^{\beta r_{ij}} = e^{ -\alpha \sum_{N}  r_i} \prod^N_{i < j}e^{\frac{a r_{ij}}{1 + \beta r_{ij}}} \] should fulfill the condition that the local energy is finite.
 	\subsubsection{Hydrogenic wavefunctions}
-		A hydrogen atom is analytically solvable and we have exact wavefunctions corresponding to the electron being in the different shells. When we are building atoms containing more electrons turning it into a many body problem we base our guess at the trialfunction on the solutions to the hydrogen atom. So we need the wavefunctions for the five lowest states to calculate up to the \(10\) electron big neon atom. The hydrogenic wavefunctions along with their gradients and laplacians is contained in table . 
+		A hydrogen atom is analytically solvable and we have exact wavefunctions corresponding to the electron being in the different shells. When we are building atoms containing more electrons turning it into a many body problem we base our guess at the trialfunction on the solutions to the hydrogen atom. So we need the wavefunctions for the five lowest states to calculate up to the \(10\) electron big neon atom. The hydrogenic wavefunctions along with their gradients and laplacians is contained in \cref{tab:hydrogenicWavefunctions}. The radial distribution of the first three hydrogen orbitals, which our trialfunctions is based on, is depicted in \cref{fig:orbitals_radial}.
 
 
 		\begin{table}
@@ -89,6 +89,23 @@
 				\label{tab:hydrogenicWavefunctions}
 			\end{center}
 		\end{table}
+
+		\begin{figure}
+		\begin{tikzpicture}[domain=0:10, range = 0:6]
+	    % \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+		    \draw[->] (-0.2,0) -- (10,0) node[below] {$r$};
+		    \draw[->] (0,0) -- (0,4) node[left] {$|R(r)|^2$};
+		    % \draw[color=red] plot[id=x, samples = 100, domain = 0:3] function{175*x**2*exp(-x/0.2)} 
+		   	\draw[color=red] plot[id=exp, samples = 100, domain = 0:5] function{6*x**2*(2*exp(-x))**2};
+		    	\draw[color=red] (1.1,3.5) node {$\psi_{S1}$};
+		    \draw[color=blue] plot[id=sin, samples = 100] function{6*x**2*(1/(2*sqrt(2))*(2-x)*exp(-x/2))**2}; 
+		        \draw[color = blue] (6,1.4) node {$\psi_{S2}$};
+		    \draw[color=green] plot[id=exp, samples = 100] function{6*x**2* ( 1/(2*sqrt(6)) * x  * exp(-x/2))**2} ;
+		        \draw[color = green] (3.6,1.4) node {$\psi_{P2}$};
+		\end{tikzpicture}
+		\caption{The radial probability distribution of the first three orbitals of a hydrogen atom. The radial distribution functions is taken from \parencite{Introduction_Quantum_Pauling}}
+		\label{fig:orbitals_radial}
+		\end{figure}
 
 	\subsubsection{Helium atom}
 		We wanted to do our Variational Monte Carlo, VMC, computations on helium first since it was a simpler system that the larger atoms and molecules.	The hamiltonian for the helium atom is given by equation \eqref{eq:hamiltonian} and a trialfunction that fulfills the cusp conditions discussed earlier is

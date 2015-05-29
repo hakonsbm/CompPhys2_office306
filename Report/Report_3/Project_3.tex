@@ -1,3 +1,13 @@
+% arara: pdflatex
+% !arara: biber
+% !arara: pdflatex
+% How to run: 
+% 1) pdflatex "filename".tex
+% 2) biber "filename"
+% 3) pdflatex "filename".tex
+% 4) pdflatex "filename".tex
+
+
 \documentclass[x11names]{article}
 \usepackage{verbatim}
 \usepackage{listings}
@@ -90,10 +100,11 @@
 
 \begin{document}
 
+
 \maketitle
 \abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: Beryllium and Neon. The program uses importance sampling to improve efficiency and make the results more precise. To further improve the efficiency, MPI has been implemented as well. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor and provide insight into the electronic structure of the atoms.}
 
-\tableofcontents
+% \tableofcontents
 
 \section{Introduction}
 VMC methods pose a very attractive alternative to other more complex ways of finding the ground state energies of simple atoms and molecules, like configuration-interaction calculations. The price to be paid in exchange for this simplicity is the sensitivity to the trial wave functions that are used, a VMC algorithm is very sensitive to how these are constructed, so they are one of the most important aspects to be considered (in this work, given the simple nature of the atoms which we will be working with, it's not so important to worry about the quality of the trial wave functions because very simple and basic ones are more than enough to reproduce the actual results). It shouldn't be forgotten that it is a variational method, and this implies that finding the optimal set of variational parameters is going to be the most important part of the calculation itself because it would create a lot of problems if the search range for the parameters was illy defined and not close enough to the variational minimum, namely, the results would have a poor quality in this case. This means that the parameters need to be chosen very carefully, or a recursive search with decreasingly coarse spacing in the space of variational parameters is required if there is no deep knowledge about the system in question.
@@ -102,34 +113,31 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 
 
 \section{Theory}
-	
+	\input{sections/monte_carlo}
 
+	\input{sections/atoms}
 
-	\include{sections/monte_carlo}
+	\input{sections/optimisation}
 
-	\include{sections/atoms}
-
-	\include{sections/optimisation}
-
-	\include{sections/extras}
+	\input{sections/extras}
 
 
 \section{Results}
 	
-	\include{sections/helium_atom}
+	\input{sections/helium_atom}
 
-	\include{sections/beryllium_neon}	
+	\input{sections/beryllium_neon}	
 
-	\include{sections/density_plots}
+	\input{sections/density_plots}
 
 
 \section{Conclusions and discussion}
 
-	\include{sections/conclusions}
+	\input{sections/conclusions}
 
-	\include{sections/appendix}
+	\input{sections/appendix}
 
-	\include{sections/verification}
+	\input{sections/verification}
 
 
 
