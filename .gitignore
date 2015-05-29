@@ -11,3 +11,17 @@ outfiles/
 *.out
 *.toc
 *.gz
+*.aux
+*.bbl 
+*.blg 
+*.fdb* 
+*.log
+*.out 
+*.syn*
+*.toc 
+*.pdf
+*.gnuplot
+*.gnuplot
+*.table
+*.bcf
+*.xml
