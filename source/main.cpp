@@ -34,6 +34,7 @@ void runDiffBetaAndR(VMCSolver *solver);
 void runNewtonsMethod(VMCSolver *solver);
 int runTests(VMCSolver *solver);
 
+
 int main(int nargs, char* args[])
 {
 

@@ -21,9 +21,6 @@ Beryllium::Beryllium(VMCSolver *solver)
     //Giving the particles in Beryllium it's spin, the first half up and the second part down
     // up = 0 and down = 1
     spin << 0 << 0 << 1 << 1;
-
-
-
 }
 
 double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
