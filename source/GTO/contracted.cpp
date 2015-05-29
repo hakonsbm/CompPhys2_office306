@@ -13,13 +13,7 @@ using namespace std;
 Contracted::Contracted():
 	// class variables here
 	contracted(0),
-    orb(0),
-	orb_1s(0),
-	orb_2s(0),
-    orb_pX(0),
-    orb_pY(0),
-    orb_pZ(0),
-    K(0.5)
+    orb(0)
 {
 }
 
@@ -61,48 +55,53 @@ int Contracted::fac(int n)
 }
 
 // contraction of orbitals
-void Contracted::contract_orb_1s()
+void Contracted::contract_orb(double coeff)
 {
-    orb_1s += orb + contracted*K;
+    orb += contracted*coeff;
+    contracted = 0;
+}
+
+
+/*
+
+void Contracted::contract_orb_1s(double coeff)
+{
+    orb_1s += orb + contracted*coeff;
     //cout << "orb_1s = " << contracted << endl;
 	contracted = 0;
 }
 
-void Contracted::contract_orb_2s()
+void Contracted::contract_orb_2s(double coeff)
 {
     orb_2s = contracted;
     //cout << "orb_2s= " << contracted << endl;
 	contracted = 0;
 }
 
-void Contracted::contract_orb_pX()
+void Contracted::contract_orb_pX(double coeff)
 {
-    orb_pX += contracted*K;
+    orb_pX += contracted;
 	contracted = 0;
 }
 
-void Contracted::contract_orb_pY()
+void Contracted::contract_orb_pY(double coeff)
 {
-    orb_pY += contracted*K;
+    orb_pY += contracted;
 	contracted = 0;
 }
 
-void Contracted::contract_orb_pZ()
+void Contracted::contract_orb_pZ(double coeff)
 {
-    orb_pZ += contracted*K;
-    contracted = 0;
-}
-
-void Contracted::contract_orb()
-{
-    orb += contracted;
-    contracted = 0;
-}
-
-void Contracted::contract_orbK()
-{
-    orb += contracted*K;
+    orb_pZ += contracted;
     contracted = 0;
 }
 
 
+
+void Contracted::contract_orbK(double coeff)
+{
+    orb += contracted*coeff;
+    contracted = 0;
+}
+
+*/

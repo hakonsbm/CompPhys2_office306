@@ -22,16 +22,17 @@ import re
 
 #atom = "Beryllium" # atom
 #cycles = "1000000" # Monte Carlo cycles
-path = "../build-vmc-hakonsbm-release" # Change to your QT build directory
-
-for rundata in [["HeliumJastrowAnalytical", "200000000"], ["Beryllium", "5000000"]]:
+path = "../../build-vmc-hakonsbm-release" # Change to your QT build directory
+os.chdir(path)
+print os.getcwd()
+for rundata in [["HeliumJastrowAnalytical", "10000000"], ["Beryllium", "1000000"], ["Neon", "1000000"]]:
 
 	n_procs = "4" # processes
 	runtype = "runFindAlphaBeta" # runtype
 	atom = rundata[0]
 	cycles = rundata[1]
-	print atom
-	os.chdir(path)
+	print atom, " ", cycles, " cycles"
+	
 	output = sp.check_output(["/usr/bin/mpirun","-n", n_procs, "vmc", atom, runtype, cycles])
 	#print "Python output:"
 	#print output

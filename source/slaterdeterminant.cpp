@@ -3,7 +3,8 @@
 #include "lib.h"
 #include "GTO/gto.h"
 
-SlaterDeterminant::SlaterDeterminant()
+SlaterDeterminant::SlaterDeterminant():
+    useGTO(false)
 {
 
 }
@@ -93,41 +94,53 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
     int i;
     int nHalf= solver->getNParticles()/2;
     double alpha = solver->getAlpha();
-    //double GTO_element;
-//    string TF = solver->getTF();
+    double GTO_element;
+    string TF = solver->getTF();
     detUpOld = zeros<mat>(nHalf, nHalf);
     detDownOld = zeros<mat>(nHalf, nHalf);
-
+    TF.erase(2);
+    GTO gto;
 
     for (int k = 0; k <  nHalf; ++k)
     {
         for (i = 0; i < nHalf; ++i)
         {
-            // for detUp
-            detUpOld(i,k) =  phi(r, alpha, i, k, solver);
-            //cout<<endl << k << endl;
-            /*
-            GTO *gto = new GTO();
-            GTO_element = gto->GTO_phi("be", r, i, k);
-            detUpOld(i,k) = GTO_element;
-        
-            //cout << detUpOld(i,k) << " " << GTO_element << endl;
-            //exit(1);
-            delete gto;
-            */
+            if (useGTO)
+            {
+                // for detUp
+
+                GTO_element = gto.GTO_phi(TF, r, i, k);
+                detUpOld(i,k) = GTO_element;
+                //delete gto;
+
+                // for detDownOld
+
+                GTO_element = gto.GTO_phi(TF, r, i + nHalf, k);
+                detDownOld(i,k) = GTO_element;
+                //delete gto;
 
 
-            //cout << endl;
-            // for detDownOld
-            detDownOld(i,k) =  phi(r, alpha, i + nHalf, k, solver);
-            /*
-            gto = new GTO();
-            GTO_element = gto->GTO_phi("be", r, i, k);
-            detDownOld(i,k) = GTO_element;
-            //cout << detDownOld(i,k) << " " << GTO_element << endl;
-            delete gto;
-            */
+                // reference
+                /*
+                detUpOld(i,k) =  phi(r, alpha, i, k, solver);
+                detDownOld(i,k) =  phi(r, alpha, i + nHalf, k, solver);
+                if (my_rank == 0) {
+                    cout << detUpOld(i,k) << " " << GTO_element << endl;
+                    cout << detDownOld(i,k) << " " << GTO_element << endl;
+                }
+                //exit(1);
+                */
 
+
+            }
+            else
+            {
+                // for detUp
+                detUpOld(i,k) =  phi(r, alpha, i, k, solver);
+
+                // for detDownOld
+                detDownOld(i,k) =  phi(r, alpha, i + nHalf, k, solver);
+            }
         }
     }
 
@@ -190,7 +203,6 @@ double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSol
 
 mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solver)
 {
-
     // Not functinoining properly, needs to be several vectors since we need a seperate tracking of "force" on each particle,
     // 3 coordinates per particle
 
@@ -213,8 +225,6 @@ mat SlaterDeterminant::gradientSlaterDeterminant(const mat &r , VMCSolver *solve
 
         }
     }
-
-
     return gradient;
 
 }

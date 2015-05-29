@@ -176,7 +176,7 @@ def extract_basisinfo(filename, printing = False):
 
 
 
-def createfunction(fname, comments, orbital_types, N_orbitals, exponents, weights):
+def createfunction(fname, comments, orbital_types, N_orbitals, exponents, weights, coeffs):
     endline = ["\n"]
     cppclass  = []
     cppheader = []
@@ -188,11 +188,11 @@ def createfunction(fname, comments, orbital_types, N_orbitals, exponents, weight
     #cppheader.append(endline)
     
     #writing to header
-    cppheader.append("    void add_"+fname+"(const vec corePos);")
+    cppheader.append("    void add_"+fname+"(const vec corePos, const vec c);")
 
     
 
-    cppclass.append("void basisbank::add_"+fname+"(const vec corePos){")
+    cppclass.append("void basisbank::add_"+fname+"(const vec corePos, const vec c){")
     orb_count = 0
     for i in range(N_orbitals):
         if orbital_types[i] == 0:
@@ -203,6 +203,9 @@ def createfunction(fname, comments, orbital_types, N_orbitals, exponents, weight
             for e in range(len(exponents[i])):
                 cppclass.append("    contracted()->add_primitive(%.8f,%.8f,0,0,0,corePos);" % (exponents[i][e], weights[i][e]))
                 orb_count += 1
+            cppclass.append("    contracted()->contract_orb(c[%d]);" %i)        
+            
+            """
             if len(exponents[i]) == 3:
                 cppclass.append("    contracted()->contract_orb_2s();")
                 orb_count = 0
@@ -210,17 +213,18 @@ def createfunction(fname, comments, orbital_types, N_orbitals, exponents, weight
                 cppclass.append("    contracted()->contract_orbK();")
             else:
                 cppclass.append("    contracted()->contract_orb_1s();")
+            """
                 
 
             
 
         if orbital_types[i] == 1:
             #create an p-orbital
-            for coor in [["X", "1,0,0"],["Y", "0,1,0"],["Z", "0,0,1"]]:
+            for coor in [["1,0,0", 0],["0,1,0", 1],["0,0,1", 2]]:
                 cppclass.append("    // p-orbital")
                 for e in range(len(exponents[i])):
-                    cppclass.append("    contracted()->add_primitive(%.8f,%.8f,%s,corePos);" % (exponents[i][e], weights[i][e],coor[1]))
-                cppclass.append("    contracted()->contract_orb_p%s();" %(coor[0]))
+                    cppclass.append("    contracted()->add_primitive(%.8f,%.8f,%s,corePos);" % (exponents[i][e], weights[i][e],coor[0]))
+                cppclass.append("    contracted()->contract_orb(c[%d]);" %(i+2*int(coor[1]))) 
 
             
         """
@@ -287,11 +291,14 @@ initContracted(new Contracted);\n\
         for e in i:
             cppfile += e+ "\n"
         cppfile += "\n"
+    cppfile += "double basisbank::get_orb() {return contracted()->get_orb();}\n"
+    """
     cppfile += "double basisbank::get_orb_1s() {return contracted()->get_orb_1s();}\n"
     cppfile += "double basisbank::get_orb_2s() {return contracted()->get_orb_2s();}\n"
     cppfile += "double basisbank::get_orb_pX() {return contracted()->get_orb_pX();}\n"
     cppfile += "double basisbank::get_orb_pY() {return contracted()->get_orb_pY();}\n"
     cppfile += "double basisbank::get_orb_pZ() {return contracted()->get_orb_pZ();}\n"
+    """
     #print cppfile
     
     
@@ -310,11 +317,15 @@ public:\n"
             cppheader += e + "\n"
     cppheader += "    void initContracted(Contracted *contracted) {m_contracted = contracted;}\n"
     cppheader += "    Contracted *contracted() {return m_contracted;}\n"
+    cppheader += "    double get_orb();\n"
+    """
     cppheader += "    double get_orb_1s();\n"
     cppheader += "    double get_orb_2s();\n"
     cppheader += "    double get_orb_pX();\n"
     cppheader += "    double get_orb_pY();\n"
     cppheader += "    double get_orb_pZ();\n"
+
+    """
 
     cppheader += "private:\n"
     cppheader += "    Contracted *m_contracted;\n"
@@ -350,12 +361,12 @@ def convertfolder():
             for i in I:
                 #i = [bT, basisW, basisE, contractedtype, len(contractedtype)]
                 if commented == 0:
-                    cppheader, cppclass = createfunction(i[0], comments, i[3], i[4], i[2], i[1])
+                    cppheader, cppclass = createfunction(i[0], comments, i[3], i[4], i[2], i[1], [])
                     cppclasses.append(cppclass)
                     cppheaders.append(cppheader)
                     commented = 1
                 else:
-                    cppheader, cppclass = createfunction(i[0], [""], i[3], i[4], i[2], i[1])
+                    cppheader, cppclass = createfunction(i[0], [""], i[3], i[4], i[2], i[1], [])
                     cppclasses.append(cppclass)
                     cppheaders.append(cppheader)
 

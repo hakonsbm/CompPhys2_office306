@@ -10,17 +10,13 @@ using namespace arma;
 class basisbank{
 public:
     basisbank();
-    void add_3_21G_be(const vec corePos);
-    void add_3_21G_ne(const vec corePos);
-    void add_3_21G_he(const vec corePos);
-    void add_3_21G_h(const vec corePos);
+    void add_3_21G_be(const vec corePos, const vec c);
+    void add_3_21G_ne(const vec corePos, const vec c);
+    void add_3_21G_he(const vec corePos, const vec c);
     void initContracted(Contracted *contracted) {m_contracted = contracted;}
+    void delContracted() {delete m_contracted;}
     Contracted *contracted() {return m_contracted;}
-    double get_orb_1s();
-    double get_orb_2s();
-    double get_orb_pX();
-    double get_orb_pY();
-    double get_orb_pZ();
+    double get_orb();
 private:
     Contracted *m_contracted;
 };

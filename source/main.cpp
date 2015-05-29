@@ -78,6 +78,10 @@ int main(int nargs, char* args[])
     else if((string)args[1]=="HydrogenTwo") solver->setTrialFunction(new HydrogenTwo(solver));
     else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
+    // if you want to use GTOs (remember to turn off analytical solving)
+    solver->determinant()->setGTO(true);
+
+
     if(my_rank==0)
     {
         cout<<"Atom: "<< args[1]<<endl;
@@ -558,7 +562,7 @@ void runCompareParallelize(VMCSolver * solver)
 {
     //TestSettings
     solver->switchElectronInteraction(true);
-    solver->trialFunction()->setAnalytical(true);
+    solver->trialFunction()->setAnalytical(false);
 //    solver->setAlpha(solver->getCharge());
 
 

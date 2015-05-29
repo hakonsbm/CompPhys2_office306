@@ -26,10 +26,15 @@ public:
     mat gradientSlaterDeterminant(const mat &r , VMCSolver *solver);
     double laplacianSlaterDeterminant(const mat &r , VMCSolver *solver);
 
+    void setGTO(bool usingGTO) {useGTO = usingGTO;}
+
     mat detUpOld;
     mat detDownOld;
     mat detUpInverseOld;
     mat detDownInverseOld;
+
+private:
+    bool useGTO;
 
 
 };

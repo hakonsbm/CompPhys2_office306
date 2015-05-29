@@ -68,6 +68,8 @@ public:
 
     void mpiArguments( int nargs, char* args[]){ m_nargs = nargs; m_args = args; }
 
+    string getTF() {return m_args[1];}
+
 private:
     TrialFunction *m_trialFunction;
     Derivatives *m_derivatives;

@@ -8,8 +8,8 @@ using namespace arma;
 
 class GTO{
 public:
-    GTO(string sys, const mat &r, int i);
-    double GTO_phi(int j);
+    GTO();
+    double GTO_phi(string sys, const mat &r, int i, int j);
     void initBasis(basisbank *basis) {m_basis = basis;}
     basisbank *basis() {return m_basis;}
 
