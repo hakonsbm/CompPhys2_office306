@@ -24,4 +24,14 @@ double TrialFunction::spinFactor(int i, int j)
 
 }
 
+void TrialFunction::setNucleusDistance(double R)
+{
+
+    m_nucleusDistance = R;
+    if(R < 0.001)
+    {
+        m_zeroDistance = true;
+    }
+    else m_zeroDistance = false;
+}
 

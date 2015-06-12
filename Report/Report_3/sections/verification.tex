@@ -1,0 +1,74 @@
+\section{Verification of the model}
+	To ensure that the program produces valid results as it gets more complicated we have implemented several different tests of smaller parts of the program that all should be met if the VMC solver is functioning properly. This section consists of a list of the different tests.
+		\subsection{Verification of the general Monte Carlo method}
+			Since the wavefunction for a Hydrogen atom can be calculated analytically, see equation \eqref{eq:hydrogen}, a Monte Carlo calculation with that wavefunction should return an exact value for the energy.
+
+			\begin{align}
+				 \Psi(\rho ) = \alpha \rho e^{-\alpha\rho} \qquad \text{ With  local energy: } \qquad E_{L} (\rho) = - \frac{1}{\rho} - \frac{\alpha}{2} \left( \alpha - \frac{2}{\rho} \right) \label{eq:hydrogen}
+			\end{align}
+
+			So a VMC calculation runrun with a Hydrogen atom with \(\alpha = 1\) it should produce an energy of exactly \( -0.5\) with \(0\) variance. 
+
+		%Need to check up some stuff when including this.
+		\subsection{Verification of the Slater determinant and the laplacian Slaterdeterminant ratio}
+			\label{sec:slaterVerification}
+			To verify the Slater determinant part of the trialfunctions we consider the atoms without any electron-electron interactions. Then it is a one-body system like hydrogen and can be calculated analytically, see \cite{griffiths2005introduction},  and we get exact wavefunctions and energy with \(0\) variance. 
+
+			\begin{table}
+			\begin{center}
+				\begin{tabular}{| c | c |}
+				\bottomrule
+				Atom & Energy
+				\\ \hline
+				Hydrogen 	& \( E_{min} = -\frac{1}{2} \)
+				\\ \hline
+				Helium 		& \( E_{min} = -4\)
+				\\ \hline Beryllium		& \( E_{min} = -20 \)
+				\\ \hline Neon		& \( E_{min} = -200 \)
+				\\ \toprule
+				\end{tabular}
+			\end{center}
+			\caption{Ground states for the different atoms without electron-electron interaction}
+			\end{table}
+
+			In this case, where the correlation derivatives disappear, the kinetic part of the local energy gets simplified, from \eqref{eq:kineticRatio}, to the following
+
+			\[\frac{\nabla^2 \Psi_T}{\Psi_T} = \frac{\nabla^2 |D_\uparrow|}{|D_\uparrow|} + \frac{\nabla^2 |D_\downarrow|}{|D_\downarrow|}  \]
+
+			To reproduce the correct results both the Slater determinant and it's laplacian needs to be correct.
+
+		\subsection{The gradient}
+			\label{sec:gradientVerification}
+			The gradient is used in the calculation of the quantum force, and all it's components is used in the calculation of the so by testing that this is correctly reproduced we get an inclination several terms are correct, \(\frac{\nabla |D_\uparrow|}{|D_\uparrow|} \), \( \frac{\nabla |D_\downarrow|}{|D_\downarrow|} \) and \( \frac{\nabla \Psi_C}{\Psi_C} \).
+
+			The wavefunctions should be correct due to the earlier test, \ref{sec:slaterVerification}, so a numerical derivation of the trialfunction should produce a correct gradient, which is then used to test the analytical version against.
+
+
+			\textbf{NB!!!!!!!!!!!!!! Does not pass at the moment...... Not sure why}
+
+		\subsection{The correlation laplacian}
+			\label{sec:laplacianCorrelationVerification}
+
+			Due to the earlier two tests, \ref{sec:slaterVerification} and \ref{sec:gradientVerification}, we can be fairly certain that all the terms except the laplacian-correlation-ratio, \(\frac{\nabla^2\Psi_C}{\Psi_C}\) in the local energy equation \eqref{eq:kineticRatio} is correct. So by then comparing the analytical version of the local energy to the numerical version we can verify that the last term is also correct.
+
+		\subsection{Local Energy in Helium}
+			For Helium we have a complete closed expression for the local energy, \(E_l\) \eqref{eq:heliumLocalEnergy}, we use this to check that the local energy calculation, see "Efficient calculation of stuff chapters"!!!!!!!!!, used on the more complicated atoms  also replicates the local energy for the simpler atom which it does. 
+
+
+		\subsection{Verification of correlation gradient}
+			The correlation gradient ratio is checked by calculating what calculating it directly for Helium, and then comparing this value against value produced by the program.
+
+			Let us consider the gradient ratio of the Padè-Jastrow factor in Helium, \(\frac{\nabla\psi_C(\vb{r}_{12})}{\psi_C(\vb{r}_{12})}\) with \(\psi_C(\vb{r_{12}}) = e^{\frac{r_{12}}{2(1+\beta r_{12})}}\). Using the results from equation \eqref{eq:gradient_ratio_Jastrow} on Helium for the first electron we get
+
+			\begin{align}
+				\left[\frac{\nabla\Psi_C}{\Psi_C} \right]_1 &= \frac{1}{\Psi_c} \pdv{\Psi_C}{x_k} = \frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right) - \frac{\vb{r_{21}}}{r_{21}}\pdv{}{r_{21}}\left( \frac{r_{21}}{2(1+\beta r_{21})} \right)
+				\\
+				&= 2\frac{\vb{r_{12}}}{r_{12}}\pdv{}{r_{12}}\left( \frac{r_{12}}{2(1+\beta r_{12})} \right)
+				\\
+				&= \frac{\vb{r_{12}}}{r_{12}} \frac{1}{(1+\beta r_{12})^2}
+			\end{align}
+
+			Testing that the program reproduces this for the helium atom indicates the \(\frac{\nabla \Psi_C}{\Psi_C}\) is being calculated correctly.
+
+		\subsection{Hydrogen Molecule}
+			\textbf{NB!!!!!!!!!!!!!! Write this}\\

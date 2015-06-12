@@ -69,6 +69,8 @@ public:
 
     void mpiArguments( int nargs, char* args[]){ m_nargs = nargs; m_args = args; }
 
+    string getTF() {return m_args[1];}
+
 private:
     TrialFunction *m_trialFunction;
     Derivatives *m_derivatives;
@@ -79,7 +81,7 @@ private:
     double localEnergy(const mat &r);
 
     bool importanceSampling;    //When this flag is true it uses importance sampling instead of regular sampling
-    bool m_blockSampling;
+    bool m_blockSampling = false;
 
     bool m_electronInteraction;
     bool m_Jastrow;

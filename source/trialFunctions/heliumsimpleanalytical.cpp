@@ -3,12 +3,19 @@
 HeliumSimpleAnalytical::HeliumSimpleAnalytical(VMCSolver *solver)
 {
     simpleFlag = true;
+    m_analytical = true;
+
     m_outfileName = "HeliumSimpleAnalytical";
 
     solver->setCharge(2);
     solver->setNParticles(2);
     solver->setAlpha(1.65);
+//    solver->setAlpha(2.);
+
     solver->setBeta(0);
+
+
+
 }
 
 double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
@@ -26,7 +33,11 @@ double HeliumSimpleAnalytical::waveFunction(const mat &r, VMCSolver *solver)
         rpos[i] = sqrt(rSingleParticle);
     }
 
+
+
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver);
+
+
 
 
 //    cout << "Starting new run" << endl << endl;
@@ -49,20 +60,10 @@ double HeliumSimpleAnalytical::localEnergy(const mat &r, VMCSolver *solver)
 
     double charge = solver->getCharge();
 
-//    solver->determinant()->updateSlaterMatrices(r,solver);
+
 
     kineticEnergy = solver->determinant()->laplacianSlaterDeterminant(r,solver)/(-2.);
 
-//    kineticEnergy = solver->derivatives()->analyticalSimpleDoubleDerivative(r,solver)/(-2.);
-//    cout << "r: " << endl << r << endl;
-//    cout << "r1: " << r1 << endl;
-//    cout << "r2: " << r2 << endl;
-
-//    cout << "Attempt at new: " << solver->determinant()->laplacianSlaterDeterminant(r,solver)/(-2.) << endl;
-//    cout << "Correct Energy: " << kineticEnergy << endl;
-
-
-//    kineticEnergy = alpha*(1./r1+1./r2) - pow(alpha,2);
 
     //Taking away the electron electron interaction, used for some tests with Hydrogenic wavesfunctions
     if(solver->getElectronInteration())

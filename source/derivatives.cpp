@@ -26,7 +26,7 @@ void Derivatives::numericalGradient(mat &gradient, const mat &r, VMCSolver *solv
     double waveFunctionMinus = 0;
     double waveFunctionPlus = 0;
 
-//    double waveFunctionCurrent = trialFunction()->waveFunction(r, this);
+    double waveFunctionCurrent = solver->trialFunction()->waveFunction(r, solver);
 
     // Kinetic energy
 
@@ -43,7 +43,7 @@ void Derivatives::numericalGradient(mat &gradient, const mat &r, VMCSolver *solv
         }
     }
 
-    gradient /=2.;
+    gradient *= 1/(2.);
 
 }
 
@@ -115,13 +115,14 @@ void Derivatives::analyticalLaplacianRatio(double &laplacianRatio, const mat &r,
     mat correlationGradient = zeros (nParticles, nDimensions);
     mat slaterGradient = zeros(nParticles, nDimensions);
 
-
     laplacianRatio += solver->determinant()->laplacianSlaterDeterminant(r, solver); // d²/dx² Psi_C /Psi_C
-    laplacianRatio += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver); //d²/dx²|D| /|D|
-//    laplacianRatio += analyticalCorrelationLaplacian(r, solver);
+//    laplacianRatio += solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver); //d²/dx²|D| /|D|
+    laplacianRatio += analyticalCorrelationLaplacian(r, solver);
 
     correlationGradient = solver->derivatives()->analyticalCorrelationGradient(r, solver);
     slaterGradient = solver->determinant()->gradientSlaterDeterminant(r, solver);
+
+
 
     //Computes the dot product over all the particles
     for(int i = 0; i < nParticles;i ++)
@@ -134,10 +135,13 @@ void Derivatives::analyticalLaplacianRatio(double &laplacianRatio, const mat &r,
 
 //    cout << "Am in LaplcacianCalculation" << endl;
 
-////    cout << "double slater is " << solver->determinant()->laplacianSlaterDeterminant(r, solver) << endl;
+//////    cout << "double slater is " << solver->determinant()->laplacianSlaterDeterminant(r, solver) << endl;
 //    cout << "The correlation d²/dx² is  " << solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) << endl;
 //    cout << "New attempt at correlation part is: " << analyticalCorrelationLaplacian(r, solver) << endl;
 //    cout << "The combined part is  " << 2.*tempTerm << endl;
+
+//    cout << "correlationGradient"  << endl << correlationGradient << endl;
+//    cout << "slaterGradient"  << endl << slaterGradient << endl;
 
 //    cout << "TotalEnergy2 is " << -(solver->derivatives()->analyticalCorrelationDoubleDerivative(r,solver) + 2.*tempTerm)/2. << endl;
 //    cout << -laplacianRatio/2. << endl;
@@ -147,6 +151,7 @@ void Derivatives::analyticalLaplacianRatio(double &laplacianRatio, const mat &r,
 
 vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
+    cout << "PSI 1 DERIV"<< endl;
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
     vec derivative = zeros (solver->getNDimensions());
@@ -159,6 +164,7 @@ vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSol
 
 double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
+    cout << "PSI 1 DOUBLEDERIV"<< endl;
     double alpha = solver->getAlpha();
     double ri = norm(r.row(particleTag));
 
@@ -172,6 +178,7 @@ double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &
 vec Derivatives::analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
 
+    cout << "PSI 2 DERIV"<< endl;
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
 
@@ -183,7 +190,7 @@ vec Derivatives::analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSol
 
 double Derivatives::analyticalPsi2SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
-
+    cout << "PSI 2 DOUBLE DERIV"<< endl;
 //    cout << "ParticleTag : " << particleTag <<endl;
     double alpha = solver->getAlpha();
     double ri = norm(r.row(particleTag));
@@ -195,29 +202,31 @@ double Derivatives::analyticalPsi2SDoubleDerivative(int particleTag, const mat &
 
 vec Derivatives::analyticalPsi2PDerivative(int particleTag, int dimension, const mat &r, VMCSolver *solver)
 {
+
+    cout << "PSI 2 P DERIV"<< endl;
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
-    double x_i = r(particleTag, 0);
-    double y_i = r(particleTag, 1);
-    double z_i = r(particleTag, 2);
-    double o_i = r(particleTag, dimension);
-    double factor = -1.0L/2.0L*o_i*alpha*exp(-1.0L/2.0L*alpha*r_i)/r_i;
-    vec derivative;
+    double factor = exp(-0.5*alpha*r_i)/r_i;
+    double x_i = r(particleTag,dimension);
+    vec gradient = zeros( solver->getNDimensions());
+    vec unitVector = zeros (solver->getNDimensions());
 
-    derivative(0) = factor*(alpha*x_i - 2*r_i);
-    derivative(1) = factor*(alpha*y_i - 2*r_i);
-    derivative(2) = factor*(alpha*z_i - 2*r_i);
+    unitVector(dimension) = 1.;
 
-    return derivative;
+    gradient = factor * (unitVector - 0.5*alpha*x_i*r(particleTag)/r_i);
+
+
+    return gradient;
 }
 
 double Derivatives::analyticalPsi2PDoubleDerivative(int particleTag, int dimension, const mat &r, VMCSolver *solver)
 {
+    cout << "PSI 2 P DOUBLE DERIV"<< endl;
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag)) ;
     double x_i = r(particleTag,dimension);
 
-    double derivative = (1.0L/4.0L)*pow(alpha, 2)*x_i*(alpha*r_i - 8)*exp(-1.0L/2.0L*alpha*r_i)/r_i;
+    double derivative = 0.25*alpha/**alpha*/*x_i*(alpha*r_i - 8)*exp(-0.5*alpha*r_i)/r_i;
 
     return derivative;
 }
@@ -255,6 +264,7 @@ mat Derivatives::analyticalCorrelationGradient( const mat &r, VMCSolver *solver)
     vec rik = zeros (nDimensions);
     vec rki = zeros (nDimensions);
 
+
     //Calculates the interaction from all the particles earlier
     for(int k = 0; k < nParticles; k++)
     {
@@ -269,6 +279,7 @@ mat Derivatives::analyticalCorrelationGradient( const mat &r, VMCSolver *solver)
                gradient.row(k) -= (rki / norm(rki) * fDerivative(k,i,r,solver)).t();
            }
     }
+
 
     return gradient;
 }
@@ -324,30 +335,29 @@ double Derivatives::analyticalCorrelationLaplacian( const mat &r, VMCSolver *sol
     int nParticles = solver->getNParticles();
     int nDimensions = solver->getNDimensions();
     double laplacianRatio = 0;
-    vec rik = zeros (3);
-    vec rki = zeros (3);
+    vec rik = zeros (nDimensions);
+    vec rki = zeros (nDimensions);
     mat gradient = zeros(nParticles, nDimensions);
+
 
     //Adding in the square of the gradient-correlation-ratio
     gradient = analyticalCorrelationGradient(r,solver);
-
 
     //Calculates the interaction from all the particles earlier
     for(int k = 0; k < nParticles; k++)
     {
         laplacianRatio += dot(gradient.row(k),gradient.row(k));
-
-           for(int i = 0; i < k-1; i ++)
+           for(int i = 0; i < k; i ++)
            {
                rik = (r.row(i) - r.row(k)).t();
                laplacianRatio += (nDimensions - 1) / norm(rik) * fDerivative(i,k,r,solver) + fDoubleDerivative(i,k,r,solver);
            }
-           for(int i = k +1 ; i < nParticles - 1 ; i ++)
+           for(int i = k + 1 ; i < nParticles ; i ++)
            {
-
                rki = (r.row(k) - r.row(i)).t();
-               laplacianRatio -= (nDimensions - 1) / norm(rki) * fDerivative(k,i,r,solver) + fDoubleDerivative(k,i,r,solver);
+               laplacianRatio += (nDimensions - 1) / norm(rki) * fDerivative(k,i,r,solver) + fDoubleDerivative(k,i,r,solver);
            }
     }
+//    cout << test << endl;
     return laplacianRatio;//DON'T FORGET TO ADD THE SUMMAND OF (∇Ψ_C/Ψ_C)² TO THE VARIABLE GRADIENT HERE WHEN YOU CALL THE FUNCTION TO GET ∇Ψ/Ψ, SEE EQUATION (16.38)
 }

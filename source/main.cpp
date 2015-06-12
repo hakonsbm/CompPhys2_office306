@@ -35,8 +35,10 @@ void runDiffBetaAndR(VMCSolver *solver);
 void runNewtonsMethod(VMCSolver *solver);
 int runTests(VMCSolver *solver);
 
+
 int main(int nargs, char* args[])
 {
+
 
 
 
@@ -77,6 +79,10 @@ int main(int nargs, char* args[])
     else if((string)args[1]=="HydrogenTwo") solver->setTrialFunction(new HydrogenTwo(solver));
     else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
+    // if you want to use GTOs (remember to turn off analytical solving)
+    solver->determinant()->setGTO(true);
+
+
     if(my_rank==0)
     {
         cout<<"Atom: "<< args[1]<<endl;
@@ -85,6 +91,13 @@ int main(int nargs, char* args[])
     }
 
     solver->setCycles(nCycles);
+
+    //Couldn't set this in the subclass of trialfunction, so putting it here for the time being
+    if((string)args[1]=="HydrogenTwo") solver->trialFunction()->setNucleusDistance(1.4);
+
+
+
+
 
     if((string)args[2]=="runWithDiffConstants") runWithDiffConstants(solver);
     else if((string)args[2]=="runSIWithDiffTimesteps") runSIWithDiffTimesteps(solver);
@@ -124,13 +137,13 @@ void runFindAlphaBeta(VMCSolver *solver)
     //It will aslo make a better fit by taking into account both the variance (which should be zero) and the energy (which should be as low as possible),
     //when the lowest energy and variance does not agree anymore the limit for the resulition of the search has been reached, if not specified in some other way.
 
-    double alphaMin = 0.7* solver->getCharge();
-    double alphaMax = 1.2* solver->getCharge();
-    double betaMin = 0.3;
+    double alphaMin = 0.7 * solver->getCharge();
+    double alphaMax = 1.2 * solver->getCharge();
+    double betaMin = 0.04;
     double betaMax = 0.4;
 
-    int nSteps = 3;    //Coarseness of mesh
-    int nMeshes = 4;    //Number of times it should decrease the mesh
+    int nSteps = 2;    //Coarseness of mesh
+    int nMeshes = 15;    //Number of times it should decrease the mesh
     double meshRangeAlpha = alphaMax - alphaMin;   //Used to recalculate the mesh
     double meshRangeBeta = betaMax - betaMin;
 
@@ -146,15 +159,24 @@ void runFindAlphaBeta(VMCSolver *solver)
 
     bool ImportanceSampling = true;    //Set to true if you want to run with importance sampling
     solver->switchbBlockSampling(false);
+
+    solver->switchElectronInteraction(true);
+    solver->trialFunction()->setAnalytical(false);
+
+    int my_rank;
+    MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
+
 //    solver->setCycles(1000000);
 
     //Temporary for the HydrogenTwo function
     solver->trialFunction()->setNucleusDistance(1.4);
 
+
+
     //Opens the file that the relevant wavefunction should be written to, this file is then written to in the
     //vmcSolver class
     string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
-    char const * outfilePath = (pathString + string("_alpha_beta")).c_str();
+    char const * outfilePath = (pathString + string("find_alpha_beta")).c_str();
     outfile.open(outfilePath);
 
     clock_t start, end;     //To keep track of the time
@@ -170,7 +192,8 @@ void runFindAlphaBeta(VMCSolver *solver)
                 if(ImportanceSampling)
                 {
                     start = clock();
-                        solver->runMasterIntegration();
+
+                    solver->runMasterIntegration();
                     end = clock();
 
                     double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
@@ -254,11 +277,10 @@ void runFindAlphaBeta(VMCSolver *solver)
                 }
             }
         }
-        cout << " The lowest variance, " << lowestVariance << ", is found with alpha  " << bestAlphaVariance  << " and beta " << bestBetaVariance << endl;
-        cout << " The lowest energy, " << lowestEnergy << ", is found with alpha  " << bestAlphaEnergy  << " and beta " << bestBetaEnergy << endl;
 
-        if(bestAlphaVariance != bestAlphaEnergy)
-            break;
+
+        //if(bestAlphaVariance != bestAlphaEnergy)
+         //   break;
 
 //        if(bestBetaEnergy != bestBetaVariance)        //Not canceling the loop because of beta, since beta has a very small influence on the values and could fail because of randomness
 //            break;
@@ -279,6 +301,15 @@ void runFindAlphaBeta(VMCSolver *solver)
 
 
     }
+    if (my_rank == 0)
+    {
+        cout << "The lowest variance, " << lowestVariance << ", is found with alpha  " << bestAlphaVariance  << " and beta " << bestBetaVariance << endl;
+        cout << "The lowest energy, " << lowestEnergy << ", is found with alpha  " << bestAlphaEnergy  << " and beta " << bestBetaEnergy << endl;
+
+        //MPI_Abort(MPI_COMM_WORLD, 1);
+
+    }
+
 }
 
 void runWithDiffConstants(VMCSolver *solver)
@@ -286,15 +317,17 @@ void runWithDiffConstants(VMCSolver *solver)
     //Settings for which values it should be cycled over and if we want to use importance sampling or now
     int my_rank;
     MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
-    double alpha_min = 9.5;//0.7*solver->getCharge();
-    double alpha_max = 10.5;//1.5* solver->getCharge();
+    double alpha_min = 1.3; //0.7*solver->getCharge();
+    double alpha_max = 2.4; //1.5* solver->getCharge();
 
-    int nSteps = 10;
+    int nSteps = 45;
 
-    double beta_min = 0.05;
-    double beta_max = 0.13;
+    double beta_min = 0.01;
+    double beta_max = 1.2;
     double d_alpha = (alpha_max-alpha_min)/ (double) nSteps;
     double d_beta = (beta_max-beta_min)/ (double) nSteps;
+
+    double stepcount;
 
     solver->switchElectronInteraction(true);
     solver->trialFunction()->setAnalytical(false);
@@ -314,9 +347,8 @@ void runWithDiffConstants(VMCSolver *solver)
 //    samplefile.open(samplefilePath);
 
 
-
-    clock_t start, end;     //To keep track of the time
-
+    clock_t start, end, tot_start, tot_end;     //To keep track of the time
+    tot_start = clock();
     for(double alpha = alpha_min ; alpha <= alpha_max; alpha += d_alpha) {
         solver->setAlpha(alpha);
         if(solver->trialFunction()->simpleFlag) {
@@ -328,6 +360,7 @@ void runWithDiffConstants(VMCSolver *solver)
 
                 double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
                 cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+
             }
             else {
                 start = clock();
@@ -342,13 +375,13 @@ void runWithDiffConstants(VMCSolver *solver)
                 end = clock();
 
                 double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
-
                 cout << "Time to find Optimal Steplength: " << timeOptimalStepLength << endl;
                 cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
             }
         }
         else {
             for(double beta = beta_min ; beta <= beta_max; beta += d_beta) {
+                stepcount += 1;
                 solver->setBeta(beta);
                 if(ImportanceSampling)
                 {
@@ -356,8 +389,21 @@ void runWithDiffConstants(VMCSolver *solver)
                     solver->runMasterIntegration();
                     end = clock();
 
-                    double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
-                    if(my_rank == 0) cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+                    if (my_rank == 0)
+                    {
+                        tot_end = clock();
+                        int seconds, minutes, hours;
+                        double timeRunMonte= 1.0*(end - start)/CLOCKS_PER_SEC;
+                        double time_so_far = (tot_end - tot_start)/CLOCKS_PER_SEC;
+                        double tot_time = time_so_far / (stepcount/(nSteps*nSteps));
+                        int time_remaining = round(tot_time - time_so_far);
+                        minutes = time_remaining / 60;
+                        seconds = time_remaining % 60;
+                        hours = minutes / 60;
+                        minutes = minutes % 60;
+                        cout << "Time to run Monte Carlo: " << timeRunMonte << endl;
+                        cout << "Estimated time remaining: " << hours << "h " << minutes << "m " << seconds << "s" << endl;
+                    }
                 }
                 else {
                     start = clock();
@@ -436,13 +482,17 @@ void runBlockingSampledRun(VMCSolver *solver)
 {
     solver->switchbBlockSampling(true);
     solver->switchElectronInteraction(true);
+    solver->trialFunction()->simpleFlag = false;
+//    solver->setAlpha(solver->getCharge());
     solver->trialFunction()->setAnalytical(false);
+
+
 
     string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
 
     char const * outfilePath = (pathString + string("_blockingSamples")).c_str();
 
-//    solver->setCycles(1000000);
+
 
     samplefile.open(outfilePath);
 
@@ -513,7 +563,7 @@ void runCompareParallelize(VMCSolver * solver)
 {
     //TestSettings
     solver->switchElectronInteraction(true);
-    solver->trialFunction()->setAnalytical(true);
+    solver->trialFunction()->setAnalytical(false);
 //    solver->setAlpha(solver->getCharge());
 
 

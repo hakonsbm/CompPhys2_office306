@@ -4,12 +4,13 @@
 HeliumJastrowAnalytical::HeliumJastrowAnalytical(VMCSolver *solver)
 {
     simpleFlag = false;
+    m_analytical = true;
     m_outfileName = "HeliumJastrowAnalytical";
 
     solver->setCharge(2);
     solver->setNParticles(2);
-    solver->setAlpha(1.843);
-    solver->setBeta(0.34);
+    solver->setAlpha(1.93);
+    solver->setBeta(0.3);
 
 
 }

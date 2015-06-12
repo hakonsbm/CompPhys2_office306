@@ -16,14 +16,11 @@ Beryllium::Beryllium(VMCSolver *solver)
     solver->setCharge(4);
     solver->setNParticles(4);
     solver->setAlpha(4.0);
-    solver->setBeta(0.31);
+    //solver->setBeta(0.31);
 
     //Giving the particles in Beryllium it's spin, the first half up and the second part down
     // up = 0 and down = 1
     spin << 0 << 0 << 1 << 1;
-
-
-
 }
 
 double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
@@ -51,7 +48,11 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
 
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 
-    return SD*product;
+    //If we want to use hydrogenic functions we don't want to have the product, still calculating it due to laziness
+    if(simpleFlag)
+        return SD;
+    else
+        return SD*product;
 }
 
 double Beryllium::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)

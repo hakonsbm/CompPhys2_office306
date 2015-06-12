@@ -37,7 +37,10 @@ SOURCES += main.cpp \
     derivatives.cpp \
     slaterdeterminant.cpp \
     trialFunctions/helium.cpp \
-    trialFunctions/hydrogentwo.cpp
+    trialFunctions/hydrogentwo.cpp \
+    GTO/basisbank.cpp \
+    GTO/contracted.cpp \
+    GTO/gto.cpp
 
 HEADERS += \
     vmcsolver.h \
@@ -54,4 +57,7 @@ HEADERS += \
     derivatives.h \
     slaterdeterminant.h \
     trialFunctions/helium.h \
-    trialFunctions/hydrogentwo.h
+    trialFunctions/hydrogentwo.h \
+    GTO/basisbank.h \
+    GTO/contracted.h \
+    GTO/gto.h

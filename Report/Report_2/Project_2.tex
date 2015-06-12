@@ -529,7 +529,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					&
 					\( e^{- \alpha ri} \)
 					&
-					\( - \frac{\alpha}{r_{i}} \left(x_{i}\vu{i} + y_{i}\vu{j} + z_{i}\vu{k}\right) e^{- \alpha r_{i}} \)
+					\( - \frac{\alpha}{r_{i}} \vb{r_i} e^{- \alpha r_{i}} \)
 					&
 					\(\frac{\alpha}{r_{i}} \left(\alpha r_{i} - 2\right) e^{- \alpha r_{i}} \)
 				\\	\hline
@@ -537,7 +537,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					&
 					\( \left(- \frac{\alpha r_{i}}{2} + 1\right) e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{4 r_{i}} \left(\alpha r_{i} - 4\right) \left(x_{i}\vu{i} + y_{i}\vu{j} + z_{i}\vu{k}\right) \)
+					\( \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{4 r_{i}} \left(\alpha r_{i} - 4\right) \vb{r_i} \)
 					&
 					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{8 r_{i}} \left(\alpha^{2} r_{i}^{2} - 10 \alpha r_{i} + 16\right) \)
 				\\	\hline
@@ -545,23 +545,23 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 					&
 					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha x_{i}^{2}\vu{i} + \alpha x_{i} y_{i}\vu{j} + \alpha x_{i} z_{i}\vu{k} - 2 r_{i}\right) \)
+					\( - \frac{\alpha  }{r_{i}} e^{- \frac{\alpha r_{i}}{2}} \left(\frac{\alpha x_{i} \vb{r_i}}{2} -  r_i\vu{i} \right) \)%- \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left( \alpha x_{i}\vb{r_i} - 2 r_{i}\right) \)
 					&
 					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 				\\	\hline
 					\(\psi_{2Py}\)
 					&
-					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
+					\( \alpha y_{i} e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha y_{i} x_{i}\vu{i} + \alpha y_{i}^{2}\vu{j} + \alpha y_{i} z_{i}\vu{k} - 2 r_{i}\right) \)
+					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left( \alpha y_{i} \vb{r_i} - 2 r_{i}\right) \)
 					&
 					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 				\\	\hline
 					\(\psi_{2Pz}\)
 					&
-					\( \alpha x_{i} e^{- \frac{\alpha r_{i}}{2}} \)
+					\( \alpha z_{i} e^{- \frac{\alpha r_{i}}{2}} \)
 					&
-					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha z_{i} x_{i}\vu{i} + \alpha z_{i} y_{i}\vu{j} + \alpha z_{i}^{2}\vu{k} - 2 r_{i}\right) \)
+					\( - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha z_{i}\vb{r_i} - 2 r_{i}\right) \)
 					&
 					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 				\\ \toprule
@@ -850,8 +850,7 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 	Taking a look at \ref{tab:energyReference} it is apparent that the results are quite precise. In the case of Beryllium, the experimental value is less than $2\%$ higher than the computational one, while for Neon, the difference is even less at barely $1\%$. These results are very good considering the amount of resources that went into calculating them: a simple standard PC and a handful of hours were enough. Considering that a relatively simple and very well tested method was used to obtain these results it is very easy to see why VMC is so popular for solving quite complicated problems like calculating the ground state energies of non-trivial quantum mechanical systems.
 
 	\begin{align}
-6 \beta^{2} r_{ij}^{4} - 6 \beta^{2} r_{ij}^{2} x_{ij}^{2} - 6 \beta^{2} r_{ij}^{2} y_{ij}^{2} - 6 \beta^{2} r_{ij}^{2} z_{ij}^{2} + 12 \beta r_{ij}^{3}
-	\end{align}
+- \frac{\alpha^{2} x_{i} y_{i}}{2 r_{i}} e^{- \frac{\alpha r_{i}}{2}} - \frac{\alpha^{2} x_{i} z_{i}}{2 r_{i}} e^{- \frac{\alpha r_{i}}{2}} - \frac{\alpha e^{- \frac{\alpha r_{i}}{2}}}{2 r_{i}} \left(\alpha x_{i}^{2} - 2 r_{i}\right)	\end{align}
 
 \bibliography{project_2}
 \bibliographystyle{plain}
