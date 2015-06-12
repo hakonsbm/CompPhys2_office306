@@ -98,6 +98,24 @@
       \field{title}{Introduction to Quantum Mechanics}
       \field{year}{2005}
     \endentry
+    \entry{mortens_notes}{book}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=f1f1ee5e424a0bb746b54acd9e6851cf}{Hjorth-Jensen}{H\bibinithyphendelim J\bibinitperiod}{Morten}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=f1f1ee5e424a0bb746b54acd9e6851cf}{Hjorth-Jensen}{H\bibinithyphendelim J\bibinitperiod}{Morten}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{f1f1ee5e424a0bb746b54acd9e6851cf}
+      \strng{fullhash}{f1f1ee5e424a0bb746b54acd9e6851cf}
+      \field{sortinit}{H}
+      \field{labelyear}{2013}
+      \field{labelmonth}{10}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Computational Physics: Lecture notes}
+      \field{month}{10}
+      \field{title}{Computational Physics: Lecture notes}
+      \field{year}{2013}
+    \endentry
     \entry{Introduction_Quantum_Pauling}{book}{}
       \field{sortinit}{I}
       \field{labelyear}{1935}

@@ -125,22 +125,24 @@ def plotChargeDensity(data, name):
 
 	if(name == "Beryllium"):
 		nElectrons = 4
-	else: 
-		if (name == "Neon"):
-			nElectrons = 10
-		else:
-			if (name == "HeliumJastrowAnalytical" or "HydrogenTwo"):
-				nElectrons = 2
-			else:
-				if(name == "BerylliumTwo"):
-					nElectrons = 8
+	if (name == "Neon"):
+		nElectrons = 10
+	if (name == "HeliumJastrowAnalytical" or "HydrogenTwo"):
+		nElectrons = 2
+	if(name == "BerylliumTwo"):
+		nElectrons = 8
 
+
+	datapoints = data.shape[0]
 
 
 	norm = np.ndarray(shape=(0), dtype=float, order='F')
-	positions = np.ndarray(shape=(3), dtype = float)
+	positions = np.ndarray(shape=(datapoints*nElectrons, 3), dtype = float)
 
-	datapoints = data.shape[0]
+	print name
+	print data.shape
+	print positions.shape
+
 	ylimit = (0, 3)
 	xlimit = (0, 4)
 
@@ -150,18 +152,38 @@ def plotChargeDensity(data, name):
 		lower = 4 + 3*i
 		upper = 7 + 3*i
 		r = data[: , lower : upper ]
-		positions = np.vstack((positions, r))
+		positions[ i*datapoints : (i + 1)*datapoints , : ] = r
+		# positions = np.vstack((positions, r))
+		print "Done with atom %d", i
+
 		# normTemp = r[:, 0]**2 + r[:,1]**2 + r[:,2]**2
 		# norm = np.append(norm,normTemp)
 		# normTemp = sorted(normTemp)
 
-	slice2D = np.ndarray(shape=(3), dtype = float)
+	print positions.shape
 
-	for i in range(0,r.shape[0]):
+
+	print "This was not the problem"
+
+
+	#Testing to see how large the array needs to be first to avoid having to resize the array
+	#So we check how many entries should be in the 2D slice, then creates the array the right size before putting them there
+	counter = 0;
+
+	for i in range(0,positions.shape[0]):
 		if np.abs(positions[i,1]) < 0.5:
-			slice2D = np.vstack((slice2D,positions[i,:]))
+			counter = counter + 1
 
+	slice2D = np.ndarray(shape=(counter, 3), dtype = float)
+	print counter
+	counter = 0
+	for i in range(0,positions.shape[0]):
+		if np.abs(positions[i,1]) < 0.5:
+			# slice2D = np.vstack((slice2D,positions[i,:]))
+			slice2D[counter,:] = positions[i,:]
+			counter = counter + 1
 
+	print "Was there a problem?"
 
 ####################################################
 	#If only one electron is wanted enable this
@@ -179,7 +201,7 @@ def plotChargeDensity(data, name):
 
 	fig = pl.figure()
 	# ax = p3.Axes3D(fig)
-	pl.title("Charge Density of " + name)
+	pl.title("Radial Charge Density of " + name)
 	pl.xlabel("r [a.u.]")
 	pl.xlim([0,6])
 	pl.ylim([0,1.6])
@@ -193,9 +215,14 @@ def plotChargeDensity(data, name):
 		#Creating a better slicething
 	fig = pl.figure()
 	pl.hist2d(slice2D[:,0], slice2D[:,2], bins=100, norm=LogNorm())
+	pl.title("Charge Density of " + name)
 	pl.xlabel("x axis [a.u.]")
 	pl.ylabel("z axis [a.u.]")
+	pl.xlim([-3,3])
+	pl.ylim([-3,3])
 	pl.colorbar()
+	fig.savefig("../../Report/figures/OneBodyDensity" + name)
+
 	pl.show()
 
 
@@ -318,6 +345,7 @@ name = "HydrogenTwo"
 dataSample = np.genfromtxt("../outfiles/" + name +"_blockingSamples")
 # dataCycles = np.genfromtxt("../outfiles/" + name +"_nCycles")
 
+print "Datareading sure took some time"
 
 # findLowestEnergy(data, name)
 # plotResultsVSTimestep(datatime , name)
