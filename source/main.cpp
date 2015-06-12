@@ -80,7 +80,7 @@ int main(int nargs, char* args[])
     else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
     // if you want to use GTOs (remember to turn off analytical solving)
-    solver->determinant()->setGTO(true);
+    solver->determinant()->setGTO(false);
 
 
     if(my_rank==0)
@@ -607,10 +607,24 @@ void runNewtonsMethod(VMCSolver *solver)
     int steps = 0;
     double lowerEnd = 0;
     double lowerDerivative = 0;
-    double midPoint = 0.5;
+    double midPoint = 0.25;
     double midDerivative = 0;
-    double higherEnd = 1;
+    double higherEnd = 0.5;
     double higherDerivative = 0;
+
+
+    //Helium
+    //double lowerEnd = 0;
+    //double midPoint = 0.5;
+    //double higherEnd = 1;
+    //Beryllium
+    //double lowerEnd = 0;
+    //double midPoint = 0.25;
+    //double higherEnd = 0.5;
+    //Neon (setAnalytical(false))
+    //double lowerEnd = 0.07;
+    //double midPoint = 0.1;
+    //double higherEnd = 0.13;
 
     solver->setBeta(lowerEnd);
     solver->runMasterIntegration();
@@ -642,7 +656,7 @@ void runNewtonsMethod(VMCSolver *solver)
 
 
 
-//    double beta = 1.11; //This is the initial seed
+//    double beta = 0.5; //This is the initial seed
 //    double h= 0.001;
 //    double firstDerivative = 0;
 
@@ -652,7 +666,7 @@ void runNewtonsMethod(VMCSolver *solver)
 //        firstDerivative = solver->getEnergyDerivative();
 //        solver->setBeta(beta+h);
 //        solver->runMasterIntegration();
-//        beta -= (firstDerivative*h)/(solver->getEnergyDerivative()-firstDerivative);
+//        beta += (firstDerivative*h)/(solver->getEnergyDerivative()-firstDerivative);
 //        solver->setBeta(beta);
 //        cout << "D=" << firstDerivative << endl;
 //        steps++;

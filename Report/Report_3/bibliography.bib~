@@ -63,10 +63,3 @@ year = {1975},
 	year = {1981},
 	pages = {1107--1119}
 }
-
-@book{mortens_notes,
-  author      = {Morten Hjorth-Jensen},
-  title	      = {Computational Physics: Lecture notes},
-  year	      = "2013",
-  month	      = "October",
-}
