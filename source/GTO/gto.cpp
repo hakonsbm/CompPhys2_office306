@@ -19,7 +19,8 @@ GTO::GTO()
 // returns orbital based on matrix row, M in the SD
 double GTO::GTO_phi(string sys, const mat &r, int i, int j)
 {
-    initBasis(new basisbank);
+    //initBasis(basisbank);
+    basisbank basis;
     vec pos(3);
 
     pos(0)=r(i,0); pos(1)=r(i,1); pos(2)=r(i,2);
@@ -28,9 +29,9 @@ double GTO::GTO_phi(string sys, const mat &r, int i, int j)
         vec coeffs(2);
         coeffs(0) = 0.4579;
         coeffs(1) = 0.6573;
-        basis()->add_3_21G_he(pos, coeffs); // for helium atom
+        basis.add_3_21G_he(pos, coeffs); // for helium atom
         //cout <<  coeffs << endl;
-        return basis()->get_orb();
+        return basis.get_orb();
     }
 
     else if (sys == "Be"){
@@ -63,8 +64,8 @@ double GTO::GTO_phi(string sys, const mat &r, int i, int j)
             exit(1);
         }
 
-        basis()->add_3_21G_be(pos, coeffs); // for beryllium atom
-        return basis()->get_orb();
+        basis.add_3_21G_be(pos, coeffs); // for beryllium atom
+        return basis.get_orb();
     }
     else if (sys == "Ne"){
         vec coeffs(9);
@@ -129,42 +130,42 @@ double GTO::GTO_phi(string sys, const mat &r, int i, int j)
             exit(1);
         }
 
-        basis()->add_3_21G_ne(pos, coeffs); // for neon atom
-        return basis()->get_orb();
+        basis.add_3_21G_ne(pos, coeffs); // for neon atom
+        return basis.get_orb();
 
     }
-    //else if (sys == "h") basis()->add_3_21G_h(pos); // for hydrogen atom
+    //else if (sys == "h") basis.add_3_21G_h(pos); // for hydrogen atom
 
     // delete from memory
-    basis()->delContracted();
-    delete m_basis;
+    //basis.delContracted();
+    //delete m_basis;
 
 }
 
 /*
 void GTO::Contracted_orbital_1s()
 {
-	return basis->get_orb_1s();
+    return basis.get_orb_1s();
 }
 
 void GTO::Contracted_orbital_2s()
 {
-	return basis->get_orb_2s();
+    return basis.get_orb_2s();
 }
 
 void GTO::Contracted_orbital_3s()
 {
-	return basis->get_orb_3s();
+    return basis.get_orb_3s();
 }
 
 void GTO::Contracted_orbital_1p()
 {
-	return basis->get_orb_1p();
+    return basis.get_orb_1p();
 }
 
 void GTO::Contracted_orbital_2p()
 {
-	return basis->get_orb_2p();
+    return basis.get_orb_2p();
 }
 
 */

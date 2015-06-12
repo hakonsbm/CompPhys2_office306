@@ -51,6 +51,34 @@
       \verb http://dx.doi.org/10.1002/qua.560090204
       \endverb
     \endentry
+    \entry{Boys_1950}{article}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=e38c457b6b8f7ff4f070b75d1d81dffb}{Boys}{B\bibinitperiod}{S.\bibnamedelimi F.}{S\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=e38c457b6b8f7ff4f070b75d1d81dffb}{Boys}{B\bibinitperiod}{S.\bibnamedelimi F.}{S\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{e38c457b6b8f7ff4f070b75d1d81dffb}
+      \strng{fullhash}{e38c457b6b8f7ff4f070b75d1d81dffb}
+      \field{sortinit}{B}
+      \field{labelyear}{1950}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Electronic Wave Functions. I. A General Method of Calculation for the Stationary States of Any Molecular System}
+      \field{journaltitle}{Proceedings of the Royal Society of London. Series A}
+      \field{number}{1063}
+      \field{title}{Electronic Wave Functions. I. A General Method of Calculation for the Stationary States of Any Molecular System}
+      \field{volume}{200}
+      \field{year}{1950}
+      \field{pages}{542\bibrangedash 554}
+    \endentry
+    \entry{EMSL}{misc}{}
+      \field{sortinit}{E}
+      \field{labelyear}{nodate}
+      \field{labeltitle}{EMSL Basis Set Exchange}
+      \field{howpublished}{\url{https://bse.pnl.gov/bse/portal}}
+      \field{note}{Accessed: 2015-05-13}
+      \field{title}{EMSL Basis Set Exchange}
+    \endentry
     \entry{griffiths2005introduction}{book}{}
       \name{labelname}{1}{}{%
         {{uniquename=0,hash=3f7a9e85c3ff6da61d1cfc99fb826cc2}{Griffiths}{G\bibinitperiod}{David\bibnamedelima J}{D\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
@@ -78,6 +106,28 @@
       \field{shorttitle}{Introduction to {Quantum} {Mechanics} by {Pauling}, {Linus}; {Wilson}, {E}.{Bright}}
       \field{title}{Introduction to {Quantum} {Mechanics}: {McGraw}-{Hill} {Inc}.,{US} 9780070489608}
       \field{year}{1935}
+    \endentry
+    \entry{Binkley_1980}{article}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=f978cbf69c5196360487d5f52966bed2}{J.\bibnamedelimi S.\bibnamedelimi Binkley}{J\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim B\bibinitperiod}{W.\bibnamedelimi J.\bibnamedelimi Hehre}{W\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim H\bibinitperiod}{}{}{J.\bibnamedelimi A.\bibnamedelimi Pople}{J\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim P\bibinitperiod}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=f978cbf69c5196360487d5f52966bed2}{J.\bibnamedelimi S.\bibnamedelimi Binkley}{J\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim B\bibinitperiod}{W.\bibnamedelimi J.\bibnamedelimi Hehre}{W\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim H\bibinitperiod}{}{}{J.\bibnamedelimi A.\bibnamedelimi Pople}{J\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim P\bibinitperiod}}%
+      }
+      \strng{namehash}{f978cbf69c5196360487d5f52966bed2}
+      \strng{fullhash}{f978cbf69c5196360487d5f52966bed2}
+      \field{sortinit}{J}
+      \field{labelyear}{1980}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Self-consistent molecular orbital methods. 21. Small split-valence basis sets for first-row elements}
+      \field{journaltitle}{J. Am. Chem. Soc}
+      \field{title}{Self-consistent molecular orbital methods. 21. Small split-valence basis sets for first-row elements}
+      \field{volume}{102}
+      \field{year}{1980}
+      \field{pages}{939\bibrangedash 947}
+      \verb{doi}
+      \verb 10.1021/ja00523a008
+      \endverb
     \endentry
     \entry{Koput_2011_PCCP}{article}{}
       \name{labelname}{1}{}{%
