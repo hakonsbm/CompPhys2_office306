@@ -50,7 +50,7 @@ double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)
     double singleParticleWavefunction = 1.0;
 
     //Calculate the single particle functions
-    //We'll assume that the R vector is aligned along the z-axis. So the nucleuses are seperated on the z-axis
+    //We'll assume that the R vector is aligned along the z-axis. So the nuclei are seperated on the z-axis
     for(int i = 0; i < nParticles ; i++)
     {
         rip1 = 0;
@@ -135,6 +135,8 @@ double HydrogenTwo::localEnergy(const mat &r, VMCSolver *solver)
     else
         potentialEnergy = - (1./r1p1+1./r1p2 + 1./r2p1+1./r2p2);
 
+
+    //If we are setting the nuclei side by side we need to make sure that 1/|R| is not included. That is accounted for by other forces
     if(!m_zeroDistance)
         potentialEnergy += 1./norm(2*nucleusHalfDistance);
 

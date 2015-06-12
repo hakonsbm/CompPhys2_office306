@@ -136,12 +136,12 @@ void runFindAlphaBeta(VMCSolver *solver)
     //It will aslo make a better fit by taking into account both the variance (which should be zero) and the energy (which should be as low as possible),
     //when the lowest energy and variance does not agree anymore the limit for the resulition of the search has been reached, if not specified in some other way.
 
-    double alphaMin = 0.7 * solver->getCharge();
+    double alphaMin = 0.2 * solver->getCharge();
     double alphaMax = 1.2 * solver->getCharge();
     double betaMin = 0.04;
-    double betaMax = 0.4;
+    double betaMax = 0.5;
 
-    int nSteps = 2;    //Coarseness of mesh
+    int nSteps = 10;    //Coarseness of mesh
     int nMeshes = 15;    //Number of times it should decrease the mesh
     double meshRangeAlpha = alphaMax - alphaMin;   //Used to recalculate the mesh
     double meshRangeBeta = betaMax - betaMin;
@@ -278,8 +278,8 @@ void runFindAlphaBeta(VMCSolver *solver)
         }
 
 
-        //if(bestAlphaVariance != bestAlphaEnergy)
-         //   break;
+        if(bestAlphaVariance != bestAlphaEnergy)
+            break;
 
 //        if(bestBetaEnergy != bestBetaVariance)        //Not canceling the loop because of beta, since beta has a very small influence on the values and could fail because of randomness
 //            break;
@@ -305,7 +305,7 @@ void runFindAlphaBeta(VMCSolver *solver)
         cout << "The lowest variance, " << lowestVariance << ", is found with alpha  " << bestAlphaVariance  << " and beta " << bestBetaVariance << endl;
         cout << "The lowest energy, " << lowestEnergy << ", is found with alpha  " << bestAlphaEnergy  << " and beta " << bestBetaEnergy << endl;
 
-        //MPI_Abort(MPI_COMM_WORLD, 1);
+        MPI_Abort(MPI_COMM_WORLD, 1);
 
     }
 
@@ -589,8 +589,8 @@ void runCompareParallelize(VMCSolver * solver)
 void runNewtonsMethod(VMCSolver *solver)
 {
 
-    solver->trialFunction()->setAnalytical(true);
-    solver->trialFunction()->setConjugate(true);
+    solver->trialFunction()->setAnalytical(false);
+    solver->trialFunction()->setConjugate(false);
 
     solver->switchbBlockSampling(false);    //This also samples the energies at each cycle to do blocking analysis on the data
 
@@ -603,8 +603,8 @@ void runNewtonsMethod(VMCSolver *solver)
     outfile.open(outfilePath);
 
     //Assuming that alpha is known, or GTO trial functions beta is what we want to minimize E_L against. So we guess a value and goes from there
-    double beta = 0.20;
-    double stepsize = 0.1;
+//    double beta = 0.20;
+//    double stepsize = 0.1;
 
 
     solver->runMasterIntegration();

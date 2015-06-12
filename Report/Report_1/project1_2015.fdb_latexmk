@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex project1_2015"] 1430566792 "project1_2015.aux" "project1_2015.bbl" "project1_2015" 1430566836
+["bibtex project1_2015"] 1433339687 "project1_2015.aux" "project1_2015.bbl" "project1_2015" 1433339688
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "project1_2015.aux" 1430566835 9155 609533a21f37fcfe4c0601b54c628519 ""
+  "project1_2015.aux" 1433339687 9234 7eb093218f28391215d1de8ff13e9bcd ""
   "project1_2015.bcf" 0 -1 0 ""
   "references.bib" 0 -1 0 ""
   (generated)
   "project1_2015.bbl"
   "project1_2015.blg"
-["pdflatex"] 1430566835 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1430566836
+["pdflatex"] 1433339687 "project1_2015.tex" "project1_2015.pdf" "project1_2015" 1433339688
   "../figures/blockingheliumsimpleandalytical" 0 -1 0 ""
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
@@ -175,12 +175,12 @@
   "figures/HeliumJastrowAnalyticalTimeVariance" 0 -1 0 ""
   "figures/VarianceNCyclesHeliumSimpleAnalytical" 0 -1 0 ""
   "figures/VarianceVsAlphaHeliumSimpleAnalytical" 0 -1 0 ""
-  "project1_2015.aux" 1430566835 9155 609533a21f37fcfe4c0601b54c628519 ""
+  "project1_2015.aux" 1433339687 9234 7eb093218f28391215d1de8ff13e9bcd ""
   "project1_2015.bbl" 1425328958 334 d84188f5736834d6e4ed7de1cad2a8ed "bibtex project1_2015"
-  "project1_2015.out" 1430566835 1123 e2da9e3fd8e255a0d6b434ece6281107 ""
-  "project1_2015.tex" 1430566835 28080 75678c217c8455e1ec14b80fd247655f ""
+  "project1_2015.out" 1433339687 1123 e2da9e3fd8e255a0d6b434ece6281107 ""
+  "project1_2015.tex" 1432124578 27864 ef56b77c25943bd2bcf0f492c49ecf1e ""
   (generated)
-  "project1_2015.out"
   "project1_2015.pdf"
   "project1_2015.aux"
+  "project1_2015.out"
   "project1_2015.log"

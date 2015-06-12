@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"run",
+				"runThermalize"
+			],
+			[
+				"cut",
+				"cutSquares"
+			],
+			[
+				"slice",
+				"slice2D"
+			],
+			[
+				"v",
+				"vstack"
+			],
+			[
+				"xli",
+				"xlim"
+			],
+			[
 				"xlim",
 				"xlimit"
 			],
@@ -54,10 +74,6 @@
 			[
 				"save",
 				"saveState"
-			],
-			[
-				"run",
-				"runCutHole"
 			],
 			[
 				"load",
@@ -160,10 +176,6 @@
 				"localEnergy2"
 			],
 			[
-				"v",
-				"velocityz"
-			],
-			[
 				"ve",
 				"velocityx"
 			]
@@ -172,49 +184,57 @@
 	"buffers":
 	[
 		{
-			"file": "sections/appendix.tex",
+			"file": "/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/run.py",
 			"settings":
 			{
-				"buffer_size": 9597,
+				"buffer_size": 7781,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "sections/helium_atom.tex",
+			"file": "/home/gullik/Documents/Søknader og CV Gullik/Open application Norsk regnesentral.tex",
 			"settings":
 			{
-				"buffer_size": 5112,
+				"buffer_size": 1960,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/python_plots.py",
+			"settings":
+			{
+				"buffer_size": 5980,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "sections/density_plots.tex",
+			"file": "/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/mdconfig.py",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gullik/Documents/CompPhys2_office306/source/python/energyLevels.py",
-			"settings":
-			{
-				"buffer_size": 6050,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Project_3.tex",
-			"settings":
-			{
-				"buffer_size": 4759,
+				"buffer_size": 2945,
 				"line_ending": "Unix"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/C++/C++ Single File.sublime-build",
 	"build_system_choices":
 	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				"Run"
+			]
+		],
 		[
 			[
 				[
@@ -271,19 +291,47 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections"
+	],
 	"file_history":
 	[
+		"/home/gullik/Documents/FYS4460/molecular-dynamics/python_framework/run.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/atoms.tex",
 		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/Project_3.tex",
+		"/home/gullik/Documents/Fys4460/Exam_answers/Exam_answers.tex",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/velocityplots.py",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/python_plots.py",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/mdconfig.py",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/run.py",
+		"/home/gullik/Documents/Fys4460/Percolation/matlab_programs/percwalk.c",
+		"/home/gullik/Documents/molecular-dynamics-fys3150/python_plots.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_1/project1_2015.tex",
+		"/home/gullik/Downloads/AGF-211_Permeability_Gullik.tex",
+		"/home/gullik/Documents/Fys4460/Exam_answers.tex",
+		"/home/gullik/Documents/CompPhys2_office306/source/python/energyLevels.py",
+		"/home/gullik/Downloads/plotmap.py",
+		"/home/gullik/Documents/discussion.tex",
+		"/home/gullik/Documents/04_hydrography.tex",
+		"/home/gullik/Documents/AGF311__811_Report2014.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/appendix.tex",
+		"/home/gullik/Documents/CompPhys2_office306/sympyMath/localEnergyAnalytic.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/helium_atom.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/density_plots.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/temp_delete.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/extras.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/bibliography.bib",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/project_3.sublime-project",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/beryllium_neon.tex",
 		"/home/gullik/Documents/CompPhys2_office306/source/python/run_script.py",
 		"/home/gullik/Documents/CompPhys2_office306/source/python/Parallel_compare_plotter.py",
-		"/home/gullik/Documents/CompPhys2_office306/source/python/energyLevels.py",
 		"/home/gullik/Documents/CompPhys2_office306/source/python/blocking_plotter.py",
 		"/home/gullik/Documents/CompPhys2_office306/source/python/alpha_beta_plotter.py",
-		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/atoms.tex",
 		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/optimisation.tex",
 		"/home/gullik/Documents/CompPhys2_office306/source/energyLevels.py",
 		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/monte_carlo.tex",
-		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/extras.tex",
 		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/extras.aux",
 		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/verification.tex",
 		"/home/gullik/Documents/Fys4460/Report/Molecular_Dynamics_Report.tex",
@@ -300,20 +348,15 @@
 		"/home/gullik/.config/sublime-text-3/Packages/LaTeXTools/builders/traditionalBuilder.py",
 		"/home/gullik/.config/sublime-text-3/Packages/User/LaTeXTools.sublime-settings",
 		"/home/gullik/Documents/Fys4460/Percolation/[no file]",
-		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/python_plots.py",
 		"/home/gullik/Documents/CompPhys2_office306/source/run_script.py",
 		"/home/gullik/Documents/Fys4460/Percolation/walk.py",
 		"/home/gullik/Documents/Fys4460/Percolation/exwalk.py",
 		"/home/gullik/Documents/CompPhys2_office306/sympyMath/localEnergy.py",
-		"/home/gullik/Documents/CompPhys2_office306/Report/Report_1/project1_2015.tex",
 		"/home/gullik/Documents/CompPhys2_office306/Report/Project_2.tex",
 		"/home/gullik/Documents/Fys3150Gullik/molecular-dynamics-fys3150/python_plots.py",
-		"/home/gullik/Documents/molecular-dynamics-fys3150/python_plots.py",
 		"/home/gullik/Documents/CompPhys2_office306/Report/project2_2015.tex",
 		"/home/gullik/Documents/Fys4460/MD_project_vs_0.2/Report/Molecular_Dynamics_Report.tex",
-		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/run.py",
 		"/home/gullik/Documents/FYS-2006 Candidate number 29.tex",
-		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/mdconfig.py",
 		"/home/gullik/Downloads/histogram_demo_features.py",
 		"/home/gullik/Documents/Fys4460/parallel_lennard_jones_md/base_code/run.py",
 		"/home/gullik/Documents/Fys4460/molecular-dynamics/Report/Molecular_Dynamics_Report.tex",
@@ -348,6 +391,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\\sigma^*",
+			"\\sigma",
+			"QUA:QUA560090204",
+			"Koput:2011:PCCP",
+			"cite",
+			"citet",
+			"cite",
+			"\\cite",
 			"Calculated in derivatives.py.",
 			"verification",
 			"eq:laplacianIntermediate",
@@ -367,7 +418,7 @@
 			"py",
 			"))"
 		],
-		"highlight": true,
+		"highlight": false,
 		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
@@ -388,111 +439,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "sections/appendix.tex",
+					"file": "/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/run.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9597,
+						"buffer_size": 7781,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6493,
-								6493
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3483.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "sections/helium_atom.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5112,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4312,
-								4312
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1341.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "sections/density_plots.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 3,
-					"file": "/home/gullik/Documents/CompPhys2_office306/source/python/energyLevels.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6050,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5312,
-								5312
+								963,
+								963
 							]
 						],
 						"settings":
@@ -501,27 +460,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3678.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "Project_3.tex",
+					"buffer": 1,
+					"file": "/home/gullik/Documents/Søknader og CV Gullik/Open application Norsk regnesentral.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4759,
+						"buffer_size": 1960,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4300,
-								4300
+								717,
+								1931
 							]
 						],
 						"settings":
@@ -529,12 +488,75 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1683.0,
+						"translation.y": 357.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/python_plots.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5980,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2188,
+								2188
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1326.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/mdconfig.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2945,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								111,
+								111
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 510.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -566,7 +588,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.707309290865,
 			1.0
 		],
 		"rows":
@@ -578,7 +600,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 183.0
+		"height": 204.0
 	},
 	"output.find_results":
 	{
@@ -618,7 +640,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -626,7 +648,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 217.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
