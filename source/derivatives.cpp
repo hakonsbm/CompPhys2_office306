@@ -150,7 +150,7 @@ void Derivatives::analyticalLaplacianRatio(double &laplacianRatio, const mat &r,
 
 vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
-//    cout << "PSI 1 DERIV"<< endl;
+
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
     vec derivative = zeros (solver->getNDimensions());
@@ -163,7 +163,7 @@ vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSol
 
 double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
-//    cout << "PSI 1 DOUBLEDERIV"<< endl;
+
     double alpha = solver->getAlpha();
     double ri = norm(r.row(particleTag));
 
@@ -177,7 +177,6 @@ double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &
 vec Derivatives::analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
 
-//    cout << "PSI 2 DERIV"<< endl;
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
 
@@ -189,7 +188,6 @@ vec Derivatives::analyticalPsi2SDerivative(int particleTag, const mat &r, VMCSol
 
 double Derivatives::analyticalPsi2SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
-//    cout << "PSI 2 DOUBLE DERIV"<< endl;
 //    cout << "ParticleTag : " << particleTag <<endl;
     double alpha = solver->getAlpha();
     double ri = norm(r.row(particleTag));
@@ -202,7 +200,6 @@ double Derivatives::analyticalPsi2SDoubleDerivative(int particleTag, const mat &
 vec Derivatives::analyticalPsi2PDerivative(int particleTag, int dimension, const mat &r, VMCSolver *solver)
 {
 
-//    cout << "PSI 2 P DERIV"<< endl;
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
     double factor = exp(-0.5*alpha*r_i)/r_i;
@@ -220,7 +217,6 @@ vec Derivatives::analyticalPsi2PDerivative(int particleTag, int dimension, const
 
 double Derivatives::analyticalPsi2PDoubleDerivative(int particleTag, int dimension, const mat &r, VMCSolver *solver)
 {
-//    cout << "PSI 2 P DOUBLE DERIV"<< endl;
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag)) ;
     double x_i = r(particleTag,dimension);

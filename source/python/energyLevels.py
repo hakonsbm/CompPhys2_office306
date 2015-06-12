@@ -150,7 +150,6 @@ def plotChargeDensity(data, name):
 		lower = 4 + 3*i
 		upper = 7 + 3*i
 		r = data[: , lower : upper ]
-		print r[0,:]
 		positions = np.vstack((positions, r))
 		# normTemp = r[:, 0]**2 + r[:,1]**2 + r[:,2]**2
 		# norm = np.append(norm,normTemp)
@@ -181,7 +180,7 @@ def plotChargeDensity(data, name):
 	fig = pl.figure()
 	# ax = p3.Axes3D(fig)
 	pl.title("Charge Density of " + name)
-	pl.xlabel("r")
+	pl.xlabel("r [a.u.]")
 	pl.xlim([0,6])
 	pl.ylim([0,1.6])
 
@@ -193,7 +192,9 @@ def plotChargeDensity(data, name):
 
 		#Creating a better slicething
 	fig = pl.figure()
-	pl.hist2d(slice2D[:,0], slice2D[:,2], bins=200, norm=LogNorm())
+	pl.hist2d(slice2D[:,0], slice2D[:,2], bins=100, norm=LogNorm())
+	pl.xlabel("x axis [a.u.]")
+	pl.ylabel("z axis [a.u.]")
 	pl.colorbar()
 	pl.show()
 
@@ -304,9 +305,9 @@ def plotVarVSnCycles(data, name):
 # name = "HeliumJastrowAnalytical"
 # name = "Beryllium"
 # name = "Neon"
-# name = "HydrogenTwo"
+name = "HydrogenTwo"
 # name = "Helium"
-name = "BerylliumTwo"
+# name = "BerylliumTwo"
 
 
 

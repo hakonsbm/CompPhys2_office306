@@ -127,6 +127,7 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
 
                 GTO_element = gto.GTO_phi(TF, r, i + nHalf, k);
                 detDownOld(i,k) = GTO_element;
+
                 //delete gto;
 
 
@@ -184,11 +185,11 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
 
 double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSolver *solver)
 {
-    int i, j, Nhalf, *indx;
+    int i, j, Nhalf;
     double d1, d2, SD;
     int nParticles= solver->getNParticles();
     Nhalf = nParticles/2;
-    indx = new int [Nhalf];
+    int indx[Nhalf];
     mat tempDetUp = zeros<mat>(Nhalf, Nhalf);
     mat tempdetDownOld = zeros<mat>(Nhalf, Nhalf);
 
@@ -217,7 +218,7 @@ double SlaterDeterminant::calculateDeterminant(const mat &r,double alpha, VMCSol
     {
         SD *= tempDetUp(i, i)*tempdetDownOld(i, i);
     }
-    delete indx;
+    //delete indx;
     // return SD
     return d1*d2*SD;
 }
