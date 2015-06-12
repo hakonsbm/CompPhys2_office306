@@ -65,6 +65,80 @@ double Neon::waveFunction(const mat &r, VMCSolver *solver)
     return SD*product;
 }
 
+double Neon::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    double rSingleParticle, alpha, beta, sum, rij, a;
+    int spin_count = 0;
+    vec spins(10);
+    for(int s = 0; s<10; s++)
+    {
+        if(s<5) spins(s)=0;
+        else spins(s)=1;
+    }
+    sum = 0.;
+    alpha = solver -> getAlpha();
+    beta = solver -> getBeta();
+    //vec argument(solver->getNParticles());
+    if(solver->getElectronInteration())
+    {
+        for(int i = 0; i < solver->getNParticles(); i++) {
+            //argument[i] = 0.0;
+            rSingleParticle = 0;
+
+            for(int j = i + 1; j < solver->getNParticles(); j++) {
+                rij = 0;
+                for(int k = 0; k < solver->getNDimensions(); k++) {
+                rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+                }
+                rij = sqrt(rij);
+                if(spins(i)==spins(j)) a = 1./4.;
+                else a = 1./2.;
+                //cout << i << " & " << j  << ": " << a << endl;
+                sum -= a*rij*rij/((1+beta*rij)*(1+beta*rij));
+                spin_count++;
+            }
+        }
+    }
+    return sum;
+}
+
+double Neon::lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    double rSingleParticle, alpha, beta, sum, rij, a;
+    int spin_count = 0;
+    vec spins(10);
+    for(int s = 0; s<10; s++)
+    {
+        if(s<5) spins(s)=0;
+        else spins(s)=1;
+    }
+    sum = 0.;
+    alpha = solver -> getAlpha();
+    beta = solver -> getBeta();
+    //vec argument(solver->getNParticles());
+    if(solver->getElectronInteration())
+    {
+        for(int i = 0; i < solver->getNParticles(); i++) {
+            //argument[i] = 0.0;
+            rSingleParticle = 0;
+
+            for(int j = i + 1; j < solver->getNParticles(); j++) {
+                rij = 0;
+                for(int k = 0; k < solver->getNDimensions(); k++) {
+                rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+                }
+                rij = sqrt(rij);
+                if(spins(i)==spins(j)) a = 1./4.;
+                else a = 1./2.;
+                //cout << i << " & " << j  << ": " << a << endl;
+                sum += 2*a*pow(rij,3)*beta/pow(1+beta*rij,3);
+                spin_count++;
+            }
+        }
+    }
+    return sum;
+}
+
 double Neon::localEnergy(const mat &r, VMCSolver *solver)
 {
     //Grabbing all the necessary constants stored in the solver

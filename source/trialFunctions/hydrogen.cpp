@@ -41,3 +41,13 @@ double Hydrogen::localEnergy(const mat &r, VMCSolver *solver)
     //Returns the local energy, EL = (a-Z)(1/r1+1/r2)+1/r12-alpha^2)
     return -pow(r1,-1) - (alpha/2)* (alpha - (2/r1)) ;
 }
+
+double Hydrogen::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}
+
+double Hydrogen::lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}

@@ -93,3 +93,13 @@ double HeliumSimpleNumerical::localEnergy(const mat &r, VMCSolver *solver)
 
     return kineticEnergy + potentialEnergy;
 }
+
+double HeliumSimpleNumerical::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}
+
+double HeliumSimpleNumerical::lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}

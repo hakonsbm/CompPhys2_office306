@@ -5,6 +5,7 @@ Helium::Helium(VMCSolver *solver)
 
     simpleFlag = false;
     m_analytical = false;
+
     m_outfileName = "Helium";
 
     solver->setCharge(2);
@@ -23,6 +24,7 @@ double Helium::waveFunction(const mat &r, VMCSolver *solver)
     double product = 1.0;
     double alpha = solver -> getAlpha();
     double beta = solver -> getBeta();
+
     //Calculate the Jastrow factor
     if(solver->getElectronInteration())
     {
@@ -46,11 +48,13 @@ double Helium::waveFunction(const mat &r, VMCSolver *solver)
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 //    cout << SD << endl;
 
+
     return SD*product;
 }
 
 double Helium::localEnergy(const mat &r, VMCSolver *solver)
 {
+
     double kineticEnergy = 0;
     double potentialEnergy = 0;
 
@@ -93,6 +97,37 @@ double Helium::localEnergy(const mat &r, VMCSolver *solver)
 
 //    cout << "potential is " << -solver->determinant()->laplacianSlaterDeterminant(r, solver)/2. + potentialEnergy << endl;
 
+
+
     return kineticEnergy + potentialEnergy;
 
+}
+
+double Helium::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    double r1 = norm(r.row(0));
+    double r2 = norm(r.row(1));
+    double r12 = norm(r.row(0) - r.row(1));
+    double dotproduct = dot(r.row(0),r.row(1));
+    double derivative = 0;
+    double beta = solver->getBeta();
+
+    derivative = (-1*solver->getAlpha()*(r1+r2)*(1-dotproduct/(r1*r2))*pow(1+r12*beta,2)+3*r12*beta+r12+3)/pow(1+r12*beta,5);
+
+    return derivative;
+}
+
+double Helium::lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    double r1 = norm(r.row(0));
+    double r2 = norm(r.row(1));
+    double r12 = norm(r.row(0) - r.row(1));
+    double dotproduct = dot(r.row(0),r.row(1));
+    double factor = solver->getAlpha()*(r1+r2)*(1-dotproduct/(r1*r2));
+    double secondDerivative = 0;
+    double beta = solver->getBeta();
+
+    secondDerivative = (r12*(3*r12*r12*factor*beta*beta+6*r12*factor*beta-12*r12*beta-5*r12+3*factor-12))/pow(1+r12*beta,6);
+
+    return secondDerivative;
 }

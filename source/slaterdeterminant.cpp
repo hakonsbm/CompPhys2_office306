@@ -91,22 +91,34 @@ double SlaterDeterminant::laplacianPhi(const mat &r, int i, int j, VMCSolver *so
 
 void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
 {
+
     int i;
     int nHalf= solver->getNParticles()/2;
     double alpha = solver->getAlpha();
     double GTO_element;
+    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11" << endl;
+
     string TF = solver->getTF();
+
+    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11" << endl;
+
     detUpOld = zeros<mat>(nHalf, nHalf);
     detDownOld = zeros<mat>(nHalf, nHalf);
+
     TF.erase(2);
+
     GTO gto;
+
 
     for (int k = 0; k <  nHalf; ++k)
     {
         for (i = 0; i < nHalf; ++i)
         {
+
+
             if (useGTO)
             {
+
                 // for detUp
 
                 GTO_element = gto.GTO_phi(TF, r, i, k);
@@ -129,8 +141,8 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
                     cout << detDownOld(i,k) << " " << GTO_element << endl;
                 }
                 //exit(1);
-                */
 
+                */
 
             }
             else

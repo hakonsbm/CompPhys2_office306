@@ -17,7 +17,9 @@ class Helium : public TrialFunction
 public:
     Helium(VMCSolver* solver);
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
-    virtual double localEnergy(const mat &r, VMCSolver *solver );
+    virtual double localEnergy(const mat &r, VMCSolver *solver);
+    virtual double lnDerivativeWaveFunction(const mat &r, VMCSolver *solver);
+    virtual double lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver);
 
 
 };

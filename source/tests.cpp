@@ -21,10 +21,8 @@ using namespace arma;
 
 TEST(Hydrogenic) {
     //C1 and C2
-
-
-
     VMCSolver *solver = new VMCSolver();
+//    solver->trialFunction()->setConjugate(false);
 
     cout << endl << "Running Hydrogen test" << endl << endl;
 
@@ -41,11 +39,13 @@ TEST(Hydrogenic) {
     solver->setAlpha(solver->getCharge());
     solver->switchbBlockSampling(false);
     solver->setCycles(10000);
+
     solver->runMasterIntegration();
+
     CHECK_EQUAL(0., solver->getEnergyVar());
     CHECK_EQUAL(-4, solver->getEnergy());
 
-
+    exit(0);
 
     cout << endl << "Running Beryllium test" << endl << endl;
     solver->setTrialFunction(new Beryllium(solver));
@@ -74,6 +74,7 @@ TEST(Hydrogenic) {
 
 TEST(Gradients)
 {
+    exit(0);
 //    ////////////////////////7
 //    /// C3
 //    /// ///////////////////////

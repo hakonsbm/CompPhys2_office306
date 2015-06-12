@@ -12,8 +12,10 @@ class TrialFunction
 {
 public:
     TrialFunction();
-    virtual double waveFunction(const mat &r, VMCSolver *solver ) = 0 ;
+    virtual double waveFunction(const mat &r, VMCSolver *solver ) = 0;
     virtual double localEnergy(const mat &r, VMCSolver *solver ) = 0;
+    virtual double lnDerivativeWaveFunction(const mat &r, VMCSolver *solver ) = 0;
+    virtual double lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver ) = 0;
     void setAnalytical(bool onOff) {m_analytical = onOff; }
     double spinFactor(int i, int j);
     double getNucleusDistance() {return m_nucleusDistance;}
