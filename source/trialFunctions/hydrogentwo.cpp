@@ -4,6 +4,7 @@ HydrogenTwo::HydrogenTwo(VMCSolver *solver)
 {
     simpleFlag = false;
     m_analytical = false;
+    m_molecule = true;
 
     m_outfileName = "HydrogenTwo";
 
@@ -66,8 +67,8 @@ double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)
 
         //Pretty sure it is supposed to be divided by two as well, if we want to reproduce the same numbers as Helium when R = 0;
         singleParticleWavefunction /= 2.;
-
     }
+
 
     //Calculate the Jastrow factor
     if(solver->getElectronInteration())
@@ -86,10 +87,11 @@ double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)
     }
 
 //    cout << "Before SD" << endl;
-//    SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
+    SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 //    cout << SD << endl;
 
-    return singleParticleWavefunction*product;
+    return SD*product;
+//    return singleParticleWavefunction*product;
 }
 
 double HydrogenTwo::localEnergy(const mat &r, VMCSolver *solver)

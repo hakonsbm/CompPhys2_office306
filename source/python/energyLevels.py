@@ -131,6 +131,9 @@ def plotChargeDensity(data, name):
 		else:
 			if (name == "HeliumJastrowAnalytical" or "HydrogenTwo"):
 				nElectrons = 2
+			else:
+				if(name == "BerylliumTwo"):
+					nElectrons = 8
 
 
 
@@ -147,16 +150,17 @@ def plotChargeDensity(data, name):
 		lower = 4 + 3*i
 		upper = 7 + 3*i
 		r = data[: , lower : upper ]
+		print r[0,:]
 		positions = np.vstack((positions, r))
-		normTemp = r[:, 0]**2 + r[:,1]**2 + r[:,2]**2
-		norm = np.append(norm,normTemp)
-		normTemp = sorted(normTemp)
+		# normTemp = r[:, 0]**2 + r[:,1]**2 + r[:,2]**2
+		# norm = np.append(norm,normTemp)
+		# normTemp = sorted(normTemp)
 
 	slice2D = np.ndarray(shape=(3), dtype = float)
 
 	for i in range(0,r.shape[0]):
-		if np.abs(r[i,0]) < 0.1:
-			slice2D = np.vstack((slice2D,r[i,:]))
+		if np.abs(positions[i,1]) < 0.5:
+			slice2D = np.vstack((slice2D,positions[i,:]))
 
 
 
@@ -168,7 +172,7 @@ def plotChargeDensity(data, name):
 	# upper = 7 + 3*electron
 	# r = data[: , lower : upper ]
 ####################################################
-	
+	norm = positions[:, 0]**2 + positions[:,1]**2 + positions[:,2]**2
 	norm = sorted(norm)
 	norm = np.sqrt(norm)
 # 
@@ -178,7 +182,7 @@ def plotChargeDensity(data, name):
 	# ax = p3.Axes3D(fig)
 	pl.title("Charge Density of " + name)
 	pl.xlabel("r")
-	pl.xlim([0,3])
+	pl.xlim([0,6])
 	pl.ylim([0,1.6])
 
 	pl.hist(norm, normed=True, bins=200)
@@ -189,7 +193,7 @@ def plotChargeDensity(data, name):
 
 		#Creating a better slicething
 	fig = pl.figure()
-	pl.hist2d(slice2D[:,1], slice2D[:,2], bins=100, norm=LogNorm())
+	pl.hist2d(slice2D[:,0], slice2D[:,2], bins=200, norm=LogNorm())
 	pl.colorbar()
 	pl.show()
 
@@ -241,31 +245,31 @@ def plotChargeDensity(data, name):
 	# #And at the last we want to create a 3D plot of it
 	# ###################################################
 
-	# # print r.shape
-	# # print xySlice.shape
+	# print r.shape
+	# print xySlice.shape
 
-	# # xySlice = xySlice[1:xySlice.shape[0]:50,:]
-	# # print xySlice.shape
-
-
-	# # return
-	# # r = xySlice
-
-	# # # r = r[10000::10,:]
-	# # fig=pl.figure()
-	# # ax = p3.Axes3D(fig)
-	# # pl.title("Charge Density, " + name)
-	# # ax.scatter(r[:,0],r[:,1],r[:,2])
-	# # ax.set_xlabel('x')
-	# # ax.set_ylabel('y')
-	# # ax.set_zlabel('z')
-	# # ax.set_xlim([-3,3])
-	# # ax.set_ylim([-3,3])
-	# # ax.set_zlim([-3,3])
+	# xySlice = xySlice[1:xySlice.shape[0]:50,:]
+	# print xySlice.shape
 
 
+	# return
+	# r = xySlice
 
-	# # fig.savefig("../../Report/figures/ChargeDensity3D" + name)
+	# r = r[10000::10,:]
+	# fig=pl.figure()
+	# ax = p3.Axes3D(fig)
+	# pl.title("Charge Density, " + name)
+	# ax.scatter(r[:,0],r[:,1],r[:,2])
+	# ax.set_xlabel('x')
+	# ax.set_ylabel('y')
+	# ax.set_zlabel('z')
+	# ax.set_xlim([-3,3])
+	# ax.set_ylim([-3,3])
+	# ax.set_zlim([-3,3])
+
+
+
+	# fig.savefig("../../Report/figures/ChargeDensity3D" + name)
 
 
 	return
@@ -300,14 +304,15 @@ def plotVarVSnCycles(data, name):
 # name = "HeliumJastrowAnalytical"
 # name = "Beryllium"
 # name = "Neon"
-name = "HydrogenTwo"
+# name = "HydrogenTwo"
 # name = "Helium"
+name = "BerylliumTwo"
 
 
 
 
 #	Picks the relevant data sample
-data = np.genfromtxt("../outfiles/" + name + "_alpha_beta")
+# data = np.genfromtxt("../outfiles/" + name + "_alpha_beta")
 # datatime = np.genfromtxt("../outfiles/" + name +"_timeStep")
 dataSample = np.genfromtxt("../outfiles/" + name +"_blockingSamples")
 # dataCycles = np.genfromtxt("../outfiles/" + name +"_nCycles")
@@ -315,10 +320,10 @@ dataSample = np.genfromtxt("../outfiles/" + name +"_blockingSamples")
 
 # findLowestEnergy(data, name)
 # plotResultsVSTimestep(datatime , name)
-plotEnergyVsAlphaBeta(data, name)
+# plotEnergyVsAlphaBeta(data, name)
 # plotEnergyVsAlpha(data, name)
 # plotResultsVSTimestep(datatime , name)
-# plotChargeDensity(dataSample, name)
+plotChargeDensity(dataSample, name)
 # plotVarVSnCycles(dataCycles[1:,:], name)
 
 

@@ -10,6 +10,7 @@
 #include "trialFunctions/beryllium.h"
 #include "trialFunctions/neon.h"
 #include "trialFunctions/hydrogentwo.h"
+#include "trialFunctions/berylliumtwo.h"
 #include "slaterdeterminant.h"
 
 #include <iostream>
@@ -77,6 +78,8 @@ int main(int nargs, char* args[])
     else if((string)args[1]=="Neon") solver->setTrialFunction(new Neon(solver));
     else if((string)args[1]=="Helium") solver->setTrialFunction(new Helium(solver));
     else if((string)args[1]=="HydrogenTwo") solver->setTrialFunction(new HydrogenTwo(solver));
+    else if((string)args[1]=="BerylliumTwo") solver->setTrialFunction(new BerylliumTwo(solver));
+
     else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
     // if you want to use GTOs (remember to turn off analytical solving)
