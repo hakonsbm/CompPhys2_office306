@@ -83,3 +83,13 @@ double HeliumJastrowAnalytical::localEnergy(const mat &r, VMCSolver *solver)
     return localEnergy1 + localEnergy2;
 }
 
+double HeliumJastrowAnalytical::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}
+
+double HeliumJastrowAnalytical::lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}
+

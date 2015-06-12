@@ -139,4 +139,14 @@ double HydrogenTwo::localEnergy(const mat &r, VMCSolver *solver)
     return kineticEnergy + potentialEnergy;
 }
 
+double HydrogenTwo::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}
+
+double HydrogenTwo::lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}
+
 

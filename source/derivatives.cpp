@@ -92,6 +92,7 @@ double Derivatives::numericalDoubleDerivative(const mat &r, VMCSolver *solver)
     return doubleDerivative;
 }
 
+
 void Derivatives::analyticalGradient(mat &gradient, const mat &r, VMCSolver *solver)
 {
 

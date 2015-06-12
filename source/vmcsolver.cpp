@@ -126,6 +126,13 @@ void VMCSolver::runMonteCarloIntegrationIS() {
     double deltaE = 0;
     double r12 = 0;
     double averageR12 = 0;
+    double deltaLnDerivative = 0;
+    double deltaLnSecondDerivative = 0;
+    double lnDerivative = 0;
+    double lnSecondDerivative = 0;
+    double lnDerivativeLocalEnergy = 0;
+    double lnSecondDerivativeLocalEnergy = 0;
+    double normalizationFactor = 0;
 
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
@@ -233,6 +240,11 @@ void VMCSolver::runMonteCarloIntegrationIS() {
             deltaE = trialFunction()->localEnergy(rNew, this);
             energySum += deltaE;
             energySquaredSum += deltaE*deltaE;
+            if(trialFunction()->getConjugate()){
+                deltaLnDerivative = trialFunction()->lnDerivativeWaveFunction(rNew, this);
+                lnDerivative += deltaLnDerivative;
+                lnDerivativeLocalEnergy += deltaE * deltaLnDerivative;
+            }
 
         }
         //we need to find the average value of r12
@@ -269,12 +281,17 @@ void VMCSolver::runMonteCarloIntegrationIS() {
         cout << "blockSampling" << endl;
     }
 
-    m_energy = energySum/(nCycles * nParticles);
-    m_energySquared = energySquaredSum/(nCycles * nParticles);
-    m_energyVar = sqrt((m_energySquared - m_energy*m_energy) / nCycles);
+    normalizationFactor = (double) nCycles*(double) nParticles;
+    m_energy = energySum/normalizationFactor;
+    m_energySquared = energySquaredSum/normalizationFactor;
+    m_energyVar = sqrt((m_energySquared - m_energy*m_energy) /(double) nCycles);
     m_averageR12 = averageR12 / (double) nCycles;
     m_ratio = (double) acc_moves/(double) moves;
     m_moves = moves;
+
+    if(trialFunction()->getConjugate()) {
+        energyDerivative = 2*(lnDerivativeLocalEnergy-m_energy*lnDerivative)/normalizationFactor;
+    }
 
 }
 

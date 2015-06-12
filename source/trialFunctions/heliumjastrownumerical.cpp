@@ -120,3 +120,13 @@ double HeliumJastrowNumerical::localEnergy(const mat &r, VMCSolver *solver)
     return kineticEnergy + potentialEnergy;
 }
 
+double HeliumJastrowNumerical::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}
+
+double HeliumJastrowNumerical::lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    return 0;
+}
+

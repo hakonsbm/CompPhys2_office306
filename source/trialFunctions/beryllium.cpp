@@ -54,6 +54,56 @@ double Beryllium::waveFunction(const mat &r, VMCSolver *solver)
     return SD*product;
 }
 
+double Beryllium::lnDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    double rSingleParticle, alpha, beta, sum, rij, a;
+    sum = 0.;
+    alpha = solver -> getAlpha();
+    beta = solver -> getBeta();
+    //vec argument(solver->getNParticles());
+    if(solver->getElectronInteration())
+    {
+        for(int i = 0; i < solver->getNParticles(); i++) {
+            rSingleParticle = 0;
+            for(int j = i + 1; j < solver->getNParticles(); j++) {
+                rij = 0;
+                for(int k = 0; k < solver->getNDimensions(); k++) {
+                    rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+                }
+                rij = sqrt(rij);
+                a = spinFactor(i,j);
+                sum -= a*rij*rij/((1+beta*rij)*(1+beta*rij));
+            }
+        }
+    }
+    return sum;
+}
+
+double Beryllium::lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver)
+{
+    double rSingleParticle, alpha, beta, sum, rij, a;
+    sum = 0.;
+    alpha = solver -> getAlpha();
+    beta = solver -> getBeta();
+    //vec argument(solver->getNParticles());
+    if(solver->getElectronInteration())
+    {
+        for(int i = 0; i < solver->getNParticles(); i++) {
+            rSingleParticle = 0;
+            for(int j = i + 1; j < solver->getNParticles(); j++) {
+                rij = 0;
+                for(int k = 0; k < solver->getNDimensions(); k++) {
+                    rij += (r(i,k) - r(j,k)) * (r(i,k) - r(j,k));
+                }
+                rij = sqrt(rij);
+                a = spinFactor(i,j);
+                sum += 2*a*pow(rij,3)*beta/pow(1+beta*rij,3);
+            }
+        }
+    }
+    return sum;
+}
+
 double Beryllium::localEnergy(const mat &r, VMCSolver *solver)
 {
     //Grabbing all the necessary constants stored in the solver

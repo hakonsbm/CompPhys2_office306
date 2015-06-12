@@ -23,12 +23,12 @@ TEST(Hydrogenic) {
 
     VMCSolver *solver = new VMCSolver();
 
-//    cout << endl << "Running Hydrogen test" << endl << endl;
+    cout << endl << "Running Hydrogen test" << endl << endl;
 
-//    solver->setTrialFunction(new Hydrogen(solver));
-//    solver->runMonteCarloIntegration();
-//    CHECK_EQUAL(0., solver->getEnergyVar());
-//    CHECK_EQUAL(-1./2, solver->getEnergy());
+    solver->setTrialFunction(new Hydrogen(solver));
+    solver->runMonteCarloIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-1./2, solver->getEnergy());
 
 
     cout << endl << "Running Helium test" << endl << endl;
@@ -44,26 +44,26 @@ TEST(Hydrogenic) {
 
 
 
-//    cout << endl << "Running Beryllium test" << endl << endl;
-//    solver->setTrialFunction(new Beryllium(solver));
-//    solver->switchElectronInteraction(false);
-//    solver->trialFunction()->setAnalytical(true);
-//    solver->setAlpha(solver->getCharge());
-//    solver->setCycles(10000);
-//    solver->runMasterIntegration();
-//    CHECK_EQUAL(0., solver->getEnergyVar());
-//    CHECK_EQUAL(-20, solver->getEnergy());
+    cout << endl << "Running Beryllium test" << endl << endl;
+    solver->setTrialFunction(new Beryllium(solver));
+    solver->switchElectronInteraction(false);
+    solver->trialFunction()->setAnalytical(true);
+    solver->setAlpha(solver->getCharge());
+    solver->setCycles(10000);
+    solver->runMasterIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-20, solver->getEnergy());
 
 
-//    cout << endl << "Running Neon test" << endl << endl;
-//    solver->setTrialFunction(new Neon(solver));
-//    solver->switchElectronInteraction(false);
-//    solver->trialFunction()->setAnalytical(true);
-//    solver->setCycles(1000);
-//    solver->setAlpha(solver->getCharge());
-//    solver->runMasterIntegration();
-//    CHECK_EQUAL(0., solver->getEnergyVar());
-//    CHECK_EQUAL(-200., solver->getEnergy());
+    cout << endl << "Running Neon test" << endl << endl;
+    solver->setTrialFunction(new Neon(solver));
+    solver->switchElectronInteraction(false);
+    solver->trialFunction()->setAnalytical(true);
+    solver->setCycles(1000);
+    solver->setAlpha(solver->getCharge());
+    solver->runMasterIntegration();
+    CHECK_EQUAL(0., solver->getEnergyVar());
+    CHECK_EQUAL(-200., solver->getEnergy());
 
 
 }

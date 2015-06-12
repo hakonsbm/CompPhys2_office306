@@ -1,3 +1,4 @@
+
 #include "vmcsolver.h"
 #include "trialFunctions/trialfunction.h"
 #include "trialFunctions/heliumjastrowanalytical.h"
@@ -553,12 +554,59 @@ void runNewtonsMethod(VMCSolver *solver)
     outfile.open(outfilePath);
 
     //Assuming that alpha is known, or GTO trial functions beta is what we want to minimize E_L against. So we guess a value and goes from there
-    double beta = 0.20;
-    double stepsize = 0.1;
+    int steps = 0;
+    double lowerEnd = 0;
+    double lowerDerivative = 0;
+    double midPoint = 0.5;
+    double midDerivative = 0;
+    double higherEnd = 1;
+    double higherDerivative = 0;
 
-
+    solver->setBeta(lowerEnd);
     solver->runMasterIntegration();
+    lowerDerivative = solver->getEnergyDerivative();
+    solver->setBeta(higherEnd);
+    solver->runMasterIntegration();
+    higherDerivative = solver->getEnergyDerivative();
+    if(higherDerivative/abs(higherDerivative) == -lowerDerivative/abs(lowerDerivative)) {
+        solver->setBeta(midPoint);
+        while(((higherEnd-lowerEnd)*0.5 > 0.01) && (steps <= 100)) {
+            solver->runMasterIntegration();
+            midDerivative = solver->getEnergyDerivative();
+            if(midDerivative/abs(midDerivative) == lowerDerivative/abs(lowerDerivative)) {
+                lowerEnd = midPoint;
+                midPoint += (higherEnd-lowerEnd)*0.5;
+            }
+            else if(midDerivative/abs(midDerivative) == higherDerivative/abs(higherDerivative)) {
+                higherEnd = midPoint;
+                midPoint -= (higherEnd-lowerEnd)*0.5;
+            }
+            solver->setBeta(midPoint);
+            steps++;
+        }
+    }
+    else {
+        cout << "No roots can be guaranteed to be found in the interval between " << lowerEnd << " and " << higherEnd << endl;
+    }
 
+
+
+
+//    double beta = 1.11; //This is the initial seed
+//    double h= 0.001;
+//    double firstDerivative = 0;
+
+//    solver->setBeta(beta);
+//    while((abs(solver->getEnergyDerivative()) > 0.01) && (steps <= 100)) {
+//        solver->runMasterIntegration();
+//        firstDerivative = solver->getEnergyDerivative();
+//        solver->setBeta(beta+h);
+//        solver->runMasterIntegration();
+//        beta -= (firstDerivative*h)/(solver->getEnergyDerivative()-firstDerivative);
+//        solver->setBeta(beta);
+//        cout << "D=" << firstDerivative << endl;
+//        steps++;
+//   }
 
 
     if(solver->getRank() == 0)
@@ -575,9 +623,3 @@ int runTests(VMCSolver *solver)
 {
     return  UnitTest::RunAllTests();
 }
-
-
-
-
-
-

@@ -25,13 +25,13 @@ public:
 
     void calculateOptimalSteplength();
     void QuantumForce(const mat &r, mat &QForce);
-    void setTrialFunction(TrialFunction *trialFunction) { m_trialFunction = trialFunction; }
+    void setTrialFunction(TrialFunction *trialFunction) { m_trialFunction = trialFunction;}
     void setAlpha(double alpha) {m_alpha = alpha;}
     void setBeta(double beta) {m_beta = beta;}
     void setCharge(int C) {charge = C;}
     void setNParticles(int P) {nParticles = P;}
     void setStepLength(double inStepLength) {stepLength = inStepLength;}
-    void setCycles(double cycles) {nCycles = cycles; }
+    void setCycles(double cycles) {nCycles = cycles;}
 
     void initiateDerivatives(Derivatives *derivatives) {m_derivatives = derivatives; }
     Derivatives *derivatives(){return m_derivatives;}
@@ -58,6 +58,7 @@ public:
     void switchJastrow(bool onOff) {m_Jastrow = onOff;}
     bool getJastrow() {return m_Jastrow; }
     bool getRank() {return my_rank;}
+    double getEnergyDerivative() {return energyDerivative;}
 
 
 
@@ -114,6 +115,7 @@ private:
     // double timestep; // timestep for gaussian deviate (using steplength)
     double GreensFunction;
     double MHRatio;
+    double energyDerivative = 1;
 
 
     mat rOld;

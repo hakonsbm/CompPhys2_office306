@@ -17,6 +17,8 @@ public:
     Neon(VMCSolver *solver);
     virtual double waveFunction(const mat &r, VMCSolver*  solver);
     virtual double localEnergy(const mat &r, VMCSolver *solver );
+    virtual double lnDerivativeWaveFunction(const mat &r, VMCSolver *solver);
+    virtual double lnSecondDerivativeWaveFunction(const mat &r, VMCSolver *solver);
 
 private:
     double psi1s(double ri, double alpha); // Ansatz functions
