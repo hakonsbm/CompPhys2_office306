@@ -105,7 +105,7 @@ void VMCSolver::runMasterIntegration()
             outfile << setw(15) << setprecision(8) << m_beta;
             outfile << setw(15) << setprecision(8) << totalAverageR12;
             outfile << setw(15) << setprecision(8) << stepLength;
-            outfile << setw(15) << nCycles ;
+            outfile << setw(15) << setprecision(8) << nCycles*numprocs ;
             outfile << trialFunction()->getNucleusDistance() << endl;
         }
 
