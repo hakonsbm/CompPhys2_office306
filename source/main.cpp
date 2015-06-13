@@ -513,6 +513,7 @@ void runCompareAnalytical(VMCSolver *solver)
 
 
     solver->switchbBlockSampling(false);
+    solver->trialFunction()->setAnalytical(true);
 //    solver->setCycles(10000000);
 
     clock_t start, end;     //To keep track of the time
@@ -523,7 +524,8 @@ void runCompareAnalytical(VMCSolver *solver)
 
     timeRunAnalytic = 1.0*(end - start)/CLOCKS_PER_SEC;
 
-    solver->setTrialFunction(new HeliumJastrowNumerical(solver));
+    //solver->setTrialFunction(new HeliumJastrowNumerical(solver));
+    solver->trialFunction()->setAnalytical(false);
 
     solver->trialFunction();
 
@@ -569,6 +571,10 @@ void runCompareParallelize(VMCSolver * solver)
     solver->switchElectronInteraction(true);
     solver->trialFunction()->setAnalytical(true);
 //    solver->setAlpha(solver->getCharge());
+    string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
+    char const * outfilePath = (pathString + string("_compare_parallelize.txt")).c_str();
+    outfile.open(outfilePath);
+    outfile << "\t\t e \t\t\t tot. e_sq \t\t var \t\t\t alpha \t\t\t beta \t\t avg dist \t\t\t stepl. \t\t cycles \n";
 
 
 
@@ -587,7 +593,7 @@ void runCompareParallelize(VMCSolver * solver)
         cout << "Time used with "<< numprocs << " processes: " << end - start << endl;
     }
 
-
+    outfile.close();
     return;
 }
 

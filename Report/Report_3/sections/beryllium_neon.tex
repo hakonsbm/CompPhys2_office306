@@ -2,12 +2,12 @@
 
 	We attempt to solve the ground state energy for the Beryllium atom and Neon atom using a Variational Monte Carlo calculation with importance sampling. We have used the trial functions \eqref{eq:BerylliumTrialFunction} for Beryllium and \eqref{eq:NeonTrialFunction} for Neon which uses $\alpha$ and $\beta$ as variational parameters.
 
-	For Beryllium we have the Alpha and Beta values $\alpha=4.0$ and $\beta=0.31$. We use $10^{7}$ cycles and find the energy to be $-14.3902$, with a variance of $0.000908566$.
-	For Neon, with $10^{6}$ cycles, we get an energy of $-127.875$ with a variance of $0.0131537$.
+	For Beryllium we have the Alpha and Beta values $\alpha=4.0$ and $\beta=0.31$. We use $10^{7}$ cycles and find the energy to be $-14.3902$ au, with a variance of $9.08566 \times 10^{-4}$.
+	For Neon, with $10^{6}$ cycles, we get an energy of $-127.875$ au with a variance of $0.0131537$.
 
 	From reseach papers we find the value for energy in the ground state
-	of Beryllium to be $-14.667$ \parencite{Koput_2011_PCCP}  and the value
-	for energy in the ground state of Neon to be \(-128.928\) \parencite{Binkley_1975}.
+	of Beryllium to be $-14.667$ au \parencite{Koput_2011_PCCP}  and the value
+	for energy in the ground state of Neon to be \(-128.928\) au \parencite{Binkley_1975}.
 	In \cref{tab:EnergyAlphaBetaReference} we compare results
 	obtained with our Variational Monte Carlo method with results from
 	various research papers.
@@ -74,3 +74,19 @@
 
 		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs.
 
+
+		\begin{table}
+			\center %
+			\begin{tabular}{|c|c|c|c|c|c|c|c|}
+				\hline 
+				Atom  & $\beta$ & Cycles & VMC {[}au{]} & Variance & Ref. energy {[}au{]} & GTO [s] & STO [s] \tabularnewline
+				\hline 
+				Helium &  $0.34$ & - & - & - & $-2.9037$ & - & - \tabularnewline
+				\hline 
+				Beryllium  &  $0.31$ & - & - & - & $-14.667$ & - & - \tabularnewline
+				\hline 
+				Neon  & $0.091$ & - & - & - & $-128.928$ & - & - \tabularnewline
+				\hline 
+			\end{tabular}\protect\caption{ Comparison of energies found using bisection method with the refenrence energy \parencite{Koput_2011_PCCP} \parencite{Binkley_1975} and comparison of the time used running the computation with the given number of cycles using GTOs and STOs.}
+			\label{tab:AtomsGTO} 
+		\end{table}
