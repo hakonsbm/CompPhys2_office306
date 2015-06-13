@@ -97,6 +97,7 @@ int main(int nargs, char* args[])
 
     //Couldn't set this in the subclass of trialfunction, so putting it here for the time being
     if((string)args[1]=="HydrogenTwo") solver->trialFunction()->setNucleusDistance(1.4);
+    else if((string)args[1]=="BerylliumTwo") solver->trialFunction()->setNucleusDistance(4.63);
 
 
 
@@ -487,7 +488,7 @@ void runBlockingSampledRun(VMCSolver *solver)
     solver->switchElectronInteraction(true);
     solver->trialFunction()->simpleFlag = false;
 //    solver->setAlpha(solver->getCharge());
-    solver->trialFunction()->setAnalytical(false);
+    solver->trialFunction()->setAnalytical(true);
 
 
 
@@ -566,7 +567,7 @@ void runCompareParallelize(VMCSolver * solver)
 {
     //TestSettings
     solver->switchElectronInteraction(true);
-    solver->trialFunction()->setAnalytical(false);
+    solver->trialFunction()->setAnalytical(true);
 //    solver->setAlpha(solver->getCharge());
 
 
