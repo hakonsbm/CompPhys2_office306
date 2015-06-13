@@ -330,9 +330,9 @@ def plotVarVSnCycles(data, name):
 
 # name = "HeliumSimpleAnalytical"
 # name = "HeliumJastrowAnalytical"
-# name = "Beryllium"
+name = "Beryllium"
 # name = "Neon"
-name = "HydrogenTwo"
+# name = "HydrogenTwo"
 # name = "Helium"
 # name = "BerylliumTwo"
 
@@ -340,7 +340,7 @@ name = "HydrogenTwo"
 
 
 #	Picks the relevant data sample
-# data = np.genfromtxt("../outfiles/" + name + "_alpha_beta")
+data = np.genfromtxt("../outfiles/" + name + "_alpha_beta")
 # datatime = np.genfromtxt("../outfiles/" + name +"_timeStep")
 dataSample = np.genfromtxt("../outfiles/" + name +"_blockingSamples")
 # dataCycles = np.genfromtxt("../outfiles/" + name +"_nCycles")

@@ -208,11 +208,30 @@
 			\hat{H} &= \sum_{i = 1}^2 - \frac{\nabla^2_i}{2} - \frac{Z_1}{r_{ip1}} - \frac{Z_2}{r_{ip2}} + \sum_{i < j}\frac{1}{r_{ij}} + \frac{Z_1Z_2}{|\vb{R|}} \label{eq:hamiltonianMolecule}
 		\end{align}
 
-		Here \(Z_1\) and \(Z_2\) is given by the charge of the respective nuclei. If we base our guess for the trialfunction on the assumption that the wavefunction for an electron should be a linear combination of the two hydrogenic wavefunctions around each nuclei. Disregarding factors, since they disappear in the VMC computation, and assuming symmetry about the nuclei we end up with
+		Here \(Z_1\) and \(Z_2\) is given by the charge of the respective nuclei. If we base our guess for the trialfunction on the assumption that the wavefunction for an electron should be a linear combination of the two hydrogenic 1S wavefunctions around each nuclei. Disregarding factors, since they disappear in the VMC computation, assuming symmetry about the nuclei we end up with
 
 		\begin{align}
 			\Psi_T(\vb{r_1}, \vb{r_2} , \vb{R} ) &= \psi(\vb{r_1} , \vb{R})\psi(\vb{r_2} , \vb{R}) \exp{ \frac{r_{12}}{2(1+\beta r_{12})} } \label{eq:H2Trialfunction}
+			\intertext{Where the hydrogenic wavefunctions is given by}
+			\psi(\vb{r_i},\vb{R}) &= \left[ \exp{-\alpha r_{ip1}} \pm \exp{-\alpha r_{ip2}} \right] 
 		\end{align}
+
+		Here we should add together the \(1S\) wavefunctions, as subtracting corresponds to the electrons having the same spin. In a Hydrogen molecule the electrons will have differents spin if possible.
+
+	\subsubsection{Beryllium Molecule}
+		The Beryllium molecule consists of four electrons shared between two nuclei with a charge of \(Z = 4\), we will use the same method to calculate it as in Hydrogen molecule and it also shares the same Hamiltonian. As in the description of the Beryllium atom we will need to construct the trialfunction out of an Slater Determinant consisting of linear combinations of the hydrogenic wavefunctions \(\psi_{1s}\) and \(\psi_{2s}\),  and a correlation term.
+
+
+		\begin{align}
+		\Psi_T(\vb{r_i}, \vb{R}) &= |D| \prod_{i<j}^{4}\exp{\left(\frac{a r_{ij}}{(1+\beta r_{ij})}\right)} \\
+		\intertext{where the Slater determinant is construced by the following wavefunctions}
+		\psi_{1S1}(\vb{r_i}) &=  \left[ \exp{-\alpha r_{ip1}} + \exp{-\alpha r_{ip2}} \right] \\
+		\psi_{1S2}(\vb{r_i}) &=  \left[ \exp{-\alpha r_{ip1}} - \exp{-\alpha r_{ip2}} \right] \\
+		\psi_{2S1}(\vb{r_i}) &=	\left[\left(1-\alpha r_{i1p}/2\right)e^{-\alpha r_{i1p}/2} + \left(1-\alpha r_{i2p}/2\right)e^{-\alpha r_{i2p}/2}  \right] \\
+		\psi_{2S2}(\vb{r_i}) &=	\left[\left(1-\alpha r_{i1p}/2\right)e^{-\alpha r_{i1p}/2} - \left(1-\alpha r_{i2p}/2\right)e^{-\alpha r_{i2p}/2}  \right]
+		\end{align}
+
+		Here we need to use both subtracting and addition in the combinations in the construction of the wavefunctions as each Beryllium will have two electrons in each shell so there will need to be two of the same spin in each of the shells.
 
 	\subsection{Calculating the Slater determinant}
 		\label{sec:slaterdeterminant}
