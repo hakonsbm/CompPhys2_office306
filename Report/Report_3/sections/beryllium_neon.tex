@@ -43,7 +43,7 @@
 				Neon  & $10.22$ & $0.091$ & $10^{6}$ & $-127.875$ & $0.0131537$ & $-128.928$ \tabularnewline
 				\hline 
 			\end{tabular}\protect\caption{Comparison of energies resulting from our Variational Monte Carlo method with
-			energies found in research papers \parencite{Koput2011PCCP} \parencite{Binkley1975}. The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation over a mesh of different \(\alpha\) and \( \beta \) values. The run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
+			energies found in research papers \parencite{Koput_2011_PCCP} \parencite{Binkley_1975}. The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation over a mesh of different \(\alpha\) and \( \beta \) values. The run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
 			\label{tab:EnergyAlphaBetaReference} 
 		\end{table}
 
@@ -70,3 +70,19 @@
 
 		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \ref{tab:MPI_speedup} and figure \ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs.
 
+
+		\begin{table}
+			\center %
+			\begin{tabular}{|c|c|c|c|c|c|c|c|}
+				\hline 
+				Atom  & $\beta$ & Cycles & VMC {[}au{]} & Variance & Ref. energy {[}au{]} & GTO [s] & STO [s] \tabularnewline
+				\hline 
+				Helium &  $0.34$ & - & - & - & $-2.9037$ & - & - \tabularnewline
+				\hline 
+				Beryllium  &  $0.31$ & - & - & - & $-14.667$ & - & - \tabularnewline
+				\hline 
+				Neon  & $0.091$ & - & - & - & $-128.928$ & - & - \tabularnewline
+				\hline 
+			\end{tabular}\protect\caption{ Comparison of energies found using bisection method with the refenrence energy \parencite{Koput_2011_PCCP} \parencite{Binkley_1975} and comparison of the time used running the computation with the given number of cycles using GTOs and STOs.}
+			\label{tab:AtomsGTO} 
+		\end{table}

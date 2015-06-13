@@ -65,3 +65,7 @@
 
 
 		\subsubsection{Conjugate gradient with GTOs}
+
+		Using GTOs we can nearly reproduce the energies we get from using Slater Type Orbitals, although we are unable to reach quite the same energy. Using GTOs in stead of STOs is also considerably slower, as we see in \ref{tab:AtomsGTO}. This can be due to inefficient code, and there is also room for improvements by calculating analytical derivatives of the GTOs. However using GTOs reduces the variables to only $\beta$, thus we don't have to look for energy minima by varying $\alpha$. This means that it is possible to easily use a gradient method to more efficiently find the variable that gives minimum energy.
+
+		
