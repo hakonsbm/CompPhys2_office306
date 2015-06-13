@@ -1,16 +1,16 @@
 [0] Config.pm:318> INFO - This is Biber 1.8
 [0] Config.pm:321> INFO - Logfile is 'Project_3.blg'
-[80] biber:275> INFO - === fr. juni 12, 2015, 21:26:33
-[80] Biber.pm:333> INFO - Reading 'Project_3.bcf'
-[155] Biber.pm:630> INFO - Found 8 citekeys in bib section 0
-[174] Biber.pm:3053> INFO - Processing section 0
-[192] Biber.pm:3190> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
-[194] bibtex.pm:933> INFO - Decoding LaTeX character macros into UTF-8
-[198] bibtex.pm:808> INFO - Found BibTeX data source 'bibliography.bib'
-[220] Utils.pm:169> WARN - BibTeX subsystem: /tmp/u6syr9UevO/bibliography.bib_32403.utf8, line 2, warning: 11 characters of junk seen at toplevel
-[266] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'variable = shifted' with 'variable = non-ignorable'
-[266] Biber.pm:2945> INFO - Sorting 'entry' list 'nyt' keys
-[266] Biber.pm:2949> INFO - No sort tailoring available for locale 'en_US.UTF-8'
-[293] bbl.pm:482> INFO - Writing 'Project_3.bbl' with encoding 'UTF-8'
-[295] bbl.pm:555> INFO - Output to Project_3.bbl
-[295] Biber.pm:105> INFO - WARNINGS: 1
+[74] biber:275> INFO - === lÃ¸. juni 13, 2015, 16:49:18
+[75] Biber.pm:333> INFO - Reading 'Project_3.bcf'
+[124] Biber.pm:630> INFO - Found 9 citekeys in bib section 0
+[135] Biber.pm:3053> INFO - Processing section 0
+[145] Biber.pm:3190> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
+[146] bibtex.pm:933> INFO - Decoding LaTeX character macros into UTF-8
+[149] bibtex.pm:808> INFO - Found BibTeX data source 'bibliography.bib'
+[159] Utils.pm:169> WARN - BibTeX subsystem: /tmp/4lvYKepy2p/bibliography.bib_9797.utf8, line 2, warning: 11 characters of junk seen at toplevel
+[204] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'variable = shifted' with 'variable = non-ignorable'
+[204] Biber.pm:2945> INFO - Sorting 'entry' list 'nyt' keys
+[205] Biber.pm:2949> INFO - No sort tailoring available for locale 'en_US.UTF-8'
+[234] bbl.pm:482> INFO - Writing 'Project_3.bbl' with encoding 'UTF-8'
+[235] bbl.pm:555> INFO - Output to Project_3.bbl
+[236] Biber.pm:105> INFO - WARNINGS: 1

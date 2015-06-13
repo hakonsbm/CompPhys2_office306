@@ -178,7 +178,7 @@ def plotChargeDensity(data, name):
 	print counter
 	counter = 0
 	for i in range(0,positions.shape[0]):
-		if np.abs(positions[i,1]) < 0.5:
+		if np.abs(positions[i,1]) < 0.2:
 			# slice2D = np.vstack((slice2D,positions[i,:]))
 			slice2D[counter,:] = positions[i,:]
 			counter = counter + 1
@@ -330,9 +330,9 @@ def plotVarVSnCycles(data, name):
 
 # name = "HeliumSimpleAnalytical"
 # name = "HeliumJastrowAnalytical"
-name = "Beryllium"
+# name = "Beryllium"
 # name = "Neon"
-# name = "HydrogenTwo"
+name = "HydrogenTwo"
 # name = "Helium"
 # name = "BerylliumTwo"
 
@@ -340,7 +340,7 @@ name = "Beryllium"
 
 
 #	Picks the relevant data sample
-data = np.genfromtxt("../outfiles/" + name + "_alpha_beta")
+# data = np.genfromtxt("../outfiles/" + name + "_alpha_beta")
 # datatime = np.genfromtxt("../outfiles/" + name +"_timeStep")
 dataSample = np.genfromtxt("../outfiles/" + name +"_blockingSamples")
 # dataCycles = np.genfromtxt("../outfiles/" + name +"_nCycles")

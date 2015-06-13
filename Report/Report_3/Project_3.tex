@@ -29,6 +29,8 @@
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{subcaption}
 
+
+
 %% references
 \usepackage[style=authoryear,
             bibstyle=authoryear,
@@ -101,7 +103,6 @@
 
 \begin{document}
 
-
 \maketitle
 \abstract{In this work, a simple Variational Monte Carlo (VMC) method has been used to calculate the values of the energies of the ground states of two atoms: Beryllium and Neon. The program uses importance sampling to improve efficiency and make the results more precise. To further improve the efficiency, MPI has been implemented as well. We provide a statistical analysis by the means of blocking so as to not understimate the error of our results. The one-body and charge densities were obtained to compare the effects of the Jastrow factor and provide insight into the electronic structure of the atoms.}
 
@@ -129,7 +130,9 @@ Instead of evaluating a very complex multidimensional integral to compute the ex
 	
 	\input{sections/helium_atom}
 
-	\input{sections/beryllium_neon}	
+	\input{sections/beryllium_neon}
+
+	\input{sections/molecules}
 
 	\input{sections/density_plots}
 
