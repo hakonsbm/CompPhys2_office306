@@ -85,7 +85,7 @@
 					\( \frac{\alpha^{2} x_{i}}{4 r_{i}} \left(\alpha r_{i} - 8\right) e^{- \frac{\alpha r_{i}}{2}} \)
 				\\ \toprule
 				\end{tabular}
-				\caption{The different hydrogenic wavefunctions along with the gradients and laplacians. The derivatives is computed in the program derivatives.py}
+				\caption{The different hydrogenic wavefunctions along with the gradients and laplacians. The derivatives is computed in the program derivatives.py \citet{git_page}}
 				\label{tab:hydrogenicWavefunctions}
 			\end{center}
 		\end{table}
@@ -132,11 +132,11 @@
 
 	\subsubsection{Beryllium atom}
 
-		It is fairly simple to extend the calculational machinery of Variational
+		It is fairly simple to extend the machinery of Variational
 		Monte Carlo to other systems than the Helium atom. To show this we
 		want to perform calculations on the beryllium atom. As beryllium has
-		four electrons compared to the 2 of helium, we need to calculate a
-		Slater determinant. Sticking to hydrogen-like wave functions,
+		four electrons compared to the 2 of helium, we need to construct a
+		Slater determinant from the hydrogenic wavefunctions. Sticking to hydrogen-like wave functions,
 		we can write the trial wave function for beryllium as
 		\begin{equation}
 			\psi_{T}({\bf r_{1}},{\bf r_{2}},{\bf r_{3}},{\bf r_{4}})=Det\left(\phi_{1}({\bf r_{1}}),\phi_{2}({\bf r_{2}}),\phi_{3}({\bf r_{3}}),\phi_{4}({\bf r_{4}})\right)\prod_{i<j}^{4}\exp{\left(\frac{a r_{ij}}{(1+\beta r_{ij})}\right)},
@@ -195,6 +195,7 @@
 
 
 	\subsubsection{Hydrogen molecule}
+		\label{sec:H2}
 		The VMC machinery can also handle simple molecules with some modifications considering that we now have two nuclei. So we need a slightly different Hamiltonian, where we we need include a few more terms in the potential energy of the system. If we let \(\vb{R}\) be the vector between the nuclei we can write the positions, \(\vb{r_{ip1}}\), of electron \(i\) in relation to nucleus \(1\).
 
 		\begin{align}
@@ -209,7 +210,7 @@
 			\hat{H} &= \sum_{i = 1}^2 - \frac{\nabla^2_i}{2} - \frac{Z_1}{r_{ip1}} - \frac{Z_2}{r_{ip2}} + \sum_{i < j}\frac{1}{r_{ij}} + \frac{Z_1Z_2}{|\vb{R|}} \label{eq:hamiltonianMolecule}
 		\end{align}
 
-		Here \(Z_1\) and \(Z_2\) is given by the charge of the respective nuclei. If we base our guess for the trialfunction on the assumption that the wavefunction for an electron should be a linear combination of the two hydrogenic 1S wavefunctions around each nuclei. Disregarding factors, since they disappear in the VMC computation, assuming symmetry about the nuclei we end up with
+		Here \(Z_1\) and \(Z_2\) is given by the charge of the respective nuclei. Assuming that the trialfunction for the Hydrogen molecule is similar to two hydrogen atoms we can base our guess of the trialfunction on a linear combination of the two hydrogenic 1S wavefunctions around each nuclei. Disregarding factors, since they disappear in the VMC computation and assuming symmetry about the nuclei we end up with
 
 		\begin{align}
 			\Psi_T(\vb{r_1}, \vb{r_2} , \vb{R} ) &= \psi(\vb{r_1} , \vb{R})\psi(\vb{r_2} , \vb{R}) \exp{ \frac{r_{12}}{2(1+\beta r_{12})} } \label{eq:H2Trialfunction}

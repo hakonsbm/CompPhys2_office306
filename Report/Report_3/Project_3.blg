@@ -1,14 +1,14 @@
 [0] Config.pm:318> INFO - This is Biber 1.8
 [0] Config.pm:321> INFO - Logfile is 'Project_3.blg'
-[81] biber:275> INFO - === sÃ¸. juni 14, 2015, 16:22:05
-[81] Biber.pm:333> INFO - Reading 'Project_3.bcf'
-[156] Biber.pm:630> INFO - Found 9 citekeys in bib section 0
-[209] Biber.pm:3053> INFO - Processing section 0
-[262] Biber.pm:3190> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
-[264] bibtex.pm:933> INFO - Decoding LaTeX character macros into UTF-8
-[267] bibtex.pm:808> INFO - Found BibTeX data source 'bibliography.bib'
-[339] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'variable = shifted' with 'variable = non-ignorable'
-[339] Biber.pm:2945> INFO - Sorting 'entry' list 'nyt' keys
-[339] Biber.pm:2949> INFO - No sort tailoring available for locale 'en_US.UTF-8'
-[369] bbl.pm:482> INFO - Writing 'Project_3.bbl' with encoding 'UTF-8'
-[370] bbl.pm:555> INFO - Output to Project_3.bbl
+[68] biber:275> INFO - === sÃ¸. juni 14, 2015, 20:58:28
+[69] Biber.pm:333> INFO - Reading 'Project_3.bcf'
+[137] Biber.pm:630> INFO - Found 10 citekeys in bib section 0
+[154] Biber.pm:3053> INFO - Processing section 0
+[168] Biber.pm:3190> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
+[170] bibtex.pm:933> INFO - Decoding LaTeX character macros into UTF-8
+[174] bibtex.pm:808> INFO - Found BibTeX data source 'bibliography.bib'
+[214] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'variable = shifted' with 'variable = non-ignorable'
+[214] Biber.pm:2945> INFO - Sorting 'entry' list 'nyt' keys
+[214] Biber.pm:2949> INFO - No sort tailoring available for locale 'en_US.UTF-8'
+[231] bbl.pm:482> INFO - Writing 'Project_3.bbl' with encoding 'UTF-8'
+[232] bbl.pm:555> INFO - Output to Project_3.bbl

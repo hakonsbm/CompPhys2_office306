@@ -79,6 +79,25 @@
       \field{note}{Accessed: 2015-05-13}
       \field{title}{EMSL Basis Set Exchange}
     \endentry
+    \entry{git_page}{misc}{}
+      \name{labelname}{2}{}{%
+        {{uniquename=0,hash=cd7e420916c97d3cbf659bafcf6af983}{G.\bibnamedelimi V.\bibnamedelimi Killie}{G\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim K\bibinitperiod}{H.\bibnamedelimi S.\bibnamedelimi B\bibnamedelima Mørk}{H\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0fe4e3995ae6de132fd7eccc9d1b6e7f}{Navarro}{N\bibinitperiod}{J.\bibnamedelimi E.\bibnamedelimi R.}{J\bibinitperiod\bibinitdelim E\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=cd7e420916c97d3cbf659bafcf6af983}{G.\bibnamedelimi V.\bibnamedelimi Killie}{G\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim K\bibinitperiod}{H.\bibnamedelimi S.\bibnamedelimi B\bibnamedelima Mørk}{H\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0fe4e3995ae6de132fd7eccc9d1b6e7f}{Navarro}{N\bibinitperiod}{J.\bibnamedelimi E.\bibnamedelimi R.}{J\bibinitperiod\bibinitdelim E\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{45598e2df48e1c8acce97e88ff183de5}
+      \strng{fullhash}{45598e2df48e1c8acce97e88ff183de5}
+      \field{sortinit}{G}
+      \field{labelyear}{nodate}
+      \field{labeltitle}{"Git address for the code"}
+      \field{title}{"Git address for the code"}
+      \verb{url}
+      \verb https://github.com/hakonsbm/CompPhys2_office306
+      \endverb
+    \endentry
     \entry{griffiths2005introduction}{book}{}
       \name{labelname}{1}{}{%
         {{uniquename=0,hash=3f7a9e85c3ff6da61d1cfc99fb826cc2}{Griffiths}{G\bibinitperiod}{David\bibnamedelima J}{D\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%

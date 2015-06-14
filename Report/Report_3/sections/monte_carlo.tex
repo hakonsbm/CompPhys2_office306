@@ -21,7 +21,7 @@
 			E[\hat{H}] &= \int{d\vb{R} P(\vb{R}) E_L(\vb{R}) }
 		\end{align}
 
-		This probability function with \(P(\vb{R})\) as the pdf, and we can use monte carlo integration to solve the integral.
+		This probability function with \(P(\vb{R})\) as the pdf, and we can use Monte Carlo integration to solve the integral. The algorithm for a Monte Carlo integration is given below.
 
 		\begin{enumerate}
 			\item Initialise system. Give particles a random position and decide how many Monte Carlo Cycles to run.
@@ -32,3 +32,5 @@
 					\item Calculate energy for this cycle.
 				\end{enumerate}
 		\end{enumerate}
+
+		See the git reposity in the reference list for a implementation of the Monte Carlo algorithm.
