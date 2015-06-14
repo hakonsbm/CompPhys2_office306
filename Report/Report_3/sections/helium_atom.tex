@@ -26,7 +26,7 @@
 				Helium & $1.843$ & $0.34$ & $10^{8}$ & $-2.89024$ & $3.77402\times10^{-5}$ & $-2.9037$\tabularnewline
 				\hline 
 			\end{tabular}
-			\caption{Comparison of the energy for Helium found with VMC without using Importance Sampling, and the reference energy found in research papers \parencite{Binkley_1975}}
+			\caption{Comparison of the energy for Helium found with VMC without using Importance Sampling, and the reference energy found in research papers \parencite{Binkley_1975}.}
 			\label{tab:Helium_no_IS}
 		\end{table}
 		
@@ -42,13 +42,13 @@
 
 		\subsubsection{Alpha and Beta Values}
 
-			Table \ref{tab:EnergyAlphaBetaReference} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. The variance was more smooth as a function of the parameters, see fig \ref{fig:HeliumAlphaBeta} and should have been used.
+			Table \ref{tab:EnergyAlphaBetaReference} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. The variance was more smooth as a function of the parameters, see fig \ref{fig:HeliumAlphaBeta} and it is therefore easier to determine the best values for the variables from variance as a function of \(\alpha\) and \(\beta\).
 
 
 
 
 		\subsubsection{Computational speed gain by using an analytical local energy}
-			By using an analytical expression for the local energy instead of using a numerical derivation in the calculation a speed up of approximately factor \(4\) was achieved, see table \ref{tab:analyticVSNumeric}.
+			By using an analytical expression for the local energy instead of using a numerical derivation in the calculation the program becomes more efficient. For Helium we get a speedup of nearly 48\%, while for Beryllium we get a speedup of approximately 80\% was achieved, see table \ref{tab:analyticVSNumeric}.
 
 			\begin{table}
 				\center
