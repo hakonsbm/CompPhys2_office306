@@ -1978,8 +1978,12 @@
     <bcf:citekey order="12">Koput_2011_PCCP</bcf:citekey>
     <bcf:citekey order="13">Binkley_1975</bcf:citekey>
     <bcf:citekey order="14">Ihle_Ledum</bcf:citekey>
-    <bcf:citekey order="15">Ihle_Ledum</bcf:citekey>
-    <bcf:citekey order="16">griffiths2005introduction</bcf:citekey>
+    <bcf:citekey order="15">Koput_2011_PCCP</bcf:citekey>
+    <bcf:citekey order="16">Binkley_1975</bcf:citekey>
+    <bcf:citekey order="17">Koput_2011_PCCP</bcf:citekey>
+    <bcf:citekey order="18">Binkley_1975</bcf:citekey>
+    <bcf:citekey order="19">Ihle_Ledum</bcf:citekey>
+    <bcf:citekey order="20">griffiths2005introduction</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nyt">
   <bcf:sorting>

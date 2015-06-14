@@ -74,8 +74,8 @@ TEST(Hydrogenic) {
 
 TEST(Gradients)
 {
-    exit(0);
-//    ////////////////////////7
+    //Not working fo the time being...
+    //    ////////////////////////7
 //    /// C3
 //    /// ///////////////////////
 
@@ -398,9 +398,8 @@ TEST(GRADIENT_CORR_RATIO_HELIUM)
 
         r12 = norm(r.row(0) - r.row(1));
         correct= ((r.row(0) - r.row(1)).t())  / (r12 * pow(1+(beta*r12), 2)) ;
-        cout << "Got here" << endl;
         calculated = (solver->derivatives()->analyticalCorrelationGradient(r,solver)).row(0).t()*2 ;
-        cout << "And failed before here" << endl;
+
     if(solver->getRank()==0)
     {
         CHECK_CLOSE( correct(0) , calculated(0), 0.001  );

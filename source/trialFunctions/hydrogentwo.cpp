@@ -63,10 +63,10 @@ double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)
         rip2 = r(i,0)*r(i,0) + r(i,1)*r(i,1) + (r(i,2) - RHalf)*(r(i,2) - RHalf);
         rip2 = sqrt(rip2);
 
-        singleParticleWavefunction *= (exp(-alpha * rip1) + exp(-alpha * rip2) );
+        singleParticleWavefunction *= (exp(-alpha * rip1) - exp(-alpha * rip2) );
 
         //Pretty sure it is supposed to be divided by two as well, if we want to reproduce the same numbers as Helium when R = 0;
-        singleParticleWavefunction /= 2.;
+//        singleParticleWavefunction /= 2.;
     }
 
 
@@ -90,8 +90,8 @@ double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 //    cout << SD << endl;
 
-    return SD*product;
-//    return singleParticleWavefunction*product;
+//    return SD*product;
+    return singleParticleWavefunction*product;
 }
 
 double HydrogenTwo::localEnergy(const mat &r, VMCSolver *solver)

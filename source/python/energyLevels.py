@@ -138,15 +138,19 @@ def plotChargeDensity(data, name):
 
 	norm = np.ndarray(shape=(0), dtype=float, order='F')
 	positions = np.ndarray(shape=(datapoints*nElectrons, 3), dtype = float)
+	electrons = np.ndarray(shape = (datapoints, 3*nElectrons) , dtype = float)
+
 
 	print name
 	print data.shape
 	print positions.shape
+	print electrons.shape
 
 	ylimit = (0, 3)
 	xlimit = (0, 4)
 
-	nElectrons = 5
+
+	
 	#This sorts out the coordinates of th eelectrons and stores them as r values
 	for i in range(0 , nElectrons):
 		lower = 4 + 3*i
@@ -161,6 +165,7 @@ def plotChargeDensity(data, name):
 		# normTemp = sorted(normTemp)
 
 	print positions.shape
+
 
 
 	print "This was not the problem"
@@ -212,16 +217,162 @@ def plotChargeDensity(data, name):
 	fig.savefig("../../Report/figures/ChargeDensity" + name)
 
 
-		#Creating a better slicething
+	# 	#Creating a better slicething
+	# for i in range (0,nElectrons):
 	fig = pl.figure()
 	pl.hist2d(slice2D[:,0], slice2D[:,2], bins=100, norm=LogNorm())
-	pl.title("Charge Density of " + name)
+	pl.title("Charge density " + name)
 	pl.xlabel("x axis [a.u.]")
 	pl.ylabel("z axis [a.u.]")
 	pl.xlim([-6,6])
 	pl.ylim([-6,6])
 	pl.colorbar()
-	fig.savefig("../../Report/figures/OneBodyDensity" + name)
+	fig.savefig("../../Report/figures/ChargeDensity3D" + name)
+
+
+	if(name == "BerylliumTwo"):
+		#Plotting each electron by itself
+		# Three subplots sharing both x/y axes
+		fig, ((ax1, ax2), (ax3 , ax4), (ax5, ax6), (ax7, ax8)) = pl.subplots(4,2, sharex='col', sharey='row')
+		# fig, ((ax1, ax2), (ax3, ax4)) = pl.subplots(2,2)#, sharex=True, sharey=True)
+		pl.xlim([-6,6])
+		pl.ylim([-6,6])
+		pl.xlabel("x axis [a.u.]")
+		pl.ylabel("z axis [a.u.]")
+
+		k = 0
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax1.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+		k = 1
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax2.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+		k = 2
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax3.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+		k = 3
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax4.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+		k = 4
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax5.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+		k = 5
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax6.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+		k = 6
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax7.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+		k = 7
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax8.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+
+
+
+		ax1.set_title("                              One Body Density electron " + name)
+		fig.subplots_adjust(hspace=0)
+
+		fig.savefig("../../Report/figures/OneBodyDensityElectrons" + name)
+
+	if(name == "HydrogenTwo"):
+		#Plotting each electron by itself
+		# Three subplots sharing both x/y axes
+		fig, (ax1, ax2) = pl.subplots(2,1, sharex='col', sharey='row')
+		# fig, ((ax1, ax2), (ax3, ax4)) = pl.subplots(2,2)#, sharex=True, sharey=True)
+		
+
+		k = 0
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax1.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+		ax1.set_xlim([-3,3])
+		ax1.set_ylim([-3,3])
+
+		k = 1
+		lower = 4 + 3*k
+		upper = 7 + 3*k
+		r = data[: , lower : upper ]
+
+		ax2.hist2d(r[:,0], r[:,2], bins=100, norm=LogNorm())
+
+		pl.xlim([-3,3])
+		pl.ylim([-3,3])
+		pl.xlabel("x axis [a.u.]")
+		pl.ylabel("z axis [a.u.]")
+
+
+		ax1.set_title("One Body Density electron " + name)
+		fig.subplots_adjust(hspace=0)
+
+		fig.savefig("../../Report/figures/OneBodyDensityElectrons" + name)
+
+
+	# ax1.colorbar()
+
+	# pl.setp([a.get_xticklabels() for a in fig.axes[:-1]], visible=False)
+
+
+		# pl.xlim([-6,6])
+		# pl.ylim([-6,6])
+
+
+	
+	# ax1.plot(x, y)
+	# ax1.set_title('Sharing both axes')
+	# ax2.scatter(x, y)
+	# ax3.scatter(x, 2 * y ** 2 - 1, color='r')
+	# # Fine-tune figure; make subplots close to each other and hide x ticks for
+	# # all but bottom plot.
+	# f.subplots_adjust(hspace=0)
+	# plt.setp([a.get_xticklabels() for a in f.axes[:-1]], visible=False)
+
+	# counter = 0
+	# for i in range(k*datapoints,(k+1)*datapoints):
+	# 	if np.abs(positions[i,1]) < 0.5:
+	# 		counter = counter + 1
+
+
+
+	# slice2D = np.ndarray(shape=(counter, 3), dtype = float)
+	# counter = 0
+	# # for i in range(k*data.shape[0],(k+1)*data.shape[0]):
+	# # 	if np.abs(positions[i,1]) < 0.2:
+	# # 		# slice2D = np.vstack((slice2D,positions[i,:]))
+	# # 		slice2D[counter,:] = positions[i,:]
+	# # 		counter = counter + 1
+	
 
 	pl.show()
 
@@ -324,7 +475,7 @@ def plotVarVSnCycles(data, name):
 
 
 
-
+pl.close('all')
 
 #Decide what we want to plot this time
 
@@ -332,9 +483,9 @@ def plotVarVSnCycles(data, name):
 # name = "HeliumJastrowAnalytical"
 # name = "Beryllium"
 # name = "Neon"
-# name = "HydrogenTwo"
+name = "HydrogenTwo"
 # name = "Helium"
-name = "BerylliumTwo"
+# name = "BerylliumTwo"
 
 
 

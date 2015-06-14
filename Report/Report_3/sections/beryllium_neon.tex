@@ -42,12 +42,14 @@
 				\hline 
 				Neon  & $10.22$ & $0.091$ & $10^{6}$ & $-127.875$ & $0.0131537$ & $-128.928$ \tabularnewline
 				\hline 
-				H$_2$ & $1.289$* & $0.401$* & $10^7$ & $-1.15828$	& $0.000225$  & $-1.17540$ \tabularnewline
+				H$_2$ & $1.289$* & $0.401$ & $10^7$ & $-1.15828$	& $0.000225$  & $-1.17540$ \tabularnewline
+				\hline 
+				H$_2$*  & $1.289$ & $0.401$* & $10^7$ & $0.320$	& $0.001105$  & $-$ \tabularnewline
 				\hline
-				Be$_{2}$ & $3.725$* & $0.246$* & $10^6$ & $ -31.349 $	& $ 0.00756 $  & $-29.339$ \tabularnewline
+				Be$_{2}$ & $3.725$* & $0.246$ & $10^6$ & $ -31.349 $	& $ 0.00756 $  & $-29.339$ \tabularnewline
 				\hline
 			\end{tabular}\protect\caption{Comparison of energies resulting from our Variational Monte Carlo method with
-			energies found in research papers \parencite{Koput_2011_PCCP} \parencite{Binkley_1975}. The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values. The run with the lowest energy gave the \(\alpha\) and \(\beta\) values. For H$_2$ and Be$_2$ we used $\alpha$, $\beta$ values, along withe the benchmark value, from \citet{Ihle_Ledum} and used a nuclei distance of \( 1.40 \) a.u. and \( 4.63\) a.u. respectively. The binding enery found for Be\(_2\) is too low which is caused by a bug in the implementation of the molecule.}
+			energies found in research papers \parencite{Koput_2011_PCCP} \parencite{Binkley_1975}. The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values. The run with the lowest energy gave the \(\alpha\) and \(\beta\) values. For H$_2$ and Be$_2$ we used $\alpha$, $\beta$ values, along withe the benchmark value, from \citet{Ihle_Ledum} and used a nuclei distance of \( 1.40 \) a.u. and \( 4.63\) a.u. respectively. The binding enery found for Be\(_2\) is too low which is caused by a bug in the implementation of the molecule. H$_2$* is the Hydrogen molecule where the \(1\)S wavefunctions was subtracted instead of added together.}
 			\label{tab:EnergyAlphaBetaReference} 
 		\end{table}
 
