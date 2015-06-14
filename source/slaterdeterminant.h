@@ -26,6 +26,9 @@ public:
     mat gradientSlaterDeterminant(const mat &r , VMCSolver *solver);
     double laplacianSlaterDeterminant(const mat &r , VMCSolver *solver);
 
+    //For the molecule we need a different wavefunctions
+    double phiMolecule(const mat &r, double alpha, int i, int j, VMCSolver *solver);
+
     void setGTO(bool usingGTO) {useGTO = usingGTO;}
 
     mat detUpOld;

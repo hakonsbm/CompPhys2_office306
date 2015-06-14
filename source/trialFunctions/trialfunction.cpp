@@ -10,7 +10,9 @@ using namespace arma;
 
 TrialFunction::TrialFunction()
 {
-    m_nucleusDistance = 0;
+//    m_nucleusDistance = 1.4;
+    m_nucleusDistance = 4.63;
+
     m_conjugateMethod = false ;
 }
 

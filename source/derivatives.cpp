@@ -53,7 +53,6 @@ double Derivatives::numericalDoubleDerivative(const mat &r, VMCSolver *solver)
 //    cout << "Doing a numerical derivation" << endl;
     double nParticles = solver->getNParticles();
     double nDimensions = solver->getNDimensions();
-    double charge = solver->getCharge();
     double h = solver->getH();
     double h2 = solver->getH2();
 
@@ -151,6 +150,7 @@ void Derivatives::analyticalLaplacianRatio(double &laplacianRatio, const mat &r,
 
 vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
+
     double alpha = solver->getAlpha();
     double r_i = norm(r.row(particleTag));
     vec derivative = zeros (solver->getNDimensions());
@@ -163,6 +163,7 @@ vec Derivatives::analyticalPsi1SDerivative(int particleTag, const mat &r, VMCSol
 
 double Derivatives::analyticalPsi1SDoubleDerivative(int particleTag, const mat &r, VMCSolver *solver)
 {
+
     double alpha = solver->getAlpha();
     double ri = norm(r.row(particleTag));
 

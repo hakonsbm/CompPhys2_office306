@@ -91,22 +91,32 @@ double SlaterDeterminant::laplacianPhi(const mat &r, int i, int j, VMCSolver *so
 
 void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
 {
+
     int i;
     int nHalf= solver->getNParticles()/2;
     double alpha = solver->getAlpha();
     double GTO_element;
+
     string TF = solver->getTF();
+
+
     detUpOld = zeros<mat>(nHalf, nHalf);
     detDownOld = zeros<mat>(nHalf, nHalf);
+
     TF.erase(2);
+
     GTO gto;
+
 
     for (int k = 0; k <  nHalf; ++k)
     {
         for (i = 0; i < nHalf; ++i)
         {
+
+
             if (useGTO)
             {
+
                 // for detUp
 
                 GTO_element = gto.GTO_phi(TF, r, i, k);
@@ -130,17 +140,29 @@ void SlaterDeterminant::updateSlaterMatrices(const mat &r, VMCSolver *solver)
                     cout << detDownOld(i,k) << " " << GTO_element << endl;
                 }
                 //exit(1);
-                */
 
+                */
 
             }
             else
             {
-                // for detUp
-                detUpOld(i,k) =  phi(r, alpha, i, k, solver);
+                if(!solver->trialFunction()->m_molecule)
+                {
+                    // for detUp
+                    detUpOld(i,k) =  phi(r, alpha, i, k, solver);
 
-                // for detDownOld
-                detDownOld(i,k) =  phi(r, alpha, i + nHalf, k, solver);
+                    // for detDownOld
+                    detDownOld(i,k) =  phi(r, alpha, i + nHalf, k, solver);
+                }
+                else
+                {
+                    // for detUp
+                    detUpOld(i,k) =  phiMolecule(r, alpha, i, k, solver);
+
+                    // for detDownOld
+                    detDownOld(i,k) =  phiMolecule(r, alpha, i + nHalf, k, solver);
+                }
+
             }
         }
     }
@@ -248,5 +270,44 @@ double SlaterDeterminant::laplacianSlaterDeterminant(const mat &r, VMCSolver *so
     }
 
     return derivative;
+
+}
+
+double SlaterDeterminant::phiMolecule(const mat &r, double alpha, int i, int j, VMCSolver *solver)
+{
+
+
+    // returns an ansatz based on matrix row, M, in the SD
+    double RHalf = solver->trialFunction()->getNucleusDistance()/2.;
+
+    double riP1 = 0;
+    double riP2 = 0;
+
+
+    //Calculates the distance from electron i to the two nuclei
+    riP1 = r(i,0)*r(i,0) + r(i,1)*r(i,1) + (r(i,2) + RHalf)*(r(i,2) + RHalf);
+    riP1 = sqrt(riP1);
+    riP2 = r(i,0)*r(i,0) + r(i,1)*r(i,1) + (r(i,2) - RHalf)*(r(i,2) - RHalf);
+    riP2 = sqrt(riP2);
+
+
+    if (j == 0)
+    {
+        return exp(-alpha*riP1) + exp(-alpha*riP2); // 1s
+    }
+    else if (j == 1)
+    {
+        return exp(-alpha*riP1) - exp(-alpha*riP2); // 1s
+
+    }
+    else if (j == 2)
+    {
+        return (1-alpha*riP1/2.0)*exp(-alpha*riP1/2.0) + (1-alpha*riP2/2.0)*exp(-alpha*riP2/2.0); // 2s
+    }
+    else if (j == 3)
+    {
+        return (1-alpha*riP1/2.0)*exp(-alpha*riP1/2.0) - (1-alpha*riP2/2.0)*exp(-alpha*riP2/2.0); // 2s
+
+    }
 
 }

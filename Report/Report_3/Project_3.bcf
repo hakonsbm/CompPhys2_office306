@@ -1966,17 +1966,24 @@
   <bcf:section number="0">
     <bcf:citekey order="1">Introduction_Quantum_Pauling</bcf:citekey>
     <bcf:citekey order="2">Introduction_Quantum_Pauling</bcf:citekey>
-    <bcf:citekey order="3">Binkley_1975</bcf:citekey>
-    <bcf:citekey order="4">Koput_2011_PCCP</bcf:citekey>
-    <bcf:citekey order="5">Binkley_1975</bcf:citekey>
-    <bcf:citekey order="6">Koput_2011_PCCP</bcf:citekey>
+    <bcf:citekey order="3">mortens_notes</bcf:citekey>
+    <bcf:citekey order="4">Boys_1950</bcf:citekey>
+    <bcf:citekey order="5">Binkley_1980</bcf:citekey>
+    <bcf:citekey order="6">EMSL</bcf:citekey>
     <bcf:citekey order="7">Koput_2011_PCCP</bcf:citekey>
     <bcf:citekey order="8">Binkley_1975</bcf:citekey>
     <bcf:citekey order="9">Koput_2011_PCCP</bcf:citekey>
     <bcf:citekey order="10">Binkley_1975</bcf:citekey>
-    <bcf:citekey order="11">Koput_2011_PCCP</bcf:citekey>
-    <bcf:citekey order="12">Binkley_1975</bcf:citekey>
-    <bcf:citekey order="13">griffiths2005introduction</bcf:citekey>
+    <bcf:citekey order="11">Ihle_Ledum</bcf:citekey>
+    <bcf:citekey order="12">Koput_2011_PCCP</bcf:citekey>
+    <bcf:citekey order="13">Binkley_1975</bcf:citekey>
+    <bcf:citekey order="14">Ihle_Ledum</bcf:citekey>
+    <bcf:citekey order="15">Koput_2011_PCCP</bcf:citekey>
+    <bcf:citekey order="16">Binkley_1975</bcf:citekey>
+    <bcf:citekey order="17">Koput_2011_PCCP</bcf:citekey>
+    <bcf:citekey order="18">Binkley_1975</bcf:citekey>
+    <bcf:citekey order="19">Ihle_Ledum</bcf:citekey>
+    <bcf:citekey order="20">griffiths2005introduction</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nyt">
   <bcf:sorting>

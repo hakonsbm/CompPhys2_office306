@@ -98,6 +98,42 @@
       \field{title}{Introduction to Quantum Mechanics}
       \field{year}{2005}
     \endentry
+    \entry{mortens_notes}{book}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=f1f1ee5e424a0bb746b54acd9e6851cf}{Hjorth-Jensen}{H\bibinithyphendelim J\bibinitperiod}{Morten}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=f1f1ee5e424a0bb746b54acd9e6851cf}{Hjorth-Jensen}{H\bibinithyphendelim J\bibinitperiod}{Morten}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{f1f1ee5e424a0bb746b54acd9e6851cf}
+      \strng{fullhash}{f1f1ee5e424a0bb746b54acd9e6851cf}
+      \field{sortinit}{H}
+      \field{labelyear}{2013}
+      \field{labelmonth}{10}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Computational Physics: Lecture notes}
+      \field{month}{10}
+      \field{title}{Computational Physics: Lecture notes}
+      \field{year}{2013}
+    \endentry
+    \entry{Ihle_Ledum}{article}{}
+      \name{labelname}{2}{}{%
+        {{uniquename=0,hash=8827037148d5620bf80ba548d611a56a}{Ihle}{I\bibinitperiod}{H.\bibnamedelimi T.}{H\bibinitperiod\bibinitdelim T\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5a0f4f8fcba262b8052efd72d0911d6f}{Ledum}{L\bibinitperiod}{L}{L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=8827037148d5620bf80ba548d611a56a}{Ihle}{I\bibinitperiod}{H.\bibnamedelimi T.}{H\bibinitperiod\bibinitdelim T\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5a0f4f8fcba262b8052efd72d0911d6f}{Ledum}{L\bibinitperiod}{L}{L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{766aa00fc63af2cc36f38e816cf5e0d9}
+      \strng{fullhash}{766aa00fc63af2cc36f38e816cf5e0d9}
+      \field{sortinit}{I}
+      \field{labelyear}{2013}
+      \field{datelabelsource}{}
+      \field{labeltitle}{VMC-calculations of atoms and simple molecules.}
+      \field{title}{VMC-calculations of atoms and simple molecules.}
+      \field{year}{2013}
+    \endentry
     \entry{Introduction_Quantum_Pauling}{book}{}
       \field{sortinit}{I}
       \field{labelyear}{1935}

@@ -1,7 +1,7 @@
 \subsection{Charge density plots}
 
 	\subsubsection{Helium Atom}
-		For the Helium atom we have ran simulations, with \(10^6\) Monte Carlo cycles, of several different trialfunctions and recorded the position of the electrons. We first did an experiment with the electrons being in a pure hydrogenlike wavefunction, then we ran an hydrogenlike wavefunction but optimized the \(\alpha \) value to get a better ground state energy then at last we also included a Pàde-Jastrow correlation factor to include the effects of the electron-electron repulsion. For the pure hydrogenic wavefunction we got $E = -2.757$ and $\sigma^2_* = 0.0030$, while with the optimized \(\alpha\) value we got $\alpha = 1.65$, $E = -2.843$ and $\sigma^2_* = 0.0027$, and lastly with the Pàde-Jastrow factor we got $\alpha = 1.843$, $\beta = 0.34$, $E = -2.887$, $\sigma^2_* = 0.0010$. Here $\sigma^2_*$ is the variance for the local energy between each particle move in the VMC, not the true variance, which is obtained through the blocking routine described in \cref{sec:blocking}. In figure \ref{fig:HeliumChargeDensity} we plots of the positions the electrons occupied during the simulations and we can see that for the pure hydrogenic wavefunction the electrons was generally closer to the nucleus than in the other two simulations. The ground-state energy improved and got closer to the reference value \ref{tab:energyReference1} as the wavefunction got more sophisticated as well as the variance decreasing. In the wavefunction the $\alpha$ parameter represents the electrical attraction of the nucleus on the electron, and is equal to the charge in a Hydrogen atom, in a real Helium atom the attraction felt is smaller than the charge of the nucleus since there is also the effect of the other electrons. This is why we get a better simulation with a smaller \(\alpha\) value. For the Helium atom the effect of the correlation factor is not very pronounced, since the electrons can quite far away from each other, but it is still significant in the ground-state energy and the variance.
+		For the Helium atom we have ran simulations, with \(10^6\) Monte Carlo cycles, of several different trialfunctions and recorded the position of the electrons. We first did an experiment with the electrons being in a pure hydrogenlike wavefunction, then we ran an hydrogenlike wavefunction but optimized the \(\alpha \) value to get a better ground state energy then at last we also included a Pàde-Jastrow correlation factor to include the effects of the electron-electron repulsion. For the pure hydrogenic wavefunction we got $E = -2.757$ and $\sigma^2_* = 0.0030$, while with the optimized \(\alpha\) value we got $\alpha = 1.65$, $E = -2.843$ and $\sigma^2_* = 0.0027$, and lastly with the Pàde-Jastrow factor we got $\alpha = 1.843$, $\beta = 0.34$, $E = -2.887$, $\sigma^2_* = 0.0010$. Here $\sigma^2_*$ is the variance for the local energy between each particle move in the VMC, not the true variance, which is obtained through the blocking routine described in \cref{sec:blocking}. In figure \ref{fig:HeliumChargeDensity} we plots of the positions the electrons occupied during the simulations and we can see that for the pure hydrogenic wavefunction the electrons was generally closer to the nucleus than in the other two simulations. The ground-state energy improved and got closer to the reference value \cref{tab:EnergyAlphaBetaReference} as the wavefunction got more sophisticated as well as the variance decreasing. In the wavefunction the $\alpha$ parameter represents the electrical attraction of the nucleus on the electron, and is equal to the charge in a Hydrogen atom, in a real Helium atom the attraction felt is smaller than the charge of the nucleus since there is also the effect of the other electrons. This is why we get a better simulation with a smaller \(\alpha\) value. For the Helium atom the effect of the correlation factor is not very pronounced, since the electrons can quite far away from each other, but it is still significant in the ground-state energy and the variance.
 		\begin{figure}
 				\centering 
 				\includegraphics[width=0.32\linewidth]{../figures/used/ChargeDensityHeliumHydrogenic}
@@ -34,4 +34,31 @@
 			\centering \includegraphics[width=0.45\linewidth]{../figures/used/ChargeDensityNeon}
 			\protect\caption{The electron-nucleus distance in an Neon atom simulated with different trialfunctions. The left plot is with hydrogenic wavefunctions ($\alpha = 10.22$, $E = -110.301$, $\sigma^2_* = 0.0477$) and the right plot is withhydrogenic wavefunctions with a Jastrow factor and optimized parameters, ( $\alpha = 10.22$, $\beta = 0.0.091$,  $E = -127.888$, $\sigma^2_* = 0.0190$ ). The simulations were run with \(10^6\) Monte Carlo cycles.}
 			\label{fig:chargeDensityNeon}
+		\end{figure}
+
+	\subsubsection{Hydrogen Molecule}
+		After extending the VMC calculation to also be able to work with simple atoms we did two runs and recorded the positions of the electrons and made charge density plots for the electrons. We used parameters from \cite{Ihle_Ledum}.
+		For the \(H_2\) molecule, which is comparable to a Helium atom with the protons seperated, the radial distribution from the mass center was slightly more smeared out than in the Helium atom because the protons were slightly apart.
+		In the charge density plot about the \(xz\) plane the electron density around the nuclei were higher. When the one-body density were plotted both the electron tended to move about both the nuclei and were not trapped along one nuclei. 
+
+		\begin{figure}
+			\centering \includegraphics[width=0.32\linewidth]{../figures/used/ChargeDensityHydrogenTwo}
+			\centering \includegraphics[width=0.32\linewidth]{../figures/used/OneBodyDensityHydrogenTwo}
+			\centering \includegraphics[width=0.32\linewidth]{../figures/used/OneBodyDensityElectronsHydrogenTwo}
+			\protect\caption{The left figure is the radial distribution of the Hydrogen Molecule from the origo, where both nuclei where placed \(R = 1.40 a.u\) way from each other on the \(z\) axis. The figure in the center shows a slice of the \(xz\) plane with with of \(1.0\) a.u. On the right figure one body denseties off each of the electrons is shown. The run used had $10^6$ VMC cycles. Both the nuclei are visible on the charge density plot as a denser concentration.}
+			\label{fig:chargeDensityHydrogenTwo}
+		\end{figure}
+
+
+
+	\subsubsection{Beryllium Molecule}
+
+		For the Beryllium molecule the consentration of the charge density around the nuclei were sharper than in the Hydrogen molecule, which is likely caused by the higher charge of the nuclei. In the Beryllium atom we also see that the electron density is higher closer to the nucleus. The charge density plots here are not to be completely trusted because there is a bug in the implementation of the molecule which causes a too low binding energy, but much of the expected physics still seem to be captured by the VMC computation. In the one body plots following only one of the electrons we can see that, compared to the Hydrogen molecule, the nuclei in the molecule traps it's electrons more effieciently.
+		
+		\begin{figure}
+			\centering \includegraphics[width=0.32\linewidth]{../figures/used/ChargeDensityBerylliumTwo}
+			\centering \includegraphics[width=0.32\linewidth]{../figures/used/OneBodyDensityBerylliumTwo}
+			\centering \includegraphics[width=0.32\linewidth]{../figures/used/OneBodyDensityElectronsBerylliumTwo}
+			\protect\caption{The left figure is the radial distribution of the Beryllium Molecule from the origo, where both nuclei where placed \(R = 4.63 a.u\) way from each other on the \(z\) axis. The figure in the center is shows a slice of the \(xz\) plane with with of \(1.0\) a.u. On the right figure one body denseties off each of the electrons is shown. The run used had $10^6$ VMC cycles. The consentration of the charge density is very sharp around the two nuclei.}
+			\label{fig:chargeDensityBerylliumTwo}
 		\end{figure}

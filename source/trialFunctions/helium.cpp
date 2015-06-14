@@ -5,6 +5,7 @@ Helium::Helium(VMCSolver *solver)
 
     simpleFlag = false;
     m_analytical = false;
+
     m_outfileName = "Helium";
 
     solver->setCharge(2);
@@ -23,6 +24,7 @@ double Helium::waveFunction(const mat &r, VMCSolver *solver)
     double product = 1.0;
     double alpha = solver -> getAlpha();
     double beta = solver -> getBeta();
+
     //Calculate the Jastrow factor
     if(solver->getElectronInteration())
     {
@@ -46,11 +48,13 @@ double Helium::waveFunction(const mat &r, VMCSolver *solver)
     SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 //    cout << SD << endl;
 
+
     return SD*product;
 }
 
 double Helium::localEnergy(const mat &r, VMCSolver *solver)
 {
+
     double kineticEnergy = 0;
     double potentialEnergy = 0;
 
@@ -92,6 +96,8 @@ double Helium::localEnergy(const mat &r, VMCSolver *solver)
         potentialEnergy = - charge*(1./r1+1./r2);
 
 //    cout << "potential is " << -solver->determinant()->laplacianSlaterDeterminant(r, solver)/2. + potentialEnergy << endl;
+
+
 
     return kineticEnergy + potentialEnergy;
 

@@ -31,6 +31,7 @@ public:
     bool m_analytical;
     bool m_conjugateMethod;
     bool m_zeroDistance;    //For use with the molecules, so 1/|R| is not included if R = 0
+    bool m_molecule = false;
 
     ivec spin;
 

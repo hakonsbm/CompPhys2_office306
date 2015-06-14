@@ -69,7 +69,8 @@ public:
 
     void mpiArguments( int nargs, char* args[]){ m_nargs = nargs; m_args = args; }
 
-    string getTF() {return m_args[1];}
+    string getTF() {return trialFunction()->m_outfileName;}
+
 
 private:
     TrialFunction *m_trialFunction;

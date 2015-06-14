@@ -4,6 +4,7 @@ HydrogenTwo::HydrogenTwo(VMCSolver *solver)
 {
     simpleFlag = false;
     m_analytical = false;
+    m_molecule = true;
 
     m_outfileName = "HydrogenTwo";
 
@@ -50,7 +51,7 @@ double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)
     double singleParticleWavefunction = 1.0;
 
     //Calculate the single particle functions
-    //We'll assume that the R vector is aligned along the z-axis. So the nucleuses are seperated on the z-axis
+    //We'll assume that the R vector is aligned along the z-axis. So the nuclei are seperated on the z-axis
     for(int i = 0; i < nParticles ; i++)
     {
         rip1 = 0;
@@ -62,12 +63,12 @@ double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)
         rip2 = r(i,0)*r(i,0) + r(i,1)*r(i,1) + (r(i,2) - RHalf)*(r(i,2) - RHalf);
         rip2 = sqrt(rip2);
 
-        singleParticleWavefunction *= (exp(-alpha * rip1) + exp(-alpha * rip2) );
+        singleParticleWavefunction *= (exp(-alpha * rip1) - exp(-alpha * rip2) );
 
         //Pretty sure it is supposed to be divided by two as well, if we want to reproduce the same numbers as Helium when R = 0;
-        singleParticleWavefunction /= 2.;
-
+//        singleParticleWavefunction /= 2.;
     }
+
 
     //Calculate the Jastrow factor
     if(solver->getElectronInteration())
@@ -86,9 +87,10 @@ double HydrogenTwo::waveFunction(const mat &r, VMCSolver *solver)
     }
 
 //    cout << "Before SD" << endl;
-//    SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
+    SD = solver->determinant()->calculateDeterminant(r,alpha,solver); //SlaterDeterminant(r, alpha, solver);
 //    cout << SD << endl;
 
+//    return SD*product;
     return singleParticleWavefunction*product;
 }
 
@@ -135,6 +137,8 @@ double HydrogenTwo::localEnergy(const mat &r, VMCSolver *solver)
     else
         potentialEnergy = - (1./r1p1+1./r1p2 + 1./r2p1+1./r2p2);
 
+
+    //If we are setting the nuclei side by side we need to make sure that 1/|R| is not included. That is accounted for by other forces
     if(!m_zeroDistance)
         potentialEnergy += 1./norm(2*nucleusHalfDistance);
 

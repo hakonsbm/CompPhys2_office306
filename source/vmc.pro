@@ -40,7 +40,8 @@ SOURCES += main.cpp \
     trialFunctions/hydrogentwo.cpp \
     GTO/basisbank.cpp \
     GTO/contracted.cpp \
-    GTO/gto.cpp
+    GTO/gto.cpp \
+    trialFunctions/berylliumtwo.cpp
 
 HEADERS += \
     vmcsolver.h \
@@ -60,4 +61,5 @@ HEADERS += \
     trialFunctions/hydrogentwo.h \
     GTO/basisbank.h \
     GTO/contracted.h \
-    GTO/gto.h
+    GTO/gto.h \
+    trialFunctions/berylliumtwo.h

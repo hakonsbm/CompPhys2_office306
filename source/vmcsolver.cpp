@@ -35,6 +35,7 @@ VMCSolver::VMCSolver():
     switchElectronInteraction(true);
     initiateDerivatives(new Derivatives);
     initiateSlaterDeterminant(new SlaterDeterminant);
+    determinant()->setGTO(false);
 }
 
 
@@ -57,6 +58,7 @@ void VMCSolver::runMasterIntegration()
         double totalMoves = 0;
         double totalRatio = 0;
         double totalAverageR12 = 0;
+
 
 
         //nCycles = nCycles/numprocs;
@@ -93,6 +95,7 @@ void VMCSolver::runMasterIntegration()
             cout << "Alpha: " << m_alpha << " and beta: " << m_beta << endl;
             cout << "Average distance between the electrons: " << totalAverageR12 << endl;
             cout << "Steplength: " << stepLength << endl;
+            cout << "Nuclei Distance: " << trialFunction()->getNucleusDistance()  << endl;
 
             //Write results to file
             outfile << setw(15) << setprecision(8) << totalEnergy;
@@ -102,7 +105,8 @@ void VMCSolver::runMasterIntegration()
             outfile << setw(15) << setprecision(8) << m_beta;
             outfile << setw(15) << setprecision(8) << totalAverageR12;
             outfile << setw(15) << setprecision(8) << stepLength;
-            outfile << setw(15) << nCycles << endl;
+            outfile << setw(15) << setprecision(8) << nCycles*numprocs ;
+            outfile << trialFunction()->getNucleusDistance() << endl;
         }
 
 //        // End MPI

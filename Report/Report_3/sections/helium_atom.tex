@@ -11,12 +11,24 @@
 		different values for the two variables $\alpha$ and $\beta$, 
 		with $2\times10^{7}$ cycles in the Monte Carlo simulation, we get the results
 		presented in figure \ref{fig:HeliumAlphaBeta}.
-		We find the optimal values to be  $\alpha=1.8$ and $\beta=0.94$ CHECK THIS, as we can see in the figures.
-		With these values for $\alpha$ and $\beta$ we get an energy of $-2.8979105$ CHECK THIS.
+		
+		We find the optimal values to be  $\alpha=1.843$ and $\beta=0.34$, as we can see in the figures.
+		Using these values for $\alpha$ and $\beta$ we run the brute force variational Monte Carlo calculation. The program finds an optimal value for the steplength, $\delta$, which results in roughly 50\% accepted moves. Using $10^{8}$ cycles the algorithm finds the steplength to be $\delta = 1.5$, giving 48.8\% accepted moves. The energy found with this method is $-2.89024$ au, with a variance of $3.77402\times10^{-5}$, as presented in table \ref{tab:Helium_no_IS}.
 		The parameter $\alpha$ can be interpreted as a parameter for the
 		force pulling the electron to the nucleus.
 
-
+		\begin{table}
+			\center
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+			    \hline
+			   	Atom  & $\alpha$ & $\beta$ & Cycles & VMC {[}au{]} & Variance & Reference energy {[}au{]} \tabularnewline
+				\hline 
+				Helium & $1.843$ & $0.34$ & $10^{8}$ & $-2.89024$ & $3.77402\times10^{-5}$ & $-2.9037$\tabularnewline
+				\hline 
+			\end{tabular}
+			\caption{Comparison of the energy for Helium found with VMC without using Importance Sampling, and the reference energy found in research papers \parencite{Binkley_1975}.}
+			\label{tab:Helium_no_IS}
+		\end{table}
 		
 
 
@@ -28,69 +40,33 @@
 		\end{figure}
 
 
-		\begin{table}
-			\centering
-			\begin{tabular}{|c|c|c|}
-				\hline
-				Atom \textbf{UPDATE ME} & VMC & References\tabularnewline
-				\hline
-				\hline
-				Helium $\psi_{T}$ & $-2.8979$ & $-2.9037$ \tabularnewline
-				\hline
-				Beryllium & $-14.4127$ & $-14.667$\tabularnewline
-				\hline
-				Neon & $ - $ & $ -128.928 $\tabularnewline
-				\hline
-			\end{tabular}
-			\protect
-			\caption{Comparison of energies found with Variational Monte Carlo method and
-			energies found in research papers. 	\parencite{Binkley_1975} \parencite{Koput_2011_PCCP}}
-			\label{tab:energyReference1}
-		\end{table}
-
 		\subsubsection{Alpha and Beta Values}
-			\begin{table}
-				\center
-				\begin{tabular}{| c | c| c |}
-				    \hline
-				   	\textbf{Trialfunction UPDATE ME} & \(\mathbf{\alpha}\) & \(\mathbf{\beta}\)
-				    \\ \hline
-				    Helium $\psi_{T}$ & 1.8 & 0.94
-				    \\	\hline
-				    Beryllium $\psi_{T}$	& 3.8	&	 0.293
-				    \\ \hline
-				    Neon $\psi_{T}$ & - & -
-				    \\	\hline
-		  		\end{tabular}
-		  		\caption{The values for \(\alpha\) and \( \beta \) where found by doing running Monte Carlo calculation with over a mesh of different \(\alpha\) and \( \beta \) values, with stepssize \(0.02\). Each Monte Carlo run went over \(10 000 	000\), using importance sampling. Then the run with the lowest energy gave the \(\alpha\) and \(\beta\) values.}
-			  	\label{tab:alpha_beta1}
-			\end{table}
 
-			Table \ref{tab:alpha_beta1} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. The variance was more smooth as a function of the parameters, see fig \ref{fig:HeliumAlphaBeta} and should have been used.
+			Table \ref{tab:EnergyAlphaBetaReference} shows the values, for \(\alpha\) and \(\beta\) values, we got from  running several Monte Carlo cycles with different values. As an algorithm to pick out the best values we minimized the energy found in the Monte Carlo runs. The values found are quite uncertain since the variance of the energy was quite high compared to the difference caused by varying the parameters. The variance was more smooth as a function of the parameters, see fig \ref{fig:HeliumAlphaBeta} and it is therefore easier to determine the best values for the variables from variance as a function of \(\alpha\) and \(\beta\).
 
 
 
 
 		\subsubsection{Computational speed gain by using an analytical local energy}
-			By using an analytical expression for the local energy instead of using a numerical derivation in the calculation a speed up of approximately factor \(4\) was achieved, see table \ref{tab:analyticVSNumeric}.
+			By using an analytical expression for the local energy instead of using a numerical derivation in the calculation the program becomes more efficient. For Helium we get a speedup of nearly 48\%, while for Beryllium we get a speedup of approximately 80\% was achieved, see table \ref{tab:analyticVSNumeric}.
 
 			\begin{table}
 				\center
 				\begin{tabular}{| c | c | c | c |}
 				    \hline
-				   	\textbf{Trialfunction UPDATE ME} & Numerical (s) & Analytical (s) & Ratio
+				   	\textbf{Trialfunction} & Numerical (s) & Analytical (s) & Ratio
 				    \\ \hline
-				    Helium $\psi_{T}$ & 86.76 & 19.98	& 4.342
+				    Helium $\psi_{T}$ & 29.7288 & 20.1189	& 0.6767
 				    \\	\hline
-				    Beryllium $\psi_{T2}$ & 1918.34  &	 &
+				    Beryllium $\psi_{T2}$ & 58.9623  &	32.4622 & 0.5505
 					    \\ \hline
 				\end{tabular}
-				\caption{The time to run a Monte Carlo run with \(10^7\) cycles. The closed expression for the local energy increased the computation time by a significant degree for each trialfunction. }
+				\caption{The time to run a Monte Carlo run with \(10^7\) cycles for Helium, and \(10^6\) cycles for Beryllium. The closed expression for the local energy increased the computation time by a significant degree for each trialfunction. }
 				\label{tab:analyticVSNumeric}
 			\end{table}
 
 		\subsubsection{Calculations using importance sampling}
-			We now introduce importance sampling to our calculations. We search for the optimal variables and find them to be $\alpha=FILLME$ and $\beta=FILLME$, which gives an energy of $-FILLME$. The energy and variance as a function of the timestep, $\delta t$ is shown in figure \ref{fig:HeliumTimestep}. BLOCKING. COMPARISON AND COMMENTS. 
+			We now introduce importance sampling to our calculations. We search for the optimal variables and find them to be $\alpha=1.843$ and $\beta=0.34$. Using these values, with $10^{8}$ cycles, we get an energy of $-2.89012$ au and a corresponding variance $7.76888\times10^{-5}$, as presented in table \ref{tab:EnergyAlphaBetaReference}. The energy and variance as a function of the timestep, $\delta t$ is shown in figure \ref{fig:HeliumTimestep}. BLOCKING. COMPARISON AND COMMENTS. 
 
 			\begin{figure}
 				\centering \includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalTimeEnergy}
@@ -100,4 +76,8 @@
 			\end{figure}
 
 
-		\subsubsection{Conjugate gradient with GTOs}
+		\subsubsection{Bisection method and GTOs}
+
+		Using GTOs we can nearly reproduce the energies we get from using Slater Type Orbitals, although we are unable to reach quite the same energy. This is due to the GTOs being an imperfect representation of the STOs. Using GTOs in stead of STOs is also considerably slower, as we see in \ref{tab:AtomsGTO}. This can be due to inefficient code, and there is also room for improvements by calculating analytical derivatives of the GTOs. However using GTOs reduces the variables to only $\beta$, thus we don't have to look for energy minima by varying $\alpha$. This means that it is possible to easily use a gradient method to more efficiently find the variable that gives minimum energy.
+
+		
