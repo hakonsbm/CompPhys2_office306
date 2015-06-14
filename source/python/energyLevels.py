@@ -146,7 +146,7 @@ def plotChargeDensity(data, name):
 	ylimit = (0, 3)
 	xlimit = (0, 4)
 
-
+	nElectrons = 5
 	#This sorts out the coordinates of th eelectrons and stores them as r values
 	for i in range(0 , nElectrons):
 		lower = 4 + 3*i
@@ -218,8 +218,8 @@ def plotChargeDensity(data, name):
 	pl.title("Charge Density of " + name)
 	pl.xlabel("x axis [a.u.]")
 	pl.ylabel("z axis [a.u.]")
-	pl.xlim([-3,3])
-	pl.ylim([-3,3])
+	pl.xlim([-6,6])
+	pl.ylim([-6,6])
 	pl.colorbar()
 	fig.savefig("../../Report/figures/OneBodyDensity" + name)
 
@@ -332,9 +332,9 @@ def plotVarVSnCycles(data, name):
 # name = "HeliumJastrowAnalytical"
 # name = "Beryllium"
 # name = "Neon"
-name = "HydrogenTwo"
+# name = "HydrogenTwo"
 # name = "Helium"
-# name = "BerylliumTwo"
+name = "BerylliumTwo"
 
 
 
