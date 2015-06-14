@@ -80,7 +80,7 @@ int main(int nargs, char* args[])
     else {if(my_rank==0) cout << args[1] << " is not a valid atom" << endl; exit(1);}
 
     // if you want to use GTOs (remember to turn off analytical solving)
-    solver->determinant()->setGTO(false);
+    solver->determinant()->setGTO(true);
 
 
     if(my_rank==0)
@@ -590,7 +590,7 @@ void runCompareParallelize(VMCSolver * solver)
 void runNewtonsMethod(VMCSolver *solver)
 {
 
-    solver->trialFunction()->setAnalytical(true);
+    solver->trialFunction()->setAnalytical(false);
     solver->trialFunction()->setConjugate(true);
 
     solver->switchbBlockSampling(false);    //This also samples the energies at each cycle to do blocking analysis on the data
@@ -607,9 +607,9 @@ void runNewtonsMethod(VMCSolver *solver)
     int steps = 0;
     double lowerEnd = 0;
     double lowerDerivative = 0;
-    double midPoint = 0.25;
+    double midPoint = 5;
     double midDerivative = 0;
-    double higherEnd = 0.5;
+    double higherEnd = 10;
     double higherDerivative = 0;
 
 
@@ -622,9 +622,9 @@ void runNewtonsMethod(VMCSolver *solver)
     //double midPoint = 0.25;
     //double higherEnd = 0.5;
     //Neon (setAnalytical(false))
-    //double lowerEnd = 0.07;
-    //double midPoint = 0.1;
-    //double higherEnd = 0.13;
+    //double lowerEnd = 0;
+    //double midPoint = 0.25;
+    //double higherEnd = 0.5;
 
     solver->setBeta(lowerEnd);
     solver->runMasterIntegration();

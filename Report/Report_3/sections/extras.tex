@@ -125,7 +125,7 @@
 		\begin{figure}
 			\centering \includegraphics[width=0.45\linewidth]{../figures/Beryllium_blocking}
 			\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_blocking}
-			\protect\caption{STD vs. blocksize with $10^{6}$ MC cycles.  The STD should have a plateauing trend as the blocksize increases.}\label{fig01:std_Stuff}
+			\protect\caption{STD vs. blocksize with $10^6$ MC cycles. The STD should have a plateauing trend as the blocksize increases.}\label{fig01:std_Stuff}
 		\end{figure}
 
 
@@ -138,8 +138,33 @@
 
 		Or more explicitly:\\
 
-		\begin{equation}\frac{\partial E}{\partial c}=\frac{2}{N}\left[\sum_{i=1}^N\left(\left[E_L\left(c\right)\right]_i\left[\frac{\partial\ln{\Psi}}{\partial c}\right]_i\right)-\frac{1}{N}\sum_{i=1}^N\left(\left[E_L\left(c\right)\right]_i\sum_{i=1}^N\left[\frac{\partial\ln{\Psi}}{\partial c}\right]_i\right)\right]\end{equation}
+		\begin{equation}\frac{\partial E}{\partial c}=\frac{2}{N}\left[\sum_{i=1}^N\left(\left[E_L\left(c\right)\right]_i\left[\frac{\partial\ln{\Psi}}{\partial c}\right]_i\right)-\frac{1}{N}\sum_{i=1}^N\left(\left[E_L\left(c\right)\right]_i\sum_{j=1}^N\left[\frac{\partial\ln{\Psi}}{\partial c}\right]_j\right)\right]\end{equation}
 
-		In our case, we are going to derive with respect to $\beta$ only, because we are only interested in minimization in that direction. Since the derivative is composed of three parts, two for the Slater determinants and one for the Padé-Jastrow interaction part, we get:\\
+		Where the indeces $i$ and $j$ run through all the timesteps independently of each other. In our case, we are going to derive with respect to $\beta$ only, because we are only interested in minimization in that direction. Since the derivative is composed of three parts, two for the Slater determinants and one for the Padé-Jastrow interaction part, we get:\\
 
-		\begin{equation}\frac{\partial\ln{\Psi}}{\partial\beta}=\frac{\partial\ln{\Psi_{SD\uparrow}}}{\partial\beta}+\frac{\partial\ln{\Psi_{SD\downarrow}}}{\partial\beta}+\frac{\partial\ln{\Psi_J}}{\partial\beta}=\frac{\partial\ln{\Psi_J}}{\partial\beta}\end{equation}
+		\begin{equation}\frac{\partial\ln{\Psi}}{\partial\beta}=\frac{\partial\ln{\Psi_{SD\uparrow}}}{\partial\beta}+\frac{\partial\ln{\Psi_{SD\downarrow}}}{\partial\beta}+\frac{\partial\ln{\Psi_J}}{\partial\beta}=\frac{\partial\ln{\Psi_J}}{\partial\beta}=\frac{\partial\left(\sum_{i<j}\frac{ar_{ij}}{1+\beta r_{ij}}\right)}{\partial\beta}=\sum_{i<j}\frac{-ar_{ij}^2}{\left(1+\beta r_{ij}\right)^2}\end{equation}
+
+		So the resulting expression is:\\
+
+		\begin{equation}\frac{\partial E}{\partial\beta}=\frac{2}{N}\left[\sum_{i=1}^N\left(\left[E_L\left(\beta\right)\right]_i\left[\sum_{k<l}\frac{-ar_{kl}^2}{\left(1+\beta r_{kl}\right)^2}\right]_i\right)-\frac{1}{N}\sum_{i=1}^N\left(\left[E_L\left(\beta\right)\right]_i\sum_{j=1}^N\left[\sum_{k<l}\frac{-ar_{kl}^2}{\left(1+\beta r_{kl}\right)^2}\right]_j\right)\right]\end{equation}
+
+		With $k$ and $l$ running through the electrons. Newton's method will be used for its simplicity, and because we will only work with $\beta$. This method additionally requires the derivative of the function ($\frac{\partial E}{\partial\beta}$ in this case), but it's not possible to simply derive with respect to $\beta$ again because there is no analytical expression for $E_L\left(\beta\right)$, so we must resort to numerical derivation. A simple, first oder finite difference method can be used for this:\\
+
+		\begin{equation}\frac{\partial^2 E}{\partial\beta^2}=\lim_{h\to 0}\frac{\frac{\partial^2 E\left(\beta+h\right)}{\partial\beta^2}-\frac{\partial^2 E\left(\beta\right)}{\partial\beta^2}}{h}\end{equation}
+
+		And with this Newton's method can be implemented in a straight forward manner with one simple equation:\\
+
+		\begin{equation}\beta_{i+1}=\beta_i-\frac{\frac{\partial E}{\partial\beta}}{\frac{\partial^2 E}{\partial\beta^2}}\end{equation}
+
+		The index $i$ represents the iterations of Newton's method, not the iterations of the Monte Carlo loop, for each iteration of this index, a whole Monte Carlo loop is performed. In iteration $0$ a seed must be provided. Depending on the guess for this seed, the method's performance will be better or worse.\\
+
+		There is one catch, the values of the first derivative are computed as a part of the Monte Carlo loop, and are thus susceptible to a certain degree of randomness. This variability introduces some uncertainty in each iteration. Basically, we are not applying the method to a function, but to a scattered point cloud from which we sample points one at a time. This, coupled with the fact that the second derivative is obtanied numerically from two points of that cloud, made the method show poor results, namely slow convergence to values that appearently depended heavily on the seed choice. To circumvent this issue, a different, yet similar method was used.\\
+
+		The bisection method is similar to Newton-Raphson method, but it only needs the function that has the roots we want to find. And, instead of a point seed, it needs an interval seed. The method exploits Bolzano's theorem in said interval: if the values of the function (the derivative of the local energy in this case) in the extremes have different signs, the existance of at least one root is guaranteed. By evaluating the function in the midpoint of the interval, it's possible to know in which half of it the root lies, and thus the interval can be reduced to one of its halves. This process is repeated until a certain tolerance is reached and the root is obtained. In our case we don't have to worry about multiple roots because we know that there is only one minimum, the only problem is choosing the appropiate intervals so that the method can find the root.\\
+
+		\begin{figure}
+			\centering \includegraphics[width=0.45\linewidth]{../figures/Bisection_method}
+			\protect\caption{Schematic representation of the bisection method: in each iteration the interval is halved in two and it converges linearly to the solution}
+		\end{figure}
+
+		The main advantage here compared to Newton's method is that the sensibility to the values of the function is much smaller because only the sign of the function values is important (and this only becomes a problem when we are already very close to the root). The other advantage is the robustness and simplicity, the method will converge no matter what if the appropiate interval is chosen, which is not something very complicated to guess and can be checked quite fast in case it's not so obvious. The downside is the linear, comparatively slow convergence; but in this case, due to the the imprecision in obtaining the values of the derivative of the local energy, Newton's method becomes relatively slow as well, so it's not actually a problem for our purposes.\\
