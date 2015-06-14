@@ -9,9 +9,10 @@ from matplotlib import cm
 
 
 atom = "HeliumJastrowAnalytical"
+#atom = "Beryllium"
 #atom = "Neon"
 
-for quant in ["energy", "variance"]:
+for quant in ["energy"]:
 
 	filename = atom + "_alpha_beta"
 	infile = open("./../outfiles/"+filename, "r")
@@ -81,10 +82,11 @@ for quant in ["energy", "variance"]:
 	plt.title(atom + " " + quant)
 	ax.set_xlabel('alpha')
 	ax.set_ylabel('beta')
-	ax.set_zlabel(quant)
+	ax.set_zlabel(quant+" [au]")
 	#plt.axis([dt[0], dt[-1], 0, 10])
 	#plt.legend()
-	print "saving to ", "../../Report/figures/" + filename + "_" + quant + ".png"
-	plt.savefig("../../Report/figures/" + filename + "_" + quant + ".png") #"../Report/figures/" + 
+	save_path = "../../Report/figures/" + filename + "_" + quant + ".png"
+	print "saving to ", save_path
+	plt.savefig(save_path) #"../Report/figures/" + 
 
 	plt.show()

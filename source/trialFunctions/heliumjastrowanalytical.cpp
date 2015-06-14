@@ -9,8 +9,8 @@ HeliumJastrowAnalytical::HeliumJastrowAnalytical(VMCSolver *solver)
 
     solver->setCharge(2);
     solver->setNParticles(2);
-    solver->setAlpha(1.93);
-    solver->setBeta(0.3);
+    solver->setAlpha(1.843);
+    solver->setBeta(0.34);
 
 
 }

@@ -5,6 +5,7 @@
 	The variational monte carlo program can either be used directly as a cpp program, or with a python run.py script included in the folder ./python/ which calls the main cpp program with specific setting, the spesific settings is included in the README file. When running the VMC program it is ran with several parameters specified; number of processors to use, cycles to run, trialfunction to use and what it should do. There are several different options included as what it can do e.g. running several runs searching for te best \(\alpha \) and $\beta$ values, doing a long run writing down positions and several other options. The solver has several subclasses containing trialfunctions, derivatives and determinants. See \cref{fig:schematic} and \cref{fig:classes} for an overview over the program.
 
 	\begin{figure}
+		\center
 		\begin{tikzpicture}[%
 		    >=triangle 60,              % Nice arrows; your taste may be different
 		    start chain=going below,    % General flow is top-to-bottom
@@ -85,6 +86,7 @@
 	\end{figure}
 \subsection{Class structure}
 	\begin{figure}
+		\center
 		\begin{tikzpicture}[%
 			    >=triangle 60,              % Nice arrows; your taste may be different
 			    start chain=going below,    % General flow is top-to-bottom

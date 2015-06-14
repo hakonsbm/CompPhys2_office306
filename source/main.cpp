@@ -601,7 +601,7 @@ void runNewtonsMethod(VMCSolver *solver)
 {
 
     solver->trialFunction()->setAnalytical(false);
-    solver->trialFunction()->setConjugate(true);
+    solver->trialFunction()->setConjugate(false);
 
     solver->switchbBlockSampling(false);    //This also samples the energies at each cycle to do blocking analysis on the data
 
@@ -618,9 +618,9 @@ void runNewtonsMethod(VMCSolver *solver)
     int steps = 0;
     double lowerEnd = 0;
     double lowerDerivative = 0;
-    double midPoint = 5;
+    double midPoint = 0.25;
     double midDerivative = 0;
-    double higherEnd = 10;
+    double higherEnd = 0.5;
     double higherDerivative = 0;
 
 
@@ -633,9 +633,9 @@ void runNewtonsMethod(VMCSolver *solver)
     //double midPoint = 0.25;
     //double higherEnd = 0.5;
     //Neon (setAnalytical(false))
-    //double lowerEnd = 0;
-    //double midPoint = 0.25;
-    //double higherEnd = 0.5;
+    //double lowerEnd = 0.07;
+    //double midPoint = 0.1;
+    //double higherEnd = 0.13;
 
     solver->setBeta(lowerEnd);
     solver->runMasterIntegration();
