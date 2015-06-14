@@ -66,7 +66,7 @@
 			\end{table}
 
 		\subsubsection{Calculations using importance sampling}
-			We now introduce importance sampling to our calculations. We search for the optimal variables and find them to be $\alpha=1.843$ and $\beta=0.34$. Using these values, with $10^{8}$ cycles, we get an energy of $-2.89012$ au and a corresponding variance $7.76888\times10^{-5}$, as presented in table \ref{tab:EnergyAlphaBetaReference}. The energy and variance as a function of the timestep, $\delta t$ is shown in figure \ref{fig:HeliumTimestep}. BLOCKING. COMPARISON AND COMMENTS. 
+			We now introduce importance sampling to our calculations. We search for the optimal variables and find them to be $\alpha=1.843$ and $\beta=0.34$. Using these values, with $10^{8}$ cycles, we get an energy of $-2.89012$ au and a corresponding variance $7.76888\times10^{-5}$, as presented in table \ref{tab:EnergyAlphaBetaReference}. The energy and variance as a function of the timestep, $\delta t$ is shown in figure \ref{fig:HeliumTimestep}.
 
 			\begin{figure}
 				\centering \includegraphics[width=0.45\linewidth]{../figures/HeliumJastrowAnalyticalTimeEnergy}
@@ -75,9 +75,13 @@
 				\label{fig:HeliumTimestep}
 			\end{figure}
 
+			\begin{figure}
+				\centering\includegraphics[width=0.45\linewidth]{../figures/Helium_blocking}
+				\protect\caption{Variance vs. blocksize for Helium. The blocking behaviour can be seen very clearly as the variance plateaus as the blocksize grows.}
+				\label{fig:HeliumBlocking}
+			\end{figure}
+
 
 		\subsubsection{Bisection method and GTOs}
 
 		Using GTOs we can nearly reproduce the energies we get from using Slater Type Orbitals, although we are unable to reach quite the same energy. This is due to the GTOs being an imperfect representation of the STOs. Using GTOs in stead of STOs is also considerably slower, as we see in \ref{tab:AtomsGTO}. This can be due to inefficient code, and there is also room for improvements by calculating analytical derivatives of the GTOs. However using GTOs reduces the variables to only $\beta$, thus we don't have to look for energy minima by varying $\alpha$. This means that it is possible to easily use a gradient method to more efficiently find the variable that gives minimum energy.
-
-		

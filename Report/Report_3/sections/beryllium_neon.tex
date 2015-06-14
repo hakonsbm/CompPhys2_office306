@@ -85,12 +85,20 @@
 				\hline 
 				Atom  & $\beta$ & Cycles & VMC {[}au{]} & Variance & Ref. energy {[}au{]} & GTO [s] & STO [s] \tabularnewline
 				\hline 
-				Helium &  $0.34$ & - & - & - & $-2.9037$ & - & - \tabularnewline
+				Helium &  $0.51625$ & $2\times 10^{6}$ & $-2.85482$ & $0.00405383$ & $-2.9037$ & $15.007$ & $6.48565$ \tabularnewline
 				\hline 
-				Beryllium  &  $0.109375$ & $7\times 10^{7}$ & $-14.0182$ & $0.00203359$ & $-14.667$ & $48321$ & $4141$ \tabularnewline
+				Beryllium  &  $0.091797$ & $7\times 10^{7}$ & $-14.0182$ & $0.00203359$ & $-14.667$ & $48321$ & $4141$ \tabularnewline
 				\hline 
-				Neon  & $0.091$ & - & - & - & $-128.928$ & - & - \tabularnewline
+				Neon  & $0.109375$ & $1\times 10^{6}$ & $-113.542$ & $0.498411$ & $-128.928$ & $2821.16$ & $203.012$ \tabularnewline
 				\hline 
 			\end{tabular}\protect\caption{ Comparison of energies found using bisection method with the refenrence energy \parencite{Koput_2011_PCCP} \parencite{Binkley_1975} and comparison of the time used running the computation with the given number of cycles using GTOs and STOs.}
 			\label{tab:AtomsGTO} 
 		\end{table}
+
+
+		\begin{figure}
+			\centering \includegraphics[width=0.45\linewidth]{../figures/Beryllium_blocking}
+			\centering \includegraphics[width=0.45\linewidth]{../figures/Neon_blocking}
+			\protect\caption{STD vs. blocksize with $10^6$ MC cycles. The STD shows a clear plateauing behaviour trend as the blocksize increases after rising dramatically for small blocksizes. This is due to the blocksize catching up to the correlation lenght between the measurements, thus yielding the right STD.}\label{fig01:std_Stuff}
+		\end{figure}
+
