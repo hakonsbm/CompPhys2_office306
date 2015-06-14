@@ -5,6 +5,8 @@
 	For Beryllium we have the Alpha and Beta values $\alpha=4.0$ and $\beta=0.31$. We use $10^{7}$ cycles and find the energy to be $-14.3902$ au, with a variance of $9.08566 \times 10^{-4}$.
 	For Neon, with $10^{6}$ cycles, we get an energy of $-127.875$ au with a variance of $0.0131537$.
 
+	However, as expected, by using Gaussian Type Orbitals we get less accurate energies compared to the reference values, as shown in table \ref{tab:AtomsGTO}, and it is considerably slower. Nontheless, with using GTOs we only have one variable we need to vary to find the best ground state energy, $\beta$. Therefore we are also able to use bisection method to find the optimal $\beta$-value.
+
 	From reseach papers we find the value for energy in the ground state
 	of Beryllium to be $-14.667$ au \parencite{Koput_2011_PCCP}  and the value
 	for energy in the ground state of Neon to be \(-128.928\) au \parencite{Binkley_1975}.
@@ -38,7 +40,7 @@
 				\hline 
 				Helium & $1.843$ & $0.34$ & $10^{8}$ & $-2.89012$ & $7.76888\times10^{-5}$ & $-2.9037$\tabularnewline
 				\hline 
-				Beryllium  & $4.0$ & $0.31$ & $10^{7}$ & $-14.3902$  & $0.000908566$ & $-14.667$ \tabularnewline
+				Beryllium  & $4.0$ & $0.31$ & $10^{7}$ & $-14.3902$  & $9.08566\times10^{-4}$ & $-14.667$ \tabularnewline
 				\hline 
 				Neon  & $10.22$ & $0.091$ & $10^{6}$ & $-127.875$ & $0.0131537$ & $-128.928$ \tabularnewline
 				\hline 
@@ -85,7 +87,7 @@
 				\hline 
 				Helium &  $0.34$ & - & - & - & $-2.9037$ & - & - \tabularnewline
 				\hline 
-				Beryllium  &  $0.31$ & - & - & - & $-14.667$ & - & - \tabularnewline
+				Beryllium  &  $0.109375$ & $7\times 10^{7}$ & $-14.0182$ & $0.00203359$ & $-14.667$ & $48321$ & $4141$ \tabularnewline
 				\hline 
 				Neon  & $0.091$ & - & - & - & $-128.928$ & - & - \tabularnewline
 				\hline 
