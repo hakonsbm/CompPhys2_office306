@@ -148,7 +148,7 @@
 
 		\begin{equation}\frac{\partial E}{\partial\beta}=\frac{2}{N}\left[\sum_{i=1}^N\left(\left[E_L\left(\beta\right)\right]_i\left[\sum_{k<l}\frac{-ar_{kl}^2}{\left(1+\beta r_{kl}\right)^2}\right]_i\right)-\frac{1}{N}\sum_{i=1}^N\left(\left[E_L\left(\beta\right)\right]_i\sum_{j=1}^N\left[\sum_{k<l}\frac{-ar_{kl}^2}{\left(1+\beta r_{kl}\right)^2}\right]_j\right)\right]\end{equation}
 
-		With $k$ and $l$ running through the electrons. Newton's method will be used for its simplicity, and because we will only work with $\beta$. This method additionally requires the derivative of the function ($\frac{\partial E}{\partial\beta}$ in this case), but it's not possible to simply derive with respect to $\beta$ again because there is no analytical expression for $E_L\left(\beta\right)$, so we must resort to numerical derivation. A simple, first oder finite difference method can be used for this:\\
+		With $k$ and $l$ running through the electrons. Newton's method will be used for its simplicity, and because we will only work with $\beta$. This method additionally requires the derivative of the function ($\frac{\partial E}{\partial\beta}$ in this case), but it's not possible to simply derive with respect to $\beta$ again because there is no analytical expression for $E_L\left(\beta\right)$, so we must resort to numerical derivation. A simple, first oder finite difference method can be used for this:\\
 
 		\begin{equation}\frac{\partial^2 E}{\partial\beta^2}=\lim_{h\to 0}\frac{\frac{\partial^2 E\left(\beta+h\right)}{\partial\beta^2}-\frac{\partial^2 E\left(\beta\right)}{\partial\beta^2}}{h}\end{equation}
 
