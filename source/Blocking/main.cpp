@@ -54,10 +54,10 @@ int main() {
     int maxBlockSize = 0;
     int minBlockSize = 10;
     outFile.open("outputSTD.dat");
-    inFile.open("../source/outfiles/Neon_blockingSamples");
+    inFile.open("../source/outfiles/Helium_blockingSamples");
     cout << "reading file" <<endl;
     while (inFile && count<=1000000) {
-        inFile >> tmp1 >> tmp2 >> tmp3 >> tmp4 >> tmp5 >> tmp6 >> tmp7 >> tmp8 >> tmp9 >> tmp10 >> tmp11 >> tmp12 >> tmp13 >> tmp14 >> tmp15 >> tmp16 >> tmp17 >> tmp18 >> tmp19 >> tmp20 >> tmp21 >> tmp22 >> tmp23 >> tmp24 >> tmp25 >> tmp26 >> tmp27 >> tmp28 >> tmp29 >> tmp30 >> tmp31 >> tmp32 >> tmp33 >> tmp34;
+        inFile >> tmp1 >> tmp2 >> tmp3 >> tmp4 >> tmp5 >> tmp6 >> tmp7 >> tmp8 >> tmp9 >> tmp10;// >> tmp11 >> tmp12 >> tmp13 >> tmp14 >> tmp15 >> tmp16 >> tmp17 >> tmp18 >> tmp19 >> tmp20 >> tmp21 >> tmp22 >> tmp23 >> tmp24 >> tmp25 >> tmp26 >> tmp27 >> tmp28 >> tmp29 >> tmp30 >> tmp31 >> tmp32 >> tmp33 >> tmp34;
         energy.push_back(tmp1);
         count++;
     }

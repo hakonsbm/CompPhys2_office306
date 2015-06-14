@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sys import argv
 
 
-filename = "../../build-blocking-Desktop-Debug/outputSTD.dat"
+filename = "../../build-blocking-Desktop-Release/outputSTD.dat"
 infile = open(filename, "r")
 blocksize = []
 std = []
@@ -28,6 +28,6 @@ plt.ylabel("Standard deviation")
 plt.title(r"Neon with $10^{6}$ cycles")
 #plt.axis([dt[0], dt[-1], 0, 10])
 #plt.legend()
-plt.savefig("../../Report/figures/" + "Neon_blockingg" + ".png")
+plt.savefig("../../Report/figures/" + "Neon_blocking" + ".png")
 
 plt.show()
