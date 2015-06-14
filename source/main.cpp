@@ -488,7 +488,7 @@ void runBlockingSampledRun(VMCSolver *solver)
     solver->switchElectronInteraction(true);
     solver->trialFunction()->simpleFlag = false;
 //    solver->setAlpha(solver->getCharge());
-    solver->trialFunction()->setAnalytical(true);
+    solver->trialFunction()->setAnalytical(false);
 
 
 

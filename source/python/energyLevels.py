@@ -146,7 +146,7 @@ def plotChargeDensity(data, name):
 	ylimit = (0, 3)
 	xlimit = (0, 4)
 
-
+	nElectrons = 5
 	#This sorts out the coordinates of th eelectrons and stores them as r values
 	for i in range(0 , nElectrons):
 		lower = 4 + 3*i
@@ -178,7 +178,7 @@ def plotChargeDensity(data, name):
 	print counter
 	counter = 0
 	for i in range(0,positions.shape[0]):
-		if np.abs(positions[i,1]) < 0.5:
+		if np.abs(positions[i,1]) < 0.2:
 			# slice2D = np.vstack((slice2D,positions[i,:]))
 			slice2D[counter,:] = positions[i,:]
 			counter = counter + 1
@@ -218,8 +218,8 @@ def plotChargeDensity(data, name):
 	pl.title("Charge Density of " + name)
 	pl.xlabel("x axis [a.u.]")
 	pl.ylabel("z axis [a.u.]")
-	pl.xlim([-3,3])
-	pl.ylim([-3,3])
+	pl.xlim([-6,6])
+	pl.ylim([-6,6])
 	pl.colorbar()
 	fig.savefig("../../Report/figures/OneBodyDensity" + name)
 
@@ -330,17 +330,17 @@ def plotVarVSnCycles(data, name):
 
 # name = "HeliumSimpleAnalytical"
 # name = "HeliumJastrowAnalytical"
-name = "Beryllium"
+# name = "Beryllium"
 # name = "Neon"
 # name = "HydrogenTwo"
 # name = "Helium"
-# name = "BerylliumTwo"
+name = "BerylliumTwo"
 
 
 
 
 #	Picks the relevant data sample
-data = np.genfromtxt("../outfiles/" + name + "_alpha_beta")
+# data = np.genfromtxt("../outfiles/" + name + "_alpha_beta")
 # datatime = np.genfromtxt("../outfiles/" + name +"_timeStep")
 dataSample = np.genfromtxt("../outfiles/" + name +"_blockingSamples")
 # dataCycles = np.genfromtxt("../outfiles/" + name +"_nCycles")
