@@ -569,7 +569,7 @@ void runCompareParallelize(VMCSolver * solver)
 {
     //TestSettings
     solver->switchElectronInteraction(true);
-    solver->trialFunction()->setAnalytical(true);
+    solver->trialFunction()->setAnalytical(false);
 //    solver->setAlpha(solver->getCharge());
     string pathString = "../source/outfiles/" +  solver->trialFunction()->m_outfileName;
     char const * outfilePath = (pathString + string("_compare_parallelize.txt")).c_str();
