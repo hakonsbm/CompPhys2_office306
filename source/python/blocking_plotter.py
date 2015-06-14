@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sys import argv
 
 
-filename = "../../build-blocking-Desktop-Release/outputSTD.dat"
+filename = "../../build-blocking-Desktop-Debug/outputSTD.dat"
 infile = open(filename, "r")
 blocksize = []
 std = []
