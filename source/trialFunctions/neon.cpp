@@ -15,7 +15,7 @@ Neon::Neon(VMCSolver *solver)
     solver->setCharge(10);
     solver->setNParticles(10);
     solver->setAlpha(10.22);
-    solver->setBeta(0.091);
+    solver->setBeta(0.109375);
     spin << 0 << 0 << 0 << 0 << 0 << 1 << 1 << 1 << 1 << 1;
 }
 

@@ -28,6 +28,6 @@ plt.ylabel("Standard deviation")
 plt.title(r"Neon with $10^{6}$ cycles")
 #plt.axis([dt[0], dt[-1], 0, 10])
 #plt.legend()
-plt.savefig("../../Report/figures/" + "Beryllium_blocking" + ".png")
+plt.savefig("../../Report/figures/" + "Neon_blockingg" + ".png")
 
 plt.show()

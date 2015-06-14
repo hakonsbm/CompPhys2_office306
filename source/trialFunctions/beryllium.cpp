@@ -16,7 +16,11 @@ Beryllium::Beryllium(VMCSolver *solver)
     solver->setCharge(4);
     solver->setNParticles(4);
     solver->setAlpha(4.0);
+<<<<<<< HEAD
     solver->setBeta(0.109375);
+=======
+    solver->setBeta(0.091797);
+>>>>>>> 7098041655800bcd96c1e99af32461831b9fef17
 
     //Giving the particles in Beryllium it's spin, the first half up and the second part down
     // up = 0 and down = 1

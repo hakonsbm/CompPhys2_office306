@@ -11,7 +11,7 @@ Helium::Helium(VMCSolver *solver)
     solver->setCharge(2);
     solver->setNParticles(2);
     solver->setAlpha(1.843);
-    solver->setBeta(0.34);
+    solver->setBeta(0.515625);
 
     spin << 0 << 1;
 }
