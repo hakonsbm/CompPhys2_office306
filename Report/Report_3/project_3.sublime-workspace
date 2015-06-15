@@ -1,0 +1,753 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Beryllium",
+				"BerylliumTwo"
+			],
+			[
+				"Charg",
+				"ChargeDensity"
+			],
+			[
+				"run",
+				"runThermalize"
+			],
+			[
+				"cut",
+				"cutSquares"
+			],
+			[
+				"slice",
+				"slice2D"
+			],
+			[
+				"v",
+				"vstack"
+			],
+			[
+				"xli",
+				"xlim"
+			],
+			[
+				"xlim",
+				"xlimit"
+			],
+			[
+				"electron",
+				"electronList"
+			],
+			[
+				"electr",
+				"electronList"
+			],
+			[
+				"norm",
+				"normTemp"
+			],
+			[
+				"data",
+				"datapoints"
+			],
+			[
+				"print",
+				"printCorrelationDerivatives"
+			],
+			[
+				"psi",
+				"Psi1S"
+			],
+			[
+				"lo",
+				"localenergy1"
+			],
+			[
+				"psi2P",
+				"psi2P"
+			],
+			[
+				"time",
+				"timestep"
+			],
+			[
+				"sa",
+				"saveState"
+			],
+			[
+				"loadS",
+				"loadSavedState"
+			],
+			[
+				"save",
+				"saveState"
+			],
+			[
+				"load",
+				"loadSavedState"
+			],
+			[
+				"r",
+				"runNewSystem"
+			],
+			[
+				"nA",
+				"nAtomsInBins"
+			],
+			[
+				"Bin",
+				"radialBins"
+			],
+			[
+				"n",
+				"nAtomsInBins"
+			],
+			[
+				"radial",
+				"radialBins"
+			],
+			[
+				"atoms",
+				"nAtoms"
+			],
+			[
+				"stat",
+				"statisticalValues"
+			],
+			[
+				"rel",
+				"relEnergyError"
+			],
+			[
+				"sta",
+				"statisticalValues"
+			],
+			[
+				"dat",
+				"dataCycles"
+			],
+			[
+				"ene",
+				"energy"
+			],
+			[
+				"en",
+				"energy"
+			],
+			[
+				"Helium",
+				"HeliumSimpleAnalytical"
+			],
+			[
+				"energy",
+				"energyFig"
+			],
+			[
+				"HeliumSimple",
+				"HeliumSimpleAnalytical_alpha_beta"
+			],
+			[
+				"alpha",
+				"ALPHA"
+			],
+			[
+				"HeliumJ",
+				"HeliumJastrowAnalytical"
+			],
+			[
+				"He",
+				"HeliumSimpleAnalytical"
+			],
+			[
+				"HE",
+				"HeliumSimpleAnalytical"
+			],
+			[
+				"Hel",
+				"HeliumSimpleAnalytical"
+			],
+			[
+				"total",
+				"totalEnergy"
+			],
+			[
+				"for",
+				"forceplot"
+			],
+			[
+				"velo",
+				"velocityPlots"
+			],
+			[
+				"local",
+				"localEnergy2"
+			],
+			[
+				"ve",
+				"velocityx"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "bibliography.bib",
+			"settings":
+			{
+				"buffer_size": 4264,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sections/atoms.tex",
+			"settings":
+			{
+				"buffer_size": 17913,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "\\subsection{Variational Monte Carlo calculations of the Beryllium and Neon atoms}\n\n	We attempt to solve the ground state energy for the Beryllium atom and Neon atom using a Variational Monte Carlo calculation with importance sampling. We have used the trial functions \\eqref{eq:BerylliumTrialFunction} for Beryllium and \\eqref{eq:NeonTrialFunction} for Neon which uses $\\alpha$ and $\\beta$ as variational parameters.\n\n	For Beryllium we have the Alpha and Beta values $\\alpha=4.0$ and $\\beta=0.31$. We use $10^{7}$ cycles and find the energy to be $-14.3902$ au, with a variance of $9.08566 \\times 10^{-4}$.\n	For Neon, with $10^{6}$ cycles, we get an energy of $-127.875$ au with a variance of $0.0131537$.\n\n	However, as expected, by using Gaussian Type Orbitals we get less accurate energies compared to the reference values, as shown in table \\ref{tab:AtomsGTO}, and it is considerably slower. Nontheless, with using GTOs we only have one variable we need to vary to find the best ground state energy, $\\beta$. Therefore we are also able to use bisection method to find the optimal $\\beta$-value.\n\n	From reseach papers we find the value for energy in the ground state\n	of Beryllium to be $-14.667$ au \\parencite{Koput_2011_PCCP}  and the value\n	for energy in the ground state of Neon to be \\(-128.928\\) au \\parencite{Binkley_1975}.\n	In \\cref{tab:EnergyAlphaBetaReference} we compare results\n	obtained with our Variational Monte Carlo method with results from\n	various research papers.\n\n	\\subsubsection{Alpha and Beta Values}\n\n		\\begin{figure}\n			\\centering \\includegraphics[width=0.45\\linewidth]{../figures/Beryllium_alpha_beta_energy}\n			\\centering \\includegraphics[width=0.45\\linewidth]{../figures/Beryllium_alpha_beta_variance}\n			\\protect\\caption{Energy (left) and variance (right) for different Alpha and Beta values for Beryllium, using $10^{6}$ cycles.}\n			\\label{fig:alpha_beta_comparison_beryllium}\n		\\end{figure}\n\n		\\begin{figure}\n			\\centering \\includegraphics[width=0.45\\linewidth]{../figures/Neon_alpha_beta_energy}\n			\\centering \\includegraphics[width=0.45\\linewidth]{../figures/Neon_alpha_beta_variance}\n			\\protect\\caption{Energy (left) and variance (right) for different Alpha and Beta values for Neon, using $10^{5}$ cycles.}\n			\\label{fig:alpha_beta_comparison_neon}\n		\\end{figure}\n\n		To find optimal Alpha and Beta values for the atoms we run VMC with ranges of different values for \\(\\alpha\\) and \\(\\beta\\). The resulting plots of variance and energy for different combinations are given in figure \\ref{fig:alpha_beta_comparison_beryllium} for Beryllium and figure \\ref{fig:alpha_beta_comparison_neon} for Neon. The optimal values are shown in table \\ref{tab:EnergyAlphaBetaReference}. As VMC runs slowly for Neon, because it has 10 electrons, we were only able to run over the range of Alpha and Beta values with $10^{5}$ cycles. This is reflected in the higher variance, and the spikes in the variance plot.\n\n		\\begin{table}\n			\\center %\n			\\begin{tabular}{|c|c|c|c|c|c|c|}\n				\\hline \n				Atom  & $\\alpha$ & $\\beta$ & Cycles & VMC {[}au{]} & Variance & Reference energy {[}au{]} \\tabularnewline\n				\\hline \n				Helium & $1.843$ & $0.34$ & $10^{8}$ & $-2.89012$ & $7.76888\\times10^{-5}$ & $-2.9037$\\tabularnewline\n				\\hline \n				Beryllium  & $4.0$ & $0.31$ & $10^{7}$ & $-14.3902$  & $9.08566\\times10^{-4}$ & $-14.667$ \\tabularnewline\n				\\hline \n				Neon  & $10.22$ & $0.091$ & $10^{6}$ & $-127.875$ & $0.0131537$ & $-128.928$ \\tabularnewline\n				\\hline \n				H$_2$ & $1.289$* & $0.401$ & $10^7$ & $-1.15828$	& $0.000225$  & $-1.17540$ \\tabularnewline\n				\\hline \n				H$_2$*  & $1.289$ & $0.401$* & $10^7$ & $0.320$	& $0.001105$  & $-$ \\tabularnewline\n				\\hline\n				Be$_{2}$ & $3.725$* & $0.246$ & $10^6$ & $ -31.349 $	& $ 0.00756 $  & $-29.339$ \\tabularnewline\n				\\hline\n			\\end{tabular}\\protect\\caption{Comparison of energies resulting from our Variational Monte Carlo method with\n			energies found in research papers \\parencite{Koput_2011_PCCP} \\parencite{Binkley_1975}. The values for \\(\\alpha\\) and \\( \\beta \\) where found by doing running Monte Carlo calculation with over a mesh of different \\(\\alpha\\) and \\( \\beta \\) values. The run with the lowest energy gave the \\(\\alpha\\) and \\(\\beta\\) values. For H$_2$ and Be$_2$ we used $\\alpha$, $\\beta$ values, along withe the benchmark value, from \\citet{Ihle_Ledum} and used a nuclei distance of \\( 1.40 \\) a.u. and \\( 4.63\\) a.u. respectively. The binding enery found for Be\\(_2\\) is too low which is caused by a bug in the implementation of the molecule. H$_2$* is the Hydrogen molecule where the \\(1\\)S wavefunctions was subtracted instead of added together.}\n			\\label{tab:EnergyAlphaBetaReference} \n		\\end{table}\n\n\n	\n\n\n	\\subsubsection{Speedup with MPI}\n		\\begin{table}\n			\\center\n			\\begin{tabular}{| c | c| c| c| c|}\n				\\hline\n					\\textbf{Num. of processes} &	1	&	2	&	3	&	4\n				\\\\ \\hline\n				\\textbf{Speedup}	&	1.0	&	1.97	&	2.90	&	3.35\n				\\\\	\\hline\n			\\end{tabular}\n			\\caption{MPI speedup}\n			\\label{tab:MPI_speedup}\n		\\end{table}\n\n		\\begin{figure}\n			\\centering \\includegraphics[width=0.45\\linewidth]{../figures/processor_number_time_comparison}\n			\\protect\\caption{MPI speedup}\n			\\label{fig:MPI_speedup}\n		\\end{figure}\n\n		It is desirable to have a speedup as close as possible to the number of processors used. The speedup measured by our VMC program running 1, 2, 3 and 4 is shown in table \\ref{tab:MPI_speedup} and figure \\ref{fig:MPI_speedup}. We see that the speedup is good for 2 and 3 processes, but for 4 processes suffers somewhat because it also have to run the OS and other programs.\n\n\n		\\begin{table}\n			\\center %\n			\\begin{tabular}{|c|c|c|c|c|c|c|c|}\n				\\hline \n				Atom  & $\\beta$ & Cycles & VMC {[}au{]} & Variance & Ref. energy {[}au{]} & GTO [s] & STO [s] \\tabularnewline\n				\\hline \n				Helium &  $0.51625$ & $2\\times 10^{6}$ & $-2.85482$ & $0.00405383$ & $-2.9037$ & $15.007$ & $6.48565$ \\tabularnewline\n				\\hline \n				Beryllium  &  $0.091797$ & $7\\times 10^{7}$ & $-14.0182$ & $0.00203359$ & $-14.667$ & $48321$ & $4141$ \\tabularnewline\n				\\hline \n				Neon  & $0.109375$ & $1\\times 10^{6}$ & $-113.542$ & $0.498411$ & $-128.928$ & $2821.16$ & $203.012$ \\tabularnewline\n				\\hline \n			\\end{tabular}\\protect\\caption{ Comparison of energies found using bisection method with the refenrence energy \\parencite{Koput_2011_PCCP} \\parencite{Binkley_1975} and comparison of the time used running the computation with the given number of cycles using GTOs and STOs.}\n			\\label{tab:AtomsGTO} \n		\\end{table}\n\n\n		\\begin{figure}\n			\\centering \\includegraphics[width=0.45\\linewidth]{../figures/Beryllium_blocking}\n			\\centering \\includegraphics[width=0.45\\linewidth]{../figures/Neon_blocking}\n			\\protect\\caption{STD vs. blocksize with $10^6$ MC cycles. The STD shows a clear plateauing behaviour trend as the blocksize increases after rising dramatically for small blocksizes. This is due to the blocksize catching up to the correlation lenght between the measurements, thus yielding the right STD.}\\label{fig01:std_Stuff}\n		\\end{figure}\n\n",
+			"file": "sections/beryllium_neon.tex",
+			"file_size": 7036,
+			"file_write_time": 130787793828733269,
+			"settings":
+			{
+				"buffer_size": 7040,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sections/molecules.tex",
+			"settings":
+			{
+				"buffer_size": 494,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "project_3.sublime-project",
+			"settings":
+			{
+				"buffer_size": 328,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Project_3.tex",
+			"settings":
+			{
+				"buffer_size": 5682,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/C++/C++ Single File.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"late",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2deb499853c4371624f5a07e27c334aa' + 'bf8c4e67d14fb0525ba4f89698a6d7e1'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections"
+	],
+	"file_history":
+	[
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/atoms.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/Project_3.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/bibliography.bib",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/optimisation.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/molecules.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/beryllium_neon.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/density_plots.tex",
+		"/home/gullik/Documents/CompPhys2_office306/source/python/energyLevels.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/verification.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/appendix.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/GTO.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/project_3.sublime-project",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/extras.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/monte_carlo.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/temp_delete.tex",
+		"/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/mdconfig.py",
+		"/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/python_plots.py",
+		"/home/gullik/Documents/FYS4460/molecular-dynamics-2/python_framework/run.py",
+		"/home/gullik/Documents/Søknader og CV Gullik/Open application Norsk regnesentral.tex",
+		"/home/gullik/Documents/Søknader og CV Gullik/Cover lett mal riktig.tex",
+		"/home/gullik/Documents/Søknader og CV Gullik/Application DNV summer project (Gullik Killie).tex",
+		"/home/gullik/Documents/CompPhys2_office306/source/python/blocking_plotter.py",
+		"/home/gullik/Documents/FYS4460/molecular-dynamics/python_framework/run.py",
+		"/home/gullik/Documents/Fys4460/Exam_answers/Exam_answers.tex",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/velocityplots.py",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/python_plots.py",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/mdconfig.py",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/python_framework/run.py",
+		"/home/gullik/Documents/Fys4460/Percolation/matlab_programs/percwalk.c",
+		"/home/gullik/Documents/molecular-dynamics-fys3150/python_plots.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_1/project1_2015.tex",
+		"/home/gullik/Downloads/AGF-211_Permeability_Gullik.tex",
+		"/home/gullik/Documents/Fys4460/Exam_answers.tex",
+		"/home/gullik/Downloads/plotmap.py",
+		"/home/gullik/Documents/discussion.tex",
+		"/home/gullik/Documents/04_hydrography.tex",
+		"/home/gullik/Documents/AGF311__811_Report2014.tex",
+		"/home/gullik/Documents/CompPhys2_office306/sympyMath/localEnergyAnalytic.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/helium_atom.tex",
+		"/home/gullik/Documents/CompPhys2_office306/source/python/run_script.py",
+		"/home/gullik/Documents/CompPhys2_office306/source/python/Parallel_compare_plotter.py",
+		"/home/gullik/Documents/CompPhys2_office306/source/python/alpha_beta_plotter.py",
+		"/home/gullik/Documents/CompPhys2_office306/source/energyLevels.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/sections/extras.aux",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/verification.tex",
+		"/home/gullik/Documents/Fys4460/Report/Molecular_Dynamics_Report.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/Project_3.toc",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/temp_delete.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_3/Project_3.aux",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Report_2/Project_2.tex",
+		"/home/gullik/Documents/Søknader og CV Gullik/søknader og cv gullik/jobbdokumenter/Application DNV/Cover lett mal riktig.tex",
+		"/home/gullik/Documents/Søknader og CV Gullik/søknader og cv gullik/jobbdokumenter/Application DNV/Application DNV summer project (Gullik Killie).tex",
+		"/home/gullik/Documents/CompPhys2_office306/sympyMath/derivatives.py",
+		"/home/gullik/Documents/Søknader og CV Gullik/søknader og cv gullik/jobbdokumenter/Open application MET/Open application MET.tex",
+		"/home/gullik/Documents/CompPhys2_office306/source/GTO/gto.py",
+		"/home/gullik/Documents/Fys4460/Percolation/Proj_3_Phys_4460.tex",
+		"/home/gullik/.config/sublime-text-3/Packages/LaTeXTools/builders/traditionalBuilder.py",
+		"/home/gullik/.config/sublime-text-3/Packages/User/LaTeXTools.sublime-settings",
+		"/home/gullik/Documents/Fys4460/Percolation/[no file]",
+		"/home/gullik/Documents/CompPhys2_office306/source/run_script.py",
+		"/home/gullik/Documents/Fys4460/Percolation/walk.py",
+		"/home/gullik/Documents/Fys4460/Percolation/exwalk.py",
+		"/home/gullik/Documents/CompPhys2_office306/sympyMath/localEnergy.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/Project_2.tex",
+		"/home/gullik/Documents/Fys3150Gullik/molecular-dynamics-fys3150/python_plots.py",
+		"/home/gullik/Documents/CompPhys2_office306/Report/project2_2015.tex",
+		"/home/gullik/Documents/Fys4460/MD_project_vs_0.2/Report/Molecular_Dynamics_Report.tex",
+		"/home/gullik/Documents/FYS-2006 Candidate number 29.tex",
+		"/home/gullik/Downloads/histogram_demo_features.py",
+		"/home/gullik/Documents/Fys4460/parallel_lennard_jones_md/base_code/run.py",
+		"/home/gullik/Documents/Fys4460/molecular-dynamics/Report/Molecular_Dynamics_Report.tex",
+		"/home/gullik/Documents/Fys4460/MD_project/Report/Molecular_Dynamics_Report.tex",
+		"/home/gullik/Documents/CompPhys2_office306/Report/project1_2015.tex",
+		"/home/gullik/Documents/Safetycopy/CompPhys2_office306/Report/project1_2015.tex",
+		"/home/gullik/Documents/Fys4460/MD_project/python/plots.py",
+		"/home/gullik/Documents/CompPhys2_office306/source/plotter.py",
+		"/home/gullik/Downloads/Glider_Hydrography.tex",
+		"/home/gullik/Downloads/results.tex",
+		"/home/gullik/Documents/INF5620-Gullik/wave_project/Report/Report_Project_1_Gullik.tex",
+		"/home/gullik/Documents/INF5620-Gullik/default_project/Report/project_2.tex",
+		"/home/gullik/Documents/compPhys2Gullik/Report/project1_2015.tex",
+		"/home/gullik/Documents/molecular-dynamics-fys3150/Report/Molecular_Dynamics_Report.tex",
+		"/home/gullik/Documents/compPhys2Gullik/Report/test.tex",
+		"/home/gullik/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/gullik/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			".py",
+			"py",
+			".py",
+			"cite",
+			"Koput2011PCCP",
+			"\\sigma^*",
+			"\\sigma",
+			"QUA:QUA560090204",
+			"Koput:2011:PCCP",
+			"cite",
+			"citet",
+			"cite",
+			"\\cite",
+			"Calculated in derivatives.py.",
+			"verification",
+			"eq:laplacianIntermediate",
+			"fig02:timestep",
+			"EnergyVsAlphaHeliumSimpleAnalytical",
+			"Head",
+			"yes",
+			"tab:energyReference",
+			"{figures/",
+			"{figure",
+			"tab",
+			"figures",
+			"None",
+			"\\^",
+			"Psi_T",
+			"phi",
+			"py",
+			"))"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "bibliography.bib",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4264,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3887,
+								3887
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1547.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "sections/atoms.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17913,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10342,
+								10342
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4131.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "sections/beryllium_neon.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7040,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3545,
+								3545
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 918.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "sections/molecules.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 494,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								467,
+								467
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "project_3.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 328,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								326,
+								326
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 8.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "Project_3.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5682,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5485,
+								5485
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2244.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 204.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "project_3.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 217.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

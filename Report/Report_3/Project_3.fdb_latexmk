@@ -1,11 +1,11 @@
 # Fdb version 3
-["biber Project_3"] 1434308307 "Project_3.bcf" "Project_3.bbl" "Project_3" 1434310549
-  "Project_3.bcf" 1434310520 92827 959858b1a9833f7ff855bbe1889bb4aa ""
+["biber Project_3"] 1434308307 "Project_3.bcf" "Project_3.bbl" "Project_3" 1434357143
+  "Project_3.bcf" 1434357143 92827 959858b1a9833f7ff855bbe1889bb4aa ""
   "bibliography.bib" 1434308193 4273 fb5bcf136c4e40d3f6695a7d9cd1b8a1 ""
   (generated)
   "Project_3.blg"
   "Project_3.bbl"
-["pdflatex"] 1434310518 "Project_3.tex" "Project_3.pdf" "Project_3" 1434310549
+["pdflatex"] 1434357139 "Project_3.tex" "Project_3.pdf" "Project_3" 1434357143
   "../figures/Beryllium_alpha_beta_energy.png" 1434307817 194285 06fe44d7d5c53ccb023f183506be58fa ""
   "../figures/Beryllium_blocking.png" 1434307817 33760 0217049587027be2352df939653a355b ""
   "../figures/Bisection_method.png" 1434307817 41614 79bd42097de2e0141b08f7eb5843100a ""
@@ -211,13 +211,13 @@
   "/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty" 1304191498 325 2bcd023400636339210573e2b3ee298b ""
   "/usr/share/texmf/tex/latex/xcolor/x11nam.def" 1339578534 9040 c0c860499be99a076792194b1d6525a1 ""
   "/usr/share/texmf/tex/latex/xcolor/xcolor.sty" 1339578534 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "Project_3.aux" 1434310520 40298 0c6f001384c73b4a949d280535f88538 ""
+  "Project_3.aux" 1434357143 40298 0c6f001384c73b4a949d280535f88538 ""
   "Project_3.bbl" 1434308308 11233 5cd37cdc7ce9e34860daef9310b81efa "biber Project_3"
-  "Project_3.out" 1434310520 2341 2fa519a9c564983a270e74bd8a9a6c50 ""
+  "Project_3.out" 1434357143 2341 2fa519a9c564983a270e74bd8a9a6c50 ""
   "Project_3.tex" 1434310373 5840 d3bb0b7b7eaeddfd5c0b2759d02b4c7f ""
   "sections/GTO.tex" 1434289472 3690 5556644bd3dc18cc3ca55a7b879db313 ""
   "sections/appendix.tex" 1434305782 13484 eef50b2085410b2d6c1d72ecb0748df9 ""
-  "sections/atoms.tex" 1434309976 18281 8cd82c6d45ae1c9fa60ecb803a632836 ""
+  "sections/atoms.tex" 1434357138 18234 aeac56569068b441b19ccf72d70f30ff ""
   "sections/beryllium_neon.tex" 1434309633 7040 a4e60955b5578732667d7f6d8c2212ff ""
   "sections/conclusions.tex" 1434309588 2844 e77db72f91907ee77646ed7ab68b8425 ""
   "sections/density_plots.tex" 1434283107 9333 42a3750d12b3ca61124a5e23aac8fa37 ""
@@ -228,7 +228,7 @@
   "sections/optimisation.tex" 1434310382 14197 2cf8e8612db7fd0c671c1490d6be627b ""
   "sections/verification.tex" 1434309668 4999 19535c381f2c1fa126b045443e45f331 ""
   (generated)
-  "Project_3.aux"
+  "Project_3.log"
   "Project_3.pdf"
   "Project_3.out"
-  "Project_3.log"
+  "Project_3.aux"

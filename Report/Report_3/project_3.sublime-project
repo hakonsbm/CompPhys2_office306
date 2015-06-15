@@ -1,0 +1,10 @@
+
+
+{
+    "folders": [{
+        "path": ".",
+        "folder_exclude_patterns": [".svn", "._d", ".metadata", ".settings"],
+        "file_exclude_patterns": ["*.pyc", "*.pyo", ".project", "*.pdf", "*.aux", "*.blg", "*.bbl", "*.bcf", "*.gnu*", "*.exp*", "*.log", "*.out", "*.run*", "*.sin*", "*.syn*", "*.fdb*", "*.swp*"]
+    }]
+}
+
